@@ -3,19 +3,39 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0837F7822B4A7AECAC85DCC7 /* Pods_moda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437E630A89CADE02D6672022 /* Pods_moda.framework */; };
 		4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */; };
 		4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */; };
 		4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DD28EBF85100EFBCC9 /* ViewController.swift */; };
 		4A5861E128EBF85100EFBCC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861DF28EBF85100EFBCC9 /* Main.storyboard */; };
 		4A5861E328EBF85200EFBCC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861E228EBF85200EFBCC9 /* Assets.xcassets */; };
 		4A5861E628EBF85200EFBCC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861E428EBF85200EFBCC9 /* LaunchScreen.storyboard */; };
+		4A5861F028EBFBD400EFBCC9 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861EF28EBFBD400EFBCC9 /* TodoView.swift */; };
+		4A5861F428EBFC7C00EFBCC9 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861F328EBFC7C00EFBCC9 /* Todo.swift */; };
+		4A5861F628EBFE9E00EFBCC9 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */; };
+		4A58620028EC0C7600EFBCC9 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861FF28EC0C7600EFBCC9 /* UIFont+Extension.swift */; };
+		4A58620128EC0E0400EFBCC9 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861FC28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Bold.otf */; };
+		4A58620228EC0E0700EFBCC9 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861F928EC0B1200EFBCC9 /* SpoqaHanSansNeo-Light.otf */; };
+		4A58620328EC0E0A00EFBCC9 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861FB28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Medium.otf */; };
+		4A58620428EC0E0D00EFBCC9 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861FD28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Regular.otf */; };
+		4A58620528EC0E1100EFBCC9 /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861FA28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Thin.otf */; };
+		4A58620828EC1FBB00EFBCC9 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620728EC1FBB00EFBCC9 /* DateCell.swift */; };
+		4A58620A28EC360600EFBCC9 /* DateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620928EC360600EFBCC9 /* DateItem.swift */; };
+		4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620B28EC394600EFBCC9 /* Date+Extension.swift */; };
+		4A58620E28EC3C9900EFBCC9 /* DateSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620D28EC3C9900EFBCC9 /* DateSectionCell.swift */; };
+		4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620F28ED0D7A00EFBCC9 /* UIViewController+Preview.swift */; };
+		4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621128ED13BB00EFBCC9 /* UICollectionView+Extension.swift */; };
+		4A58621428ED284400EFBCC9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A58621328ED284400EFBCC9 /* Colors.xcassets */; };
+		4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621528ED291D00EFBCC9 /* UIColor+Extension.swift */; };
+		4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		437E630A89CADE02D6672022 /* Pods_moda.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moda.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5861D628EBF85100EFBCC9 /* moda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +44,26 @@
 		4A5861E228EBF85200EFBCC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A5861E528EBF85200EFBCC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A5861E728EBF85200EFBCC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A5861EF28EBFBD400EFBCC9 /* TodoView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		4A5861F328EBFC7C00EFBCC9 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		4A5861F928EC0B1200EFBCC9 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Light.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
+		4A5861FA28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Thin.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
+		4A5861FB28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Medium.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
+		4A5861FC28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Bold.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		4A5861FD28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Regular.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
+		4A5861FF28EC0C7600EFBCC9 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		4A58620728EC1FBB00EFBCC9 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		4A58620928EC360600EFBCC9 /* DateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItem.swift; sourceTree = "<group>"; };
+		4A58620B28EC394600EFBCC9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		4A58620D28EC3C9900EFBCC9 /* DateSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSectionCell.swift; sourceTree = "<group>"; };
+		4A58620F28ED0D7A00EFBCC9 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
+		4A58621128ED13BB00EFBCC9 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		4A58621328ED284400EFBCC9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		4A58621528ED291D00EFBCC9 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		7F5A659CE6FD5E07C2E1C8D2 /* Pods-moda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.release.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.release.xcconfig"; sourceTree = "<group>"; };
+		BB517FA9A0D7F372DAF73F6D /* Pods-moda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.debug.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0837F7822B4A7AECAC85DCC7 /* Pods_moda.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +83,8 @@
 			children = (
 				4A5861D828EBF85100EFBCC9 /* moda */,
 				4A5861D728EBF85100EFBCC9 /* Products */,
+				CD0FAA5024DEB4102AC21E2F /* Pods */,
+				86211C65C4AFFCB6F634C926 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +99,114 @@
 		4A5861D828EBF85100EFBCC9 /* moda */ = {
 			isa = PBXGroup;
 			children = (
+				4A5861FE28EC0C6400EFBCC9 /* Extension */,
+				4A5861F728EC0AEF00EFBCC9 /* Resource */,
+				4A5861F128EBFC5900EFBCC9 /* Domain */,
+				4A5861ED28EBFBA200EFBCC9 /* Presentation */,
 				4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */,
 				4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */,
 				4A5861DD28EBF85100EFBCC9 /* ViewController.swift */,
 				4A5861DF28EBF85100EFBCC9 /* Main.storyboard */,
 				4A5861E228EBF85200EFBCC9 /* Assets.xcassets */,
+				4A58621328ED284400EFBCC9 /* Colors.xcassets */,
 				4A5861E428EBF85200EFBCC9 /* LaunchScreen.storyboard */,
 				4A5861E728EBF85200EFBCC9 /* Info.plist */,
 			);
 			path = moda;
+			sourceTree = "<group>";
+		};
+		4A5861ED28EBFBA200EFBCC9 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				4A5861EE28EBFBAC00EFBCC9 /* Todo */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		4A5861EE28EBFBAC00EFBCC9 /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				4A58620628EC1F8E00EFBCC9 /* Date */,
+				4A5861EF28EBFBD400EFBCC9 /* TodoView.swift */,
+				4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
+		4A5861F128EBFC5900EFBCC9 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				4A5861F228EBFC6600EFBCC9 /* Models */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		4A5861F228EBFC6600EFBCC9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4A5861F328EBFC7C00EFBCC9 /* Todo.swift */,
+				4A58620928EC360600EFBCC9 /* DateItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4A5861F728EC0AEF00EFBCC9 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				4A5861F828EC0B0100EFBCC9 /* Font */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		4A5861F828EC0B0100EFBCC9 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				4A5861FC28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Bold.otf */,
+				4A5861F928EC0B1200EFBCC9 /* SpoqaHanSansNeo-Light.otf */,
+				4A5861FB28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Medium.otf */,
+				4A5861FD28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Regular.otf */,
+				4A5861FA28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Thin.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		4A5861FE28EC0C6400EFBCC9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4A5861FF28EC0C7600EFBCC9 /* UIFont+Extension.swift */,
+				4A58620B28EC394600EFBCC9 /* Date+Extension.swift */,
+				4A58620F28ED0D7A00EFBCC9 /* UIViewController+Preview.swift */,
+				4A58621128ED13BB00EFBCC9 /* UICollectionView+Extension.swift */,
+				4A58621528ED291D00EFBCC9 /* UIColor+Extension.swift */,
+				4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		4A58620628EC1F8E00EFBCC9 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				4A58620728EC1FBB00EFBCC9 /* DateCell.swift */,
+				4A58620D28EC3C9900EFBCC9 /* DateSectionCell.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
+		86211C65C4AFFCB6F634C926 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				437E630A89CADE02D6672022 /* Pods_moda.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD0FAA5024DEB4102AC21E2F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BB517FA9A0D7F372DAF73F6D /* Pods-moda.debug.xcconfig */,
+				7F5A659CE6FD5E07C2E1C8D2 /* Pods-moda.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +216,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A5861EA28EBF85200EFBCC9 /* Build configuration list for PBXNativeTarget "moda" */;
 			buildPhases = (
+				A910F0008437E11915E73340 /* [CP] Check Pods Manifest.lock */,
 				4A5861D228EBF85100EFBCC9 /* Sources */,
 				4A5861D328EBF85100EFBCC9 /* Frameworks */,
 				4A5861D428EBF85100EFBCC9 /* Resources */,
+				808D2E68638D75591E7579E3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -103,7 +247,7 @@
 				};
 			};
 			buildConfigurationList = 4A5861D128EBF85100EFBCC9 /* Build configuration list for PBXProject "moda" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -125,22 +269,82 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A58621428ED284400EFBCC9 /* Colors.xcassets in Resources */,
+				4A58620228EC0E0700EFBCC9 /* SpoqaHanSansNeo-Light.otf in Resources */,
+				4A58620528EC0E1100EFBCC9 /* SpoqaHanSansNeo-Thin.otf in Resources */,
 				4A5861E628EBF85200EFBCC9 /* LaunchScreen.storyboard in Resources */,
 				4A5861E328EBF85200EFBCC9 /* Assets.xcassets in Resources */,
+				4A58620428EC0E0D00EFBCC9 /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				4A5861E128EBF85100EFBCC9 /* Main.storyboard in Resources */,
+				4A58620128EC0E0400EFBCC9 /* SpoqaHanSansNeo-Bold.otf in Resources */,
+				4A58620328EC0E0A00EFBCC9 /* SpoqaHanSansNeo-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		808D2E68638D75591E7579E3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-moda/Pods-moda-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-moda/Pods-moda-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-moda/Pods-moda-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A910F0008437E11915E73340 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-moda-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4A5861D228EBF85100EFBCC9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A58620028EC0C7600EFBCC9 /* UIFont+Extension.swift in Sources */,
+				4A58620A28EC360600EFBCC9 /* DateItem.swift in Sources */,
 				4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */,
+				4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */,
+				4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */,
 				4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */,
+				4A5861F028EBFBD400EFBCC9 /* TodoView.swift in Sources */,
+				4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */,
+				4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */,
+				4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */,
 				4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */,
+				4A5861F628EBFE9E00EFBCC9 /* TodoViewController.swift in Sources */,
+				4A58620E28EC3C9900EFBCC9 /* DateSectionCell.swift in Sources */,
+				4A5861F428EBFC7C00EFBCC9 /* Todo.swift in Sources */,
+				4A58620828EC1FBB00EFBCC9 /* DateCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +486,7 @@
 		};
 		4A5861EB28EBF85200EFBCC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB517FA9A0D7F372DAF73F6D /* Pods-moda.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -311,6 +516,7 @@
 		};
 		4A5861EC28EBF85200EFBCC9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F5A659CE6FD5E07C2E1C8D2 /* Pods-moda.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

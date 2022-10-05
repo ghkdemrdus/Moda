@@ -1,0 +1,6 @@
+framework module Pods_moda {
+  umbrella header "Pods-moda-umbrella.h"
+
+  export *
+  module * { export * }
+}
