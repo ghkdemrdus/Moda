@@ -32,6 +32,8 @@
 		4A58621428ED284400EFBCC9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A58621328ED284400EFBCC9 /* Colors.xcassets */; };
 		4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621528ED291D00EFBCC9 /* UIColor+Extension.swift */; };
 		4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */; };
+		4A58621A28ED645200EFBCC9 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621928ED645200EFBCC9 /* TodoViewModel.swift */; };
+		4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621C28ED7C5500EFBCC9 /* DateManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +46,7 @@
 		4A5861E228EBF85200EFBCC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A5861E528EBF85200EFBCC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A5861E728EBF85200EFBCC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A5861EF28EBFBD400EFBCC9 /* TodoView.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; tabWidth = 4; };
+		4A5861EF28EBFBD400EFBCC9 /* TodoView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		4A5861F328EBFC7C00EFBCC9 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		4A5861F928EC0B1200EFBCC9 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Light.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
@@ -62,6 +64,8 @@
 		4A58621328ED284400EFBCC9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		4A58621528ED291D00EFBCC9 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		4A58621928ED645200EFBCC9 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
+		4A58621C28ED7C5500EFBCC9 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		7F5A659CE6FD5E07C2E1C8D2 /* Pods-moda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.release.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.release.xcconfig"; sourceTree = "<group>"; };
 		BB517FA9A0D7F372DAF73F6D /* Pods-moda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.debug.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +103,7 @@
 		4A5861D828EBF85100EFBCC9 /* moda */ = {
 			isa = PBXGroup;
 			children = (
+				4A58621B28ED7C4600EFBCC9 /* Util */,
 				4A5861FE28EC0C6400EFBCC9 /* Extension */,
 				4A5861F728EC0AEF00EFBCC9 /* Resource */,
 				4A5861F128EBFC5900EFBCC9 /* Domain */,
@@ -129,6 +134,7 @@
 				4A58620628EC1F8E00EFBCC9 /* Date */,
 				4A5861EF28EBFBD400EFBCC9 /* TodoView.swift */,
 				4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */,
+				4A58621928ED645200EFBCC9 /* TodoViewModel.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -190,6 +196,14 @@
 				4A58620D28EC3C9900EFBCC9 /* DateSectionCell.swift */,
 			);
 			path = Date;
+			sourceTree = "<group>";
+		};
+		4A58621B28ED7C4600EFBCC9 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				4A58621C28ED7C5500EFBCC9 /* DateManager.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		86211C65C4AFFCB6F634C926 /* Frameworks */ = {
@@ -330,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A58621A28ED645200EFBCC9 /* TodoViewModel.swift in Sources */,
 				4A58620028EC0C7600EFBCC9 /* UIFont+Extension.swift in Sources */,
 				4A58620A28EC360600EFBCC9 /* DateItem.swift in Sources */,
 				4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */,
@@ -337,6 +352,7 @@
 				4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */,
 				4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */,
 				4A5861F028EBFBD400EFBCC9 /* TodoView.swift in Sources */,
+				4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */,
 				4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */,
 				4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */,
 				4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */,
