@@ -5,6 +5,8 @@
 //  Created by 황득연 on 2022/10/05.
 //
 
+import Foundation
+
 protocol TodoViewModelType {
   
   
@@ -25,7 +27,7 @@ class TodoViewModel: TodoViewModelType {
 
   // MARK: - Models
   var dates: [DateItem] = []
-  
+  var clickedDate: Date?
   
 }
 
@@ -36,7 +38,9 @@ extension TodoViewModel {
   }
   
   func clickDate(_ item: Int) {
-//    self.didUpdateDates?(item, false, false)
+    self.dates[item].isSelected = true
+//    self.clickedDate = self.dates[item]
+//    self.didUpdateDateClicked?(item)
   }
 }
 
@@ -45,6 +49,7 @@ extension TodoViewModel {
   func getInitialDates() {
     let dates = DateManager().initialDates()
     self.dates = dates
+    self.clickedDate = Date().today()
     self.didUpdateDates?(dates)
   }
 }
