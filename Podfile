@@ -6,7 +6,9 @@ target 'moda' do
   use_frameworks!
 
   # Pods for moda
-  pod 'FlexLayout'
-  pod 'PinLayout'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'SnapKit'
+  pod 'Then'
 
 end

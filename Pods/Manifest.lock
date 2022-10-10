@@ -1,20 +1,34 @@
 PODS:
-  - FlexLayout (1.3.24)
-  - PinLayout (1.10.3)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - SnapKit (5.6.0)
+  - Then (3.0.0)
 
 DEPENDENCIES:
-  - FlexLayout
-  - PinLayout
+  - RxCocoa
+  - RxSwift
+  - SnapKit
+  - Then
 
 SPEC REPOS:
   trunk:
-    - FlexLayout
-    - PinLayout
+    - RxCocoa
+    - RxRelay
+    - RxSwift
+    - SnapKit
+    - Then
 
 SPEC CHECKSUMS:
-  FlexLayout: 4c4dec5e4aafab84908dd864bb097baebef0d44e
-  PinLayout: 0090ccbf29ae69af6ae5a15eaeaf27ed7b2c4d83
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: c37b8d251f46a26433510e1dff32e8ff6f329147
+PODFILE CHECKSUM: 4f47747a1e01598ee9c99e08520adca034ef2b34
 
 COCOAPODS: 1.11.3

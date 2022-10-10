@@ -48,11 +48,10 @@ extension Date {
     return dateFormatter.string(from: self)
   }
   
-  func getDay() -> Int {
+  func getDay() -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "d"
-    let calendar = Calendar.current
-    return calendar.component(.day, from: self)
+    return dateFormatter.string(from: self)
   }
   
 }

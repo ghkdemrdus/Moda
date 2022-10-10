@@ -7,28 +7,40 @@
 
 import Foundation
 
-protocol TodoViewModelType {
-  
-  
-  //Input
-  func clickDate(_ item: Int)
+import RxSwift
+import RxRelay
 
-  //Output
-  var didUpdateDates: (([DateItem]) -> Void)? { get set }
-  var didUpdateDateClicked: (([DateItem]) -> Void)? { get set }
-}
-
-class TodoViewModel: TodoViewModelType {
+class TodoViewModel {
   var didUpdateDateClicked: (([DateItem]) -> Void)?
   
+  struct Input {
+    let viewWillAppearEvent: Observable<Void>
+  }
   
-  // MARK: - Outputs
-  var didUpdateDates: (([DateItem]) -> Void)?
-
+  struct Output {
+    let didLoadData = PublishRelay<Bool>()
+  }
+  
   // MARK: - Models
   var dates: [DateItem] = []
   var clickedDate: Date?
+  private(set) var initialLoad = true
   
+  func transform(from input: Input, disposeBag: DisposeBag) -> Output {
+    let output = Output()
+    
+    input.viewWillAppearEvent
+      .subscribe(onNext: { [weak self] in
+        if self?.initialLoad ?? true {
+          self?.getInitialDates()
+          self?.initialLoad = false
+          output.didLoadData.accept(true)
+        }
+      })
+      .disposed(by: disposeBag)
+    
+    return output
+  }
 }
 
 // MARK: - Inputs
@@ -39,8 +51,9 @@ extension TodoViewModel {
   
   func clickDate(_ item: Int) {
     self.dates[item].isSelected = true
-//    self.clickedDate = self.dates[item]
-//    self.didUpdateDateClicked?(item)
+    print("hihi click date ")
+    //    self.clickedDate = self.dates[item]
+    //    self.didUpdateDateClicked?(item)
   }
 }
 
@@ -50,6 +63,5 @@ extension TodoViewModel {
     let dates = DateManager().initialDates()
     self.dates = dates
     self.clickedDate = Date().today()
-    self.didUpdateDates?(dates)
   }
 }

@@ -18,7 +18,7 @@ extension UIFont {
         case thin = "-Thin"
     }
 
-    static func Custom(_ type: OpenSansType = .regular, _ size: CGFloat = UIFont.systemFontSize) -> UIFont {
+    static func custom(_ type: OpenSansType = .regular, _ size: CGFloat = UIFont.systemFontSize) -> UIFont {
         return UIFont(name: "SpoqaHanSansNeo\(type.rawValue)", size: size)!
     }
 
