@@ -18,11 +18,10 @@ class TodoViewModel {
   }
   
   struct Output {
-    let didLoadData = PublishRelay<Bool>()
+    var dateArray = BehaviorRelay<[DateItem?]>(value: [])
   }
   
   // MARK: - Models
-  var dates: [DateItem] = []
   var clickedDate: Date?
   private(set) var initialLoad = true
   
@@ -31,11 +30,7 @@ class TodoViewModel {
     
     input.viewWillAppearEvent
       .subscribe(onNext: { [weak self] in
-        if self?.initialLoad ?? true {
-          self?.getInitialDates()
-          self?.initialLoad = false
-          output.didLoadData.accept(true)
-        }
+        self?.getInitialDates(output: output)
       })
       .disposed(by: disposeBag)
     
@@ -45,12 +40,12 @@ class TodoViewModel {
 
 // MARK: - Inputs
 extension TodoViewModel {
-  func viewDidLoad() {
-    self.getInitialDates()
-  }
+//  func viewDidLoad() {
+//    self.getInitialDates()
+//  }
   
   func clickDate(_ item: Int) {
-    self.dates[item].isSelected = true
+//    self.dates[item].isSelected = true
     print("hihi click date ")
     //    self.clickedDate = self.dates[item]
     //    self.didUpdateDateClicked?(item)
@@ -59,9 +54,9 @@ extension TodoViewModel {
 
 // MARK: - Date Manager
 extension TodoViewModel {
-  func getInitialDates() {
+  func getInitialDates(output: Output) {
     let dates = DateManager().initialDates()
-    self.dates = dates
+    output.dateArray.accept(dates)
     self.clickedDate = Date().today()
   }
 }

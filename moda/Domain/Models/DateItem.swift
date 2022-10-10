@@ -8,7 +8,7 @@
 import Foundation
 
 struct DateItem {
-    var date: Date
-    var isPrevious: Bool
-    var isSelected: Bool
+  let date: Date
+  let isPrevious: Bool
+  let isSelected: Bool
 }

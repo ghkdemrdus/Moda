@@ -62,13 +62,14 @@ extension DateCell {
 }
 
 extension DateCell {
-  func configure(_ date: DateItem) {
-    self.dayView.backgroundColor = date.isSelected ? .dateBg : .white
-    self.dayLabel.text = String(date.date.getDay())
-    self.dayLabel.textColor = date.isSelected ? .currentDate : date.isPrevious ? .previousDate : .followingDate
-    self.weekdayLabel.text = date.date.getWeedDay()
-    self.weekdayLabel.textColor = date.isSelected ? .currentDate : date.isPrevious ? .previousDate : .followingDate
-    
+  func configure(with date: DateItem?) {
+    if let date = date {
+      self.dayView.backgroundColor = date.isSelected ? .dateBg : .white
+      self.dayLabel.text = String(date.date.getDay())
+      self.dayLabel.textColor = date.isSelected ? .currentDate : date.isPrevious ? .previousDate : .followingDate
+      self.weekdayLabel.text = date.date.getWeedDay()
+      self.weekdayLabel.textColor = date.isSelected ? .currentDate : date.isPrevious ? .previousDate : .followingDate
+    }
     //        self.dayLabel.flex.markDirty()
     //        self.dayOfWeekLabel.flex.markDirty()
   }
