@@ -9,6 +9,9 @@ import Foundation
 
 struct DateItem {
   let date: Date
+  let isCurrent: Bool
   let isPrevious: Bool
-  let isSelected: Bool
+  var isSelected: Bool
+  
+  static let `default` = DateItem(date: Date(), isCurrent: false, isPrevious: false, isSelected: false)
 }

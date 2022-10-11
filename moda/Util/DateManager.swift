@@ -17,11 +17,11 @@ struct DateManager {
     
     while tmpDate < endDate {
       if tmpDate == currentDate {
-        dates.append(DateItem(date: tmpDate, isPrevious: false, isSelected: true))
+        dates.append(DateItem(date: tmpDate, isCurrent: true, isPrevious: false, isSelected: true))
       } else if tmpDate < currentDate {
-        dates.append(DateItem(date: tmpDate, isPrevious: true, isSelected: false))
+        dates.append(DateItem(date: tmpDate, isCurrent: false, isPrevious: true, isSelected: false))
       } else {
-        dates.append(DateItem(date: tmpDate, isPrevious: false, isSelected: false))
+        dates.append(DateItem(date: tmpDate, isCurrent: false, isPrevious: false, isSelected: false))
       }
       tmpDate = tmpDate.addDays(1)!
     }

@@ -42,20 +42,8 @@ class TodoViewController: UIViewController {
   
   private let titleStackView = UIStackView().then {
     $0.axis = .horizontal
-    //    $0.distribution = .fill // default
-    //    $0.alignment = .fill
   }
   
-  //  var dateCollectionView : UICollectionView = {
-  //    var layout = UICollectionViewFlowLayout()
-  //    layout.scrollDirection = .horizontal
-  //
-  //    layout.minimumInteritemSpacing = 0
-  //    //    layout.sectionInset = .zero
-  //
-  //    let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-  //    return cv
-  //  }()
   
   var dateCollectionView = TodoDateView()
   
@@ -64,7 +52,6 @@ class TodoViewController: UIViewController {
     setupView()
     configureUI()
     bindViewModel()
-//    viewModel.viewDidLoad()
   }
 }
 
@@ -90,11 +77,6 @@ extension TodoViewController {
     }
     
     self.dateCollectionView.showsHorizontalScrollIndicator = false
-    
-    //    self.dateCollectionView.register(DateCell.self, forCellWithReuseIdentifier: String(describing: DateCell.self))
-    //    self.dateCollectionView.showsHorizontalScrollIndicator = false
-    //    self.dateCollectionView.dataSource = self
-    //    self.dateCollectionView.delegate = self
   }
   
   private func configureUI() {
@@ -118,20 +100,14 @@ extension TodoViewController {
   private func bindViewModel() {
     
     let input = TodoViewModel.Input(
-      viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in }
+      viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
+      dateCellDidTapEvent: self.dateCollectionView.rx.itemSelected.map { $0.row }
     )
     
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     print(output)
     
     self.bindDateArray(output: output)
-    
-    //      .asDriver(onErrorJustReturn: false)
-    //      .drive(onNext: { [weak self] _ in
-    //        self?.view.endEditing(true)
-    //        self?.dateCollectionView.reloadData()
-    //      })
-    //      .disposed(by: self.disposeBag)
   }
   
   func bindDateArray(output: TodoViewModel.Output?) {
@@ -143,53 +119,30 @@ extension TodoViewController {
           cellType: DateCell.self
         )
       ) { _, model, cell in
-        print(model)
         cell.configure(with: model)
       }
       .disposed(by: self.disposeBag)
+    
+    output?.indicesToUpdate
+      .asDriver()
+      .drive(onNext: { [weak self] (previousIndex, currentIndex) in
+//        print(previousIndex)
+//        print(currentIndex)
+        self?.updateBackground(index: previousIndex, isSelected: false)
+        self?.updateBackground(index: currentIndex, isSelected: true)
+      })
+      .disposed(by: self.disposeBag)
   }
-
+  
+  func updateBackground(index: Int?, isSelected: Bool) {
+    guard let index = index else { return }
+    let indexPath = IndexPath(row: index, section: 0)
+    guard let cell = self.dateCollectionView.cellForItem(at: indexPath) as? DateCell else { return }
+//    cell.updateBackground(isSelected: isSelected)
+  }
+  
 }
 
-extension TodoViewController: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(DateCell.self, for: indexPath)
-//    cell.configure(viewModel.dates[indexPath.item])
-    //    cell.clickDate = { [weak self] dateIndexPath in
-    //      self?.onClickDate?(dateIndexPath.item)
-    //    }
-    //        print(dates)
-    return cell
-  }
-  
-  //  func numberOfSections(in collectionView: UICollectionView) -> Int {
-  //    return 1
-  //  }
-  
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 11
-  }
-}
-
-extension TodoViewController: UICollectionViewDelegateFlowLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
-  }
-  
-  //  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-  //    return .init(top: 0, left: 30, bottom: 0, right: 30)
-  //  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let width = collectionView.frame.size.width
-    let height = collectionView.bounds.height
-    return .init(width: width / CGFloat(7), height: height)
-  }
-}
 
 //#if canImport(SwiftUI) && DEBUG
 //struct TodoViewController_Previews: PreviewProvider {

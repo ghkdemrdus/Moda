@@ -15,18 +15,21 @@ class TodoViewModel {
   
   struct Input {
     let viewWillAppearEvent: Observable<Void>
+    let dateCellDidTapEvent: Observable<Int>
   }
   
   struct Output {
-    var dateArray = BehaviorRelay<[DateItem?]>(value: [])
+    var dateArray = BehaviorRelay<[DateItem]>(value: [])
+    var selectedIndex = BehaviorRelay<Int>(value: 0)
+    var indicesToUpdate = BehaviorRelay<(Int, Int)>(value: (0, 0))
   }
   
   // MARK: - Models
   var clickedDate: Date?
-  private(set) var initialLoad = true
   
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
+    self.bindOutput(output: output, disposeBag: disposeBag)
     
     input.viewWillAppearEvent
       .subscribe(onNext: { [weak self] in
@@ -34,21 +37,27 @@ class TodoViewModel {
       })
       .disposed(by: disposeBag)
     
+    input.dateCellDidTapEvent
+      .bind(to: output.selectedIndex)
+      .disposed(by: disposeBag)
+    
     return output
   }
-}
-
-// MARK: - Inputs
-extension TodoViewModel {
-//  func viewDidLoad() {
-//    self.getInitialDates()
-//  }
   
-  func clickDate(_ item: Int) {
-//    self.dates[item].isSelected = true
-    print("hihi click date ")
-    //    self.clickedDate = self.dates[item]
-    //    self.didUpdateDateClicked?(item)
+  private func bindOutput(output: Output, disposeBag: DisposeBag) {
+    bindDate(output: output, disposeBag: disposeBag)
+  }
+  
+  private func bindDate(output: Output, disposeBag: DisposeBag) {
+    Observable.zip(output.selectedIndex, output.selectedIndex.skip(1))
+      .subscribe(onNext: { previous, current in
+        var list = output.dateArray.value
+        list[previous].isSelected = false
+        list[current].isSelected = true
+        output.dateArray.accept(list)
+      })
+//      .bind(to: output.indicesToUpdate)
+      .disposed(by: disposeBag)
   }
 }
 
@@ -57,6 +66,6 @@ extension TodoViewModel {
   func getInitialDates(output: Output) {
     let dates = DateManager().initialDates()
     output.dateArray.accept(dates)
-    self.clickedDate = Date().today()
+    output.selectedIndex.accept(Int(Date().today().getDay()) ?? 0)
   }
 }

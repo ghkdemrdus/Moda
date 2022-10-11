@@ -9,15 +9,15 @@ import UIKit
 import Then
 
 class DateCell: UICollectionViewCell {
-  
-  private var bg: UIColor = .white
-  
+    
   // MARK: - UI
   
-  private let dayView = UIView().then {
+  private let dateView = UIView().then {
     $0.layer.cornerRadius = 6
   }
-    
+  private let dayView = UIView().then {
+    $0.layer.cornerRadius = 16
+  }
   private let weekdayLabel = UILabel().then {
     $0.translatesAutoresizingMaskIntoConstraints = false
     $0.font = .custom(.bold, 13)
@@ -36,27 +36,40 @@ class DateCell: UICollectionViewCell {
     fatalError()
   }
   
+  override func prepareForReuse() {
+    self.dateView.backgroundColor = nil
+    self.dayView.backgroundColor = nil
+    self.dayView.layer.borderWidth = 0
+  }
+  
 }
 
 extension DateCell {
   
   private func configureUI() {
-    self.contentView.addSubview(self.dayView)
-    self.dayView.snp.makeConstraints {
+    self.contentView.addSubview(self.dateView)
+    self.dateView.snp.makeConstraints {
       $0.centerX.equalToSuperview()
       $0.top.bottom.equalToSuperview()
       $0.width.equalTo(40)
     }
-    self.dayView.addSubview(self.weekdayLabel)
+    self.dateView.addSubview(self.weekdayLabel)
     self.weekdayLabel.snp.makeConstraints {
       $0.top.equalToSuperview().offset(10)
       $0.centerX.equalToSuperview()
     }
     
-    self.dayView.addSubview(self.dayLabel)
-    self.dayLabel.snp.makeConstraints {
+    self.dateView.addSubview(self.dayView)
+    self.dayView.snp.makeConstraints {
       $0.centerX.equalToSuperview()
-      $0.top.equalTo(self.weekdayLabel.snp.bottom).offset(10)
+      $0.top.equalTo(self.weekdayLabel.snp.bottom).offset(4)
+      $0.width.equalTo(32)
+      $0.height.equalTo(32)
+    }
+    
+    self.dayView.addSubview(dayLabel)
+    self.dayLabel.snp.makeConstraints {
+      $0.centerY.centerX.equalToSuperview()
     }
   }
 }
@@ -64,13 +77,28 @@ extension DateCell {
 extension DateCell {
   func configure(with date: DateItem?) {
     if let date = date {
-      self.dayView.backgroundColor = date.isSelected ? .dateBg : .white
+      self.dateView.backgroundColor = date.isCurrent ? .dateBg : .white
       self.dayLabel.text = String(date.date.getDay())
-      self.dayLabel.textColor = date.isSelected ? .currentDate : date.isPrevious ? .previousDate : .followingDate
+      self.dayLabel.textColor = date.isCurrent ? .currentDate : date.isPrevious ? .previousDate : .followingDate
       self.weekdayLabel.text = date.date.getWeedDay()
-      self.weekdayLabel.textColor = date.isSelected ? .currentDate : date.isPrevious ? .previousDate : .followingDate
+      self.weekdayLabel.textColor = date.isCurrent ? .currentDate : date.isPrevious ? .previousDate : .followingDate
+      self.updateDayViewBackground(date: date)
     }
-    //        self.dayLabel.flex.markDirty()
-    //        self.dayOfWeekLabel.flex.markDirty()
+  }
+  
+  func updateDayViewBackground(date: DateItem) {
+    if date.isCurrent == true {
+      self.dayView.backgroundColor = .dateBg
+      return
+    }
+    if date.isSelected == true {
+      if date.isPrevious == true {
+        self.dayView.layer.borderWidth = 1
+        self.dayView.layer.borderColor = UIColor.dateBg.cgColor
+      } else {
+        self.dayView.backgroundColor = .followingDayBg
+      }
+    }
+      
   }
 }
