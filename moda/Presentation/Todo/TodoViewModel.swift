@@ -21,7 +21,6 @@ class TodoViewModel {
   struct Output {
     var dateArray = BehaviorRelay<[DateItem]>(value: [])
     var selectedIndex = BehaviorRelay<Int>(value: 0)
-    var indicesToUpdate = BehaviorRelay<(Int, Int)>(value: (0, 0))
   }
   
   // MARK: - Models
@@ -66,6 +65,6 @@ extension TodoViewModel {
   func getInitialDates(output: Output) {
     let dates = DateManager().initialDates()
     output.dateArray.accept(dates)
-    output.selectedIndex.accept(Int(Date().today().getDay()) ?? 0)
+    output.selectedIndex.accept((Int(Date().today().getDay()) ?? 1) - 1)
   }
 }

@@ -53,6 +53,11 @@ class TodoViewController: UIViewController {
     configureUI()
     bindViewModel()
   }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    self.initialScroll()
+  }
 }
 
 extension TodoViewController {
@@ -122,25 +127,26 @@ extension TodoViewController {
         cell.configure(with: model)
       }
       .disposed(by: self.disposeBag)
-    
-    output?.indicesToUpdate
+    output?.selectedIndex
       .asDriver()
-      .drive(onNext: { [weak self] (previousIndex, currentIndex) in
-//        print(previousIndex)
-//        print(currentIndex)
-        self?.updateBackground(index: previousIndex, isSelected: false)
-        self?.updateBackground(index: currentIndex, isSelected: true)
+      .drive(onNext: { index in
+        if let count = output?.dateArray.value.count {
+          if count > 0 {
+            self.dateCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
+          }
+        }
       })
       .disposed(by: self.disposeBag)
+      
   }
-  
-  func updateBackground(index: Int?, isSelected: Bool) {
-    guard let index = index else { return }
-    let indexPath = IndexPath(row: index, section: 0)
-    guard let cell = self.dateCollectionView.cellForItem(at: indexPath) as? DateCell else { return }
-//    cell.updateBackground(isSelected: isSelected)
+}
+
+extension TodoViewController {
+  private func initialScroll() {
+    let day = Int(Date().today().getDay()) ?? 1
+    self.dateCollectionView.scrollToItem(at: IndexPath(row: day - 1, section: 0), at: .centeredHorizontally, animated: false)
+
   }
-  
 }
 
 
