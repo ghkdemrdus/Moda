@@ -8,17 +8,40 @@
 import Foundation
 
 struct DateManager {
-  func initialDates() -> [DateItem] {
+  
+  let wordOfMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  
+  func getPreviousMonth(from date: Date) -> Int {
+    if date.getMonth() == "1" { return 12 }
+    return Int(date.getMonth())! - 1
+  }
+//  
+//  func getWordOfMonth(from date: Date) -> String {
+//    
+//  }
+  
+  func getPreviousDates(from date: Date) -> [DateItem] {
+    let previousMonth = date.addMonth(-1)!
+    return getDates(from: previousMonth)
+  }
+  
+  func getFollowingDates(from date: Date) -> [DateItem] {
+    let followingMonth = date.addMonth(1)!
+    return getDates(from: followingMonth)
+  }
+  
+  func getDates(from date: Date = Date()) -> [DateItem] {
+    let startDate = Date().firstDayOfMonth(date: date)
+    let endDate = Date().firstDayOfMonth(date: date).addMonth(1)!
+    let today = Date().today()
+    
     var dates: [DateItem] = []
-    let startDate = Date().firstDayOfMonth()
-    let endDate = Date().firstDayOfMonth().addMonth(1)!
-    let currentDate = Date().today()
     var tmpDate = startDate
     
     while tmpDate < endDate {
-      if tmpDate == currentDate {
+      if tmpDate == today {
         dates.append(DateItem(date: tmpDate, isCurrent: true, isPrevious: false, isSelected: true))
-      } else if tmpDate < currentDate {
+      } else if tmpDate < today {
         dates.append(DateItem(date: tmpDate, isCurrent: false, isPrevious: true, isSelected: false))
       } else {
         dates.append(DateItem(date: tmpDate, isCurrent: false, isPrevious: false, isSelected: false))

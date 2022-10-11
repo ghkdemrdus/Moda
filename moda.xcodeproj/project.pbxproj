@@ -34,6 +34,7 @@
 		4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */; };
 		4A58621A28ED645200EFBCC9 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621928ED645200EFBCC9 /* TodoViewModel.swift */; };
 		4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621C28ED7C5500EFBCC9 /* DateManager.swift */; };
+		4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */; };
 		4A8F897E28F3ED9500ACE0F1 /* TodoDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		4A58621928ED645200EFBCC9 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		4A58621C28ED7C5500EFBCC9 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateView.swift; sourceTree = "<group>"; };
 		7F5A659CE6FD5E07C2E1C8D2 /* Pods-moda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.release.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.release.xcconfig"; sourceTree = "<group>"; };
 		BB517FA9A0D7F372DAF73F6D /* Pods-moda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.debug.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.debug.xcconfig"; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			children = (
 				4A5861FF28EC0C7600EFBCC9 /* UIFont+Extension.swift */,
 				4A58620B28EC394600EFBCC9 /* Date+Extension.swift */,
+				4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */,
 				4A58620F28ED0D7A00EFBCC9 /* UIViewController+Preview.swift */,
 				4A58621128ED13BB00EFBCC9 /* UICollectionView+Extension.swift */,
 				4A58621528ED291D00EFBCC9 /* UIColor+Extension.swift */,
@@ -355,6 +358,7 @@
 				4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */,
 				4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */,
 				4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */,
+				4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */,
 				4A5861F028EBFBD400EFBCC9 /* TodoView.swift in Sources */,
 				4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */,
 				4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */,

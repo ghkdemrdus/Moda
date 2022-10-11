@@ -20,9 +20,9 @@ extension Date {
     return calendar.date(from: components)!
   }
   
-  func firstDayOfMonth() -> Date {
+  func firstDayOfMonth(date: Date) -> Date {
     let calendar = Calendar.current
-    let components = calendar.dateComponents([.year, .month], from: self)
+    let components = calendar.dateComponents([.year, .month], from: date)
     return calendar.date(from: components)!
   }
   
@@ -51,6 +51,18 @@ extension Date {
   func getDay() -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "d"
+    return dateFormatter.string(from: self)
+  }
+  
+  func getMonth() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "M"
+    return dateFormatter.string(from: self)
+  }
+  
+  func getWordOfMonth() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MMMM"
     return dateFormatter.string(from: self)
   }
   

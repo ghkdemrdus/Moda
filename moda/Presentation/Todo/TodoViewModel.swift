@@ -11,20 +11,23 @@ import RxSwift
 import RxRelay
 
 class TodoViewModel {
-  var didUpdateDateClicked: (([DateItem]) -> Void)?
+
+  private let dm = DateManager()
+  var initialSetting: Bool = true
   
   struct Input {
     let viewWillAppearEvent: Observable<Void>
     let dateCellDidTapEvent: Observable<Int>
+    let previousButtonDidTapEvent: Observable<Void>
+    let nextButtonDidTapEvent: Observable<Void>
   }
   
   struct Output {
     var dateArray = BehaviorRelay<[DateItem]>(value: [])
     var selectedIndex = BehaviorRelay<Int>(value: 0)
+    var month = BehaviorRelay<String>(value: "1")
+    var wordOfMonth = BehaviorRelay<String>(value: "January")
   }
-  
-  // MARK: - Models
-  var clickedDate: Date?
   
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
@@ -38,6 +41,22 @@ class TodoViewModel {
     
     input.dateCellDidTapEvent
       .bind(to: output.selectedIndex)
+      .disposed(by: disposeBag)
+    
+    input.previousButtonDidTapEvent
+      .subscribe(onNext: { [weak self] in
+        guard let self = self else { return }
+        let newDates = self.dm.getPreviousDates(from: output.dateArray.value[0].date)
+        self.updateUI(output: output, dates: newDates, selectedDay: 0)
+      })
+      .disposed(by: disposeBag)
+    
+    input.nextButtonDidTapEvent
+      .subscribe(onNext: { [weak self] in
+        guard let self = self else { return }
+        let newDates = self.dm.getFollowingDates(from: output.dateArray.value[0].date)
+        self.updateUI(output: output, dates: newDates, selectedDay: 0)
+      })
       .disposed(by: disposeBag)
     
     return output
@@ -55,16 +74,25 @@ class TodoViewModel {
         list[current].isSelected = true
         output.dateArray.accept(list)
       })
-//      .bind(to: output.indicesToUpdate)
       .disposed(by: disposeBag)
+  }
+  
+  private func updateUI(output: Output, dates: [DateItem], selectedDay: Int) {
+    output.dateArray.accept(dates)
+    output.selectedIndex.accept(selectedDay)
+    output.month.accept(dates[0].date.getMonth())
+    output.wordOfMonth.accept(dm.wordOfMonth[Int(dates[0].date.getMonth())! - 1])
   }
 }
 
-// MARK: - Date Manager
+// MARK: - Date
 extension TodoViewModel {
   func getInitialDates(output: Output) {
-    let dates = DateManager().initialDates()
-    output.dateArray.accept(dates)
-    output.selectedIndex.accept((Int(Date().today().getDay()) ?? 1) - 1)
+    let dates = dm.getDates()
+    self.updateUI(output: output, dates: dates, selectedDay: getTodayDateIndex())
+  }
+  
+   func getTodayDateIndex() -> Int {
+    return (Int(Date().today().getDay()) ?? 1) - 1
   }
 }

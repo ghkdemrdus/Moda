@@ -6,15 +6,18 @@
 //
 
 import UIKit
+import Then
 
 extension UIView {
-    func setCornerRadius(_ radius: CGFloat? = nil) {
-        if let radius = radius {
-            self.layer.cornerRadius = radius
-        } else {
-            self.layer.cornerRadius = self.frame.height / 2
-        }
-        self.layer.masksToBounds = true
-        self.layer.cornerCurve = .continuous
+  func setCornerRadius(_ radius: CGFloat? = nil) {
+    if let radius = radius {
+      self.layer.cornerRadius = radius
+    } else {
+      self.layer.cornerRadius = self.frame.height / 2
     }
+    self.layer.masksToBounds = true
+    self.layer.cornerCurve = .continuous
+  }
+  
+  
 }
