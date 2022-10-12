@@ -70,7 +70,9 @@ class TodoViewModel {
     Observable.zip(output.selectedIndex, output.selectedIndex.skip(1))
       .subscribe(onNext: { previous, current in
         var list = output.dateArray.value
-        list[previous].isSelected = false
+        if list.count > previous {
+          list[previous].isSelected = false          
+        }
         list[current].isSelected = true
         output.dateArray.accept(list)
       })
