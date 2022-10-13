@@ -27,6 +27,8 @@ class TodoViewModel {
     var selectedIndex = BehaviorRelay<Int>(value: 0)
     var month = BehaviorRelay<String>(value: "1")
     var wordOfMonth = BehaviorRelay<String>(value: "January")
+    var monthlyTodos = BehaviorRelay<[TodoItem]>(value: [])
+    var dailyTodos = BehaviorRelay<[TodoItem]>(value: [])
   }
   
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {

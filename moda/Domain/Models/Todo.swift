@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct Todo {
-    var content: String
-    var isDone: Bool
+struct TodoItem {
+  var content: String
+  var isDone: Bool
+  
+  static let `default` = TodoItem(content: "", isDone: false)
 }

@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0837F7822B4A7AECAC85DCC7 /* Pods_moda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437E630A89CADE02D6672022 /* Pods_moda.framework */; };
+		4A3CD2AE28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */; };
 		4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */; };
 		4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */; };
 		4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DD28EBF85100EFBCC9 /* ViewController.swift */; };
 		4A5861E128EBF85100EFBCC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861DF28EBF85100EFBCC9 /* Main.storyboard */; };
 		4A5861E328EBF85200EFBCC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861E228EBF85200EFBCC9 /* Assets.xcassets */; };
 		4A5861E628EBF85200EFBCC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861E428EBF85200EFBCC9 /* LaunchScreen.storyboard */; };
-		4A5861F028EBFBD400EFBCC9 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861EF28EBFBD400EFBCC9 /* TodoView.swift */; };
 		4A5861F428EBFC7C00EFBCC9 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861F328EBFC7C00EFBCC9 /* Todo.swift */; };
 		4A5861F628EBFE9E00EFBCC9 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */; };
 		4A58620028EC0C7600EFBCC9 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861FF28EC0C7600EFBCC9 /* UIFont+Extension.swift */; };
@@ -26,7 +26,6 @@
 		4A58620828EC1FBB00EFBCC9 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620728EC1FBB00EFBCC9 /* DateCell.swift */; };
 		4A58620A28EC360600EFBCC9 /* DateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620928EC360600EFBCC9 /* DateItem.swift */; };
 		4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620B28EC394600EFBCC9 /* Date+Extension.swift */; };
-		4A58620E28EC3C9900EFBCC9 /* DateSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620D28EC3C9900EFBCC9 /* DateSectionCell.swift */; };
 		4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620F28ED0D7A00EFBCC9 /* UIViewController+Preview.swift */; };
 		4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621128ED13BB00EFBCC9 /* UICollectionView+Extension.swift */; };
 		4A58621428ED284400EFBCC9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A58621328ED284400EFBCC9 /* Colors.xcassets */; };
@@ -35,11 +34,16 @@
 		4A58621A28ED645200EFBCC9 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621928ED645200EFBCC9 /* TodoViewModel.swift */; };
 		4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621C28ED7C5500EFBCC9 /* DateManager.swift */; };
 		4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */; };
+		4A59EA5328F65A29002C6FBE /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59EA5228F65A29002C6FBE /* TodoCell.swift */; };
 		4A8F897E28F3ED9500ACE0F1 /* TodoDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */; };
+		4AAFE77B28F6AF7F00EA6FB4 /* MontlySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77A28F6AF7F00EA6FB4 /* MontlySectionCell.swift */; };
+		4AAFE77D28F6B06B00EA6FB4 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */; };
+		4AAFE77F28F6B0C200EA6FB4 /* DailySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77E28F6B0C200EA6FB4 /* DailySectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		437E630A89CADE02D6672022 /* Pods_moda.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moda.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoHeaderView.swift; sourceTree = "<group>"; };
 		4A5861D628EBF85100EFBCC9 /* moda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +52,6 @@
 		4A5861E228EBF85200EFBCC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4A5861E528EBF85200EFBCC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A5861E728EBF85200EFBCC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4A5861EF28EBFBD400EFBCC9 /* TodoView.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; tabWidth = 2; };
 		4A5861F328EBFC7C00EFBCC9 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		4A5861F928EC0B1200EFBCC9 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Light.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
@@ -60,7 +63,6 @@
 		4A58620728EC1FBB00EFBCC9 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		4A58620928EC360600EFBCC9 /* DateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItem.swift; sourceTree = "<group>"; };
 		4A58620B28EC394600EFBCC9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		4A58620D28EC3C9900EFBCC9 /* DateSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSectionCell.swift; sourceTree = "<group>"; };
 		4A58620F28ED0D7A00EFBCC9 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		4A58621128ED13BB00EFBCC9 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		4A58621328ED284400EFBCC9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -69,7 +71,11 @@
 		4A58621928ED645200EFBCC9 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		4A58621C28ED7C5500EFBCC9 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		4A59EA5228F65A29002C6FBE /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
 		4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateView.swift; sourceTree = "<group>"; };
+		4AAFE77A28F6AF7F00EA6FB4 /* MontlySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MontlySectionCell.swift; sourceTree = "<group>"; };
+		4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
+		4AAFE77E28F6B0C200EA6FB4 /* DailySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySectionCell.swift; sourceTree = "<group>"; };
 		7F5A659CE6FD5E07C2E1C8D2 /* Pods-moda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.release.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.release.xcconfig"; sourceTree = "<group>"; };
 		BB517FA9A0D7F372DAF73F6D /* Pods-moda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.debug.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,11 +121,6 @@
 				4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */,
 				4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */,
 				4A5861DD28EBF85100EFBCC9 /* ViewController.swift */,
-				4A5861DF28EBF85100EFBCC9 /* Main.storyboard */,
-				4A5861E228EBF85200EFBCC9 /* Assets.xcassets */,
-				4A58621328ED284400EFBCC9 /* Colors.xcassets */,
-				4A5861E428EBF85200EFBCC9 /* LaunchScreen.storyboard */,
-				4A5861E728EBF85200EFBCC9 /* Info.plist */,
 			);
 			path = moda;
 			sourceTree = "<group>";
@@ -127,6 +128,7 @@
 		4A5861ED28EBFBA200EFBCC9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				4A59EA4C28F64F64002C6FBE /* TodoScene */,
 				4A5861EE28EBFBAC00EFBCC9 /* Todo */,
 			);
 			path = Presentation;
@@ -136,9 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				4A58620628EC1F8E00EFBCC9 /* Date */,
-				4A5861EF28EBFBD400EFBCC9 /* TodoView.swift */,
-				4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */,
-				4A58621928ED645200EFBCC9 /* TodoViewModel.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -163,6 +162,11 @@
 		4A5861F728EC0AEF00EFBCC9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				4A5861DF28EBF85100EFBCC9 /* Main.storyboard */,
+				4A5861E228EBF85200EFBCC9 /* Assets.xcassets */,
+				4A58621328ED284400EFBCC9 /* Colors.xcassets */,
+				4A5861E428EBF85200EFBCC9 /* LaunchScreen.storyboard */,
+				4A5861E728EBF85200EFBCC9 /* Info.plist */,
 				4A5861F828EC0B0100EFBCC9 /* Font */,
 			);
 			path = Resource;
@@ -197,9 +201,6 @@
 		4A58620628EC1F8E00EFBCC9 /* Date */ = {
 			isa = PBXGroup;
 			children = (
-				4A58620728EC1FBB00EFBCC9 /* DateCell.swift */,
-				4A58620D28EC3C9900EFBCC9 /* DateSectionCell.swift */,
-				4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -210,6 +211,46 @@
 				4A58621C28ED7C5500EFBCC9 /* DateManager.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		4A59EA4C28F64F64002C6FBE /* TodoScene */ = {
+			isa = PBXGroup;
+			children = (
+				4A59EA4F28F64F88002C6FBE /* ViewModel */,
+				4A59EA4E28F64F7F002C6FBE /* ViewController */,
+				4A59EA4D28F64F74002C6FBE /* View */,
+			);
+			path = TodoScene;
+			sourceTree = "<group>";
+		};
+		4A59EA4D28F64F74002C6FBE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4A58620728EC1FBB00EFBCC9 /* DateCell.swift */,
+				4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */,
+				4A59EA5228F65A29002C6FBE /* TodoCell.swift */,
+				4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */,
+				4AAFE77A28F6AF7F00EA6FB4 /* MontlySectionCell.swift */,
+				4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */,
+				4AAFE77E28F6B0C200EA6FB4 /* DailySectionCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A59EA4E28F64F7F002C6FBE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		4A59EA4F28F64F88002C6FBE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4A58621928ED645200EFBCC9 /* TodoViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		86211C65C4AFFCB6F634C926 /* Frameworks */ = {
@@ -355,18 +396,21 @@
 				4A58620A28EC360600EFBCC9 /* DateItem.swift in Sources */,
 				4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */,
 				4A8F897E28F3ED9500ACE0F1 /* TodoDateView.swift in Sources */,
+				4AAFE77F28F6B0C200EA6FB4 /* DailySectionCell.swift in Sources */,
 				4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */,
+				4AAFE77B28F6AF7F00EA6FB4 /* MontlySectionCell.swift in Sources */,
 				4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */,
+				4A59EA5328F65A29002C6FBE /* TodoCell.swift in Sources */,
+				4AAFE77D28F6B06B00EA6FB4 /* TodoView.swift in Sources */,
 				4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */,
 				4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */,
-				4A5861F028EBFBD400EFBCC9 /* TodoView.swift in Sources */,
 				4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */,
 				4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */,
 				4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */,
 				4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */,
 				4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */,
 				4A5861F628EBFE9E00EFBCC9 /* TodoViewController.swift in Sources */,
-				4A58620E28EC3C9900EFBCC9 /* DateSectionCell.swift in Sources */,
+				4A3CD2AE28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift in Sources */,
 				4A5861F428EBFC7C00EFBCC9 /* Todo.swift in Sources */,
 				4A58620828EC1FBB00EFBCC9 /* DateCell.swift in Sources */,
 			);
@@ -518,7 +562,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 79K7D639YK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = moda/Info.plist;
+				INFOPLIST_FILE = moda/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -548,7 +592,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 79K7D639YK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = moda/Info.plist;
+				INFOPLIST_FILE = moda/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

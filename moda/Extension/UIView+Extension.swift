@@ -9,15 +9,10 @@ import UIKit
 import Then
 
 extension UIView {
-  func setCornerRadius(_ radius: CGFloat? = nil) {
-    if let radius = radius {
-      self.layer.cornerRadius = radius
-    } else {
-      self.layer.cornerRadius = self.frame.height / 2
-    }
-    self.layer.masksToBounds = true
-    self.layer.cornerCurve = .continuous
-  }
-  
-  
+  func setCornerRadius(corners: UIRectCorner, radius: CGFloat) {
+       let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+       let mask = CAShapeLayer()
+       mask.path = path.cgPath
+       layer.mask = mask
+   }
 }
