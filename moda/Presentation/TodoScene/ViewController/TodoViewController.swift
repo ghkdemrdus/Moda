@@ -11,15 +11,14 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class TodoViewController: UIViewController {
   
   var viewModel = TodoViewModel()
   private let disposeBag = DisposeBag()
   
-  enum Section: Int {
-    case monthly
-  }
+  var dataSource: RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>!
   
   //MARK: - UI
   private let leftArrowButton =  UIButton().then {
@@ -35,14 +34,14 @@ class TodoViewController: UIViewController {
   private let monthLabel = UILabel().then {
     $0.textColor = .black
     $0.textAlignment = .center
-    $0.font = UIFont.custom(.bold, 28)
+    $0.font = .spoqaHanSansNeo(type: .bold, size: 28)
     $0.text = "10"
   }
   
   private let wordOfMonthLabel = UILabel().then {
     $0.textColor = .black
     $0.textAlignment = .center
-    $0.font = UIFont.custom(.bold, 18)
+    $0.font = .spoqaHanSansNeo(type: .bold, size: 18)
     $0.text = "October"
   }
   
@@ -54,6 +53,33 @@ class TodoViewController: UIViewController {
     $0.spacing = 8
   }
   
+  private lazy var todoCollectionViewLayout = UICollectionViewCompositionalLayout (sectionProvider: { section, env -> NSCollectionLayoutSection? in
+    let section = self.dataSource.sectionModels[section].model
+    switch section {
+    case .monthly:
+      return self.getMonthlyTodoSection()
+    case .daily:
+      return self.getDailyTodoSection()
+    }
+  }, configuration: UICollectionViewCompositionalLayoutConfiguration().then {
+    $0.interSectionSpacing = 28
+  })
+    .then {
+      $0.register(MonthlySEctionBackgroundDecorationView.self, forDecorationViewOfKind: String(describing: "monthly-section-background"))
+    }
+  
+  private lazy var todoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.todoCollectionViewLayout).then {
+    $0.isScrollEnabled = true
+    $0.showsVerticalScrollIndicator = false
+    $0.contentInset = .zero
+    $0.backgroundColor = .clear
+    $0.clipsToBounds = true
+        $0.register(TodoHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
+    $0.register(MonthlyTodoCell.self)
+    //    $0.register(DailyTodoCell.self)
+  }
+  
+  
   private let monthlyHeaderView = UIView()
   private let monthlyTitleLabel = UILabel().then {
     $0.text = "먼쓸리 투두"
@@ -62,28 +88,68 @@ class TodoViewController: UIViewController {
   private lazy var tableView = UITableView().then {
     
     $0.register(TodoCell.self, forCellReuseIdentifier: String(describing: TodoCell.self))
-//    $0.register(MonthlyTodoHeaderView.self, forHeaderFooterViewReuseIdentifier: String(describing: MonthlyTodoHeaderView.self))
+    //    $0.register(MonthlyTodoHeaderView.self, forHeaderFooterViewReuseIdentifier: String(describing: MonthlyTodoHeaderView.self))
     $0.delegate = self
     $0.dataSource = self
-//    $0.tableHeaderView?.frame.size.height = height
-//    $0.tableFooterView = UIView()
-//    $0.tableFooterView?.frame.size.height = 15
-//    $0.rowHeight = 130
+    //    $0.tableHeaderView?.frame.size.height = height
+    //    $0.tableFooterView = UIView()
+    //    $0.tableFooterView?.frame.size.height = 15
+    //    $0.rowHeight = 130
     $0.separatorStyle = .none
     $0.showsVerticalScrollIndicator = false
     $0.backgroundColor = .monthlyBg
-//    $0.refreshControl = self.refreshControl
+    //    $0.refreshControl = self.refreshControl
   }
   
   
   var dateCollectionView = TodoDateView()
-  var todoCollectionView = TodoView()
+  //  var todoCollectionView = TodoView()
+  
+  private func configureCollectionView() -> TodoViewModel.CellInput {
+    let monthlyTodos = PublishRelay<Todo>()
+    let dailyTodos = PublishRelay<Todo>()
+    
+    self.dataSource = RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>(
+      configureCell: { dataSource, tableView, indexPath, item in
+        switch item {
+        case .monthly(let todo):
+          let cell = self.todoCollectionView.dequeueReusableCell(MonthlyTodoCell.self, for: indexPath)
+          cell.updateUI(todo: todo)
+          return cell
+        case .daily(let todo):
+          let cell = self.todoCollectionView.dequeueReusableCell(MonthlyTodoCell.self, for: indexPath)
+          return cell
+        }
+       
+      })
+    
+    self.dataSource.configureSupplementaryView = { (dataSource, collectionView, kind, indexPath) in
+      if kind == UICollectionView.elementKindSectionHeader {
+        let section = collectionView.dequeueReusableHeaderView(TodoHeaderView.self, for: indexPath)
+        //        switch self.dataSource.sectionModels[indexPath.section].model {
+        //        case .monthly:
+        //          section.updateUI(title: "000 님을 위한\n향수 추천", content: "어퓸을 사용할수록\n더 잘 맞는 향수를 보여드려요")
+        //        case .daily:
+        //          section.updateUI(title: "20대 여성이\n많이 찾는 향수", content: "00 님 연령대 분들에게 인기 많은 향수 입니다.")
+        //        }
+        return section
+      } else {
+        return UICollectionReusableView()
+      }
+    }
+    
+    return TodoViewModel.CellInput(
+      
+    )
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupView()
-    configureUI()
-    bindViewModel()
+    self.setupView()
+    self.configureUI()
+    let cellInput = self.configureCollectionView()
+    
+    self.bindViewModel()
   }
   
   override func viewDidLayoutSubviews() {
@@ -137,16 +203,9 @@ extension TodoViewController {
     self.view.addSubview(self.todoCollectionView)
     self.todoCollectionView.snp.makeConstraints {
       $0.top.equalTo(self.dateCollectionView.snp.bottom).offset(10)
-      $0.left.right.equalToSuperview()
+      $0.bottom.equalToSuperview()
+      $0.left.right.equalToSuperview().inset(16)
     }
-    
-//    self.view.addSubview(self.tableView)
-//    self.tableView.snp.makeConstraints {
-//      $0.left.right.equalToSuperview().inset(10)
-//      $0.top.equalTo(self.dateCollectionView.snp.bottom).offset(16)
-//      $0.bottom.equalToSuperview()
-//    }
-
   }
 }
 
@@ -160,6 +219,7 @@ extension TodoViewController {
     )
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     self.bindDateArray(output: output)
+    self.bindMonthly(output: output)
   }
   
   func bindDateArray(output: TodoViewModel.Output?) {
@@ -195,6 +255,12 @@ extension TodoViewController {
       .drive(self.wordOfMonthLabel.rx.text)
       .disposed(by: self.disposeBag)
   }
+  
+  func bindMonthly(output: TodoViewModel.Output?) {
+    output?.todoDatas
+      .bind(to: self.todoCollectionView.rx.items(dataSource: dataSource))
+      .disposed(by: self.disposeBag)
+  }
 }
 
 extension TodoViewController {
@@ -206,7 +272,7 @@ extension TodoViewController {
 
 extension TodoViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      return 50
+    return 50
   }
 }
 
@@ -215,13 +281,13 @@ extension TodoViewController: UITableViewDataSource {
     return 50
   }
   
-//  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//      guard let header = tableView.dequeueReusableHeaderFooterView(
-//          withIdentifier: String(describing: MonthlyTodoHeaderView.self)) as? MonthlyTodoHeaderView else { return UITableViewHeaderFooterView() }
-//      
-//      
-//      return header
-//  }
+  //  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+  //      guard let header = tableView.dequeueReusableHeaderFooterView(
+  //          withIdentifier: String(describing: MonthlyTodoHeaderView.self)) as? MonthlyTodoHeaderView else { return UITableViewHeaderFooterView() }
+  //
+  //
+  //      return header
+  //  }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 10

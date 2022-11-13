@@ -20,7 +20,7 @@ class TodoCell: UITableViewCell {
   
   private let contentLabel = UILabel().then {
     $0.lineBreakMode = .byCharWrapping
-    $0.font = .custom(.medium, 15)
+    $0.font = .spoqaHanSansNeo(type: .medium, size: 15)
     $0.numberOfLines = 0
     $0.text = "(최대길이)먼쓸리가 두 줄이 가능하다면 어떻게 되는지 설명해주는 화면이랍니다 찡긋 "
   }
@@ -40,7 +40,7 @@ class TodoCell: UITableViewCell {
     self.configureUI()
   }
   
-  func updateUI(todo: TodoItem) {
+  func updateUI(todo: Todo) {
     self.contentLabel.text = todo.content
     self.doneButton.setImage(UIImage(named: todo.isDone == true ? "imgHomeMonthlyDoActive" : "imgHomeMonthlyDoInactive"), for: .normal)
   }

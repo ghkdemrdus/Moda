@@ -15,7 +15,7 @@ class MonthlySectionCell: UICollectionViewCell {
   
   private let titleLabel = UILabel().then {
     $0.text = "먼쓸리 투두"
-    $0.font = .custom(.bold, 19)
+    $0.font = .spoqaHanSansNeo(type: .bold, size: 19)
   }
   private let todoTableView = UITableView()
   
@@ -42,15 +42,15 @@ class MonthlySectionCell: UICollectionViewCell {
   }
 }
 
-extension MonthlySectionCell: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.output?.monthlyTodos.value.count ?? 0
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TodoCell.self), for: indexPath) as? TodoCell else { return UITableViewCell() }
-    
-    cell.updateUI(todo: output?.monthlyTodos.value[indexPath.item] ?? TodoItem.default)
-    return cell
-  }
-}
+//extension MonthlySectionCell: UITableViewDataSource {
+//  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    return self.output?.monthlyTodos.value.count ?? 0
+//  }
+//  
+//  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//    guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TodoCell.self), for: indexPath) as? TodoCell else { return UITableViewCell() }
+//    
+//    cell.updateUI(todo: output?.monthlyTodos.value[indexPath.item] ?? Todo.default)
+//    return cell
+//  }
+//}

@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct TodoItem {
+struct Todo: Hashable {
   var content: String
   var isDone: Bool
   
-  static let `default` = TodoItem(content: "", isDone: false)
+  static let `default` = Todo(content: "", isDone: false)
 }

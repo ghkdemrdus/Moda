@@ -12,7 +12,7 @@ import Then
 class MonthlyTodoHeaderView: UITableViewHeaderFooterView {
   private let headerTitleLabel = UILabel().then {
     $0.text = "먼쓸리 투두"
-    $0.font = .custom(.bold, 19)
+    $0.font = .spoqaHanSansNeo(type: .bold, size: 19)
         
   }
   

@@ -8,6 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		0837F7822B4A7AECAC85DCC7 /* Pods_moda.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437E630A89CADE02D6672022 /* Pods_moda.framework */; };
+		4A2FB654291E5350007B2686 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FB64F291E534E007B2686 /* SpoqaHanSansNeo-Light.otf */; };
+		4A2FB655291E5350007B2686 /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FB650291E534F007B2686 /* SpoqaHanSansNeo-Thin.otf */; };
+		4A2FB656291E5350007B2686 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FB651291E534F007B2686 /* SpoqaHanSansNeo-Bold.otf */; };
+		4A2FB657291E5350007B2686 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FB652291E534F007B2686 /* SpoqaHanSansNeo-Regular.otf */; };
+		4A2FB658291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FB653291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf */; };
+		4A2FB65A291E584E007B2686 /* TodoViewController+CollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB659291E584E007B2686 /* TodoViewController+CollectionViewSection.swift */; };
+		4A2FB65C291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB65B291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift */; };
+		4A2FB65F291F27ED007B2686 /* ModaDataSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB65E291F27ED007B2686 /* ModaDataSection.swift */; };
+		4A2FB662291F2BF8007B2686 /* MonthlyTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */; };
+		4A2FB664291F2DDC007B2686 /* DailyTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */; };
+		4A2FB666291F2EDA007B2686 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB665291F2EDA007B2686 /* UIImage+Extension.swift */; };
+		4A2FB66B291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66A291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift */; };
+		4A2FB66E291FB390007B2686 /* TodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */; };
+		4A2FB670291FBD3E007B2686 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66F291FBD3E007B2686 /* Log.swift */; };
 		4A3CD2AE28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */; };
 		4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */; };
 		4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */; };
@@ -18,11 +32,6 @@
 		4A5861F428EBFC7C00EFBCC9 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861F328EBFC7C00EFBCC9 /* Todo.swift */; };
 		4A5861F628EBFE9E00EFBCC9 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */; };
 		4A58620028EC0C7600EFBCC9 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861FF28EC0C7600EFBCC9 /* UIFont+Extension.swift */; };
-		4A58620128EC0E0400EFBCC9 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861FC28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Bold.otf */; };
-		4A58620228EC0E0700EFBCC9 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861F928EC0B1200EFBCC9 /* SpoqaHanSansNeo-Light.otf */; };
-		4A58620328EC0E0A00EFBCC9 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861FB28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Medium.otf */; };
-		4A58620428EC0E0D00EFBCC9 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861FD28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Regular.otf */; };
-		4A58620528EC0E1100EFBCC9 /* SpoqaHanSansNeo-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A5861FA28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Thin.otf */; };
 		4A58620828EC1FBB00EFBCC9 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620728EC1FBB00EFBCC9 /* DateCell.swift */; };
 		4A58620A28EC360600EFBCC9 /* DateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620928EC360600EFBCC9 /* DateItem.swift */; };
 		4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620B28EC394600EFBCC9 /* Date+Extension.swift */; };
@@ -43,6 +52,20 @@
 
 /* Begin PBXFileReference section */
 		437E630A89CADE02D6672022 /* Pods_moda.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_moda.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A2FB64F291E534E007B2686 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
+		4A2FB650291E534F007B2686 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
+		4A2FB651291E534F007B2686 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
+		4A2FB652291E534F007B2686 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
+		4A2FB653291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
+		4A2FB659291E584E007B2686 /* TodoViewController+CollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoViewController+CollectionViewSection.swift"; sourceTree = "<group>"; };
+		4A2FB65B291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCollectionSectionedNonAnimatedDataSource.swift; sourceTree = "<group>"; };
+		4A2FB65E291F27ED007B2686 /* ModaDataSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModaDataSection.swift; sourceTree = "<group>"; };
+		4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoCell.swift; sourceTree = "<group>"; };
+		4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodoCell.swift; sourceTree = "<group>"; };
+		4A2FB665291F2EDA007B2686 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		4A2FB66A291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySEctionBackgroundDecorationView.swift; sourceTree = "<group>"; };
+		4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHeaderView.swift; sourceTree = "<group>"; };
+		4A2FB66F291FBD3E007B2686 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoHeaderView.swift; sourceTree = "<group>"; };
 		4A5861D628EBF85100EFBCC9 /* moda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,11 +77,6 @@
 		4A5861E728EBF85200EFBCC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A5861F328EBFC7C00EFBCC9 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
-		4A5861F928EC0B1200EFBCC9 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Light.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
-		4A5861FA28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Thin.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
-		4A5861FB28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Medium.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
-		4A5861FC28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Bold.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
-		4A5861FD28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SpoqaHanSansNeo-Regular.otf"; path = "../../../../../Downloads/SpoqaHanSansNeo_OTF_original 2/SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		4A5861FF28EC0C7600EFBCC9 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		4A58620728EC1FBB00EFBCC9 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		4A58620928EC360600EFBCC9 /* DateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateItem.swift; sourceTree = "<group>"; };
@@ -92,6 +110,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A2FB65D291F27DF007B2686 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				4A2FB65E291F27ED007B2686 /* ModaDataSection.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		4A2FB667291FAD3E007B2686 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
+		4A2FB66C291FB371007B2686 /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */,
+				4A2FB66A291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift */,
+				4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */,
+			);
+			path = Todo;
+			sourceTree = "<group>";
+		};
 		4A5861CD28EBF85100EFBCC9 = {
 			isa = PBXGroup;
 			children = (
@@ -175,11 +218,11 @@
 		4A5861F828EC0B0100EFBCC9 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				4A5861FC28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Bold.otf */,
-				4A5861F928EC0B1200EFBCC9 /* SpoqaHanSansNeo-Light.otf */,
-				4A5861FB28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Medium.otf */,
-				4A5861FD28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Regular.otf */,
-				4A5861FA28EC0B1200EFBCC9 /* SpoqaHanSansNeo-Thin.otf */,
+				4A2FB651291E534F007B2686 /* SpoqaHanSansNeo-Bold.otf */,
+				4A2FB64F291E534E007B2686 /* SpoqaHanSansNeo-Light.otf */,
+				4A2FB653291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf */,
+				4A2FB652291E534F007B2686 /* SpoqaHanSansNeo-Regular.otf */,
+				4A2FB650291E534F007B2686 /* SpoqaHanSansNeo-Thin.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -194,6 +237,7 @@
 				4A58621128ED13BB00EFBCC9 /* UICollectionView+Extension.swift */,
 				4A58621528ED291D00EFBCC9 /* UIColor+Extension.swift */,
 				4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */,
+				4A2FB665291F2EDA007B2686 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -208,7 +252,10 @@
 		4A58621B28ED7C4600EFBCC9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				4A2FB65D291F27DF007B2686 /* Constant */,
 				4A58621C28ED7C5500EFBCC9 /* DateManager.swift */,
+				4A2FB65B291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift */,
+				4A2FB66F291FBD3E007B2686 /* Log.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -216,9 +263,9 @@
 		4A59EA4C28F64F64002C6FBE /* TodoScene */ = {
 			isa = PBXGroup;
 			children = (
-				4A59EA4F28F64F88002C6FBE /* ViewModel */,
-				4A59EA4E28F64F7F002C6FBE /* ViewController */,
 				4A59EA4D28F64F74002C6FBE /* View */,
+				4A59EA4E28F64F7F002C6FBE /* ViewController */,
+				4A59EA4F28F64F88002C6FBE /* ViewModel */,
 			);
 			path = TodoScene;
 			sourceTree = "<group>";
@@ -226,6 +273,9 @@
 		4A59EA4D28F64F74002C6FBE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A2FB667291FAD3E007B2686 /* Date */,
+				4A2FB66C291FB371007B2686 /* Todo */,
+				4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */,
 				4A58620728EC1FBB00EFBCC9 /* DateCell.swift */,
 				4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */,
 				4A59EA5228F65A29002C6FBE /* TodoCell.swift */,
@@ -241,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */,
+				4A2FB659291E584E007B2686 /* TodoViewController+CollectionViewSection.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -330,15 +381,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2FB654291E5350007B2686 /* SpoqaHanSansNeo-Light.otf in Resources */,
+				4A2FB656291E5350007B2686 /* SpoqaHanSansNeo-Bold.otf in Resources */,
 				4A58621428ED284400EFBCC9 /* Colors.xcassets in Resources */,
-				4A58620228EC0E0700EFBCC9 /* SpoqaHanSansNeo-Light.otf in Resources */,
-				4A58620528EC0E1100EFBCC9 /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				4A2FB657291E5350007B2686 /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				4A5861E628EBF85200EFBCC9 /* LaunchScreen.storyboard in Resources */,
 				4A5861E328EBF85200EFBCC9 /* Assets.xcassets in Resources */,
-				4A58620428EC0E0D00EFBCC9 /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				4A5861E128EBF85100EFBCC9 /* Main.storyboard in Resources */,
-				4A58620128EC0E0400EFBCC9 /* SpoqaHanSansNeo-Bold.otf in Resources */,
-				4A58620328EC0E0A00EFBCC9 /* SpoqaHanSansNeo-Medium.otf in Resources */,
+				4A2FB655291E5350007B2686 /* SpoqaHanSansNeo-Thin.otf in Resources */,
+				4A2FB658291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,26 +443,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A58621A28ED645200EFBCC9 /* TodoViewModel.swift in Sources */,
+				4A2FB66E291FB390007B2686 /* TodoHeaderView.swift in Sources */,
 				4A58620028EC0C7600EFBCC9 /* UIFont+Extension.swift in Sources */,
 				4A58620A28EC360600EFBCC9 /* DateItem.swift in Sources */,
 				4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */,
+				4A2FB664291F2DDC007B2686 /* DailyTodoCell.swift in Sources */,
 				4A8F897E28F3ED9500ACE0F1 /* TodoDateView.swift in Sources */,
 				4AAFE77F28F6B0C200EA6FB4 /* DailySectionCell.swift in Sources */,
 				4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */,
 				4AAFE77B28F6AF7F00EA6FB4 /* MontlySectionCell.swift in Sources */,
+				4A2FB65C291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift in Sources */,
 				4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */,
 				4A59EA5328F65A29002C6FBE /* TodoCell.swift in Sources */,
 				4AAFE77D28F6B06B00EA6FB4 /* TodoView.swift in Sources */,
 				4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */,
+				4A2FB662291F2BF8007B2686 /* MonthlyTodoCell.swift in Sources */,
+				4A2FB666291F2EDA007B2686 /* UIImage+Extension.swift in Sources */,
+				4A2FB65F291F27ED007B2686 /* ModaDataSection.swift in Sources */,
 				4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */,
 				4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */,
 				4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */,
+				4A2FB66B291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift in Sources */,
 				4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */,
 				4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */,
 				4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */,
 				4A5861F628EBFE9E00EFBCC9 /* TodoViewController.swift in Sources */,
 				4A3CD2AE28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift in Sources */,
+				4A2FB670291FBD3E007B2686 /* Log.swift in Sources */,
 				4A5861F428EBFC7C00EFBCC9 /* Todo.swift in Sources */,
+				4A2FB65A291E584E007B2686 /* TodoViewController+CollectionViewSection.swift in Sources */,
 				4A58620828EC1FBB00EFBCC9 /* DateCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

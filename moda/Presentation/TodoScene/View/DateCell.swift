@@ -20,11 +20,11 @@ class DateCell: UICollectionViewCell {
   }
   private let weekdayLabel = UILabel().then {
     $0.translatesAutoresizingMaskIntoConstraints = false
-    $0.font = .custom(.bold, 13)
+    $0.font = .spoqaHanSansNeo(type: .bold, size: 13)
   }
   private let dayLabel = UILabel().then {
     $0.translatesAutoresizingMaskIntoConstraints = false
-    $0.font = .custom(.bold, 13)
+    $0.font = .spoqaHanSansNeo(type: .bold, size: 13)
   }
   
   override init(frame: CGRect) {
