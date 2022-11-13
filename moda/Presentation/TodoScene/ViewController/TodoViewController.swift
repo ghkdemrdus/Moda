@@ -198,6 +198,12 @@ extension TodoViewController {
           let cell = self.todoCollectionView.dequeueReusableCell(DailyTodoCell.self, for: indexPath)
           cell.updateUI(todo: todo)
           return cell
+        case .monthlyEmpty:
+          let cell = self.todoCollectionView.dequeueReusableCell(MonthlyEmptyCell.self, for: indexPath)
+          return cell
+        case .dailyEmpty:
+          let cell = self.todoCollectionView.dequeueReusableCell(MonthlyEmptyCell.self, for: indexPath)
+          return cell
         }
         
       })

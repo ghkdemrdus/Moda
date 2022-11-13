@@ -34,6 +34,7 @@ class TodoView: UICollectionView {
     self.register(TodoHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
     self.register(MonthlyTodoCell.self)
     self.register(DailyTodoCell.self)
+    self.register(MonthlyEmptyCell.self)
   }
   
   private lazy var todoCollectionViewLayout = UICollectionViewCompositionalLayout (sectionProvider: { section, env -> NSCollectionLayoutSection? in
@@ -52,18 +53,19 @@ class TodoView: UICollectionView {
     }
   
   func getMonthlyTodoSection() -> NSCollectionLayoutSection {
-    // item
+
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1),
       heightDimension: .estimated(36)
     )
+
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
     
-    // group
     let groupSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1),
       heightDimension: .estimated(36)
     )
+
     let group = NSCollectionLayoutGroup.horizontal(
       layoutSize: groupSize,
       subitems: [item]
@@ -73,6 +75,7 @@ class TodoView: UICollectionView {
       widthDimension: .fractionalWidth(1),
       heightDimension: .absolute(42)
     )
+    
     let header = NSCollectionLayoutBoundarySupplementaryItem(
       layoutSize: headerSize,
       elementKind: UICollectionView.elementKindSectionHeader,
@@ -90,18 +93,18 @@ class TodoView: UICollectionView {
   }
   
   func getDailyTodoSection() -> NSCollectionLayoutSection {
-    // item
+
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1),
       heightDimension: .estimated(36)
     )
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
-    
-    // group
+
     let groupSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1),
       heightDimension: .estimated(36)
     )
+    
     let group = NSCollectionLayoutGroup.horizontal(
       layoutSize: groupSize,
       subitems: [item]
@@ -118,7 +121,6 @@ class TodoView: UICollectionView {
       alignment: .top
     )
     
-    // section
     let section = NSCollectionLayoutSection(group: group)
     section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4)
     section.boundarySupplementaryItems = [header]

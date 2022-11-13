@@ -27,12 +27,14 @@ struct TodoDataSection {
     
     case monthly(Todo)
     case daily(Todo)
+    case monthlyEmpty
+    case dailyEmpty
   }
   
   static var initialSectionDatas: [TodoDataSection.Model] {
     return [
-      TodoDataSection.Model(model: TodoSection.monthly, items: []),
-      TodoDataSection.Model(model: TodoSection.daily, items: [])
+      TodoDataSection.Model(model: TodoSection.monthly, items: [TodoItem.monthlyEmpty]),
+      TodoDataSection.Model(model: TodoSection.daily, items: [TodoItem.dailyEmpty])
     ]
   }
 }

@@ -52,7 +52,7 @@ class TodoViewModel {
     .bind(to: output.todoDatas)
     .disposed(by: disposeBag)
     
-    monthlyTodos.accept([Todo(content: "ㅁㄷㅇㄹㅁ여ㅛ셔ㅛㅁㅈ요ㅕㅁㅈㅅ요ㅕㅁㅈㅅ요ㅕㅈㅁ쇼엿ㅈ묘ㅕㅇ쇼ㅕㅁㅈㅇ셧ㅁ져ㅛㅈㅁ", isDone: false),Todo(content: "1", isDone: false),Todo(content: "1", isDone: false),Todo(content: "1", isDone: false)])
+//    monthlyTodos.accept([Todo(content: "ㅁㄷㅇㄹㅁ여ㅛ셔ㅛㅁㅈ요ㅕㅁㅈㅅ요ㅕㅁㅈㅅ요ㅕㅈㅁ쇼엿ㅈ묘ㅕㅇ쇼ㅕㅁㅈㅇ셧ㅁ져ㅛㅈㅁ", isDone: false),Todo(content: "1", isDone: false),Todo(content: "1", isDone: false),Todo(content: "1", isDone: false)])
     
     dailyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
       todoDatas.map {
