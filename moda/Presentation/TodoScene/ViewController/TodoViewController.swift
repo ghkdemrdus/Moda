@@ -15,11 +15,6 @@ import RxDataSources
 
 class TodoViewController: UIViewController {
   
-  var viewModel = TodoViewModel()
-  private let disposeBag = DisposeBag()
-  
-  var todoDataSource: RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>!
-  
   //MARK: - UI
   private let leftArrowButton =  UIButton().then {
     $0.setImage(UIImage(named: "iconArrowLeft"), for: .normal)
@@ -52,10 +47,141 @@ class TodoViewController: UIViewController {
     $0.axis = .horizontal
     $0.spacing = 8
   }
-
   
-  var dateCollectionView = DateView()
-  lazy var todoCollectionView = TodoView(todoDataSource: self.todoDataSource)
+  private let dateCollectionView = DateView()
+  private lazy var todoCollectionView = TodoView(todoDataSource: self.todoDataSource)
+  private let bottomInputView = UIView()
+  private let inputDividerView = UIView().then {
+    $0.backgroundColor = .inputDividerBg
+  }
+  
+  private let monthButton = UIButton().then {
+    $0.setTitle("M", for: .normal)
+    $0.setTitleColor(.burgundy, for: .normal)
+    $0.titleLabel?.font = .spoqaHanSansNeo(type: .regular, size: 13)
+    $0.layer.cornerRadius = 5
+    $0.backgroundColor = .lightOrange
+  }
+  private let dailyButton = UIButton().then {
+    $0.setTitle("D", for: .normal)
+    $0.setTitleColor(.burgundy, for: .normal)
+    $0.titleLabel?.font = .spoqaHanSansNeo(type: .regular, size: 13)
+  }
+  
+  private let inputTextField = BottomInputTextField().then {
+    $0.layer.cornerRadius = 17.5
+    $0.backgroundColor = .lightGray
+  }
+  
+  
+  var viewModel = TodoViewModel()
+  private let disposeBag = DisposeBag()
+  private var todoDataSource: RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>!
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.setupView()
+    let cellInput = self.configureCollectionView()
+    self.configureUI()
+    
+    self.bindViewModel()
+  }
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    if viewModel.initialSetting == true {
+      self.initialScroll()
+      viewModel.initialSetting = false
+    }
+    
+  }
+}
+
+// MARK: - Configure UI
+extension TodoViewController {
+  private func setupView() {
+    self.dateView.addArrangedSubview(monthLabel)
+    self.dateView.addArrangedSubview(wordOfMonthLabel)
+    self.dateCollectionView.showsHorizontalScrollIndicator = false
+  }
+  
+  private func configureUI() {
+    
+    // MARK: - Date Header
+    self.view.addSubview(todoHeaderView)
+    self.todoHeaderView.snp.makeConstraints {
+      $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(0)
+      $0.centerX.equalToSuperview()
+      $0.width.equalTo(202)
+      $0.height.equalTo(35)
+    }
+    self.todoHeaderView.addSubview(self.leftArrowButton)
+    self.leftArrowButton.snp.makeConstraints {
+      $0.top.leading.bottom.equalToSuperview()
+    }
+    
+    self.todoHeaderView.addSubview(self.dateView)
+    self.dateView.snp.makeConstraints {
+      $0.centerX.centerY.equalToSuperview()
+    }
+    
+    self.todoHeaderView.addSubview(self.rightArrowButton)
+    self.rightArrowButton.snp.makeConstraints {
+      $0.top.trailing.bottom.equalToSuperview()
+    }
+    
+    // MARK: - Date
+    self.view.addSubview(self.dateCollectionView)
+    self.dateCollectionView.snp.makeConstraints {
+      $0.top.equalTo(self.todoHeaderView.snp.bottom).offset(10)
+      $0.right.left.equalToSuperview().inset(30)
+      $0.height.equalTo(64)
+    }
+    
+    // MARK: - Bottom Input
+    self.view.addSubview(self.bottomInputView)
+    self.bottomInputView.snp.makeConstraints {
+      $0.bottom.left.right.equalToSuperview()
+      $0.height.equalTo(77.5)
+    }
+    
+    self.bottomInputView.addSubview(self.inputDividerView)
+    self.inputDividerView.snp.makeConstraints {
+      $0.top.left.right.equalToSuperview()
+      $0.height.equalTo(1)
+    }
+    
+    self.bottomInputView.addSubview(self.monthButton)
+    self.monthButton.snp.makeConstraints {
+      $0.top.left.equalToSuperview().offset(14)
+      $0.width.height.equalTo(24)
+    }
+    
+    self.bottomInputView.addSubview(self.dailyButton)
+    self.dailyButton.snp.makeConstraints {
+      $0.centerY.equalTo(self.monthButton)
+      $0.left.equalTo(self.monthButton.snp.right).offset(2)
+      $0.width.height.equalTo(24)
+    }
+    
+    self.bottomInputView.addSubview(self.inputTextField)
+    self.inputTextField.snp.makeConstraints {
+      $0.centerY.equalTo(self.monthButton)
+      $0.left.equalTo(self.dailyButton.snp.right).offset(7)
+      $0.right.equalToSuperview().offset(-15)
+      $0.height.equalTo(35)
+    }
+    
+    // MARK: - Todo
+    self.view.addSubview(self.todoCollectionView)
+    self.todoCollectionView.snp.makeConstraints {
+      $0.top.equalTo(self.dateCollectionView.snp.bottom).offset(18)
+      $0.bottom.equalTo(self.bottomInputView.snp.top)
+      $0.left.right.equalToSuperview().inset(16)
+    }
+   
+  }
   
   private func configureCollectionView() -> TodoViewModel.CellInput {
     let monthlyTodos = PublishRelay<Todo>()
@@ -94,71 +220,6 @@ class TodoViewController: UIViewController {
     return TodoViewModel.CellInput(
       
     )
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.setupView()
-    let cellInput = self.configureCollectionView()
-    self.configureUI()
-    
-    self.bindViewModel()
-  }
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    if viewModel.initialSetting == true {
-      self.initialScroll()
-      viewModel.initialSetting = false
-    }
-    
-  }
-}
-
-extension TodoViewController {
-  private func setupView() {
-    self.dateView.addArrangedSubview(monthLabel)
-    self.dateView.addArrangedSubview(wordOfMonthLabel)
-    self.dateCollectionView.showsHorizontalScrollIndicator = false
-  }
-  
-  private func configureUI() {
-    
-    self.view.addSubview(todoHeaderView)
-    self.todoHeaderView.snp.makeConstraints {
-      $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(0)
-      $0.centerX.equalToSuperview()
-      $0.width.equalTo(202)
-      $0.height.equalTo(35)
-    }
-    self.todoHeaderView.addSubview(self.leftArrowButton)
-    self.leftArrowButton.snp.makeConstraints {
-      $0.top.leading.bottom.equalToSuperview()
-    }
-    
-    self.todoHeaderView.addSubview(self.dateView)
-    self.dateView.snp.makeConstraints {
-      $0.centerX.centerY.equalToSuperview()
-    }
-    
-    self.todoHeaderView.addSubview(self.rightArrowButton)
-    self.rightArrowButton.snp.makeConstraints {
-      $0.top.trailing.bottom.equalToSuperview()
-    }
-    
-    self.view.addSubview(self.dateCollectionView)
-    self.dateCollectionView.snp.makeConstraints {
-      $0.top.equalTo(self.todoHeaderView.snp.bottom).offset(10)
-      $0.right.left.equalToSuperview().inset(30)
-      $0.height.equalTo(64)
-    }
-    
-    self.view.addSubview(self.todoCollectionView)
-    self.todoCollectionView.snp.makeConstraints {
-      $0.top.equalTo(self.dateCollectionView.snp.bottom).offset(10)
-      $0.bottom.equalToSuperview()
-      $0.left.right.equalToSuperview().inset(16)
-    }
   }
 }
 

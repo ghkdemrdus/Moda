@@ -22,7 +22,7 @@
 		4A2FB66B291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66A291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift */; };
 		4A2FB66E291FB390007B2686 /* TodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */; };
 		4A2FB670291FBD3E007B2686 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66F291FBD3E007B2686 /* Log.swift */; };
-		4A3CD2AE28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */; };
+		4A2FB6742920CCEC007B2686 /* BottomInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB6732920CCEC007B2686 /* BottomInputTextField.swift */; };
 		4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */; };
 		4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */; };
 		4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DD28EBF85100EFBCC9 /* ViewController.swift */; };
@@ -44,9 +44,7 @@
 		4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621C28ED7C5500EFBCC9 /* DateManager.swift */; };
 		4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */; };
 		4A8F897E28F3ED9500ACE0F1 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F897D28F3ED9500ACE0F1 /* DateView.swift */; };
-		4AAFE77B28F6AF7F00EA6FB4 /* MontlySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77A28F6AF7F00EA6FB4 /* MontlySectionCell.swift */; };
 		4AAFE77D28F6B06B00EA6FB4 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */; };
-		4AAFE77F28F6B0C200EA6FB4 /* DailySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77E28F6B0C200EA6FB4 /* DailySectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +63,7 @@
 		4A2FB66A291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySectionBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHeaderView.swift; sourceTree = "<group>"; };
 		4A2FB66F291FBD3E007B2686 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
-		4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoHeaderView.swift; sourceTree = "<group>"; };
+		4A2FB6732920CCEC007B2686 /* BottomInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomInputTextField.swift; sourceTree = "<group>"; };
 		4A5861D628EBF85100EFBCC9 /* moda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,9 +87,7 @@
 		4A58621C28ED7C5500EFBCC9 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		4A8F897D28F3ED9500ACE0F1 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
-		4AAFE77A28F6AF7F00EA6FB4 /* MontlySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MontlySectionCell.swift; sourceTree = "<group>"; };
 		4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
-		4AAFE77E28F6B0C200EA6FB4 /* DailySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySectionCell.swift; sourceTree = "<group>"; };
 		7F5A659CE6FD5E07C2E1C8D2 /* Pods-moda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.release.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.release.xcconfig"; sourceTree = "<group>"; };
 		BB517FA9A0D7F372DAF73F6D /* Pods-moda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.debug.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +131,14 @@
 				4A2FB66A291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift */,
 			);
 			path = Todo;
+			sourceTree = "<group>";
+		};
+		4A2FB6722920CCCF007B2686 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				4A2FB6732920CCEC007B2686 /* BottomInputTextField.swift */,
+			);
+			path = Input;
 			sourceTree = "<group>";
 		};
 		4A5861CD28EBF85100EFBCC9 = {
@@ -277,9 +281,7 @@
 			children = (
 				4A2FB667291FAD3E007B2686 /* Date */,
 				4A2FB66C291FB371007B2686 /* Todo */,
-				4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */,
-				4AAFE77A28F6AF7F00EA6FB4 /* MontlySectionCell.swift */,
-				4AAFE77E28F6B0C200EA6FB4 /* DailySectionCell.swift */,
+				4A2FB6722920CCCF007B2686 /* Input */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -446,9 +448,7 @@
 				4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */,
 				4A2FB664291F2DDC007B2686 /* DailyTodoCell.swift in Sources */,
 				4A8F897E28F3ED9500ACE0F1 /* DateView.swift in Sources */,
-				4AAFE77F28F6B0C200EA6FB4 /* DailySectionCell.swift in Sources */,
 				4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */,
-				4AAFE77B28F6AF7F00EA6FB4 /* MontlySectionCell.swift in Sources */,
 				4A2FB65C291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift in Sources */,
 				4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */,
 				4AAFE77D28F6B06B00EA6FB4 /* TodoView.swift in Sources */,
@@ -462,9 +462,9 @@
 				4A2FB66B291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift in Sources */,
 				4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */,
 				4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */,
+				4A2FB6742920CCEC007B2686 /* BottomInputTextField.swift in Sources */,
 				4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */,
 				4A5861F628EBFE9E00EFBCC9 /* TodoViewController.swift in Sources */,
-				4A3CD2AE28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift in Sources */,
 				4A2FB670291FBD3E007B2686 /* Log.swift in Sources */,
 				4A5861F428EBFC7C00EFBCC9 /* Todo.swift in Sources */,
 				4A2FB65A291E584E007B2686 /* TodoViewController+CollectionViewSection.swift in Sources */,
