@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import SnapKit
 import Then
-
+//54
 final class MonthlyEmptyCell: UICollectionViewCell {
   
   private let contentLabel = UILabel().then {

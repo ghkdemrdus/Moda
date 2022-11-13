@@ -18,4 +18,5 @@ extension UIImage {
   static let dailyDoActive = UIImage(named: "imgHomeDailyDoActive")
   static let dailyDoInactive = UIImage(named: "imgHomeDailyDoInactive")
   static let dailyMeatball = UIImage(named: "iconHomeDailyMeatball")
+  static let dailyEmpty = UIImage(named: "imgHomeEmptyDaily")
 }

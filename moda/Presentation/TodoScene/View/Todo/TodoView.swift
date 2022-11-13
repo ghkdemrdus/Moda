@@ -33,8 +33,9 @@ class TodoView: UICollectionView {
     self.clipsToBounds = true
     self.register(TodoHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
     self.register(MonthlyTodoCell.self)
-    self.register(DailyTodoCell.self)
     self.register(MonthlyEmptyCell.self)
+    self.register(DailyTodoCell.self)
+    self.register(DailyEmptyCell.self)
   }
   
   private lazy var todoCollectionViewLayout = UICollectionViewCompositionalLayout (sectionProvider: { section, env -> NSCollectionLayoutSection? in
@@ -96,13 +97,13 @@ class TodoView: UICollectionView {
 
     let itemSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1),
-      heightDimension: .estimated(36)
+      heightDimension: .estimated(44)
     )
     let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
     let groupSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1),
-      heightDimension: .estimated(36)
+      heightDimension: .estimated(44)
     )
     
     let group = NSCollectionLayoutGroup.horizontal(
@@ -112,7 +113,7 @@ class TodoView: UICollectionView {
     
     let headerSize = NSCollectionLayoutSize(
       widthDimension: .fractionalWidth(1),
-      heightDimension: .absolute(44)
+      heightDimension: .absolute(40)
     )
 
     let header = NSCollectionLayoutBoundarySupplementaryItem(
@@ -122,7 +123,7 @@ class TodoView: UICollectionView {
     )
     
     let section = NSCollectionLayoutSection(group: group)
-    section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 0, trailing: 4)
+    section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 40, trailing: 4)
     section.boundarySupplementaryItems = [header]
     
     return section

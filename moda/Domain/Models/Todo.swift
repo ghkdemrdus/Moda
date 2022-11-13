@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import RxDataSources
 
 struct Todo: Hashable {
-  var content: String
-  var isDone: Bool
   
-  static let `default` = Todo(content: "", isDone: false)
+  let id: String
+  let content: String
+  let isDone: Bool
+  
+  static let `default` = Todo(id: "", content: "", isDone: false)
 }

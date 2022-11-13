@@ -48,24 +48,21 @@ class TodoViewController: UIViewController {
     $0.spacing = 8
   }
   
-  private let dateCollectionView = DateView()
-  private lazy var todoCollectionView = TodoView(todoDataSource: self.todoDataSource)
-  private let bottomInputView = UIView()
   private let inputDividerView = UIView().then {
     $0.backgroundColor = .inputDividerBg
   }
   
-  private let monthButton = UIButton().then {
+  private let monthlyButton = UIButton().then {
     $0.setTitle("M", for: .normal)
     $0.setTitleColor(.burgundy, for: .normal)
-    $0.titleLabel?.font = .spoqaHanSansNeo(type: .regular, size: 13)
     $0.layer.cornerRadius = 5
-    $0.backgroundColor = .lightOrange
   }
+  
   private let dailyButton = UIButton().then {
     $0.setTitle("D", for: .normal)
     $0.setTitleColor(.burgundy, for: .normal)
-    $0.titleLabel?.font = .spoqaHanSansNeo(type: .regular, size: 13)
+    $0.layer.cornerRadius = 5
+
   }
   
   private let inputTextField = BottomInputTextField().then {
@@ -73,6 +70,13 @@ class TodoViewController: UIViewController {
     $0.backgroundColor = .lightGray
   }
   
+  private let registerButton = UIButton().then {
+    $0.setImage(.monthlyDoActive, for: .normal)
+  }
+  
+  private let dateCollectionView = DateView()
+  private lazy var todoCollectionView = TodoView(todoDataSource: self.todoDataSource)
+  private let bottomInputView = UIView()
   
   var viewModel = TodoViewModel()
   private let disposeBag = DisposeBag()
@@ -152,25 +156,31 @@ extension TodoViewController {
       $0.height.equalTo(1)
     }
     
-    self.bottomInputView.addSubview(self.monthButton)
-    self.monthButton.snp.makeConstraints {
+    self.bottomInputView.addSubview(self.monthlyButton)
+    self.monthlyButton.snp.makeConstraints {
       $0.top.left.equalToSuperview().offset(14)
       $0.width.height.equalTo(24)
     }
     
     self.bottomInputView.addSubview(self.dailyButton)
     self.dailyButton.snp.makeConstraints {
-      $0.centerY.equalTo(self.monthButton)
-      $0.left.equalTo(self.monthButton.snp.right).offset(2)
+      $0.centerY.equalTo(self.monthlyButton)
+      $0.left.equalTo(self.monthlyButton.snp.right).offset(2)
       $0.width.height.equalTo(24)
     }
     
     self.bottomInputView.addSubview(self.inputTextField)
     self.inputTextField.snp.makeConstraints {
-      $0.centerY.equalTo(self.monthButton)
+      $0.centerY.equalTo(self.monthlyButton)
       $0.left.equalTo(self.dailyButton.snp.right).offset(7)
       $0.right.equalToSuperview().offset(-15)
       $0.height.equalTo(35)
+    }
+    
+    self.bottomInputView.addSubview(self.registerButton)
+    self.registerButton.snp.makeConstraints {
+      $0.centerY.equalTo(self.monthlyButton)
+      $0.right.equalToSuperview().offset(-20)
     }
     
     // MARK: - Todo
@@ -180,7 +190,7 @@ extension TodoViewController {
       $0.bottom.equalTo(self.bottomInputView.snp.top)
       $0.left.right.equalToSuperview().inset(16)
     }
-   
+    
   }
   
   private func configureCollectionView() -> TodoViewModel.CellInput {
@@ -202,7 +212,7 @@ extension TodoViewController {
           let cell = self.todoCollectionView.dequeueReusableCell(MonthlyEmptyCell.self, for: indexPath)
           return cell
         case .dailyEmpty:
-          let cell = self.todoCollectionView.dequeueReusableCell(MonthlyEmptyCell.self, for: indexPath)
+          let cell = self.todoCollectionView.dequeueReusableCell(DailyEmptyCell.self, for: indexPath)
           return cell
         }
         
@@ -235,11 +245,17 @@ extension TodoViewController {
       viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
       dateCellDidTapEvent: self.dateCollectionView.rx.itemSelected.map { $0.row },
       previousButtonDidTapEvent: self.leftArrowButton.rx.tap.asObservable(),
-      nextButtonDidTapEvent: self.rightArrowButton.rx.tap.asObservable()
+      nextButtonDidTapEvent: self.rightArrowButton.rx.tap.asObservable(),
+      monthlyButtonDidTapEvent: self.monthlyButton.rx.tap.asObservable(),
+      dailyButtonDidTapEvent: self.dailyButton.rx.tap.asObservable(),
+      inputTextFieldDidEditEvent: self.inputTextField.rx.text.orEmpty.asObservable(),
+      registerButtonDidTapEvent: self.registerButton.rx.tap.asObservable()
     )
+    
     let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
     self.bindDateArray(output: output)
     self.bindMonthly(output: output)
+    self.bindInput(output: output)
   }
   
   func bindDateArray(output: TodoViewModel.Output?) {
@@ -280,6 +296,29 @@ extension TodoViewController {
     output?.todoDatas
       .bind(to: self.todoCollectionView.rx.items(dataSource: self.todoDataSource))
       .disposed(by: self.disposeBag)
+  }
+  
+  func bindInput(output: TodoViewModel.Output?) {
+    output?.selectedType
+      .asDriver()
+      .drive(onNext: { [weak self] type in
+        self?.monthlyButton.do {
+          $0.backgroundColor = type == .monthly ? .lightOrange : .white
+          $0.titleLabel?.font = .spoqaHanSansNeo(type: type == .monthly ? .bold : .regular, size: 13)
+        }
+        self?.dailyButton.do {
+          $0.backgroundColor = type == .monthly ? .white : .lightOrange
+          $0.titleLabel?.font = .spoqaHanSansNeo(type: type == .monthly ? .regular : .bold, size: 13)
+        }
+      })
+      .disposed(by: self.disposeBag)
+    
+    output?.completeRegister
+      .asDriver(onErrorJustReturn: true)
+      .drive(onNext: { [weak self] _ in
+        self?.inputTextField.text = ""
+      })
+      .disposed(by: disposeBag)
   }
 }
 

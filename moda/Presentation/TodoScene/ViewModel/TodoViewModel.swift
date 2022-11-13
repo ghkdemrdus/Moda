@@ -20,6 +20,10 @@ class TodoViewModel {
     let dateCellDidTapEvent: Observable<Int>
     let previousButtonDidTapEvent: Observable<Void>
     let nextButtonDidTapEvent: Observable<Void>
+    let monthlyButtonDidTapEvent: Observable<Void>
+    let dailyButtonDidTapEvent: Observable<Void>
+    let inputTextFieldDidEditEvent: Observable<String>
+    let registerButtonDidTapEvent: Observable<Void>
   }
   
   struct CellInput {
@@ -31,20 +35,31 @@ class TodoViewModel {
     var month = BehaviorRelay<String>(value: "1")
     var wordOfMonth = BehaviorRelay<String>(value: "January")
     var todoDatas = BehaviorRelay<[TodoDataSection.Model]>(value: TodoDataSection.initialSectionDatas)
+    var selectedType = BehaviorRelay<TodoDataSection.TodoSection>(value: .monthly)
+    var completeRegister = PublishRelay<Bool>()
   }
   
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
     let output = Output()
-    let monthlyTodos = PublishRelay<[Todo]>()
-    let dailyTodos = PublishRelay<[Todo]>()
+    let monthlyTodos = BehaviorRelay<[Todo]>(value: [])
+    let dailyTodos = BehaviorRelay<[Todo]>(value: [])
+    
+    var type: TodoDataSection.TodoSection = .monthly
+    var inputText = ""
 
     
     monthlyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
       todoDatas.map {
         guard $0.model != .monthly else {
-          let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
-          let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
-          return sectionModel
+          if todos.count == 0 {
+            let items = [TodoDataSection.TodoItem.monthlyEmpty]
+            let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
+            return sectionModel
+          } else {
+            let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
+            let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
+            return sectionModel
+          }
         }
         return $0
       }
@@ -57,9 +72,15 @@ class TodoViewModel {
     dailyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
       todoDatas.map {
         guard $0.model != .daily else {
-          let items = todos.map {TodoDataSection.TodoItem.daily($0) }
-          let sectionModel = TodoDataSection.Model(model: .daily, items: items)
-          return sectionModel
+          if todos.count == 0 {
+            let items = [TodoDataSection.TodoItem.dailyEmpty]
+            let sectionModel = TodoDataSection.Model(model: .daily, items: items)
+            return sectionModel
+          } else {
+            let items = todos.map {TodoDataSection.TodoItem.daily($0) }
+            let sectionModel = TodoDataSection.Model(model: .daily, items: items)
+            return sectionModel
+          }
         }
         return $0
       }
@@ -67,7 +88,7 @@ class TodoViewModel {
     .bind(to: output.todoDatas)
     .disposed(by: disposeBag)
     
-    dailyTodos.accept([Todo(content: "ㄴㄷ론다론ㄹ다여ㅛ셔ㅛㅁㅈ요ㅕㅁㅈㅅ요ㅕㅁㅈㅅ요ㅕㅈㅁ쇼엿ㅈ묘ㅕㅇ쇼ㅕㅁㅈㅇ셧ㅁ져ㅛㅈㅁ", isDone: false),Todo(content: "11231231232", isDone: false),Todo(content: "1", isDone: false),Todo(content: "1", isDone: false)])
+//    dailyTodos.accept([Todo(content: "ㄴㄷ론다론ㄹ다여ㅛ셔ㅛㅁㅈ요ㅕㅁㅈㅅ요ㅕㅁㅈㅅ요ㅕㅈㅁ쇼엿ㅈ묘ㅕㅇ쇼ㅕㅁㅈㅇ셧ㅁ져ㅛㅈㅁ", isDone: false),Todo(content: "11231231232", isDone: false),Todo(content: "1", isDone: false),Todo(content: "1", isDone: false)])
  
 
     self.bindOutput(output: output, disposeBag: disposeBag)
@@ -95,6 +116,41 @@ class TodoViewModel {
         guard let self = self else { return }
         let newDates = self.dm.getFollowingDates(from: output.dateArray.value[0].date)
         self.updateUI(output: output, dates: newDates, selectedDay: 0)
+      })
+      .disposed(by: disposeBag)
+    
+    input.monthlyButtonDidTapEvent
+      .subscribe(onNext: {
+        output.selectedType.accept(.monthly)
+        type = .monthly
+      })
+      .disposed(by: disposeBag)
+    
+    input.dailyButtonDidTapEvent
+      .subscribe(onNext: {
+        output.selectedType.accept(.daily)
+        type = .daily
+      })
+      .disposed(by: disposeBag)
+    
+    input.inputTextFieldDidEditEvent
+      .distinctUntilChanged()
+      .subscribe(onNext: { input in
+        inputText = input
+      })
+      .disposed(by: disposeBag)
+    
+    input.registerButtonDidTapEvent
+      .subscribe(onNext: {
+        guard inputText.count != 0 else { return }
+        switch type {
+        case .monthly:
+          monthlyTodos.accept(monthlyTodos.value + [Todo(id: self.dm.getCurrent(), content: inputText, isDone: false)])
+        case .daily:
+          dailyTodos.accept(dailyTodos.value + [Todo(id: self.dm.getCurrent(), content: inputText, isDone: false)])
+        }
+        inputText = ""
+        output.completeRegister.accept(true)
       })
       .disposed(by: disposeBag)
     

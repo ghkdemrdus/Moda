@@ -15,10 +15,6 @@ struct DateManager {
     if date.getMonth() == "1" { return 12 }
     return Int(date.getMonth())! - 1
   }
-//  
-//  func getWordOfMonth(from date: Date) -> String {
-//    
-//  }
   
   func getPreviousDates(from date: Date) -> [DateItem] {
     let previousMonth = date.addMonth(-1)!
@@ -49,5 +45,9 @@ struct DateManager {
       tmpDate = tmpDate.addDays(1)!
     }
     return dates
+  }
+  
+  func getCurrent() -> String {
+    return String(Int(Date().timeIntervalSince1970 * 10) % 1000 )
   }
 }

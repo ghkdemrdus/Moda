@@ -21,8 +21,17 @@ struct TodoDataSection {
   
   enum TodoItem: Hashable, IdentifiableType {
     
-    var identity: Int {
-      hashValue
+    var identity: String {
+      switch self {
+      case .monthly(let todo):
+        return todo.id
+      case .daily(let todo):
+        return todo.id
+      case .monthlyEmpty:
+        return "monthlyEmpty"
+      case .dailyEmpty:
+        return "dailyEmpty"
+      }
     }
     
     case monthly(Todo)

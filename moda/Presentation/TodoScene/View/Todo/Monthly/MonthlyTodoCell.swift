@@ -7,10 +7,13 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import SnapKit
 import Then
 
 final class MonthlyTodoCell: UICollectionViewCell {
+  
+  var disposeBag = DisposeBag()
   
   private let checkButton = UIButton()
   
@@ -34,6 +37,7 @@ final class MonthlyTodoCell: UICollectionViewCell {
   }
   
   override func prepareForReuse() {
+    disposeBag = DisposeBag()
     self.checkButton.setImage(nil, for: .normal)
     self.todoLabel.text = nil
   }
@@ -65,5 +69,9 @@ final class MonthlyTodoCell: UICollectionViewCell {
   func updateUI(todo: Todo) {
     self.todoLabel.text = todo.content
     self.checkButton.setImage(todo.isDone ? .monthlyDoInactive : .monthlyDoInactive, for: .normal)
+  }
+  
+  func onCheckClick() {
+    self.checkButton.rx.tap.asObservable()
   }
 }

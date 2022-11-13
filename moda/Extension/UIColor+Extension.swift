@@ -17,7 +17,9 @@ extension UIColor {
   class var todo: UIColor { return UIColor(red: 13 / 255, green: 5 / 255, blue: 34 / 255, alpha: 1) }
   class var todoTitle: UIColor { return UIColor(red: 9 / 255, green: 2 / 255, blue: 0 / 255, alpha: 1) }
   class var burgundy: UIColor { return UIColor(red: 9 / 255, green: 2 / 255, blue: 0 / 255, alpha: 1) }
+  
   class var lightGray: UIColor { return UIColor(red: 232 / 255, green: 234 / 255, blue: 242 / 255, alpha: 1) }
+  class var lightGray1: UIColor { return UIColor(red: 161 / 255, green: 164 / 255, blue: 177 / 255, alpha: 1) }
   class var lightOrange: UIColor { return UIColor(red: 255 / 255, green: 220 / 255, blue: 201 / 255, alpha: 1) }
   class var lightOrange1: UIColor { return UIColor(red: 208 / 255, green: 125 / 255, blue: 101 / 255, alpha: 1) }
   
