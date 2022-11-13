@@ -16,4 +16,6 @@ extension UIColor {
   class var followingDayBg: UIColor { return UIColor(red: 255 / 255, green: 214 / 255, blue: 184 / 255, alpha: 1) }
   class var todo: UIColor { return UIColor(red: 13 / 255, green: 5 / 255, blue: 34 / 255, alpha: 1) }
   class var todoTitle: UIColor { return UIColor(red: 9 / 255, green: 2 / 255, blue: 0 / 255, alpha: 1) }
+  
+  class var todoDividerBg: UIColor { return UIColor(white: 246 / 255, alpha: 1) }
 }

@@ -19,7 +19,7 @@
 		4A2FB662291F2BF8007B2686 /* MonthlyTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */; };
 		4A2FB664291F2DDC007B2686 /* DailyTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */; };
 		4A2FB666291F2EDA007B2686 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB665291F2EDA007B2686 /* UIImage+Extension.swift */; };
-		4A2FB66B291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66A291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift */; };
+		4A2FB66B291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66A291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift */; };
 		4A2FB66E291FB390007B2686 /* TodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */; };
 		4A2FB670291FBD3E007B2686 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66F291FBD3E007B2686 /* Log.swift */; };
 		4A3CD2AE28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */; };
@@ -43,8 +43,7 @@
 		4A58621A28ED645200EFBCC9 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621928ED645200EFBCC9 /* TodoViewModel.swift */; };
 		4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621C28ED7C5500EFBCC9 /* DateManager.swift */; };
 		4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */; };
-		4A59EA5328F65A29002C6FBE /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59EA5228F65A29002C6FBE /* TodoCell.swift */; };
-		4A8F897E28F3ED9500ACE0F1 /* TodoDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */; };
+		4A8F897E28F3ED9500ACE0F1 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F897D28F3ED9500ACE0F1 /* DateView.swift */; };
 		4AAFE77B28F6AF7F00EA6FB4 /* MontlySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77A28F6AF7F00EA6FB4 /* MontlySectionCell.swift */; };
 		4AAFE77D28F6B06B00EA6FB4 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */; };
 		4AAFE77F28F6B0C200EA6FB4 /* DailySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77E28F6B0C200EA6FB4 /* DailySectionCell.swift */; };
@@ -63,7 +62,7 @@
 		4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoCell.swift; sourceTree = "<group>"; };
 		4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodoCell.swift; sourceTree = "<group>"; };
 		4A2FB665291F2EDA007B2686 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		4A2FB66A291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySEctionBackgroundDecorationView.swift; sourceTree = "<group>"; };
+		4A2FB66A291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySectionBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHeaderView.swift; sourceTree = "<group>"; };
 		4A2FB66F291FBD3E007B2686 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoHeaderView.swift; sourceTree = "<group>"; };
@@ -89,8 +88,7 @@
 		4A58621928ED645200EFBCC9 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		4A58621C28ED7C5500EFBCC9 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
-		4A59EA5228F65A29002C6FBE /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
-		4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDateView.swift; sourceTree = "<group>"; };
+		4A8F897D28F3ED9500ACE0F1 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		4AAFE77A28F6AF7F00EA6FB4 /* MontlySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MontlySectionCell.swift; sourceTree = "<group>"; };
 		4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		4AAFE77E28F6B0C200EA6FB4 /* DailySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailySectionCell.swift; sourceTree = "<group>"; };
@@ -121,6 +119,8 @@
 		4A2FB667291FAD3E007B2686 /* Date */ = {
 			isa = PBXGroup;
 			children = (
+				4A8F897D28F3ED9500ACE0F1 /* DateView.swift */,
+				4A58620728EC1FBB00EFBCC9 /* DateCell.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -128,9 +128,11 @@
 		4A2FB66C291FB371007B2686 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */,
-				4A2FB66A291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift */,
 				4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */,
+				4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */,
+				4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */,
+				4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */,
+				4A2FB66A291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -275,13 +277,8 @@
 			children = (
 				4A2FB667291FAD3E007B2686 /* Date */,
 				4A2FB66C291FB371007B2686 /* Todo */,
-				4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */,
-				4A58620728EC1FBB00EFBCC9 /* DateCell.swift */,
-				4A8F897D28F3ED9500ACE0F1 /* TodoDateView.swift */,
-				4A59EA5228F65A29002C6FBE /* TodoCell.swift */,
 				4A3CD2AD28F6893400D0D0A8 /* MonthlyTodoHeaderView.swift */,
 				4AAFE77A28F6AF7F00EA6FB4 /* MontlySectionCell.swift */,
-				4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */,
 				4AAFE77E28F6B0C200EA6FB4 /* DailySectionCell.swift */,
 			);
 			path = View;
@@ -448,13 +445,12 @@
 				4A58620A28EC360600EFBCC9 /* DateItem.swift in Sources */,
 				4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */,
 				4A2FB664291F2DDC007B2686 /* DailyTodoCell.swift in Sources */,
-				4A8F897E28F3ED9500ACE0F1 /* TodoDateView.swift in Sources */,
+				4A8F897E28F3ED9500ACE0F1 /* DateView.swift in Sources */,
 				4AAFE77F28F6B0C200EA6FB4 /* DailySectionCell.swift in Sources */,
 				4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */,
 				4AAFE77B28F6AF7F00EA6FB4 /* MontlySectionCell.swift in Sources */,
 				4A2FB65C291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift in Sources */,
 				4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */,
-				4A59EA5328F65A29002C6FBE /* TodoCell.swift in Sources */,
 				4AAFE77D28F6B06B00EA6FB4 /* TodoView.swift in Sources */,
 				4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */,
 				4A2FB662291F2BF8007B2686 /* MonthlyTodoCell.swift in Sources */,
@@ -463,7 +459,7 @@
 				4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */,
 				4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */,
 				4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */,
-				4A2FB66B291FAD6B007B2686 /* MonthlySEctionBackgroundDecorationView.swift in Sources */,
+				4A2FB66B291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift in Sources */,
 				4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */,
 				4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */,
 				4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */,

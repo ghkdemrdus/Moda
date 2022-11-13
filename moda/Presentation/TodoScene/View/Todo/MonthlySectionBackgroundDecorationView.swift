@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MonthlySEctionBackgroundDecorationView: UICollectionReusableView {
+class MonthlySectionBackgroundDecorationView: UICollectionReusableView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.backgroundColor = .monthlyBg

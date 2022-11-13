@@ -53,6 +53,22 @@ class TodoViewModel {
     .disposed(by: disposeBag)
     
     monthlyTodos.accept([Todo(content: "ㅁㄷㅇㄹㅁ여ㅛ셔ㅛㅁㅈ요ㅕㅁㅈㅅ요ㅕㅁㅈㅅ요ㅕㅈㅁ쇼엿ㅈ묘ㅕㅇ쇼ㅕㅁㅈㅇ셧ㅁ져ㅛㅈㅁ", isDone: false),Todo(content: "1", isDone: false),Todo(content: "1", isDone: false),Todo(content: "1", isDone: false)])
+    
+    dailyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
+      todoDatas.map {
+        guard $0.model != .daily else {
+          let items = todos.map {TodoDataSection.TodoItem.daily($0) }
+          let sectionModel = TodoDataSection.Model(model: .daily, items: items)
+          return sectionModel
+        }
+        return $0
+      }
+    }
+    .bind(to: output.todoDatas)
+    .disposed(by: disposeBag)
+    
+    dailyTodos.accept([Todo(content: "ㄴㄷ론다론ㄹ다여ㅛ셔ㅛㅁㅈ요ㅕㅁㅈㅅ요ㅕㅁㅈㅅ요ㅕㅈㅁ쇼엿ㅈ묘ㅕㅇ쇼ㅕㅁㅈㅇ셧ㅁ져ㅛㅈㅁ", isDone: false),Todo(content: "11231231232", isDone: false),Todo(content: "1", isDone: false),Todo(content: "1", isDone: false)])
+ 
 
     self.bindOutput(output: output, disposeBag: disposeBag)
     

@@ -14,7 +14,6 @@ final class TodoHeaderView: UICollectionReusableView {
   private let titleLabel = UILabel().then {
     $0.textColor = .todoTitle
     $0.font = .spoqaHanSansNeo(type: .bold, size: 19)
-    $0.text = "먼쓸리 투두"
   }
   
   override init(frame: CGRect) {
@@ -26,12 +25,15 @@ final class TodoHeaderView: UICollectionReusableView {
   }
   
   private func configureUI() {
-    
     self.addSubview(self.titleLabel)
     self.titleLabel.snp.makeConstraints {
       $0.top.equalToSuperview().offset(12)
       $0.left.equalToSuperview()
     }
+  }
+  
+  func updateUI(title: String) {
+    self.titleLabel.text = title
   }
 }
 

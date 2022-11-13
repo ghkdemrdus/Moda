@@ -1,13 +1,13 @@
 //
-//  TodoView.swift
+//  TodoDateView.swift
 //  moda
 //
-//  Created by 황득연 on 2022/10/12.
+//  Created by 황득연 on 2022/10/10.
 //
 
 import UIKit
 
-class TodoView: UICollectionView {
+class DateView: UICollectionView {
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     super.init(frame: frame, collectionViewLayout: UICollectionViewLayout())
     self.configureUI()
@@ -19,18 +19,17 @@ class TodoView: UICollectionView {
   }
 }
 
-private extension TodoView {
+private extension DateView {
   func configureUI() {
     self.collectionViewLayout = self.createCompositionalLayout()
-    self.register(MonthlySectionCell.self, forCellWithReuseIdentifier: String(describing: MonthlySectionCell.self))
-//    self.register(DailySectionCell.self, forCellWithReuseIdentifier: String(describing: DailySectionCell.self))
+    self.register(DateCell.self, forCellWithReuseIdentifier: String(describing: DateCell.self))
     
   }
   
   func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
     let item = NSCollectionLayoutItem(
       layoutSize: .init(
-        widthDimension: .fractionalWidth(1),
+        widthDimension: .fractionalWidth(1 / 7.0),
         heightDimension: .fractionalHeight(1)
       )
     )
@@ -38,13 +37,16 @@ private extension TodoView {
     let group = NSCollectionLayoutGroup.horizontal(
       layoutSize: .init(
         widthDimension: .fractionalWidth(1),
-        heightDimension: .fractionalWidth(1)
+        heightDimension: .absolute(64)
       ),
       subitems: [item]
     )
     let section = NSCollectionLayoutSection(group: group)
     section.orthogonalScrollingBehavior = .none
-  
-    return UICollectionViewCompositionalLayout(section: section)
+    
+    let config = UICollectionViewCompositionalLayoutConfiguration()
+    config.scrollDirection = .horizontal
+    
+    return UICollectionViewCompositionalLayout(section: section, configuration: config)
   }
 }

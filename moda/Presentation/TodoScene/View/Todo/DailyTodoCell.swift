@@ -1,5 +1,5 @@
 //
-//  MonthlyTodoCell.swift
+//  DailyTodoCell.swift
 //  moda
 //
 //  Created by 황득연 on 2022/11/12.
@@ -10,7 +10,7 @@ import RxSwift
 import SnapKit
 import Then
 
-final class MonthlyTodoCell: UICollectionViewCell {
+final class DailyTodoCell: UICollectionViewCell {
   
   private let checkButton = UIButton()
   
@@ -21,7 +21,11 @@ final class MonthlyTodoCell: UICollectionViewCell {
   }
   
   private let moreButton = UIButton().then {
-    $0.setImage(.monthlyMeatball, for: .normal)
+    $0.setImage(.dailyMeatball, for: .normal)
+  }
+  
+  private let dividerView = UIView().then {
+    $0.backgroundColor = .todoDividerBg
   }
   
   override init(frame: CGRect) {
@@ -41,7 +45,7 @@ final class MonthlyTodoCell: UICollectionViewCell {
   private func configureUI() {
     self.contentView.addSubview(self.checkButton)
     self.checkButton.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(6)
+      $0.top.equalToSuperview().offset(9.5)
       $0.left.equalToSuperview()
       $0.width.height.equalTo(24)
     }
@@ -53,10 +57,16 @@ final class MonthlyTodoCell: UICollectionViewCell {
       $0.width.height.equalTo(24)
     }
     
+    self.contentView.addSubview(self.dividerView)
+    self.dividerView.snp.makeConstraints {
+      $0.bottom.left.right.equalToSuperview()
+      $0.height.equalTo(1)
+    }
+    
     self.contentView.addSubview(self.todoLabel)
     self.todoLabel.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(8)
-      $0.bottom.equalToSuperview().offset(-9)
+      $0.top.equalToSuperview().offset(11.5)
+      $0.bottom.equalTo(self.dividerView).offset(-12.5)
       $0.left.equalTo(self.checkButton.snp.right).offset(8)
       $0.right.equalTo(self.moreButton.snp.left).offset(-8)
     }
@@ -64,6 +74,6 @@ final class MonthlyTodoCell: UICollectionViewCell {
   
   func updateUI(todo: Todo) {
     self.todoLabel.text = todo.content
-    self.checkButton.setImage(todo.isDone ? .monthlyDoInactive : .monthlyDoInactive, for: .normal)
+    self.checkButton.setImage(todo.isDone ? .dailyDoActive : .dailyDoInactive, for: .normal)
   }
 }
