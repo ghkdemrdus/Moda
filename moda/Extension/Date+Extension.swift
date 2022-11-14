@@ -66,4 +66,19 @@ extension Date {
     return dateFormatter.string(from: self)
   }
   
+  /// Monthly Todo 를 불러오기 위한 포맷
+  func getCurrentMonth() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yy-MM"
+    return dateFormatter.string(from: self)
+  }
+  
+  /// Daily Todo 를 불러오기 위한 포맷
+  func getCurrentDate() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yy-MM-dd"
+    return dateFormatter.string(from: self)
+  }
+  
+  
 }

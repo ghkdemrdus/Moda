@@ -9,11 +9,17 @@ import Foundation
 
 import RxSwift
 import RxRelay
+//import RealmSwift
 
 class TodoViewModel {
 
   private let dm = DateManager()
+//  private let todoStroage = TodoStorage()
   var initialSetting: Bool = true
+  
+  private var currentDate = Date()
+  private let monthlyTodos = BehaviorRelay<[Todo]>(value: [])
+  private let dailyTodos = BehaviorRelay<[Todo]>(value: [])
   
   struct Input {
     let viewWillAppearEvent: Observable<Void>
@@ -40,13 +46,17 @@ class TodoViewModel {
   }
   
   func transform(from input: Input, disposeBag: DisposeBag) -> Output {
+    
+//    self.fetchMonthlyTodos(date: self.currentDate, disposeBag: disposeBag)
+//    self.fetchDailyTodos(date: self.currentDate, disposeBag: disposeBag)
+//
     let output = Output()
-    let monthlyTodos = BehaviorRelay<[Todo]>(value: [])
-    let dailyTodos = BehaviorRelay<[Todo]>(value: [])
+    
     
     var type: TodoDataSection.TodoSection = .monthly
     var inputText = ""
 
+//    Observable.array(from: self.todoStroage.fetchTodoInfo(date: self.dm.getDates()))
     
     monthlyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
       todoDatas.map {
@@ -100,7 +110,12 @@ class TodoViewModel {
       .disposed(by: disposeBag)
     
     input.dateCellDidTapEvent
-      .bind(to: output.selectedIndex)
+      .subscribe(onNext: { [weak self] idx in
+        let updatedDate = output.dateArray.value[idx].date
+        self?.currentDate = updatedDate
+//        self?.fetchDailyTodos(date: updatedDate, disposeBag: disposeBag)
+        output.selectedIndex.accept(idx)
+      })
       .disposed(by: disposeBag)
     
     input.previousButtonDidTapEvent
@@ -141,13 +156,18 @@ class TodoViewModel {
       .disposed(by: disposeBag)
     
     input.registerButtonDidTapEvent
-      .subscribe(onNext: {
+      .subscribe(onNext: { [weak self] in
+        guard let self = self else { return }
         guard inputText.count != 0 else { return }
+        let todo = Todo(id: self.dm.getCurrent(), content: inputText, isDone: false)
         switch type {
         case .monthly:
-          monthlyTodos.accept(monthlyTodos.value + [Todo(id: self.dm.getCurrent(), content: inputText, isDone: false)])
+          self.monthlyTodos.accept(self.monthlyTodos.value + [todo])
+//          self.addMonthlyTodo(date: self.currentDate, todo: todo)
         case .daily:
-          dailyTodos.accept(dailyTodos.value + [Todo(id: self.dm.getCurrent(), content: inputText, isDone: false)])
+          self.dailyTodos.accept(self.dailyTodos.value + [todo])
+//          self.addDailyTodo(date: self.currentDate, todo: todo)
+
         }
         inputText = ""
         output.completeRegister.accept(true)
@@ -159,7 +179,7 @@ class TodoViewModel {
   
   private func bindOutput(output: Output, disposeBag: DisposeBag) {
     bindDate(output: output, disposeBag: disposeBag)
-    bindMonthly(output: output, disposeBag: disposeBag)
+    bindTodos(output: output, disposeBag: disposeBag)
   }
   
   private func bindDate(output: Output, disposeBag: DisposeBag) {
@@ -175,7 +195,7 @@ class TodoViewModel {
       .disposed(by: disposeBag)
   }
   
-  private func bindMonthly(output: Output, disposeBag: DisposeBag) {
+  private func bindTodos(output: Output, disposeBag: DisposeBag) {
     
     
     
@@ -203,3 +223,40 @@ extension TodoViewModel {
     return (Int(Date().today().getDay()) ?? 1) - 1
   }
 }
+
+// MARK: - Realm
+//extension TodoViewModel {
+//  func fetchMonthlyTodos(date: Date, disposeBag: DisposeBag) {
+//    self.todoStroage.fetchMonthlyTodos(date: date)
+//      .subscribe(onNext: { [weak self] todos in
+//        guard let todos = todos else {
+//          self?.monthlyTodos.accept([])
+//          return
+//        }
+//        self?.monthlyTodos.accept(todos)
+//      })
+//      .disposed(by: disposeBag)
+//  }
+//
+//  func fetchDailyTodos(date: Date, disposeBag: DisposeBag) {
+//    self.todoStroage.fetchDailyTodos(date: date)
+//      .subscribe(onNext: { [weak self] todos in
+//        Log(todos)
+//        guard let todos = todos else {
+//          self?.dailyTodos.accept([])
+//          return
+//        }
+//        self?.dailyTodos.accept(todos)
+//      })
+//      .disposed(by: disposeBag)
+//  }
+//
+//  func addMonthlyTodo(date: Date, todo: Todo) {
+//    self.todoStroage.addMonthlyTodo(date: date, todo: todo)
+//  }
+//
+//  func addDailyTodo(date: Date, todo: Todo) {
+//    self.todoStroage.addDailyTodo(date: date, todo: todo)
+//  }
+//
+//}

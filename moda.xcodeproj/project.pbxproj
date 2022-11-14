@@ -25,6 +25,11 @@
 		4A2FB6742920CCEC007B2686 /* BottomInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB6732920CCEC007B2686 /* BottomInputTextField.swift */; };
 		4A2FB6762920D060007B2686 /* MonthlyEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB6752920D060007B2686 /* MonthlyEmptyCell.swift */; };
 		4A2FB67A2920D525007B2686 /* DailyEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB6792920D525007B2686 /* DailyEmptyCell.swift */; };
+		4A2FB67E292103E8007B2686 /* MonthlyTodoInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB67D292103E8007B2686 /* MonthlyTodoInfoEntity.swift */; };
+		4A2FB68129210BAE007B2686 /* TodoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB68029210BAE007B2686 /* TodoStorage.swift */; };
+		4A2FB6832921F974007B2686 /* TodoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB6822921F974007B2686 /* TodoInfo.swift */; };
+		4A2FB685292204A3007B2686 /* DailyTodoInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB684292204A3007B2686 /* DailyTodoInfoEntity.swift */; };
+		4A2FB687292204AC007B2686 /* TodoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB686292204AC007B2686 /* TodoEntity.swift */; };
 		4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */; };
 		4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */; };
 		4A5861DE28EBF85100EFBCC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DD28EBF85100EFBCC9 /* ViewController.swift */; };
@@ -68,6 +73,11 @@
 		4A2FB6732920CCEC007B2686 /* BottomInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomInputTextField.swift; sourceTree = "<group>"; };
 		4A2FB6752920D060007B2686 /* MonthlyEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyEmptyCell.swift; sourceTree = "<group>"; };
 		4A2FB6792920D525007B2686 /* DailyEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEmptyCell.swift; sourceTree = "<group>"; };
+		4A2FB67D292103E8007B2686 /* MonthlyTodoInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoInfoEntity.swift; sourceTree = "<group>"; };
+		4A2FB68029210BAE007B2686 /* TodoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStorage.swift; sourceTree = "<group>"; };
+		4A2FB6822921F974007B2686 /* TodoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInfo.swift; sourceTree = "<group>"; };
+		4A2FB684292204A3007B2686 /* DailyTodoInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodoInfoEntity.swift; sourceTree = "<group>"; };
+		4A2FB686292204AC007B2686 /* TodoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntity.swift; sourceTree = "<group>"; };
 		4A5861D628EBF85100EFBCC9 /* moda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +173,33 @@
 			path = Daily;
 			sourceTree = "<group>";
 		};
+		4A2FB67B292103A3007B2686 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4A2FB67F29210ADE007B2686 /* Storage */,
+				4A2FB67C292103AA007B2686 /* Entity */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4A2FB67C292103AA007B2686 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				4A2FB67D292103E8007B2686 /* MonthlyTodoInfoEntity.swift */,
+				4A2FB684292204A3007B2686 /* DailyTodoInfoEntity.swift */,
+				4A2FB686292204AC007B2686 /* TodoEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		4A2FB67F29210ADE007B2686 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				4A2FB68029210BAE007B2686 /* TodoStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		4A5861CD28EBF85100EFBCC9 = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +226,7 @@
 				4A5861F728EC0AEF00EFBCC9 /* Resource */,
 				4A5861F128EBFC5900EFBCC9 /* Domain */,
 				4A5861ED28EBFBA200EFBCC9 /* Presentation */,
+				4A2FB67B292103A3007B2686 /* Data */,
 				4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */,
 				4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */,
 				4A5861DD28EBF85100EFBCC9 /* ViewController.swift */,
@@ -226,6 +264,7 @@
 			children = (
 				4A5861F328EBFC7C00EFBCC9 /* Todo.swift */,
 				4A58620928EC360600EFBCC9 /* DateItem.swift */,
+				4A2FB6822921F974007B2686 /* TodoInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -478,13 +517,18 @@
 				4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */,
 				4A2FB662291F2BF8007B2686 /* MonthlyTodoCell.swift in Sources */,
 				4A2FB6762920D060007B2686 /* MonthlyEmptyCell.swift in Sources */,
+				4A2FB687292204AC007B2686 /* TodoEntity.swift in Sources */,
 				4A2FB666291F2EDA007B2686 /* UIImage+Extension.swift in Sources */,
+				4A2FB67E292103E8007B2686 /* MonthlyTodoInfoEntity.swift in Sources */,
 				4A2FB65F291F27ED007B2686 /* ModaDataSection.swift in Sources */,
+				4A2FB6832921F974007B2686 /* TodoInfo.swift in Sources */,
 				4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */,
+				4A2FB685292204A3007B2686 /* DailyTodoInfoEntity.swift in Sources */,
 				4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */,
 				4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */,
 				4A2FB66B291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift in Sources */,
 				4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */,
+				4A2FB68129210BAE007B2686 /* TodoStorage.swift in Sources */,
 				4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */,
 				4A2FB6742920CCEC007B2686 /* BottomInputTextField.swift in Sources */,
 				4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */,

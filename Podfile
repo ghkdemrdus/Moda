@@ -11,5 +11,4 @@ target 'moda' do
   pod 'RxDataSources'
   pod 'SnapKit'
   pod 'Then'
-
 end
