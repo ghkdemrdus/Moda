@@ -8,22 +8,22 @@
 import Foundation
 
 extension Date {
-  func today() -> Date {
-    let calendar = Calendar.current
-    let components = calendar.dateComponents([.year, .month, .day], from: Date())
-    return calendar.date(from: components)!
+  
+  func toKST() -> Date {
+    let time = TimeInterval(TimeZone(abbreviation: "KST")!.secondsFromGMT() - TimeZone(abbreviation: "UTC")!.secondsFromGMT())
+    return addingTimeInterval(time)
   }
   
-  func plain(date: Date) -> Date {
+  func plain() -> Date {
     let calendar = Calendar.current
-    let components = calendar.dateComponents([.year, .month, .day], from: date)
-    return calendar.date(from: components)!
+    let components = calendar.dateComponents([.year, .month, .day], from: self)
+    return calendar.date(from: components)!.toKST()
   }
   
   func firstDayOfMonth(date: Date) -> Date {
     let calendar = Calendar.current
     let components = calendar.dateComponents([.year, .month], from: date)
-    return calendar.date(from: components)!
+    return calendar.date(from: components)!.toKST()
   }
   
   func addDays(_ days: Int) -> Date? {
@@ -42,41 +42,41 @@ extension Date {
     return nextDate
   }
   
-  func getWeedDay() -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "EEEEE"
-    return dateFormatter.string(from: self)
-  }
-  
-  func getDay() -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "d"
-    return dateFormatter.string(from: self)
-  }
-  
-  func getMonth() -> String {
+  func toMonthFormat() -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "M"
     return dateFormatter.string(from: self)
   }
   
-  func getWordOfMonth() -> String {
+  func toDayFormat() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "d"
+    return dateFormatter.string(from: self)
+  }
+  
+  func toWeedDayFormat() -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "EEEEE"
+    return dateFormatter.string(from: self)
+  }
+  
+  func toWordOfMonthFormat() -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "MMMM"
     return dateFormatter.string(from: self)
   }
   
   /// Monthly Todo 를 불러오기 위한 포맷
-  func getCurrentMonth() -> String {
+  func toMonthlyIdFormat() -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yy-MM"
+    dateFormatter.dateFormat = "yyMM"
     return dateFormatter.string(from: self)
   }
   
   /// Daily Todo 를 불러오기 위한 포맷
-  func getCurrentDate() -> String {
+  func toDailyIdFormat() -> String {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yy-MM-dd"
+    dateFormatter.dateFormat = "yyMMdd"
     return dateFormatter.string(from: self)
   }
   

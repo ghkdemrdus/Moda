@@ -12,8 +12,8 @@ struct DateManager {
   let wordOfMonth = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   
   func getPreviousMonth(from date: Date) -> Int {
-    if date.getMonth() == "1" { return 12 }
-    return Int(date.getMonth())! - 1
+    if date.toMonthFormat() == "1" { return 12 }
+    return Int(date.toMonthFormat())! - 1
   }
   
   func getPreviousDates(from date: Date) -> [DateItem] {
@@ -29,7 +29,7 @@ struct DateManager {
   func getDates(from date: Date = Date()) -> [DateItem] {
     let startDate = Date().firstDayOfMonth(date: date)
     let endDate = Date().firstDayOfMonth(date: date).addMonth(1)!
-    let today = Date().today()
+    let today = Date().plain()
     
     var dates: [DateItem] = []
     var tmpDate = startDate
@@ -47,7 +47,7 @@ struct DateManager {
     return dates
   }
   
-  func getCurrent() -> String {
-    return String(Int(Date().timeIntervalSince1970 * 10) % 1000 )
+  func getUniqueId() -> String {
+    return Date().toDailyIdFormat() + String(Int(Date().timeIntervalSince1970 * 10) % 100000 )
   }
 }

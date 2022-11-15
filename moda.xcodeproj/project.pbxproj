@@ -13,7 +13,6 @@
 		4A2FB656291E5350007B2686 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FB651291E534F007B2686 /* SpoqaHanSansNeo-Bold.otf */; };
 		4A2FB657291E5350007B2686 /* SpoqaHanSansNeo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FB652291E534F007B2686 /* SpoqaHanSansNeo-Regular.otf */; };
 		4A2FB658291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FB653291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf */; };
-		4A2FB65A291E584E007B2686 /* TodoViewController+CollectionViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB659291E584E007B2686 /* TodoViewController+CollectionViewSection.swift */; };
 		4A2FB65C291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB65B291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift */; };
 		4A2FB65F291F27ED007B2686 /* ModaDataSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB65E291F27ED007B2686 /* ModaDataSection.swift */; };
 		4A2FB662291F2BF8007B2686 /* MonthlyTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */; };
@@ -61,7 +60,6 @@
 		4A2FB651291E534F007B2686 /* SpoqaHanSansNeo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Bold.otf"; sourceTree = "<group>"; };
 		4A2FB652291E534F007B2686 /* SpoqaHanSansNeo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Regular.otf"; sourceTree = "<group>"; };
 		4A2FB653291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
-		4A2FB659291E584E007B2686 /* TodoViewController+CollectionViewSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoViewController+CollectionViewSection.swift"; sourceTree = "<group>"; };
 		4A2FB65B291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCollectionSectionedNonAnimatedDataSource.swift; sourceTree = "<group>"; };
 		4A2FB65E291F27ED007B2686 /* ModaDataSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModaDataSection.swift; sourceTree = "<group>"; };
 		4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoCell.swift; sourceTree = "<group>"; };
@@ -238,17 +236,8 @@
 			isa = PBXGroup;
 			children = (
 				4A59EA4C28F64F64002C6FBE /* TodoScene */,
-				4A5861EE28EBFBAC00EFBCC9 /* Todo */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		4A5861EE28EBFBAC00EFBCC9 /* Todo */ = {
-			isa = PBXGroup;
-			children = (
-				4A58620628EC1F8E00EFBCC9 /* Date */,
-			);
-			path = Todo;
 			sourceTree = "<group>";
 		};
 		4A5861F128EBFC5900EFBCC9 /* Domain */ = {
@@ -309,13 +298,6 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		4A58620628EC1F8E00EFBCC9 /* Date */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Date;
-			sourceTree = "<group>";
-		};
 		4A58621B28ED7C4600EFBCC9 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,7 +333,6 @@
 			isa = PBXGroup;
 			children = (
 				4A5861F528EBFE9E00EFBCC9 /* TodoViewController.swift */,
-				4A2FB659291E584E007B2686 /* TodoViewController+CollectionViewSection.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -535,7 +516,6 @@
 				4A5861F628EBFE9E00EFBCC9 /* TodoViewController.swift in Sources */,
 				4A2FB670291FBD3E007B2686 /* Log.swift in Sources */,
 				4A5861F428EBFC7C00EFBCC9 /* Todo.swift in Sources */,
-				4A2FB65A291E584E007B2686 /* TodoViewController+CollectionViewSection.swift in Sources */,
 				4A58620828EC1FBB00EFBCC9 /* DateCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -68,10 +68,10 @@ final class MonthlyTodoCell: UICollectionViewCell {
   
   func updateUI(todo: Todo) {
     self.todoLabel.text = todo.content
-    self.checkButton.setImage(todo.isDone ? .monthlyDoInactive : .monthlyDoInactive, for: .normal)
+    self.checkButton.setImage(todo.isDone ? .monthlyDoActive : .monthlyDoInactive, for: .normal)
   }
   
-  func onCheckClick() {
-    self.checkButton.rx.tap.asObservable()
+  func onCheckClick() -> Observable<Void> {
+    return self.checkButton.rx.tap.asObservable()
   }
 }

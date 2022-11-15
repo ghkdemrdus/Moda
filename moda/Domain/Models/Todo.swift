@@ -17,8 +17,8 @@ struct Todo: Hashable {
   static let `default` = Todo(id: "", content: "", isDone: false)
 }
 
-//extension Todo {
-//  func toEntity() -> TodoEntity {
-//    TodoEntity(id: id, content: content, isDone: isDone)
-//  }
-//}
+extension Todo {
+  func toEntity() -> TodoEntity {
+    TodoEntity(todoId: id, content: content, isDone: isDone)
+  }
+}

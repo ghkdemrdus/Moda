@@ -7,6 +7,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 import SnapKit
 import Then
 
@@ -75,5 +76,9 @@ final class DailyTodoCell: UICollectionViewCell {
   func updateUI(todo: Todo) {
     self.todoLabel.text = todo.content
     self.checkButton.setImage(todo.isDone ? .dailyDoActive : .dailyDoInactive, for: .normal)
+  }
+  
+  func onCheckClick() -> Observable<Void> {
+    return self.checkButton.rx.tap.asObservable()
   }
 }

@@ -7,7 +7,6 @@
 
 import Foundation
 
-//import RealmSwift
 import SnapKit
 import Then
 import RxSwift
@@ -90,7 +89,7 @@ class TodoViewController: UIViewController {
     let cellInput = self.configureCollectionView()
     self.configureUI()
     
-    self.bindViewModel()
+    self.bindViewModel(cellInput: cellInput)
   }
   
   override func viewDidLayoutSubviews() {
@@ -195,8 +194,8 @@ extension TodoViewController {
   }
   
   private func configureCollectionView() -> TodoViewModel.CellInput {
-    let monthlyTodos = PublishRelay<Todo>()
-    let dailyTodos = PublishRelay<Todo>()
+    let updateMonthlyTodo = PublishRelay<Todo>()
+    let updateDailyTodo = PublishRelay<Todo>()
     
     self.todoDataSource = RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>(
       configureCell: { dataSource, tableView, indexPath, item in
@@ -204,10 +203,20 @@ extension TodoViewController {
         case .monthly(let todo):
           let cell = self.todoCollectionView.dequeueReusableCell(MonthlyTodoCell.self, for: indexPath)
           cell.updateUI(todo: todo)
+          cell.onCheckClick()
+            .subscribe(onNext: {
+              updateMonthlyTodo.accept(todo)
+            })
+            .disposed(by: self.disposeBag)
           return cell
         case .daily(let todo):
           let cell = self.todoCollectionView.dequeueReusableCell(DailyTodoCell.self, for: indexPath)
           cell.updateUI(todo: todo)
+          cell.onCheckClick()
+            .subscribe(onNext: {
+              updateDailyTodo.accept(todo)
+            })
+            .disposed(by: self.disposeBag)
           return cell
         case .monthlyEmpty:
           let cell = self.todoCollectionView.dequeueReusableCell(MonthlyEmptyCell.self, for: indexPath)
@@ -235,13 +244,14 @@ extension TodoViewController {
     }
     
     return TodoViewModel.CellInput(
-      
+      monthlyTodoCheckButtonDidTapEvent: updateMonthlyTodo,
+      dailyTodoCheckButtonDidTapEvent: updateDailyTodo
     )
   }
 }
 
 extension TodoViewController {
-  private func bindViewModel() {
+  private func bindViewModel(cellInput: TodoViewModel.CellInput) {
     let input = TodoViewModel.Input(
       viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
       dateCellDidTapEvent: self.dateCollectionView.rx.itemSelected.map { $0.row },
@@ -253,7 +263,7 @@ extension TodoViewController {
       registerButtonDidTapEvent: self.registerButton.rx.tap.asObservable()
     )
     
-    let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+    let output = self.viewModel.transform(from: input, from: cellInput, disposeBag: self.disposeBag)
     self.bindDateArray(output: output)
     self.bindMonthly(output: output)
     self.bindInput(output: output)
