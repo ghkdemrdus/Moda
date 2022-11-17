@@ -11,6 +11,7 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
+
 import RxDataSources
 
 class TodoViewController: UIViewController {
@@ -41,7 +42,7 @@ class TodoViewController: UIViewController {
   }
   
   private let todoHeaderView = UIView().then {
-    $0.backgroundColor = .systemBackground
+    $0.backgroundColor = .white
   }
   private let dateView = UIStackView().then {
     $0.axis = .horizontal
@@ -68,6 +69,7 @@ class TodoViewController: UIViewController {
   private let inputTextField = BottomInputTextField().then {
     $0.layer.cornerRadius = 17.5
     $0.backgroundColor = .lightGray
+    $0.returnKeyType = .done
   }
   
   private let registerButton = UIButton().then {
@@ -80,6 +82,7 @@ class TodoViewController: UIViewController {
   
   var viewModel = TodoViewModel()
   private let disposeBag = DisposeBag()
+  //  private var keyboardHeight: CGFloat = 0
   private var todoDataSource: RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>!
   
   
@@ -90,6 +93,12 @@ class TodoViewController: UIViewController {
     self.configureUI()
     
     self.bindViewModel(cellInput: cellInput)
+    self.bindKeyboard()
+  }
+  
+  @objc func dismissKeyboard() {
+    //Causes the view (or one of its embedded text fields) to resign the first responder status.
+    view.endEditing(true)
   }
   
   override func viewDidLayoutSubviews() {
@@ -98,13 +107,18 @@ class TodoViewController: UIViewController {
       self.initialScroll()
       viewModel.initialSetting = false
     }
-    
+  }
+  
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+    self.view.endEditing(true)
   }
 }
 
 // MARK: - Configure UI
 extension TodoViewController {
   private func setupView() {
+    self.view.backgroundColor = .white
     self.dateView.addArrangedSubview(monthLabel)
     self.dateView.addArrangedSubview(wordOfMonthLabel)
     self.dateCollectionView.showsHorizontalScrollIndicator = false
@@ -146,8 +160,9 @@ extension TodoViewController {
     // MARK: - Bottom Input
     self.view.addSubview(self.bottomInputView)
     self.bottomInputView.snp.makeConstraints {
-      $0.bottom.left.right.equalToSuperview()
-      $0.height.equalTo(77.5)
+      $0.left.right.equalToSuperview()
+      $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
+      $0.height.equalTo(51)
     }
     
     self.bottomInputView.addSubview(self.inputDividerView)
@@ -273,6 +288,7 @@ extension TodoViewController {
   }
 }
 
+// MARK: - Bind ViewModel
 extension TodoViewController {
   private func bindViewModel(cellInput: TodoViewModel.CellInput) {
     let input = TodoViewModel.Input(
@@ -283,6 +299,7 @@ extension TodoViewController {
       monthlyButtonDidTapEvent: self.monthlyButton.rx.tap.asObservable(),
       dailyButtonDidTapEvent: self.dailyButton.rx.tap.asObservable(),
       inputTextFieldDidEditEvent: self.inputTextField.rx.text.orEmpty.asObservable(),
+      keyboardDoneKeyDidTapEvent: self.inputTextField.rx.controlEvent([.editingDidEndOnExit]).asObservable(),
       registerButtonDidTapEvent: self.registerButton.rx.tap.asObservable()
     )
     
@@ -357,8 +374,39 @@ extension TodoViewController {
       .asDriver(onErrorJustReturn: true)
       .drive(onNext: { [weak self] _ in
         self?.inputTextField.text = ""
+//        NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+        self?.view.endEditing(true)
       })
       .disposed(by: disposeBag)
+  }
+}
+
+// MARK: - Bind Keyboard
+extension TodoViewController {
+  
+  private func bindKeyboard() {
+    self.keyboardHeight()
+      .subscribe(onNext: { [weak self] keyboardHeight in
+        guard let self = self else { return }
+        let height = keyboardHeight > 0 ? -keyboardHeight + self.view.safeAreaInsets.bottom : 0
+        self.bottomInputView.snp.updateConstraints {
+          $0.height.equalTo(51)
+          $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(height)
+        }
+        self.view.layoutIfNeeded()
+      })
+      .disposed(by: disposeBag)
+    
+    self.dismissKeyboardbyTouchAnywhere()
+  }
+  
+  private func dismissKeyboardbyTouchAnywhere() {
+    //    dateCollectionView.isUserInteractionEnabled = true
+    let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+    tap.cancelsTouchesInView = false
+    tap.delegate = self
+    //    tap.
+    self.view.addGestureRecognizer(tap)
   }
 }
 
@@ -369,10 +417,33 @@ extension TodoViewController {
   }
   
   private func showOptionBottomSheet() {
-    Log("show")
     let bottomSheetVC = OptionBottomSheetViewController()
     bottomSheetVC.modalPresentationStyle = .overFullScreen
     self.present(bottomSheetVC, animated: false, completion: nil)
+  }
+  
+  func keyboardHeight() -> Observable<CGFloat> {
+    return Observable
+      .from([
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillShowNotification)
+          .map { notification -> CGFloat in
+            (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height ?? 0
+          },
+        NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
+          .map { _ -> CGFloat in
+            0
+          }
+      ])
+      .merge()
+  }
+}
+
+extension TodoViewController: UIGestureRecognizerDelegate {
+  func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    if touch.view?.isDescendant(of: self.dailyButton) == true || touch.view?.isDescendant(of: self.monthlyButton) == true  || touch.view?.isDescendant(of: self.registerButton) == true {
+      return false
+    }
+    return true
   }
 }
 

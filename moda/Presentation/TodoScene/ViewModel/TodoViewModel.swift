@@ -20,6 +20,7 @@ class TodoViewModel {
     let monthlyButtonDidTapEvent: Observable<Void>
     let dailyButtonDidTapEvent: Observable<Void>
     let inputTextFieldDidEditEvent: Observable<String>
+    let keyboardDoneKeyDidTapEvent: Observable<Void>
     let registerButtonDidTapEvent: Observable<Void>
   }
   
@@ -58,6 +59,11 @@ class TodoViewModel {
     var inputText = ""
     
     let output = Output()
+    
+//    input.keyboardDoneKeyDidTapEvent.subscribe(onNext: {
+//      Log("hihihi")
+//    })
+//    .disposed(by: disposeBag)
     
     self.bindOutput(output: output, disposeBag: disposeBag)
     
@@ -114,8 +120,10 @@ class TodoViewModel {
       })
       .disposed(by: disposeBag)
     
-    input.registerButtonDidTapEvent
-      .subscribe(onNext: { [weak self] in
+    
+    Observable.merge(input.keyboardDoneKeyDidTapEvent, input.registerButtonDidTapEvent)
+      .subscribe(onNext: { [weak self] _ in
+        Log("zmfflr")
         guard let self = self else { return }
         guard inputText.count != 0 else { return }
         let todo = Todo(id: self.dm.getUniqueId(), content: inputText, isDone: false)

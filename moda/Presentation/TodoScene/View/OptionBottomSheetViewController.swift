@@ -6,41 +6,30 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 class OptionBottomSheetViewController: UIViewController {
   
   let bottomHeight: CGFloat = 359
   
-  // bottomSheet가 view의 상단에서 떨어진 거리
   private var bottomSheetViewTopConstraint: NSLayoutConstraint!
   
-  // 기존 화면을 흐려지게 만들기 위한 뷰
-  private let dimmedBackView: UIView = {
-    let view = UIView()
-    view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-    return view
-  }()
+  private let dimmedBackView = UIView().then {
+    $0.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+  }
+
+  private let bottomSheetView = UIView().then() {
+    $0.backgroundColor = .white
+    $0.layer.cornerRadius = 27
+    $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    $0.clipsToBounds = true
+  }
   
-  // 바텀 시트 뷰
-  private let bottomSheetView: UIView = {
-    let view = UIView()
-    view.backgroundColor = .white
-    
-    view.layer.cornerRadius = 27
-    view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-    view.clipsToBounds = true
-    
-    return view
-  }()
-  
-  // dismiss Indicator View UI 구성 부분
-  private let dismissIndicatorView: UIView = {
-    let view = UIView()
-    view.backgroundColor = .systemGray2
-    view.layer.cornerRadius = 3
-    
-    return view
-  }()
+  private let dismissIndicatorView = UIView().then {
+    $0.backgroundColor = .systemGray2
+    $0.layer.cornerRadius = 3
+  }
   
   // MARK: - View Life Cycle
   override func viewDidLoad() {
@@ -59,12 +48,26 @@ class OptionBottomSheetViewController: UIViewController {
   // MARK: - @Functions
   // UI 세팅 작업
   private func setupUI() {
-    view.addSubview(dimmedBackView)
-    view.addSubview(bottomSheetView)
-    view.addSubview(dismissIndicatorView)
+    self.view.addSubview(self.dimmedBackView)
+    self.dimmedBackView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
     
+    self.view.addSubview(self.bottomSheetView)
+    self.bottomSheetView.snp.makeConstraints {
+      $0.bottom.left.right.equalToSuperview()
+      $0.height.equalTo(self.bottomHeight)
+    }
+    
+    self.view.addSubview(self.dismissIndicatorView)
+    self.dismissIndicatorView.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(self.bottomSheetView).offset(12)
+      $0.width.equalTo(102)
+      $0.height.equalTo(7)
+    }
+        
     dimmedBackView.alpha = 0.0
-    setupLayout()
   }
   
   // GestureRecognizer 세팅 작업
@@ -115,7 +118,7 @@ class OptionBottomSheetViewController: UIViewController {
     let safeAreaHeight: CGFloat = view.safeAreaLayoutGuide.layoutFrame.height
     let bottomPadding: CGFloat = view.safeAreaInsets.bottom
     
-    bottomSheetViewTopConstraint.constant = (safeAreaHeight + bottomPadding) - bottomHeight
+//    bottomSheetViewTopConstraint.constant = (safeAreaHeight + bottomPadding) - bottomHeight
     
     UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
       self.dimmedBackView.alpha = 0.5
@@ -127,7 +130,7 @@ class OptionBottomSheetViewController: UIViewController {
   private func hideBottomSheetAndGoBack() {
     let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.height
     let bottomPadding = view.safeAreaInsets.bottom
-    bottomSheetViewTopConstraint.constant = safeAreaHeight + bottomPadding
+//    bottomSheetViewTopConstraint.constant = safeAreaHeight + bottomPadding
     UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn, animations: {
       self.dimmedBackView.alpha = 0.0
       self.view.layoutIfNeeded()

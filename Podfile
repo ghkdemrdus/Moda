@@ -8,6 +8,7 @@ target 'moda' do
   # Pods for moda
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxGesture'
   pod 'RxDataSources'
   pod 'SnapKit'
   pod 'Then'
