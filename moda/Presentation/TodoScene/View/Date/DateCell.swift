@@ -79,9 +79,9 @@ extension DateCell {
     if let date = date {
       self.dateView.backgroundColor = date.isCurrent ? .dateBg : .white
       self.dayLabel.text = String(date.date.toDayFormat())
-      self.dayLabel.textColor = date.isCurrent ? .currentDate : date.isPrevious ? .previousDate : .followingDate
+      self.dayLabel.textColor = date.isCurrent ? .darkBurgundy2 : date.isPrevious ? .previousDate : .followingDate
       self.weekdayLabel.text = date.date.toWeedDayFormat()
-      self.weekdayLabel.textColor = date.isCurrent ? .currentDate : date.isPrevious ? .previousDate : .followingDate
+      self.weekdayLabel.textColor = date.isCurrent ? .darkBurgundy2 : date.isPrevious ? .previousDate : .followingDate
       self.updateDayViewBackground(date: date)
     }
   }

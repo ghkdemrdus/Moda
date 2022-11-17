@@ -14,7 +14,7 @@ import Then
 final class DailyTodoCell: UICollectionViewCell {
   
   private let todoLabel = UILabel().then {
-    $0.textColor = .todo
+    $0.textColor = .darkGray2
     $0.font = .spoqaHanSansNeo(type: .medium, size: 15)
     $0.numberOfLines = 0
   }

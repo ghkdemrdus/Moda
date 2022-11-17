@@ -55,13 +55,13 @@ class TodoViewController: UIViewController {
   
   private let monthlyButton = UIButton().then {
     $0.setTitle("M", for: .normal)
-    $0.setTitleColor(.burgundy, for: .normal)
+    $0.setTitleColor(.darkBurgundy1, for: .normal)
     $0.layer.cornerRadius = 5
   }
   
   private let dailyButton = UIButton().then {
     $0.setTitle("D", for: .normal)
-    $0.setTitleColor(.burgundy, for: .normal)
+    $0.setTitleColor(.darkBurgundy1, for: .normal)
     $0.layer.cornerRadius = 5
     
   }
@@ -269,6 +269,11 @@ extension TodoViewController {
               //              self.todoCollectionView.supplementaryView(forElementKind: "TodoHeaderView", at: indexPath)?.setNeedsDisplay()
             })
             .disposed(by: section.disposeBag)
+          Observable.combineLatest(self.viewModel.monthlyTodos, self.viewModel.isMonthlyTodosHidden)
+            .subscribe(onNext: { todos, isHidden in
+              section.updateArrow(itemCount: todos.count, isHidden: isHidden)
+            })
+            .disposed(by: self.disposeBag)
         case .daily:
           section.updateUI(title: "데일리 투두")
         }
@@ -374,7 +379,6 @@ extension TodoViewController {
       .asDriver(onErrorJustReturn: true)
       .drive(onNext: { [weak self] _ in
         self?.inputTextField.text = ""
-//        NotificationCenter.default.rx.notification(UIResponder.keyboardWillHideNotification)
         self?.view.endEditing(true)
       })
       .disposed(by: disposeBag)
@@ -419,6 +423,7 @@ extension TodoViewController {
   private func showOptionBottomSheet() {
     let bottomSheetVC = OptionBottomSheetViewController()
     bottomSheetVC.modalPresentationStyle = .overFullScreen
+    bottomSheetVC.delegate = self
     self.present(bottomSheetVC, animated: false, completion: nil)
   }
   
@@ -444,6 +449,12 @@ extension TodoViewController: UIGestureRecognizerDelegate {
       return false
     }
     return true
+  }
+}
+
+extension TodoViewController: BottomSheetDismissDelegate {
+  func deleteTodo() {
+    self.viewModel.deleteTodoByDelegate()
   }
 }
 

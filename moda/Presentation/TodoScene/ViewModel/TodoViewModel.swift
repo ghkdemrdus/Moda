@@ -47,24 +47,36 @@ class TodoViewModel {
   private let todoStroage = TodoStorage()
   var initialSetting: Bool = true
   
-  private var isMonthlyTodosAllShown = BehaviorRelay<Bool>(value: false)
+  var isMonthlyTodosHidden = BehaviorRelay<Bool>(value: true)
+  let monthlyTodos = BehaviorRelay<[Todo]>(value: [])
   private var currentDate = BehaviorRelay<Date>(value: Date().plain())
-  private let monthlyTodos = BehaviorRelay<[Todo]>(value: [])
   private let dailyTodos = BehaviorRelay<[Todo]>(value: [])
+  private let todoDeleteEvent = PublishRelay<Bool>()
   
   
   func transform(from input: Input, from cellInput: CellInput, disposeBag: DisposeBag) -> Output {
     
     var type: TodoDataSection.TodoSection = .monthly
     var inputText = ""
+    var todoInfoTappedOption: (Todo, TodoDataSection.TodoSection)?
     
     let output = Output()
     
-//    input.keyboardDoneKeyDidTapEvent.subscribe(onNext: {
-//      Log("hihihi")
-//    })
-//    .disposed(by: disposeBag)
-    
+    self.todoDeleteEvent
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self, let info = todoInfoTappedOption else { return }
+        switch info.1 {
+        case .monthly:
+          let todos = self.monthlyTodos.value.filter { info.0.id != $0.id}
+          self.monthlyTodos.accept(todos)
+        case .daily:
+          let todos = self.dailyTodos.value.filter { info.0.id != $0.id}
+          self.dailyTodos.accept(todos)
+        }
+        self.deleteTodo(todo: info.0)
+      })
+      .disposed(by: disposeBag)
+
     self.bindOutput(output: output, disposeBag: disposeBag)
     
     input.viewWillAppearEvent
@@ -123,7 +135,6 @@ class TodoViewModel {
     
     Observable.merge(input.keyboardDoneKeyDidTapEvent, input.registerButtonDidTapEvent)
       .subscribe(onNext: { [weak self] _ in
-        Log("zmfflr")
         guard let self = self else { return }
         guard inputText.count != 0 else { return }
         let todo = Todo(id: self.dm.getUniqueId(), content: inputText, isDone: false)
@@ -169,18 +180,25 @@ class TodoViewModel {
       .disposed(by: disposeBag)
     
     cellInput.monthyOptionDidTapEvent
-      .subscribe(onNext: { [weak self] todo in
+      .subscribe(onNext: { todo in
         output.showOptionBottomSheet.accept(true)
+        todoInfoTappedOption = (todo, .monthly)
+      })
+      .disposed(by: disposeBag)
+    
+    cellInput.dailyOptionDidTapEvent
+      .subscribe(onNext: { todo in
+        output.showOptionBottomSheet.accept(true)
+        todoInfoTappedOption = (todo, .daily)
       })
       .disposed(by: disposeBag)
     
     cellInput.arrowButtonDidTapEvent
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
-        self.isMonthlyTodosAllShown.accept(!self.isMonthlyTodosAllShown.value)
+        self.isMonthlyTodosHidden.accept(!self.isMonthlyTodosHidden.value)
       })
       .disposed(by: disposeBag)
-    
  
     
     Observable.zip(self.currentDate, self.currentDate.skip(1))
@@ -212,9 +230,9 @@ class TodoViewModel {
   }
   
   private func bindTodos(output: Output, disposeBag: DisposeBag) {
-    Observable.combineLatest(monthlyTodos, isMonthlyTodosAllShown).withLatestFrom(output.todoDatas) { data, todoDatas in
+    Observable.combineLatest(monthlyTodos, isMonthlyTodosHidden).withLatestFrom(output.todoDatas) { data, todoDatas in
       let todos = data.0
-      let isShown = data.1
+      let isHidden = data.1
       return todoDatas.map {
         guard $0.model != .monthly else {
           if todos.count == 0 {
@@ -222,12 +240,12 @@ class TodoViewModel {
             let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
             return sectionModel
           } else {
-            if isShown {
-              let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
+            if isHidden {
+              let items =  Array(todos.map {TodoDataSection.TodoItem.monthly($0) }.prefix(3))
               let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
               return sectionModel
             } else {
-              let items =  Array(todos.map {TodoDataSection.TodoItem.monthly($0) }.prefix(3))
+              let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
               let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
               return sectionModel
             }
@@ -238,25 +256,7 @@ class TodoViewModel {
     }
     .bind(to: output.todoDatas)
     .disposed(by: disposeBag)
-    
-//    monthlyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
-//      todoDatas.map {
-//        guard $0.model != .monthly else {
-//          if todos.count == 0 {
-//            let items = [TodoDataSection.TodoItem.monthlyEmpty]
-//            let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
-//            return sectionModel
-//          } else {
-//            let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
-//            let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
-//            return sectionModel
-//          }
-//        }
-//        return $0
-//      }
-//    }
-//    .bind(to: output.todoDatas)
-//    .disposed(by: disposeBag)
+
     
     dailyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
       todoDatas.map {
@@ -340,4 +340,16 @@ extension TodoViewModel {
     self.todoStroage.updateTodo(todo: todo)
   }
   
+  func deleteTodo(todo: Todo ) {
+    self.todoStroage.deleteTodo(todo: todo)
+  }
+  
 }
+
+extension TodoViewModel {
+  func deleteTodoByDelegate() {
+    
+    self.todoDeleteEvent.accept(true)
+  }
+}
+

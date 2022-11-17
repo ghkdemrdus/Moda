@@ -14,7 +14,6 @@ import Then
 final class TodoHeaderView: UICollectionReusableView {
   
   private let titleLabel = UILabel().then {
-    $0.textColor = .todoTitle
     $0.font = .spoqaHanSansNeo(type: .bold, size: 19)
   }
 
@@ -25,7 +24,6 @@ final class TodoHeaderView: UICollectionReusableView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.configureUI()
-    self.bindUI()
   }
   required init?(coder: NSCoder) {
     fatalError()
@@ -34,7 +32,6 @@ final class TodoHeaderView: UICollectionReusableView {
   override func prepareForReuse() {
     self.disposeBag = DisposeBag()
     self.arrowButton.setImage(nil, for: .normal)
-    self.bindUI()
   }
   
   private func configureUI() {
@@ -54,24 +51,37 @@ final class TodoHeaderView: UICollectionReusableView {
   /// Monthly Header Update
   func updateUI(title: String) {
     self.titleLabel.text = title
+    self.titleLabel.textColor = .darkGray1
   }
   
   /// Daily Header Update
   func updateUI(title: String, itemCount: Int) {
     self.titleLabel.text = title
-    self.arrowButton.setImage(itemCount > 3 ? .arrowUp : .arrowDown, for: .normal)
-    self.arrowUp = itemCount > 3 ? true : false
+    self.titleLabel.textColor = .darkBurgundy3
+    if itemCount <= 3 {
+      self.arrowButton.isHidden = true
+    }
+    self.arrowButton.setImage(.arrowUp, for: .normal)
   }
   
-  private func bindUI() {
-    self.arrowButton.rx.tap.asObservable()
-      .subscribe(onNext: { [weak self] in
-        self?.arrowUp.toggle()
-        self?.arrowButton.setImage(self?.arrowUp == true ? .arrowUp : .arrowDown, for: .normal)
-      })
-      .disposed(by: self.disposeBag)
+  func updateArrow(itemCount: Int, isHidden: Bool?) {
+    guard itemCount > 3 else {
+      self.arrowButton.isHidden = true
+      return
+    }
+    self.arrowButton.isHidden = false
+    self.arrowButton.setImage(isHidden == true ? .arrowDown : .arrowUp, for: .normal)
   }
   
+//  private func bindUI() {
+//    self.arrowButton.rx.tap.asObservable()
+//      .subscribe(onNext: { [weak self] in
+//        self?.arrowUp.toggle()
+//        self?.arrowButton.setImage(self?.arrowUp == true ? .arrowUp : .arrowDown, for: .normal)
+//      })
+//      .disposed(by: self.disposeBag)
+//  }
+//  
   func onClickArrow() -> Observable<Void> {
     return arrowButton.rx.tap.asObservable()
   }

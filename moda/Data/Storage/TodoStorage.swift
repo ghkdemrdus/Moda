@@ -78,6 +78,14 @@ final class TodoStorage {
     }
   }
   
+  func deleteTodo(todo: Todo) {
+    let previousTodo = realm.objects(TodoEntity.self).filter( "todoId == '\(todo.id)'").first
+    guard let previousTodo = previousTodo else { return }
+    try! self.realm.write {
+      self.realm.delete(previousTodo)
+    }
+  }
+  
 
 
   //    print("Log: \(todoInfo)")
