@@ -13,19 +13,18 @@ import Then
 
 final class MonthlyTodoCell: UICollectionViewCell {
   
-  var disposeBag = DisposeBag()
-  
-  private let checkButton = UIButton()
-  
   private let todoLabel = UILabel().then {
     $0.textColor = .todo
     $0.font = .spoqaHanSansNeo(type: .medium, size: 15)
     $0.numberOfLines = 0
   }
   
-  private let moreButton = UIButton().then {
+  private let optionButton = UIButton().then {
     $0.setImage(.monthlyMeatball, for: .normal)
   }
+  
+  var disposeBag = DisposeBag()
+  private let checkButton = UIButton()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -38,7 +37,7 @@ final class MonthlyTodoCell: UICollectionViewCell {
   
   override func prepareForReuse() {
     disposeBag = DisposeBag()
-    self.checkButton.setImage(nil, for: .normal)
+    self.checkButton.setImage(.monthlyDoInactive, for: .normal)
     self.todoLabel.text = nil
   }
   
@@ -50,8 +49,8 @@ final class MonthlyTodoCell: UICollectionViewCell {
       $0.width.height.equalTo(24)
     }
     
-    self.contentView.addSubview(self.moreButton)
-    self.moreButton.snp.makeConstraints {
+    self.contentView.addSubview(self.optionButton)
+    self.optionButton.snp.makeConstraints {
       $0.centerY.equalTo(self.checkButton)
       $0.right.equalToSuperview()
       $0.width.height.equalTo(24)
@@ -62,7 +61,7 @@ final class MonthlyTodoCell: UICollectionViewCell {
       $0.top.equalToSuperview().offset(8)
       $0.bottom.equalToSuperview().offset(-9)
       $0.left.equalTo(self.checkButton.snp.right).offset(8)
-      $0.right.equalTo(self.moreButton.snp.left).offset(-8)
+      $0.right.equalTo(self.optionButton.snp.left).offset(-8)
     }
   }
   
@@ -73,5 +72,9 @@ final class MonthlyTodoCell: UICollectionViewCell {
   
   func onCheckClick() -> Observable<Void> {
     return self.checkButton.rx.tap.asObservable()
+  }
+  
+  func onOptionClick() -> Observable<Void> {
+    return self.optionButton.rx.tap.asObservable()
   }
 }

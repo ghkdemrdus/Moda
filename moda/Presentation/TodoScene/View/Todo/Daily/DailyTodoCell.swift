@@ -13,21 +13,22 @@ import Then
 
 final class DailyTodoCell: UICollectionViewCell {
   
-  private let checkButton = UIButton()
-  
   private let todoLabel = UILabel().then {
     $0.textColor = .todo
     $0.font = .spoqaHanSansNeo(type: .medium, size: 15)
     $0.numberOfLines = 0
   }
   
-  private let moreButton = UIButton().then {
+  private let optionButton = UIButton().then {
     $0.setImage(.dailyMeatball, for: .normal)
   }
   
   private let dividerView = UIView().then {
     $0.backgroundColor = .todoDividerBg
   }
+
+  var disposeBag = DisposeBag()
+  private let checkButton = UIButton()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -39,6 +40,7 @@ final class DailyTodoCell: UICollectionViewCell {
   }
   
   override func prepareForReuse() {
+    self.disposeBag = DisposeBag()
     self.checkButton.setImage(nil, for: .normal)
     self.todoLabel.text = nil
   }
@@ -51,8 +53,8 @@ final class DailyTodoCell: UICollectionViewCell {
       $0.width.height.equalTo(24)
     }
     
-    self.contentView.addSubview(self.moreButton)
-    self.moreButton.snp.makeConstraints {
+    self.contentView.addSubview(self.optionButton)
+    self.optionButton.snp.makeConstraints {
       $0.centerY.equalTo(self.checkButton)
       $0.right.equalToSuperview()
       $0.width.height.equalTo(24)
@@ -69,7 +71,7 @@ final class DailyTodoCell: UICollectionViewCell {
       $0.top.equalToSuperview().offset(11.5)
       $0.bottom.equalTo(self.dividerView).offset(-12.5)
       $0.left.equalTo(self.checkButton.snp.right).offset(8)
-      $0.right.equalTo(self.moreButton.snp.left).offset(-8)
+      $0.right.equalTo(self.optionButton.snp.left).offset(-8)
     }
   }
   
@@ -80,5 +82,9 @@ final class DailyTodoCell: UICollectionViewCell {
   
   func onCheckClick() -> Observable<Void> {
     return self.checkButton.rx.tap.asObservable()
+  }
+  
+  func onOptionClick() -> Observable<Void> {
+    return self.optionButton.rx.tap.asObservable()
   }
 }

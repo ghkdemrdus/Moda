@@ -62,7 +62,7 @@ class TodoViewController: UIViewController {
     $0.setTitle("D", for: .normal)
     $0.setTitleColor(.burgundy, for: .normal)
     $0.layer.cornerRadius = 5
-
+    
   }
   
   private let inputTextField = BottomInputTextField().then {
@@ -196,6 +196,9 @@ extension TodoViewController {
   private func configureCollectionView() -> TodoViewModel.CellInput {
     let updateMonthlyTodo = PublishRelay<Todo>()
     let updateDailyTodo = PublishRelay<Todo>()
+    let monthlyOptionDidTap = PublishRelay<Todo>()
+    let dailyOptionDidTap = PublishRelay<Todo>()
+    let arrowDidTap = PublishRelay<Bool>()
     
     self.todoDataSource = RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>(
       configureCell: { dataSource, tableView, indexPath, item in
@@ -207,7 +210,12 @@ extension TodoViewController {
             .subscribe(onNext: {
               updateMonthlyTodo.accept(todo)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: cell.disposeBag)
+          cell.onOptionClick()
+            .subscribe(onNext: {
+              monthlyOptionDidTap.accept(todo)
+            })
+            .disposed(by: cell.disposeBag)
           return cell
         case .daily(let todo):
           let cell = self.todoCollectionView.dequeueReusableCell(DailyTodoCell.self, for: indexPath)
@@ -216,7 +224,12 @@ extension TodoViewController {
             .subscribe(onNext: {
               updateDailyTodo.accept(todo)
             })
-            .disposed(by: self.disposeBag)
+            .disposed(by: cell.disposeBag)
+          cell.onOptionClick()
+            .subscribe(onNext: {
+              dailyOptionDidTap.accept(todo)
+            })
+            .disposed(by: cell.disposeBag)
           return cell
         case .monthlyEmpty:
           let cell = self.todoCollectionView.dequeueReusableCell(MonthlyEmptyCell.self, for: indexPath)
@@ -231,9 +244,16 @@ extension TodoViewController {
     self.todoDataSource.configureSupplementaryView = { (dataSource, collectionView, kind, indexPath) in
       if kind == UICollectionView.elementKindSectionHeader {
         let section = collectionView.dequeueReusableHeaderView(TodoHeaderView.self, for: indexPath)
-        switch self.todoDataSource.sectionModels[indexPath.section].model {
+        let sectionModel = self.todoDataSource.sectionModels[indexPath.section]
+        switch sectionModel.model {
         case .monthly:
-          section.updateUI(title: "먼쓸리 투두")
+          section.updateUI(title: "먼쓸리 투두", itemCount: sectionModel.items.count)
+          section.onClickArrow()
+            .subscribe(onNext: {
+              arrowDidTap.accept(true)
+              //              self.todoCollectionView.supplementaryView(forElementKind: "TodoHeaderView", at: indexPath)?.setNeedsDisplay()
+            })
+            .disposed(by: section.disposeBag)
         case .daily:
           section.updateUI(title: "데일리 투두")
         }
@@ -245,7 +265,10 @@ extension TodoViewController {
     
     return TodoViewModel.CellInput(
       monthlyTodoCheckButtonDidTapEvent: updateMonthlyTodo,
-      dailyTodoCheckButtonDidTapEvent: updateDailyTodo
+      dailyTodoCheckButtonDidTapEvent: updateDailyTodo,
+      monthyOptionDidTapEvent: monthlyOptionDidTap,
+      dailyOptionDidTapEvent: dailyOptionDidTap,
+      arrowButtonDidTapEvent: arrowDidTap
     )
   }
 }
@@ -265,7 +288,7 @@ extension TodoViewController {
     
     let output = self.viewModel.transform(from: input, from: cellInput, disposeBag: self.disposeBag)
     self.bindDateArray(output: output)
-    self.bindMonthly(output: output)
+    self.bindTodos(output: output)
     self.bindInput(output: output)
   }
   
@@ -303,9 +326,15 @@ extension TodoViewController {
       .disposed(by: self.disposeBag)
   }
   
-  func bindMonthly(output: TodoViewModel.Output?) {
+  func bindTodos(output: TodoViewModel.Output?) {
     output?.todoDatas
       .bind(to: self.todoCollectionView.rx.items(dataSource: self.todoDataSource))
+      .disposed(by: self.disposeBag)
+    
+    output?.showOptionBottomSheet
+      .subscribe(onNext: { [weak self] _ in
+        self?.showOptionBottomSheet()
+      })
       .disposed(by: self.disposeBag)
   }
   
@@ -337,6 +366,13 @@ extension TodoViewController {
   private func initialScroll() {
     let day = viewModel.getTodayDateIndex()
     self.dateCollectionView.scrollToItem(at: IndexPath(row: day, section: 0), at: .centeredHorizontally, animated: false)
+  }
+  
+  private func showOptionBottomSheet() {
+    Log("show")
+    let bottomSheetVC = OptionBottomSheetViewController()
+    bottomSheetVC.modalPresentationStyle = .overFullScreen
+    self.present(bottomSheetVC, animated: false, completion: nil)
   }
 }
 

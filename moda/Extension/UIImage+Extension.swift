@@ -13,6 +13,8 @@ extension UIImage {
   static let monthlyDoActive = UIImage(named: "imgHomeMonthlyDoActive")
   static let monthlyDoInactive = UIImage(named: "imgHomeMonthlyDoInactive")
   static let monthlyMeatball = UIImage(named: "iconHomeMonthlyMeatball")
+  static let arrowUp = UIImage(named: "iconHomeMonthlyArrowUp")
+  static let arrowDown = UIImage(named: "iconHomeMonthlyArrowDown")
   
   // MARK: - Daily
   static let dailyDoActive = UIImage(named: "imgHomeDailyDoActive")

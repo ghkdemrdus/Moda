@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 
 class TodoViewModel {
-
+  
   struct Input {
     let viewWillAppearEvent: Observable<Void>
     let dateCellDidTapEvent: Observable<Int>
@@ -26,6 +26,9 @@ class TodoViewModel {
   struct CellInput {
     let monthlyTodoCheckButtonDidTapEvent: PublishRelay<Todo>
     let dailyTodoCheckButtonDidTapEvent: PublishRelay<Todo>
+    let monthyOptionDidTapEvent: PublishRelay<Todo>
+    let dailyOptionDidTapEvent: PublishRelay<Todo>
+    let arrowButtonDidTapEvent: PublishRelay<Bool>
   }
   
   struct Output {
@@ -35,6 +38,7 @@ class TodoViewModel {
     var wordOfMonth = BehaviorRelay<String>(value: "January")
     var todoDatas = BehaviorRelay<[TodoDataSection.Model]>(value: TodoDataSection.initialSectionDatas)
     var selectedType = BehaviorRelay<TodoDataSection.TodoSection>(value: .monthly)
+    var showOptionBottomSheet = PublishRelay<Bool>()
     var completeRegister = PublishRelay<Bool>()
   }
   
@@ -42,6 +46,7 @@ class TodoViewModel {
   private let todoStroage = TodoStorage()
   var initialSetting: Bool = true
   
+  private var isMonthlyTodosAllShown = BehaviorRelay<Bool>(value: false)
   private var currentDate = BehaviorRelay<Date>(value: Date().plain())
   private let monthlyTodos = BehaviorRelay<[Todo]>(value: [])
   private let dailyTodos = BehaviorRelay<[Todo]>(value: [])
@@ -51,7 +56,7 @@ class TodoViewModel {
     
     var type: TodoDataSection.TodoSection = .monthly
     var inputText = ""
-
+    
     let output = Output()
     
     self.bindOutput(output: output, disposeBag: disposeBag)
@@ -155,6 +160,21 @@ class TodoViewModel {
       .bind(to: self.dailyTodos)
       .disposed(by: disposeBag)
     
+    cellInput.monthyOptionDidTapEvent
+      .subscribe(onNext: { [weak self] todo in
+        output.showOptionBottomSheet.accept(true)
+      })
+      .disposed(by: disposeBag)
+    
+    cellInput.arrowButtonDidTapEvent
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self else { return }
+        self.isMonthlyTodosAllShown.accept(!self.isMonthlyTodosAllShown.value)
+      })
+      .disposed(by: disposeBag)
+    
+ 
+    
     Observable.zip(self.currentDate, self.currentDate.skip(1))
       .subscribe(onNext: { [weak self] previous, current in
         self?.fetchMonthlyTodos(date: current, disposeBag: disposeBag)
@@ -184,17 +204,25 @@ class TodoViewModel {
   }
   
   private func bindTodos(output: Output, disposeBag: DisposeBag) {
-    monthlyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
-      todoDatas.map {
+    Observable.combineLatest(monthlyTodos, isMonthlyTodosAllShown).withLatestFrom(output.todoDatas) { data, todoDatas in
+      let todos = data.0
+      let isShown = data.1
+      return todoDatas.map {
         guard $0.model != .monthly else {
           if todos.count == 0 {
             let items = [TodoDataSection.TodoItem.monthlyEmpty]
             let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
             return sectionModel
           } else {
-            let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
-            let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
-            return sectionModel
+            if isShown {
+              let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
+              let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
+              return sectionModel
+            } else {
+              let items =  Array(todos.map {TodoDataSection.TodoItem.monthly($0) }.prefix(3))
+              let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
+              return sectionModel
+            }
           }
         }
         return $0
@@ -202,6 +230,25 @@ class TodoViewModel {
     }
     .bind(to: output.todoDatas)
     .disposed(by: disposeBag)
+    
+//    monthlyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
+//      todoDatas.map {
+//        guard $0.model != .monthly else {
+//          if todos.count == 0 {
+//            let items = [TodoDataSection.TodoItem.monthlyEmpty]
+//            let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
+//            return sectionModel
+//          } else {
+//            let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
+//            let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
+//            return sectionModel
+//          }
+//        }
+//        return $0
+//      }
+//    }
+//    .bind(to: output.todoDatas)
+//    .disposed(by: disposeBag)
     
     dailyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
       todoDatas.map {
