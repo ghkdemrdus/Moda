@@ -18,6 +18,7 @@ extension UIColor {
   
   class var darkGray1: UIColor { return UIColor(red: 53 / 255, green: 49 / 255, blue: 64 / 255, alpha: 1) }
   class var darkGray2: UIColor { return UIColor(red: 79 / 255, green: 74 / 255, blue: 91 / 255, alpha: 1) }
+  class var darkGray3: UIColor { return UIColor(red: 75 / 255, green: 79 / 255, blue: 96 / 255, alpha: 1) }
   class var darkBurgundy1: UIColor { return UIColor(red: 9 / 255, green: 2 / 255, blue: 0 / 255, alpha: 1) }
   class var darkBurgundy2: UIColor { return UIColor(red: 58 / 255, green: 42 / 255, blue: 29 / 255, alpha: 1) }
   class var darkBurgundy3: UIColor { return UIColor(red: 105 / 255, green: 58 / 255, blue: 44 / 255, alpha: 1) }

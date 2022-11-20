@@ -66,6 +66,7 @@ class TodoViewController: UIViewController {
   }
   
   private let inputTextField = BottomInputTextField().then {
+    $0.textColor = .darkGray3
     $0.layer.cornerRadius = 17.5
     $0.backgroundColor = .lightGray
     $0.returnKeyType = .done
