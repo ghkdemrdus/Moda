@@ -49,6 +49,7 @@
 		4A58621A28ED645200EFBCC9 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621928ED645200EFBCC9 /* TodoViewModel.swift */; };
 		4A58621D28ED7C5500EFBCC9 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621C28ED7C5500EFBCC9 /* DateManager.swift */; };
 		4A59EA4B28F558D4002C6FBE /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */; };
+		4A5A94F1292A445200B4197D /* InputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5A94F0292A445200B4197D /* InputState.swift */; };
 		4A8F897E28F3ED9500ACE0F1 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F897D28F3ED9500ACE0F1 /* DateView.swift */; };
 		4AAFE77D28F6B06B00EA6FB4 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		4A58621928ED645200EFBCC9 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		4A58621C28ED7C5500EFBCC9 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		4A59EA4A28F558D4002C6FBE /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		4A5A94F0292A445200B4197D /* InputState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputState.swift; sourceTree = "<group>"; };
 		4A8F897D28F3ED9500ACE0F1 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		7F5A659CE6FD5E07C2E1C8D2 /* Pods-moda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moda.release.xcconfig"; path = "Target Support Files/Pods-moda/Pods-moda.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				4A2FB65E291F27ED007B2686 /* ModaDataSection.swift */,
+				4A5A94F0292A445200B4197D /* InputState.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */,
 				4A5861F628EBFE9E00EFBCC9 /* TodoViewController.swift in Sources */,
 				4A2FB670291FBD3E007B2686 /* Log.swift in Sources */,
+				4A5A94F1292A445200B4197D /* InputState.swift in Sources */,
 				4A5861F428EBFC7C00EFBCC9 /* Todo.swift in Sources */,
 				4A58620828EC1FBB00EFBCC9 /* DateCell.swift in Sources */,
 			);

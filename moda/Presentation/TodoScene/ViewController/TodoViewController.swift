@@ -63,7 +63,6 @@ class TodoViewController: UIViewController {
     $0.setTitle("D", for: .normal)
     $0.setTitleColor(.darkBurgundy1, for: .normal)
     $0.layer.cornerRadius = 5
-    
   }
   
   private let inputTextField = BottomInputTextField().then {
@@ -72,19 +71,16 @@ class TodoViewController: UIViewController {
     $0.returnKeyType = .done
   }
   
-  private let registerButton = UIButton().then {
-    $0.setImage(.monthlyDoActive, for: .normal)
-  }
-  
+  private let registerButton = UIButton()
   private let dateCollectionView = DateView()
   private lazy var todoCollectionView = TodoView(todoDataSource: self.todoDataSource)
-  private let bottomInputView = UIView()
+  private let bottomInputView = UIView().then { $0.backgroundColor = .white }
+
+  // MARK: - Vars & Lets
   
   var viewModel = TodoViewModel()
   private let disposeBag = DisposeBag()
-  //  private var keyboardHeight: CGFloat = 0
   private var todoDataSource: RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>!
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -97,7 +93,6 @@ class TodoViewController: UIViewController {
   }
   
   @objc func dismissKeyboard() {
-    //Causes the view (or one of its embedded text fields) to resign the first responder status.
     view.endEditing(true)
   }
   
@@ -195,7 +190,7 @@ extension TodoViewController {
     self.bottomInputView.addSubview(self.registerButton)
     self.registerButton.snp.makeConstraints {
       $0.centerY.equalTo(self.monthlyButton)
-      $0.right.equalToSuperview().offset(-20)
+      $0.right.equalTo(self.inputTextField.snp.right).offset(-6)
     }
     
     // MARK: - Todo
@@ -266,7 +261,6 @@ extension TodoViewController {
           section.onClickArrow()
             .subscribe(onNext: {
               arrowDidTap.accept(true)
-              //              self.todoCollectionView.supplementaryView(forElementKind: "TodoHeaderView", at: indexPath)?.setNeedsDisplay()
             })
             .disposed(by: section.disposeBag)
           Observable.combineLatest(self.viewModel.monthlyTodos, self.viewModel.isMonthlyTodosHidden)
@@ -375,13 +369,20 @@ extension TodoViewController {
       })
       .disposed(by: self.disposeBag)
     
+    output?.inputState
+      .asDriver()
+      .drive(onNext: { [weak self] state in
+        self?.registerButton.setImage(state == .empty ? .inputInactive : .monthlyDoActive, for: .normal)
+      })
+      .disposed(by: self.disposeBag)
+    
     output?.completeRegister
       .asDriver(onErrorJustReturn: true)
       .drive(onNext: { [weak self] _ in
         self?.inputTextField.text = ""
         self?.view.endEditing(true)
       })
-      .disposed(by: disposeBag)
+      .disposed(by: self.disposeBag)
   }
 }
 
@@ -445,9 +446,10 @@ extension TodoViewController {
 
 extension TodoViewController: UIGestureRecognizerDelegate {
   func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-    if touch.view?.isDescendant(of: self.dailyButton) == true || touch.view?.isDescendant(of: self.monthlyButton) == true  || touch.view?.isDescendant(of: self.registerButton) == true {
+    if touch.view?.isDescendant(of: self.bottomInputView) == true {
       return false
     }
+    
     return true
   }
 }

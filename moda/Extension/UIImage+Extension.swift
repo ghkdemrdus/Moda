@@ -21,4 +21,8 @@ extension UIImage {
   static let dailyDoInactive = UIImage(named: "imgHomeDailyDoInactive")
   static let dailyMeatball = UIImage(named: "iconHomeDailyMeatball")
   static let dailyEmpty = UIImage(named: "imgHomeEmptyDaily")
+  
+  // MARK: - Input
+  static let inputInactive = UIImage(named: "imgHomeInputTypeInactive")
+  
 }

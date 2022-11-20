@@ -40,6 +40,7 @@ class TodoViewModel {
     var todoDatas = BehaviorRelay<[TodoDataSection.Model]>(value: TodoDataSection.initialSectionDatas)
     var selectedType = BehaviorRelay<TodoDataSection.TodoSection>(value: .monthly)
     var showOptionBottomSheet = PublishRelay<Bool>()
+    var inputState = BehaviorRelay<InputState>(value: .empty)
     var completeRegister = PublishRelay<Bool>()
   }
   
@@ -127,8 +128,9 @@ class TodoViewModel {
     
     input.inputTextFieldDidEditEvent
       .distinctUntilChanged()
-      .subscribe(onNext: { input in
+      .subscribe(onNext: { [weak self] input in
         inputText = input
+        self?.updateInputState(output: output, inputText: input)
       })
       .disposed(by: disposeBag)
     
@@ -286,6 +288,14 @@ class TodoViewModel {
     output.month.accept(dates[0].date.toMonthFormat())
     output.wordOfMonth.accept(dm.wordOfMonth[Int(dates[0].date.toMonthFormat())! - 1])
   }
+  
+  private func updateInputState(output: Output, inputText: String) {
+    if inputText.count == 0 {
+      output.inputState.accept(.empty)
+    } else {
+      output.inputState.accept(.edit)
+    }
+  }
 }
 
 // MARK: - Date
@@ -348,7 +358,6 @@ extension TodoViewModel {
 
 extension TodoViewModel {
   func deleteTodoByDelegate() {
-    
     self.todoDeleteEvent.accept(true)
   }
 }
