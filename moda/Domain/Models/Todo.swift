@@ -13,8 +13,9 @@ struct Todo: Hashable {
   let id: String
   let content: String
   let isDone: Bool
+  let type: TodoDataSection.TodoSection
   
-  static let `default` = Todo(id: "", content: "", isDone: false)
+  static let `default` = Todo(id: "", content: "", isDone: false, type: .daily)
 }
 
 extension Todo {

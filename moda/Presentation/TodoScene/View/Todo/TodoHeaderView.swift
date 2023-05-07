@@ -51,13 +51,13 @@ final class TodoHeaderView: UICollectionReusableView {
   /// Monthly Header Update
   func updateUI(title: String) {
     self.titleLabel.text = title
-    self.titleLabel.textColor = .darkGray1
+    self.titleLabel.textColor = .todoTitle
   }
   
   /// Daily Header Update
   func updateUI(title: String, itemCount: Int) {
     self.titleLabel.text = title
-    self.titleLabel.textColor = .darkBurgundy3
+    self.titleLabel.textColor = .todoTitle
     if itemCount <= 3 {
       self.arrowButton.isHidden = true
     }

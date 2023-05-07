@@ -15,6 +15,6 @@ class DailyTodoInfoEntity: Object {
 
 extension DailyTodoInfoEntity {
   func asDomain() -> [Todo] {
-    return dailyTodos.map { $0.asDomain() }
+    return dailyTodos.map { $0.asDomainToDaily() }
   }
 }

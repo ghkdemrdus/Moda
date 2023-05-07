@@ -28,101 +28,99 @@ class TodoViewController: UIViewController {
   }
   
   private let monthLabel = UILabel().then {
-    $0.textColor = .black
+    $0.textColor = .month
     $0.textAlignment = .center
     $0.font = .spoqaHanSansNeo(type: .bold, size: 28)
     $0.text = "10"
   }
   
   private let wordOfMonthLabel = UILabel().then {
-    $0.textColor = .black
+    $0.textColor = .month
     $0.textAlignment = .center
     $0.font = .spoqaHanSansNeo(type: .bold, size: 18)
     $0.text = "October"
   }
   
   private let todoHeaderView = UIView().then {
-    $0.backgroundColor = .white
+    $0.backgroundColor = .bg
   }
-  private let dateView = UIStackView().then {
+  
+  private lazy var dateView = UIStackView().then {
+    $0.addArrangedSubview(self.monthLabel)
+    $0.addArrangedSubview(self.wordOfMonthLabel)
     $0.axis = .horizontal
     $0.spacing = 8
   }
   
   private let inputDividerView = UIView().then {
-    $0.backgroundColor = .inputDividerBg
+    $0.backgroundColor = .inputDivider
   }
   
   private let monthlyButton = UIButton().then {
     $0.setTitle("M", for: .normal)
-    $0.setTitleColor(.darkBurgundy1, for: .normal)
+    $0.setTitleColor(.optionActive, for: .normal)
     $0.layer.cornerRadius = 5
   }
   
   private let dailyButton = UIButton().then {
     $0.setTitle("D", for: .normal)
-    $0.setTitleColor(.darkBurgundy1, for: .normal)
+    $0.setTitleColor(.optionActive, for: .normal)
     $0.layer.cornerRadius = 5
   }
   
   private let inputTextField = BottomInputTextField().then {
-    $0.textColor = .darkGray3
+    $0.textColor = .todo
     $0.font = .spoqaHanSansNeo(type: .medium, size: 15)
     $0.layer.cornerRadius = 17.5
-    $0.backgroundColor = .lightGray
+    $0.backgroundColor = .inputBg
     $0.returnKeyType = .done
   }
   
   private let registerButton = UIButton()
-  private let dateCollectionView = DateView()
+  private let dateCollectionView = DateView().then {
+    $0.showsHorizontalScrollIndicator = false
+  }
   private lazy var todoCollectionView = TodoView(todoDataSource: self.todoDataSource)
-  private let bottomInputView = UIView().then { $0.backgroundColor = .white }
-
+  private let bottomInputView = UIView().then { $0.backgroundColor = .bg }
+  private let todoDidEdit = PublishRelay<Todo>()
+  private let todoEndEdit = PublishRelay<Todo>()
+  private let hideKeyboard = PublishRelay<Void>()
+  
   // MARK: - Vars & Lets
   
-  var viewModel = TodoViewModel()
+  private let viewModel = TodoViewModel()
   private let disposeBag = DisposeBag()
   private var todoDataSource: RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.setupView()
+    
+    self.view.backgroundColor = .bg
     let cellInput = self.configureCollectionView()
     self.configureUI()
-    
     self.bindViewModel(cellInput: cellInput)
     self.bindKeyboard()
   }
   
   @objc func dismissKeyboard() {
-    view.endEditing(true)
+    self.view.endEditing(true)
+    guard let todo = self.viewModel.todoTappedOption, self.viewModel.isEditing else { return }
+    self.todoEndEdit.accept(todo)
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    if viewModel.initialSetting == true {
+    if self.viewModel.initialSetting {
       self.initialScroll()
-      viewModel.initialSetting = false
+      self.viewModel.initialSetting = false
     }
-  }
-  
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-    self.view.endEditing(true)
   }
 }
 
 // MARK: - Configure UI
 extension TodoViewController {
-  private func setupView() {
-    self.view.backgroundColor = .white
-    self.dateView.addArrangedSubview(monthLabel)
-    self.dateView.addArrangedSubview(wordOfMonthLabel)
-    self.dateCollectionView.showsHorizontalScrollIndicator = false
-  }
   
   private func configureUI() {
-    
     // MARK: - Date Header
     self.view.addSubview(todoHeaderView)
     self.todoHeaderView.snp.makeConstraints {
@@ -131,6 +129,7 @@ extension TodoViewController {
       $0.width.equalTo(202)
       $0.height.equalTo(35)
     }
+    
     self.todoHeaderView.addSubview(self.leftArrowButton)
     self.leftArrowButton.snp.makeConstraints {
       $0.top.leading.bottom.equalToSuperview()
@@ -202,45 +201,63 @@ extension TodoViewController {
       $0.bottom.equalTo(self.bottomInputView.snp.top)
       $0.left.right.equalToSuperview().inset(16)
     }
-    
   }
   
+  // MARK: - CollectionView
   private func configureCollectionView() -> TodoViewModel.CellInput {
     let updateMonthlyTodo = PublishRelay<Todo>()
     let updateDailyTodo = PublishRelay<Todo>()
-    let monthlyOptionDidTap = PublishRelay<Todo>()
-    let dailyOptionDidTap = PublishRelay<Todo>()
+    let optionDidTap = PublishRelay<Todo>()
     let arrowDidTap = PublishRelay<Bool>()
+    let todoDidEdit = PublishRelay<String>()
     
     self.todoDataSource = RxCollectionViewSectionedNonAnimatedDataSource<TodoDataSection.Model>(
       configureCell: { dataSource, tableView, indexPath, item in
+        let cell = self.todoCollectionView.dequeueReusableCell(TodoCell.self, for: indexPath)
         switch item {
-        case .monthly(let todo):
-          let cell = self.todoCollectionView.dequeueReusableCell(MonthlyTodoCell.self, for: indexPath)
+        case .monthly(let todo), .daily(let todo):
           cell.updateUI(todo: todo)
-          cell.onCheckClick()
+          cell.rx.tapCheck
             .subscribe(onNext: {
               updateMonthlyTodo.accept(todo)
-            })
-            .disposed(by: cell.disposeBag)
-          cell.onOptionClick()
-            .subscribe(onNext: {
-              monthlyOptionDidTap.accept(todo)
-            })
-            .disposed(by: cell.disposeBag)
-          return cell
-        case .daily(let todo):
-          let cell = self.todoCollectionView.dequeueReusableCell(DailyTodoCell.self, for: indexPath)
-          cell.updateUI(todo: todo)
-          cell.onCheckClick()
-            .subscribe(onNext: {
               updateDailyTodo.accept(todo)
             })
             .disposed(by: cell.disposeBag)
-          cell.onOptionClick()
+          cell.rx.tapOption
             .subscribe(onNext: {
-              dailyOptionDidTap.accept(todo)
+              optionDidTap.accept(todo)
             })
+            .disposed(by: cell.disposeBag)
+          cell.editTodo
+            .asDriver(onErrorDriveWith: .empty())
+            .drive(onNext: {
+              todoDidEdit.accept($0)  
+            })
+            .disposed(by: cell.disposeBag)
+            Observable.merge(
+              cell.todoTextField.rx.controlEvent([.editingDidEndOnExit]).asObservable().map { _ in false },
+              cell.editing.asObservable()
+            )
+            .asDriver(onErrorDriveWith: .empty())
+            .drive(onNext: { [weak self] isEditing in
+              guard let self = self else { return }
+              DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+                self?.bottomInputView.isHidden = isEditing
+              }
+              self.todoCollectionView.snp.updateConstraints {
+                $0.bottom.equalTo(self.bottomInputView.snp.top).offset(isEditing ? 51 : 0)
+              }
+            })
+            .disposed(by: cell.disposeBag)
+          self.todoDidEdit
+            .filter { $0.id == todo.id }
+            .map { _ in true }
+            .bind(to: cell.editing)
+            .disposed(by: cell.disposeBag)
+          self.todoEndEdit
+            .filter { $0.id == todo.id }
+            .map { _ in false }
+            .bind(to: cell.editing)
             .disposed(by: cell.disposeBag)
           return cell
         case .monthlyEmpty:
@@ -250,7 +267,6 @@ extension TodoViewController {
           let cell = self.todoCollectionView.dequeueReusableCell(DailyEmptyCell.self, for: indexPath)
           return cell
         }
-        
       })
     
     self.todoDataSource.configureSupplementaryView = { (dataSource, collectionView, kind, indexPath) in
@@ -282,9 +298,9 @@ extension TodoViewController {
     return TodoViewModel.CellInput(
       monthlyTodoCheckButtonDidTapEvent: updateMonthlyTodo,
       dailyTodoCheckButtonDidTapEvent: updateDailyTodo,
-      monthyOptionDidTapEvent: monthlyOptionDidTap,
-      dailyOptionDidTapEvent: dailyOptionDidTap,
-      arrowButtonDidTapEvent: arrowDidTap
+      optionDidTap: optionDidTap,
+      arrowButtonDidTapEvent: arrowDidTap,
+      todoDidEditEvent: todoDidEdit
     )
   }
 }
@@ -350,9 +366,13 @@ extension TodoViewController {
       .disposed(by: self.disposeBag)
     
     output?.showOptionBottomSheet
-      .subscribe(onNext: { [weak self] _ in
+      .subscribe(onNext: { [weak self] in
         self?.showOptionBottomSheet()
       })
+      .disposed(by: self.disposeBag)
+    
+    output?.focusOnTodo
+      .bind(to: self.todoDidEdit)
       .disposed(by: self.disposeBag)
   }
   
@@ -361,11 +381,13 @@ extension TodoViewController {
       .asDriver()
       .drive(onNext: { [weak self] type in
         self?.monthlyButton.do {
-          $0.backgroundColor = type == .monthly ? .lightOrange : .white
+          $0.backgroundColor = type == .monthly ? .optionBg : .clear
+          $0.setTitleColor(type == .monthly ? .optionActive : .optionInactive, for: .normal)
           $0.titleLabel?.font = .spoqaHanSansNeo(type: type == .monthly ? .bold : .regular, size: 13)
         }
         self?.dailyButton.do {
-          $0.backgroundColor = type == .monthly ? .white : .lightOrange
+          $0.backgroundColor = type == .monthly ? .clear : .optionBg
+          $0.setTitleColor(type == .monthly ? .optionInactive : .optionActive, for: .normal)
           $0.titleLabel?.font = .spoqaHanSansNeo(type: type == .monthly ? .regular : .bold, size: 13)
         }
       })
@@ -408,11 +430,9 @@ extension TodoViewController {
   }
   
   private func dismissKeyboardbyTouchAnywhere() {
-    //    dateCollectionView.isUserInteractionEnabled = true
     let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
     tap.cancelsTouchesInView = false
     tap.delegate = self
-    //    tap.
     self.view.addGestureRecognizer(tap)
   }
 }
@@ -451,12 +471,15 @@ extension TodoViewController: UIGestureRecognizerDelegate {
     if touch.view?.isDescendant(of: self.bottomInputView) == true {
       return false
     }
-    
     return true
   }
 }
 
 extension TodoViewController: BottomSheetDismissDelegate {
+  func updateTodo() {
+    self.viewModel.updateTodoByDelegate()
+  }
+  
   func deleteTodo() {
     self.viewModel.deleteTodoByDelegate()
   }

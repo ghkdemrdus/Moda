@@ -27,9 +27,9 @@ class TodoViewModel {
   struct CellInput {
     let monthlyTodoCheckButtonDidTapEvent: PublishRelay<Todo>
     let dailyTodoCheckButtonDidTapEvent: PublishRelay<Todo>
-    let monthyOptionDidTapEvent: PublishRelay<Todo>
-    let dailyOptionDidTapEvent: PublishRelay<Todo>
+    let optionDidTap: PublishRelay<Todo>
     let arrowButtonDidTapEvent: PublishRelay<Bool>
+    let todoDidEditEvent: PublishRelay<String> 
   }
   
   struct Output {
@@ -39,45 +39,55 @@ class TodoViewModel {
     var wordOfMonth = BehaviorRelay<String>(value: "January")
     var todoDatas = BehaviorRelay<[TodoDataSection.Model]>(value: TodoDataSection.initialSectionDatas)
     var selectedType = BehaviorRelay<TodoDataSection.TodoSection>(value: .monthly)
-    var showOptionBottomSheet = PublishRelay<Bool>()
+    var showOptionBottomSheet = PublishRelay<Void>()
     var inputState = BehaviorRelay<InputState>(value: .empty)
     var completeRegister = PublishRelay<Bool>()
+    var focusOnTodo = PublishRelay<Todo>()
   }
   
   private let dm = DateManager()
   private let todoStroage = TodoStorage()
   var initialSetting: Bool = true
+  var isEditing: Bool = false
   
   var isMonthlyTodosHidden = BehaviorRelay<Bool>(value: true)
   let monthlyTodos = BehaviorRelay<[Todo]>(value: [])
   private var currentDate = BehaviorRelay<Date>(value: Date().plain())
   private let dailyTodos = BehaviorRelay<[Todo]>(value: [])
-  private let todoDeleteEvent = PublishRelay<Bool>()
-  
+  private let todoUpdateEvent = PublishRelay<Void>()
+  private let todoDeleteEvent = PublishRelay<Void>()
+  var todoTappedOption: Todo?
   
   func transform(from input: Input, from cellInput: CellInput, disposeBag: DisposeBag) -> Output {
     
     var type: TodoDataSection.TodoSection = .monthly
     var inputText = ""
-    var todoInfoTappedOption: (Todo, TodoDataSection.TodoSection)?
     
     let output = Output()
     
-    self.todoDeleteEvent
+    self.todoUpdateEvent
       .subscribe(onNext: { [weak self] _ in
-        guard let self = self, let info = todoInfoTappedOption else { return }
-        switch info.1 {
-        case .monthly:
-          let todos = self.monthlyTodos.value.filter { info.0.id != $0.id}
-          self.monthlyTodos.accept(todos)
-        case .daily:
-          let todos = self.dailyTodos.value.filter { info.0.id != $0.id}
-          self.dailyTodos.accept(todos)
-        }
-        self.deleteTodo(todo: info.0)
+        self?.isEditing = true
+        guard let todo = self?.todoTappedOption else { return }
+        output.focusOnTodo.accept(todo) 
       })
       .disposed(by: disposeBag)
-
+    
+    self.todoDeleteEvent
+      .subscribe(onNext: { [weak self] _ in
+        guard let self = self, let todo = self.todoTappedOption else { return }
+        switch todo.type {
+        case .monthly:
+          let todos = self.monthlyTodos.value.filter { todo.id != $0.id}
+          self.monthlyTodos.accept(todos)
+        case .daily:
+          let todos = self.dailyTodos.value.filter { todo.id != $0.id}
+          self.dailyTodos.accept(todos)
+        }
+        self.deleteTodo(todo: todo)
+      })
+      .disposed(by: disposeBag)
+    
     self.bindOutput(output: output, disposeBag: disposeBag)
     
     input.viewWillAppearEvent
@@ -139,7 +149,7 @@ class TodoViewModel {
       .subscribe(onNext: { [weak self] _ in
         guard let self = self else { return }
         guard inputText.count != 0 else { return }
-        let todo = Todo(id: self.dm.getUniqueId(), content: inputText, isDone: false)
+        let todo = Todo(id: self.dm.getUniqueId(), content: inputText, isDone: false, type: type)
         switch type {
         case .monthly:
           self.monthlyTodos.accept(self.monthlyTodos.value + [todo])
@@ -157,7 +167,7 @@ class TodoViewModel {
       .withLatestFrom(self.monthlyTodos) { [weak self] todo, todos in
         todos.map {
           guard $0.id != todo.id else {
-            let updatedTodo = Todo(id: todo.id, content: todo.content, isDone: !todo.isDone)
+            let updatedTodo = Todo(id: todo.id, content: todo.content, isDone: !todo.isDone, type: todo.type)
             self?.updateTodo(todo: updatedTodo)
             return updatedTodo
           }
@@ -171,7 +181,7 @@ class TodoViewModel {
       .withLatestFrom(self.dailyTodos) { [weak self] todo, todos in
         todos.map {
           guard $0.id != todo.id else {
-            let updatedTodo = Todo(id: todo.id, content: todo.content, isDone: !todo.isDone)
+            let updatedTodo = Todo(id: todo.id, content: todo.content, isDone: !todo.isDone, type: todo.type)
             self?.updateTodo(todo: updatedTodo)
             return updatedTodo
           }
@@ -181,17 +191,10 @@ class TodoViewModel {
       .bind(to: self.dailyTodos)
       .disposed(by: disposeBag)
     
-    cellInput.monthyOptionDidTapEvent
-      .subscribe(onNext: { todo in
-        output.showOptionBottomSheet.accept(true)
-        todoInfoTappedOption = (todo, .monthly)
-      })
-      .disposed(by: disposeBag)
-    
-    cellInput.dailyOptionDidTapEvent
-      .subscribe(onNext: { todo in
-        output.showOptionBottomSheet.accept(true)
-        todoInfoTappedOption = (todo, .daily)
+    cellInput.optionDidTap
+      .subscribe(onNext: { [weak self] todo in
+        output.showOptionBottomSheet.accept(())
+        self?.todoTappedOption = todo
       })
       .disposed(by: disposeBag)
     
@@ -201,7 +204,48 @@ class TodoViewModel {
         self.isMonthlyTodosHidden.accept(!self.isMonthlyTodosHidden.value)
       })
       .disposed(by: disposeBag)
- 
+    
+    cellInput.todoDidEditEvent
+      .delay(.milliseconds(100), scheduler: MainScheduler.instance)
+      .subscribe(onNext: { [weak self] content in
+        guard let todo = self?.todoTappedOption else { return }
+        var updatedTodos: [Todo]
+        switch todo.type {
+        case .monthly:
+          let todos = self?.monthlyTodos.value ?? []
+          if content.isEmpty {
+            updatedTodos = todos.filter { $0.id != todo.id }
+          } else {
+            updatedTodos = todos.map {
+              guard $0.id != todo.id else {
+                let updatedTodo = Todo(id: todo.id, content: content, isDone: todo.isDone, type: todo.type)
+                self?.updateTodo(todo: updatedTodo)
+                return updatedTodo
+              }
+              return $0
+            }
+          }
+          self?.monthlyTodos.accept(updatedTodos)
+        case .daily:
+          let todos = self?.dailyTodos.value ?? []
+          if content.isEmpty {
+            updatedTodos = todos.filter { $0.id != todo.id }
+          } else {
+            updatedTodos = todos.map {
+              guard $0.id != todo.id else {
+                let updatedTodo = Todo(id: todo.id, content: content, isDone: todo.isDone, type: todo.type)
+                self?.updateTodo(todo: updatedTodo)
+                return updatedTodo
+              }
+              return $0
+            }
+          }
+          self?.dailyTodos.accept(updatedTodos)
+        }
+        self?.todoTappedOption = nil
+        self?.isEditing = false
+      })
+      .disposed(by: disposeBag)
     
     Observable.zip(self.currentDate, self.currentDate.skip(1))
       .subscribe(onNext: { [weak self] previous, current in
@@ -236,24 +280,22 @@ class TodoViewModel {
       let todos = data.0
       let isHidden = data.1
       return todoDatas.map {
-        guard $0.model != .monthly else {
-          if todos.count == 0 {
-            let items = [TodoDataSection.TodoItem.monthlyEmpty]
+        guard $0.model == .monthly else { return $0 }
+        if todos.count == 0 {
+          let items = [TodoDataSection.TodoItem.monthlyEmpty]
+          let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
+          return sectionModel
+        } else {
+          if isHidden {
+            let items =  Array(todos.map {TodoDataSection.TodoItem.monthly($0) }.prefix(3))
             let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
             return sectionModel
           } else {
-            if isHidden {
-              let items =  Array(todos.map {TodoDataSection.TodoItem.monthly($0) }.prefix(3))
-              let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
-              return sectionModel
-            } else {
-              let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
-              let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
-              return sectionModel
-            }
+            let items = todos.map {TodoDataSection.TodoItem.monthly($0) }
+            let sectionModel = TodoDataSection.Model(model: .monthly, items: items)
+            return sectionModel
           }
         }
-        return $0
       }
     }
     .bind(to: output.todoDatas)
@@ -262,25 +304,21 @@ class TodoViewModel {
     
     dailyTodos.withLatestFrom(output.todoDatas) { todos, todoDatas in
       todoDatas.map {
-        guard $0.model != .daily else {
-          if todos.count == 0 {
-            let items = [TodoDataSection.TodoItem.dailyEmpty]
-            let sectionModel = TodoDataSection.Model(model: .daily, items: items)
-            return sectionModel
-          } else {
-            let items = todos.map {TodoDataSection.TodoItem.daily($0) }
-            let sectionModel = TodoDataSection.Model(model: .daily, items: items)
-            return sectionModel
-          }
+        guard $0.model == .daily else { return $0 }
+        if todos.count == 0 {
+          let items = [TodoDataSection.TodoItem.dailyEmpty]
+          let sectionModel = TodoDataSection.Model(model: .daily, items: items)
+          return sectionModel
+        } else {
+          let items = todos.map {TodoDataSection.TodoItem.daily($0) }
+          let sectionModel = TodoDataSection.Model(model: .daily, items: items)
+          return sectionModel
         }
-        return $0
       }
     }
     .bind(to: output.todoDatas)
     .disposed(by: disposeBag)
   }
-  
-  
   
   private func updateUI(output: Output, dates: [DateItem], selectedDay: Int) {
     output.dateArray.accept(dates)
@@ -290,11 +328,7 @@ class TodoViewModel {
   }
   
   private func updateInputState(output: Output, inputText: String) {
-    if inputText.count == 0 {
-      output.inputState.accept(.empty)
-    } else {
-      output.inputState.accept(.edit)
-    }
+    output.inputState.accept(inputText.count == 0 ? .empty : .edit)
   }
 }
 
@@ -357,8 +391,13 @@ extension TodoViewModel {
 }
 
 extension TodoViewModel {
+  func updateTodoByDelegate() {
+    self.todoUpdateEvent.accept(())
+    Log(self.dailyTodos.value)
+  }
+  
   func deleteTodoByDelegate() {
-    self.todoDeleteEvent.accept(true)
+    self.todoDeleteEvent.accept(())
   }
 }
 

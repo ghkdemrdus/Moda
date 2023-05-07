@@ -77,24 +77,24 @@ extension DateCell {
 extension DateCell {
   func configure(with date: DateItem?) {
     if let date = date {
-      self.dateView.backgroundColor = date.isCurrent ? .dateBg : .white
+      self.dateView.backgroundColor = date.isCurrent ? .todayBg : .clear
       self.dayLabel.text = String(date.date.toDayFormat())
-      self.dayLabel.textColor = date.isCurrent ? .darkBurgundy2 : date.isPrevious ? .previousDate : .followingDate
+      self.dayLabel.textColor = date.isCurrent ? .today : date.isPrevious ? .previousDay : .followingDay
       self.weekdayLabel.text = date.date.toWeedDayFormat()
-      self.weekdayLabel.textColor = date.isCurrent ? .darkBurgundy2 : date.isPrevious ? .previousDate : .followingDate
+      self.weekdayLabel.textColor = date.isCurrent ? .today : date.isPrevious ? .previousDay : .followingDay
       self.updateDayViewBackground(date: date)
     }
   }
   
   func updateDayViewBackground(date: DateItem) {
     if date.isCurrent == true {
-      self.dayView.backgroundColor = .dateBg
+      self.dayView.backgroundColor = .todayBg
       return
     }
     if date.isSelected == true {
       if date.isPrevious == true {
         self.dayView.layer.borderWidth = 1
-        self.dayView.layer.borderColor = UIColor.dateBg.cgColor
+        self.dayView.layer.borderColor = UIColor.previousDayBg.cgColor
       } else {
         self.dayView.backgroundColor = .followingDayBg
       }

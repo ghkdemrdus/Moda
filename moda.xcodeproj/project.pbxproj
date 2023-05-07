@@ -15,8 +15,6 @@
 		4A2FB658291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2FB653291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf */; };
 		4A2FB65C291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB65B291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift */; };
 		4A2FB65F291F27ED007B2686 /* ModaDataSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB65E291F27ED007B2686 /* ModaDataSection.swift */; };
-		4A2FB662291F2BF8007B2686 /* MonthlyTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */; };
-		4A2FB664291F2DDC007B2686 /* DailyTodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */; };
 		4A2FB666291F2EDA007B2686 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB665291F2EDA007B2686 /* UIImage+Extension.swift */; };
 		4A2FB66B291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66A291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift */; };
 		4A2FB66E291FB390007B2686 /* TodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */; };
@@ -29,6 +27,7 @@
 		4A2FB6832921F974007B2686 /* TodoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB6822921F974007B2686 /* TodoInfo.swift */; };
 		4A2FB685292204A3007B2686 /* DailyTodoInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB684292204A3007B2686 /* DailyTodoInfoEntity.swift */; };
 		4A2FB687292204AC007B2686 /* TodoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A2FB686292204AC007B2686 /* TodoEntity.swift */; };
+		4A37F9A22A04D638006B8B25 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A37F9A12A04D638006B8B25 /* TodoCell.swift */; };
 		4A3B04282925E833004F155D /* OptionBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3B04272925E833004F155D /* OptionBottomSheetViewController.swift */; };
 		4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */; };
 		4A5861DC28EBF85100EFBCC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5861DB28EBF85100EFBCC9 /* SceneDelegate.swift */; };
@@ -43,7 +42,6 @@
 		4A58620C28EC394600EFBCC9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620B28EC394600EFBCC9 /* Date+Extension.swift */; };
 		4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58620F28ED0D7A00EFBCC9 /* UIViewController+Preview.swift */; };
 		4A58621228ED13BB00EFBCC9 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621128ED13BB00EFBCC9 /* UICollectionView+Extension.swift */; };
-		4A58621428ED284400EFBCC9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A58621328ED284400EFBCC9 /* Colors.xcassets */; };
 		4A58621628ED291D00EFBCC9 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621528ED291D00EFBCC9 /* UIColor+Extension.swift */; };
 		4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */; };
 		4A58621A28ED645200EFBCC9 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A58621928ED645200EFBCC9 /* TodoViewModel.swift */; };
@@ -63,8 +61,6 @@
 		4A2FB653291E5350007B2686 /* SpoqaHanSansNeo-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Medium.otf"; sourceTree = "<group>"; };
 		4A2FB65B291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCollectionSectionedNonAnimatedDataSource.swift; sourceTree = "<group>"; };
 		4A2FB65E291F27ED007B2686 /* ModaDataSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModaDataSection.swift; sourceTree = "<group>"; };
-		4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoCell.swift; sourceTree = "<group>"; };
-		4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodoCell.swift; sourceTree = "<group>"; };
 		4A2FB665291F2EDA007B2686 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		4A2FB66A291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySectionBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoHeaderView.swift; sourceTree = "<group>"; };
@@ -73,10 +69,11 @@
 		4A2FB6752920D060007B2686 /* MonthlyEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyEmptyCell.swift; sourceTree = "<group>"; };
 		4A2FB6792920D525007B2686 /* DailyEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyEmptyCell.swift; sourceTree = "<group>"; };
 		4A2FB67D292103E8007B2686 /* MonthlyTodoInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodoInfoEntity.swift; sourceTree = "<group>"; };
-		4A2FB68029210BAE007B2686 /* TodoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStorage.swift; sourceTree = "<group>"; };
+		4A2FB68029210BAE007B2686 /* TodoStorage.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TodoStorage.swift; sourceTree = "<group>"; tabWidth = 2; };
 		4A2FB6822921F974007B2686 /* TodoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInfo.swift; sourceTree = "<group>"; };
 		4A2FB684292204A3007B2686 /* DailyTodoInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodoInfoEntity.swift; sourceTree = "<group>"; };
 		4A2FB686292204AC007B2686 /* TodoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntity.swift; sourceTree = "<group>"; };
+		4A37F9A12A04D638006B8B25 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
 		4A3B04272925E833004F155D /* OptionBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionBottomSheetViewController.swift; sourceTree = "<group>"; };
 		4A5861D628EBF85100EFBCC9 /* moda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = moda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A5861D928EBF85100EFBCC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,7 +90,6 @@
 		4A58620B28EC394600EFBCC9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		4A58620F28ED0D7A00EFBCC9 /* UIViewController+Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Preview.swift"; sourceTree = "<group>"; };
 		4A58621128ED13BB00EFBCC9 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
-		4A58621328ED284400EFBCC9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		4A58621528ED291D00EFBCC9 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		4A58621728ED3C9900EFBCC9 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		4A58621928ED645200EFBCC9 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
@@ -139,31 +135,14 @@
 		4A2FB66C291FB371007B2686 /* Todo */ = {
 			isa = PBXGroup;
 			children = (
-				4A2FB6772920D085007B2686 /* Monthly */,
-				4A2FB6782920D088007B2686 /* Daily */,
 				4A2FB66D291FB390007B2686 /* TodoHeaderView.swift */,
 				4A2FB66A291FAD6B007B2686 /* MonthlySectionBackgroundDecorationView.swift */,
 				4AAFE77C28F6B06B00EA6FB4 /* TodoView.swift */,
+				4A2FB6752920D060007B2686 /* MonthlyEmptyCell.swift */,
+				4A2FB6792920D525007B2686 /* DailyEmptyCell.swift */,
+				4A37F9A12A04D638006B8B25 /* TodoCell.swift */,
 			);
 			path = Todo;
-			sourceTree = "<group>";
-		};
-		4A2FB6772920D085007B2686 /* Monthly */ = {
-			isa = PBXGroup;
-			children = (
-				4A2FB661291F2BF8007B2686 /* MonthlyTodoCell.swift */,
-				4A2FB6752920D060007B2686 /* MonthlyEmptyCell.swift */,
-			);
-			path = Monthly;
-			sourceTree = "<group>";
-		};
-		4A2FB6782920D088007B2686 /* Daily */ = {
-			isa = PBXGroup;
-			children = (
-				4A2FB663291F2DDC007B2686 /* DailyTodoCell.swift */,
-				4A2FB6792920D525007B2686 /* DailyEmptyCell.swift */,
-			);
-			path = Daily;
 			sourceTree = "<group>";
 		};
 		4A2FB67B292103A3007B2686 /* Data */ = {
@@ -257,7 +236,6 @@
 			children = (
 				4A5861DF28EBF85100EFBCC9 /* Main.storyboard */,
 				4A5861E228EBF85200EFBCC9 /* Assets.xcassets */,
-				4A58621328ED284400EFBCC9 /* Colors.xcassets */,
 				4A5861E428EBF85200EFBCC9 /* LaunchScreen.storyboard */,
 				4A5861E728EBF85200EFBCC9 /* Info.plist */,
 				4A5861F828EC0B0100EFBCC9 /* Font */,
@@ -391,6 +369,7 @@
 				TargetAttributes = {
 					4A5861D528EBF85100EFBCC9 = {
 						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1400;
 					};
 				};
 			};
@@ -419,7 +398,6 @@
 			files = (
 				4A2FB654291E5350007B2686 /* SpoqaHanSansNeo-Light.otf in Resources */,
 				4A2FB656291E5350007B2686 /* SpoqaHanSansNeo-Bold.otf in Resources */,
-				4A58621428ED284400EFBCC9 /* Colors.xcassets in Resources */,
 				4A2FB657291E5350007B2686 /* SpoqaHanSansNeo-Regular.otf in Resources */,
 				4A5861E628EBF85200EFBCC9 /* LaunchScreen.storyboard in Resources */,
 				4A5861E328EBF85200EFBCC9 /* Assets.xcassets in Resources */,
@@ -480,9 +458,9 @@
 			files = (
 				4A58621A28ED645200EFBCC9 /* TodoViewModel.swift in Sources */,
 				4A2FB66E291FB390007B2686 /* TodoHeaderView.swift in Sources */,
+				4A37F9A22A04D638006B8B25 /* TodoCell.swift in Sources */,
 				4A58620028EC0C7600EFBCC9 /* UIFont+Extension.swift in Sources */,
 				4A58620A28EC360600EFBCC9 /* DateItem.swift in Sources */,
-				4A2FB664291F2DDC007B2686 /* DailyTodoCell.swift in Sources */,
 				4A8F897E28F3ED9500ACE0F1 /* DateView.swift in Sources */,
 				4A58621828ED3C9900EFBCC9 /* UIView+Extension.swift in Sources */,
 				4A2FB65C291F2784007B2686 /* RxCollectionSectionedNonAnimatedDataSource.swift in Sources */,
@@ -490,7 +468,6 @@
 				4A58621028ED0D7A00EFBCC9 /* UIViewController+Preview.swift in Sources */,
 				4AAFE77D28F6B06B00EA6FB4 /* TodoView.swift in Sources */,
 				4A5861DA28EBF85100EFBCC9 /* AppDelegate.swift in Sources */,
-				4A2FB662291F2BF8007B2686 /* MonthlyTodoCell.swift in Sources */,
 				4A2FB6762920D060007B2686 /* MonthlyEmptyCell.swift in Sources */,
 				4A2FB687292204AC007B2686 /* TodoEntity.swift in Sources */,
 				4A2FB666291F2EDA007B2686 /* UIImage+Extension.swift in Sources */,
@@ -658,8 +635,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1.0.1.2;
 				DEVELOPMENT_TEAM = 79K7D639YK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moda/Resource/Info.plist;
@@ -672,13 +650,14 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pinto.moda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -690,8 +669,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.0.0;
+				CURRENT_PROJECT_VERSION = 1.0.1.2;
 				DEVELOPMENT_TEAM = 79K7D639YK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = moda/Resource/Info.plist;
@@ -704,7 +684,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pinto.moda;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

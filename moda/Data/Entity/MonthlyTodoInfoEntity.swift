@@ -16,7 +16,7 @@ class MonthlyTodoInfoEntity: Object {
 
 extension MonthlyTodoInfoEntity {
   func asDomain() -> [Todo] {
-    return monthlyTodos.map { $0.asDomain() }
+    return monthlyTodos.map { $0.asDomainToMonthly() }
   }
 }
 

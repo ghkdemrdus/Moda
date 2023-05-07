@@ -21,7 +21,7 @@ class DateView: UICollectionView {
 
 private extension DateView {
   func configureUI() {
-    self.backgroundColor = .white
+    self.backgroundColor = .bg
     self.collectionViewLayout = self.createCompositionalLayout()
     self.register(DateCell.self, forCellWithReuseIdentifier: String(describing: DateCell.self))
     

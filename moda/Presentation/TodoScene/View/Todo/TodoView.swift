@@ -32,9 +32,8 @@ class TodoView: UICollectionView {
     self.backgroundColor = .clear
     self.clipsToBounds = true
     self.register(TodoHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader)
-    self.register(MonthlyTodoCell.self)
+    self.register(TodoCell.self)
     self.register(MonthlyEmptyCell.self)
-    self.register(DailyTodoCell.self)
     self.register(DailyEmptyCell.self)
   }
   

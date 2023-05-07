@@ -20,23 +20,36 @@ class OptionBottomSheetViewController: UIViewController {
   }
   
   private let bottomSheetView = UIView().then {
-    $0.backgroundColor = .white
+    $0.backgroundColor = .bg
     $0.layer.cornerRadius = 14
     $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     $0.clipsToBounds = true
   }
   
-  private let deleteButton = UIButton().then {
-    $0.setTitle("삭제", for: .normal)
-    $0.setTitleColor(.darkBurgundy2, for: .normal)
-    $0.titleLabel?.font = .spoqaHanSansNeo(type: .medium, size: 17)
-    $0.contentHorizontalAlignment = .left
-    $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 0)
+  private lazy var buttonStackView = UIStackView().then {
+    $0.addArrangedSubview(self.updateButton)
+    $0.addArrangedSubview(self.deleteButton)
+    $0.axis = .vertical
   }
   
-  let bottomHeight: CGFloat = 66
-  private var bottomSheetViewTopConstraint: NSLayoutConstraint!
-  let disposeBag = DisposeBag()
+  private let updateButton = UIButton().then {
+    $0.setTitle("수정", for: .normal)
+    $0.setTitleColor(.todo, for: .normal)
+    $0.titleLabel?.font = .spoqaHanSansNeo(type: .medium, size: 17)
+    $0.contentHorizontalAlignment = .left
+    $0.contentEdgeInsets = UIEdgeInsets(top: 16, left: 25, bottom: 16, right: 0)
+  }
+  
+  private let deleteButton = UIButton().then {
+    $0.setTitle("삭제", for: .normal)
+    $0.setTitleColor(.todo, for: .normal)
+    $0.titleLabel?.font = .spoqaHanSansNeo(type: .medium, size: 17)
+    $0.contentHorizontalAlignment = .left
+    $0.contentEdgeInsets = UIEdgeInsets(top: 16, left: 25, bottom: 16, right: 0)
+  }
+  
+  private let bottomHeight: CGFloat = 122
+  private let disposeBag = DisposeBag()
   
   // MARK: - View Life Cycle
   override func viewDidLoad() {
@@ -48,8 +61,8 @@ class OptionBottomSheetViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    
-    showBottomSheet()
+
+    self.showBottomSheet()
   }
   
   private func configureUI() {
@@ -64,22 +77,25 @@ class OptionBottomSheetViewController: UIViewController {
     self.view.addSubview(self.bottomSheetView)
     self.bottomSheetView.snp.makeConstraints {
       $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(topConstant)
-      $0.bottom.left.right.equalToSuperview()
-      $0.height.equalTo(self.bottomHeight + self.view.safeAreaInsets.bottom)
+      $0.bottom.equalToSuperview().priority(.low)
+      $0.left.right.equalToSuperview()
     }
     
-    self.bottomSheetView.translatesAutoresizingMaskIntoConstraints = false
-    self.bottomSheetView.addSubview(self.deleteButton)
-    self.deleteButton.snp.makeConstraints {
+    self.bottomSheetView.addSubview(self.buttonStackView)
+    self.buttonStackView.snp.makeConstraints {
       $0.top.equalToSuperview().offset(14)
       $0.left.right.equalToSuperview()
-      $0.height.equalTo(42)
     }
-    
-    
   }
   
   private func bindUI() {
+    self.updateButton.rx.tap
+      .subscribe(onNext: { [weak self] in
+        self?.delegate?.updateTodo()
+        self?.hideBottomSheet()
+      })
+      .disposed(by: self.disposeBag)
+    
     self.deleteButton.rx.tap
       .subscribe(onNext: { [weak self] in
         self?.delegate?.deleteTodo()
@@ -147,5 +163,6 @@ class OptionBottomSheetViewController: UIViewController {
 }
 
 protocol BottomSheetDismissDelegate: AnyObject {
+  func updateTodo()
   func deleteTodo()
 }
