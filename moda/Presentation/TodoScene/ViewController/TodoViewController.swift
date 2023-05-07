@@ -224,6 +224,13 @@ extension TodoViewController {
             })
             .disposed(by: cell.disposeBag)
           cell.rx.tapOption
+            .filter { [weak self] _ in 
+              if self?.viewModel.isEditing == true {
+                self?.viewModel.isEditing.toggle()
+                return false
+              } 
+              return true
+            }
             .subscribe(onNext: {
               optionDidTap.accept(todo)
             })
