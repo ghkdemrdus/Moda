@@ -25,4 +25,10 @@ extension UIImage {
   // MARK: - Input
   static let inputInactive = UIImage(named: "imgHomeInputTypeInactive")
   
+  // MARK: - Notice
+  static let imgPromotionWidget = UIImage(named: "img_promotion_widget")
+  static let repair = UIImage(named: "iconRepair")
+
+  // MARK: - Common
+  static let close = UIImage(named: "iconClose")
 }

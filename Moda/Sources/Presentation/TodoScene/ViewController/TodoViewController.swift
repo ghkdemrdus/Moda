@@ -16,7 +16,8 @@ import RxDataSources
 
 class TodoViewController: UIViewController {
 
-  //MARK: - UI
+  //MARK: - UI Components
+
   private let leftArrowButton =  UIButton().then {
     $0.setImage(UIImage(named: "iconArrowLeft"), for: .normal)
     $0.contentMode = .scaleAspectFill
@@ -75,13 +76,72 @@ class TodoViewController: UIViewController {
     $0.backgroundColor = .inputBg
     $0.returnKeyType = .done
   }
-  
+
   private let registerButton = UIButton()
   private let dateCollectionView = DateView().then {
     $0.showsHorizontalScrollIndicator = false
   }
   private lazy var todoCollectionView = TodoView(todoDataSource: self.todoDataSource)
   private let bottomInputView = UIView().then { $0.backgroundColor = .bg }
+
+  private let noticeContainer = UIView().then {
+    $0.backgroundColor = .black.withAlphaComponent(0.6)
+  }
+
+  private let noticeView = UIView().then {
+    $0.backgroundColor = .noticeBg
+    $0.layer.cornerRadius = 24
+  }
+
+  private let noticeCloseButton = UIButton().then {
+    $0.setImage(.close, for: .normal)
+  }
+
+  private let noticeImageView = UIImageView().then {
+    $0.image = .imgPromotionWidget
+    $0.contentMode = .scaleAspectFit
+  }
+
+  private let noticeLabel = UILabel().then {
+    $0.text = "여러분의 사랑으로 드디어 위젯이 나왔어요!\n위젯을 추가하고, MODA와 더 자주 만나요!"
+    $0.textColor = .noticeText
+    $0.textAlignment = .center
+    $0.font = .spoqaHanSansNeo(type: .medium, size: 14)
+    $0.numberOfLines = 0
+  }
+
+  private let noticeWarningView = UIView().then {
+    $0.backgroundColor = .noticeTextBg
+    $0.layer.cornerRadius = 12
+  }
+
+  private let noticeWarningStackView = UIStackView().then {
+    $0.axis = .horizontal
+    $0.spacing = 4
+  }
+
+  private let noticeWarningImageView = UIImageView().then {
+    $0.image = .repair
+    $0.contentMode = .scaleAspectFit
+  }
+
+  private let noticeWarningLabel = UILabel().then {
+    $0.text = "다음 기능들도 얼른 출시할테니 기다려 주세요!"
+    $0.textColor = .noticeText
+    $0.font = .spoqaHanSansNeo(type: .medium, size: 12)
+    $0.textAlignment = .center
+    $0.layer.cornerRadius = 12
+    $0.backgroundColor = .noticeTextBg
+  }
+
+  private let noticeConfirmButton = UIButton().then {
+    $0.setTitle("좋아요!", for: .normal)
+    $0.setTitleColor(.white, for: .normal)
+    $0.titleLabel?.font = .spoqaHanSansNeo(type: .bold, size: 16)
+    $0.layer.cornerRadius = 12
+    $0.backgroundColor = .noticeButtonBg
+  }
+
   private let todoDidEdit = PublishRelay<Todo>()
   private let todoEndEdit = PublishRelay<Todo>()
   private let hideKeyboard = PublishRelay<Void>()
@@ -200,6 +260,62 @@ extension TodoViewController {
       $0.top.equalTo(self.dateCollectionView.snp.bottom).offset(18)
       $0.bottom.equalTo(self.bottomInputView.snp.top)
       $0.left.right.equalToSuperview().inset(16)
+    }
+
+    // MARK: - Notice
+    let didShowWidgetNotice = UserDefaults.standard.bool(forKey: "didShowWidgetNotice")
+    if !didShowWidgetNotice {
+      self.view.addSubview(self.noticeContainer)
+      self.noticeContainer.snp.makeConstraints {
+        $0.edges.equalToSuperview()
+      }
+      
+      self.noticeContainer.addSubview(self.noticeView)
+      self.noticeView.snp.makeConstraints {
+        $0.centerY.equalToSuperview()
+        $0.leading.trailing.equalToSuperview().inset(35)
+      }
+
+      self.noticeView.addSubview(self.noticeCloseButton)
+      self.noticeCloseButton.snp.makeConstraints {
+        $0.top.leading.equalToSuperview().offset(16)
+        $0.size.equalTo(24)
+      }
+
+      self.noticeView.addSubview(self.noticeImageView)
+      self.noticeImageView.snp.makeConstraints {
+        $0.top.equalTo(self.noticeCloseButton.snp.bottom)
+        $0.leading.trailing.equalToSuperview()
+      }
+
+      self.noticeView.addSubview(self.noticeLabel)
+      self.noticeLabel.snp.makeConstraints {
+        $0.leading.trailing.equalToSuperview().inset(16)
+        $0.top.equalTo(self.noticeImageView.snp.bottom).offset(16)
+      }
+
+      self.noticeView.addSubview(self.noticeWarningView)
+      self.noticeWarningView.snp.makeConstraints {
+        $0.top.equalTo(self.noticeLabel.snp.bottom).offset(12)
+        $0.leading.trailing.equalToSuperview().inset(16)
+        $0.height.equalTo(40)
+      }
+
+      self.noticeWarningView.addSubview(self.noticeWarningStackView)
+      self.noticeWarningStackView.snp.makeConstraints {
+        $0.center.equalToSuperview()
+      }
+
+      self.noticeWarningStackView.addArrangedSubview(self.noticeWarningImageView)
+      self.noticeWarningStackView.addArrangedSubview(self.noticeWarningLabel)
+
+      self.noticeView.addSubview(self.noticeConfirmButton)
+      self.noticeConfirmButton.snp.makeConstraints {
+        $0.top.equalTo(self.noticeWarningView.snp.bottom).offset(16)
+        $0.bottom.equalToSuperview().offset(-16)
+        $0.leading.trailing.equalToSuperview().inset(16)
+        $0.height.equalTo(48)
+      }
     }
   }
   
@@ -322,6 +438,10 @@ extension TodoViewController {
       nextButtonDidTapEvent: self.rightArrowButton.rx.tap.asObservable(),
       monthlyButtonDidTapEvent: self.monthlyButton.rx.tap.asObservable(),
       dailyButtonDidTapEvent: self.dailyButton.rx.tap.asObservable(),
+      noticeCloseDidTapEvent: Observable.merge(
+        self.noticeCloseButton.rx.tap.asObservable(),
+        self.noticeConfirmButton.rx.tap.asObservable()
+      ),
       inputTextFieldDidEditEvent: self.inputTextField.rx.text.orEmpty.asObservable(),
       keyboardDoneKeyDidTapEvent: self.inputTextField.rx.controlEvent([.editingDidEndOnExit]).asObservable(),
       registerButtonDidTapEvent: self.registerButton.rx.tap.asObservable()
@@ -331,6 +451,7 @@ extension TodoViewController {
     self.bindDateArray(output: output)
     self.bindTodos(output: output)
     self.bindInput(output: output)
+    self.bindNotice(output: output)
   }
   
   func bindDateArray(output: TodoViewModel.Output?) {
@@ -412,6 +533,15 @@ extension TodoViewController {
       .drive(onNext: { [weak self] _ in
         self?.inputTextField.text = ""
         self?.view.endEditing(true)
+      })
+      .disposed(by: self.disposeBag)
+  }
+
+  func bindNotice(output: TodoViewModel.Output?) {
+    output?.closeNotice
+      .asDriver(onErrorJustReturn: ())
+      .drive(onNext: { [weak self] in
+        self?.noticeContainer.isHidden = true
       })
       .disposed(by: self.disposeBag)
   }

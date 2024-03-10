@@ -9,5 +9,7 @@ import WidgetKit
 
 struct ModaDailyEntry: TimelineEntry {
   var date: Date
+  let totalCount: Int
+  let doneCount: Int
   let dailyTodos: [Todo]
 }

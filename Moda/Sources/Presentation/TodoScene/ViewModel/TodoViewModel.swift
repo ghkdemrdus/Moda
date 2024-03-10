@@ -19,6 +19,7 @@ class TodoViewModel {
     let nextButtonDidTapEvent: Observable<Void>
     let monthlyButtonDidTapEvent: Observable<Void>
     let dailyButtonDidTapEvent: Observable<Void>
+    let noticeCloseDidTapEvent: Observable<Void>
     let inputTextFieldDidEditEvent: Observable<String>
     let keyboardDoneKeyDidTapEvent: Observable<Void>
     let registerButtonDidTapEvent: Observable<Void>
@@ -43,6 +44,7 @@ class TodoViewModel {
     var inputState = BehaviorRelay<InputState>(value: .empty)
     var completeRegister = PublishRelay<Bool>()
     var focusOnTodo = PublishRelay<Todo>()
+    var closeNotice = PublishRelay<Void>()
   }
   
   private let dm = DateManager()
@@ -135,7 +137,14 @@ class TodoViewModel {
         type = .daily
       })
       .disposed(by: disposeBag)
-    
+
+    input.noticeCloseDidTapEvent
+      .subscribe(onNext: {
+        output.closeNotice.accept(())
+        UserDefaults.standard.set(true, forKey: "didShowWidgetNotice")
+      })
+      .disposed(by: disposeBag)
+
     input.inputTextFieldDidEditEvent
       .distinctUntilChanged()
       .subscribe(onNext: { [weak self] input in

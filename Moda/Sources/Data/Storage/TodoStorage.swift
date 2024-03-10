@@ -19,10 +19,13 @@ final class TodoStorage {
     let config = Realm.Configuration(fileURL: path, schemaVersion: 2)
 
     self.realm = try! Realm(configuration: config)
-//    migration()
+    migrationIfNeeded()
   }
 
-  private func migration() {
+  private func migrationIfNeeded() {
+    let didMigrate = UserDefaults.standard.bool(forKey: "didMigrate")
+    guard !didMigrate else { return }
+
     let oldRealm = try! Realm()
     let dailyTodos = oldRealm.objects(DailyTodoInfoEntity.self)
     let monthlyTodos = oldRealm.objects(MonthlyTodoInfoEntity.self)
@@ -40,6 +43,8 @@ final class TodoStorage {
         self.addMonthlyTodo(date: date, todo: todo)
       }
     }
+
+    UserDefaults.standard.set(true, forKey: "didMigrate")
   }
 
   func fetchMonthlyTodos(date: Date) -> Observable<[Todo]?> {

@@ -27,6 +27,10 @@ extension UIColor {
   static var todayBg: UIColor { named("TodayBg") }
   static var todo: UIColor { named("Todo") }
   static var todoTitle: UIColor { named("TodoTitle") }
+  static var noticeBg: UIColor { named("noticeBg") }
+  static var noticeText: UIColor { named("noticeText") }
+  static var noticeButtonBg: UIColor { named("noticeButtonBg") }
+  static var noticeTextBg: UIColor { named("noticeTextBg") }
 
   private static func named(_ name: String) -> UIColor {
     return UIColor(named: name) ?? .white

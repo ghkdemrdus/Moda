@@ -16,7 +16,7 @@ extension Font {
     case thin = "Thin"
   }
 
-  static func spoqaHans(size: CGFloat, weight: SpoqaHanSansWeight = .regular) -> Font {
+  static func spoqaHans(size: CGFloat, weight: SpoqaHanSansWeight = .medium) -> Font {
     return Font.custom("SpoqaHanSansNeo-\(weight.rawValue)", size: size)
   }
 }
