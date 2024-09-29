@@ -1,0 +1,24 @@
+import ProjectDescription
+import ProjectDescriptionHelpers
+
+let project = Project(
+    name: Module.App.moda.name,
+    organizationName: Module.organization,
+    options: .options(
+        textSettings: .textSettings(usesTabs: false, indentWidth: 2, tabWidth: 2, wrapsLines: true)
+    ),
+    settings: .defaultProject,
+    targets: [
+        .app(
+            implementation: .moda,
+            dependencies: [
+                .core(implementation: .core),
+                .core(implementation: .resource),
+//                .thirdParty(.kingfisher),
+                .thirdParty(.composableArchitecture)
+            ]
+        )
+    ],
+    schemes: Scheme.default,
+    resourceSynthesizers: []
+)

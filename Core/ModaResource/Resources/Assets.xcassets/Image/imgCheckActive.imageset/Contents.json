@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "type=common, state=actvie.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
