@@ -50,14 +50,14 @@ private extension HomeDailyTodoItemView {
 // MARK: - Previews
 
 #Preview("1줄인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodo", isDone: true, type: .daily)
+  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodo", isDone: true, category: .daily)
 
   HomeDailyTodoItemView(todo: $todo)
     .loadCustomFonts()
 }
 
 #Preview("2줄 이상인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodo", isDone: true, type: .daily)
+  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodo", isDone: true, category: .daily)
 
   HomeDailyTodoItemView(todo: $todo)
     .loadCustomFonts()

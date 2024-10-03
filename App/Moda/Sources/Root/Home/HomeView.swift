@@ -7,27 +7,33 @@
 
 import SwiftUI
 import ComposableArchitecture
+import SwiftData
 
 @ViewAction(for: Home.self)
 struct HomeView: View {
 
   @Bindable var store: StoreOf<Home>
 
-  @State private var isMonthlyFolded = true
-  @State private var isMonthlyEditing = false
-  @State private var isDailyEditing = false
-  @State private var isDeleteTodoBottomSheetPresented = false
-  @State private var isDelayTodoBottomSheetPresented = false
-  @State private var deletingTodo: Todo?
+  @Environment(\.modelContext) var modelContext
+  @Query var monthlyTodosList: [MonthlyTodos]
+  @Query var dailyTodosList: [DailyTodos]
 
   @Namespace private var monthlyAnimationNamespace
   @Namespace private var dailyAnimationNamespace
 
   var body: some View {
     content
-      .animation(.spring, value: isMonthlyEditing)
-      .animation(.spring, value: isDailyEditing)
-      .animation(.spring, value: isDeleteTodoBottomSheetPresented)
+      .animation(.spring(duration: 0.4), value: store.isMonthlyEditing)
+      .animation(.spring(duration: 0.4), value: store.isDailyEditing)
+      .onChange(of: store.monthlyTodos) {
+        updateLocalData(monthlyTodos: $1)
+      }
+      .onChange(of: store.dailyTodos) {
+        updateLocalData(dailyTodos: $1)
+      }
+      .onChange(of: store.currentDate, initial: true) {
+        changeTodos(with: $1)
+      }
   }
 }
 
@@ -42,61 +48,63 @@ private extension HomeView {
           send(.monthChanged($0))
         }
       )
-      .blur(radius: isMonthlyEditing || isDailyEditing ? 1.2 : 0)
 
-      HomeDateSelectorView(dates: store.dates, currentDate: $store.currentDate)
-        .padding(.top, 12)
-        .blur(radius: isMonthlyEditing || isDailyEditing ? 1.2 : 0)
+      HomeDateSelectorView(
+        dates: store.dates,
+        currentDate: $store.currentDate
+      )
+      .padding(.top, 12)
 
       ScrollView {
         LazyVStack(spacing: 24) {
           HomeMonthlyTodoView(
-            isFolded: $isMonthlyFolded,
+            isFolded: $store.isMonthlyFolded,
             todos: $store.monthlyTodos,
             onTapEdit: {
-              isMonthlyEditing = true
+              hideKeyboard()
+              send(.monthlyEditTapped)
             }
           )
-          .opacity(isMonthlyEditing || isDailyEditing ? 0 : 1)
           .matchedGeometryEffect(id: "Monthly", in: monthlyAnimationNamespace, anchor: .top)
 
           HomeDailyTodoView(
             todos: $store.dailyTodos,
             onTapEdit: {
-              isDailyEditing = true
+              hideKeyboard()
+              send(.dailyEditTapped)
             }
           )
-          .opacity(isMonthlyEditing || isDailyEditing ? 0 : 1)
           .matchedGeometryEffect(id: "Daily", in: dailyAnimationNamespace, anchor: .top)
         }
+        .opacity(store.isEditing ? 0 : 1)
         .padding(.vertical, 16)
-        .animation(.spring, value: isMonthlyFolded)
+        .animation(.spring(duration: 0.4), value: store.isMonthlyFolded)
       }
 
       if store.editingTodo == nil {
         HomeInputView(onTapAdd: {
           send(.todoAdded($0, $1))
         })
-        .blur(radius: isMonthlyEditing || isDailyEditing ? 1.2 : 0)
       }
     }
     .background(Color.backgroundPrimary)
-    .overlay(if: isMonthlyEditing) {
+    .blur(radius: store.isEditing ? 1.2 : 0)
+    .overlay(if: store.isMonthlyEditing) {
       VStack(spacing: 0) {
         Color.clear.frame(height: 132)
 
         HomeMonthlyTodoEditView(
           todos: $store.monthlyTodos,
           onTapDone: {
-            isMonthlyEditing = false
+            store.isMonthlyEditing = false
           },
           onTapDelete: {
-            deletingTodo = $0
-            isDeleteTodoBottomSheetPresented = true
+            store.editingTodo = $0
+            store.isDeleteTodoBottomSheetPresented = true
           },
           onTapDelay: {
-            deletingTodo = $0
-            isDelayTodoBottomSheetPresented = true
+            store.editingTodo = $0
+            store.isDelayTodoBottomSheetPresented = true
           }
         )
         .matchedGeometryEffect(id: "Monthly", in: monthlyAnimationNamespace, anchor: .top)
@@ -107,26 +115,26 @@ private extension HomeView {
         Color.backgroundPrimary.opacity(0.5)
           .ignoresSafeArea()
           .onTapGesture {
-            isMonthlyEditing = false
+            store.isMonthlyEditing = false
           }
       }
     }
-    .overlay(if: isDailyEditing) {
+    .overlay(if: store.isDailyEditing) {
       VStack(spacing: 0) {
         Color.clear.frame(height: 132)
 
         HomeDailyTodoEditView(
           todos: $store.dailyTodos,
           onTapDone: {
-            isDailyEditing = false
+            store.isDailyEditing = false
           },
           onTapDelete: {
-            deletingTodo = $0
-            isDeleteTodoBottomSheetPresented = true
+            store.editingTodo = $0
+            store.isDeleteTodoBottomSheetPresented = true
           },
           onTapDelay: {
-            deletingTodo = $0
-            isDelayTodoBottomSheetPresented = true
+            store.editingTodo = $0
+            store.isDelayTodoBottomSheetPresented = true
           }
         )
         .matchedGeometryEffect(id: "Daily", in: dailyAnimationNamespace, anchor: .top)
@@ -137,15 +145,15 @@ private extension HomeView {
         Color.backgroundPrimary.opacity(0.5)
           .ignoresSafeArea()
           .onTapGesture {
-            isDailyEditing = false
+            store.isDailyEditing = false
           }
       }
     }
     .overlay {
       HomeDeleteTodoBottomSheet(
-        isPresented: $isDeleteTodoBottomSheetPresented,
-        todo: deletingTodo,
-        onTapDelete: { 
+        isPresented: $store.isDeleteTodoBottomSheetPresented,
+        todo: store.editingTodo,
+        onTapDelete: {
           send(.todoDeleted($0))
         }
       )
@@ -153,14 +161,66 @@ private extension HomeView {
     }
     .overlay {
       HomeDelayTodoBottomSheet(
-        isPresented: $isDelayTodoBottomSheetPresented,
-        todo: deletingTodo,
-        onTapDelete: {
-          send(.todoDeleted($0))
+        isPresented: $store.isDelayTodoBottomSheetPresented,
+        todo: store.editingTodo,
+        onTapConfirm: {
+          delayTodo(todo: $0, date: $1)
+          send(.todoDelayed($0, $1))
         }
       )
       .ignoresSafeArea()
     }
+  }
+}
+
+// MARK: - Properties & Methods
+
+private extension HomeView {
+  func updateLocalData(monthlyTodos: [Todo]) {
+    let id = store.currentDate.date.format(.monthlyId)
+    if let todoIdx = monthlyTodosList.firstIndex(where: { $0.id == id }) {
+      monthlyTodosList[todoIdx].todos = monthlyTodos
+    } else {
+      modelContext.insert(MonthlyTodos(id: id, todos: monthlyTodos))
+    }
+  }
+
+  func updateLocalData(dailyTodos: [Todo]) {
+    let id = store.currentDate.date.format(.dailyId)
+    if let todoIdx = dailyTodosList.firstIndex(where: { $0.id == id }) {
+      dailyTodosList[todoIdx].todos = dailyTodos
+    } else {
+      modelContext.insert(DailyTodos(id: id, todos: dailyTodos))
+    }
+  }
+
+  func delayTodo(todo: Todo, date: Date) {
+    switch todo.category {
+    case .monthly:
+      let id = date.format(.monthlyId)
+      if let todoIdx = monthlyTodosList.firstIndex(where: { $0.id == id }) {
+        monthlyTodosList[todoIdx].todos.append(todo)
+      } else {
+        modelContext.insert(MonthlyTodos(id: id, todos: [todo]))
+      }
+
+    case .daily:
+      let id = date.format(.dailyId)
+      if let todoIdx = dailyTodosList.firstIndex(where: { $0.id == id }) {
+        dailyTodosList[todoIdx].todos.append(todo)
+      } else {
+        modelContext.insert(DailyTodos(id: id, todos: [todo]))
+      }
+    }
+  }
+
+  func changeTodos(with currentDate: HomeDate) {
+    let monthlyId = currentDate.date.format(.monthlyId)
+    let dailyId = currentDate.date.format(.dailyId)
+    let monthlyTodo = monthlyTodosList.first { $0.id == monthlyId }
+    let dailyTodo = dailyTodosList.first { $0.id == dailyId }
+    send(.monthlyTodosUpdated(monthlyTodo?.todos ?? []))
+    send(.dailyTodosUpdated(dailyTodo?.todos ?? []))
   }
 }
 

@@ -6,26 +6,29 @@
 //  Copyright © 2024 Moda. All rights reserved.
 //
 
-public struct Todo: Identifiable, Equatable {
+import SwiftData
 
-  public enum `Type` {
+@Model
+public class Todo: Identifiable, Equatable, Hashable {
+
+  public enum Category: String, Codable {
     case monthly
     case daily
   }
 
-  public let id: String
+  @Attribute(.unique) public var id: String
   public var content: String
   public var isDone: Bool
-  public let type: `Type`
+  public var category: Category
 
-  public init(id: String, content: String, isDone: Bool, type: `Type`) {
+  public init(id: String, content: String, isDone: Bool, category: Category) {
     self.id = id
     self.content = content
     self.isDone = isDone
-    self.type = type
+    self.category = category
   }
-
-  public static func == (lhs: Self, rhs: Self) -> Bool {
-    lhs.id == rhs.id
-  }
+//
+//  public static func == (lhs: Self, rhs: Self) -> Bool {
+//    lhs.id == rhs.id
+//  }
 }

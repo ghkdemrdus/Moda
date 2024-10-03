@@ -39,6 +39,7 @@ private extension HomeMonthlyTodoEditItemView {
         .foregroundStyle(Color.textSecondary)
         .frame(maxWidth: .infinity, alignment: .leading)
         .underline()
+        .submitLabel(.done)
 
       PlainButton(
         action: {

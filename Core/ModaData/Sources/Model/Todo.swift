@@ -29,7 +29,7 @@ public struct Todo: Identifiable, Equatable {
 
 public extension Todo {
   func toEntity() -> TodoEntity {
-    TodoEntity(todoId: id, content: content, isDone: isDone)
+    TodoEntity(id: id, content: content, isDone: isDone)
   }
 }
 

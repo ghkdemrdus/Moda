@@ -5,16 +5,23 @@
 //  Created by 황득연 on 2022/11/14.
 //
 
-import RealmSwift
+import SwiftData
 
-class DailyTodosEntity: Object {
-  @Persisted(primaryKey: true) var id: ObjectId
-  @Persisted var date: String = ""
-  @Persisted var dailyTodos = List<TodoEntity>()
-}
+@Model
+class DailyTodos {
+  @Attribute(.unique) var id: String
+  var date: String
+  var dailyTodos: [Todo]
 
-extension DailyTodosEntity {
-  func asDomain() -> [Todo] {
-    return dailyTodos.map { $0.asDomainToDaily() }
+  init(id: String, date: String, dailyTodos: [Todo]) {
+    self.id = id
+    self.date = date
+    self.dailyTodos = dailyTodos
   }
 }
+
+//extension DailyTodosEntity {
+//  func asDomain() -> [Todo] {
+//    return dailyTodos.map { $0.asDomainToDaily() }
+//  }
+//}

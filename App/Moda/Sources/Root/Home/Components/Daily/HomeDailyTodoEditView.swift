@@ -25,6 +25,11 @@ struct HomeDailyTodoEditView: View {
 
   var body: some View {
     content
+      .onChange(of: todos) {
+        if $1.count == 0 {
+          onTapDone()
+        }
+      }
   }
 }
 
@@ -51,7 +56,7 @@ private extension HomeDailyTodoEditView {
       .padding(.horizontal, 20.5)
 
       ScrollView {
-        LazyVStack(spacing: 0) {
+        VStack(spacing: 0) {
           ForEach(Array(todos.enumerated()), id: \.element.id) { idx, todo in
             HomeDailyTodoEditItemView(
               idx: idx,
@@ -67,7 +72,7 @@ private extension HomeDailyTodoEditView {
           }
         }
         .onChangeSize {
-          height = min($0.height, 500)
+          height = min($0.height, UIScreen.heightExceptSafeArea - 222)
         }
         .onChangePosition {
           offsetY = $0
@@ -89,7 +94,7 @@ private extension HomeDailyTodoEditView {
             updateDragging: { _ in },
             endDragging: {}
           )
-          .offset(y: limitedDragOffset() + offsetY)
+          .offset(y: min(limitedDragOffset() + offsetY, UIScreen.heightExceptSafeArea - 222))
           .zIndex(1)
         }
       }
@@ -141,11 +146,11 @@ private extension HomeDailyTodoEditView {
 
 #Preview(traits: .sizeThatFitsLayout) {
   @Previewable @State var todos: [Todo] = [
-    .init(id: "1", content: "Todo1", isDone: true, type: .monthly),
-    .init(id: "2", content: "Todo2", isDone: true, type: .monthly),
-    .init(id: "3", content: "Todo3", isDone: false, type: .monthly),
-    .init(id: "4", content: "Todo4", isDone: false, type: .monthly),
-    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, type: .monthly)
+    .init(id: "1", content: "Todo1", isDone: true, category: .monthly),
+    .init(id: "2", content: "Todo2", isDone: true, category: .monthly),
+    .init(id: "3", content: "Todo3", isDone: false, category: .monthly),
+    .init(id: "4", content: "Todo4", isDone: false, category: .monthly),
+    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .monthly)
   ]
 
   HomeDailyTodoEditView(

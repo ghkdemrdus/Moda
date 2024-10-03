@@ -8,19 +8,13 @@
 import SwiftData
 
 @Model
-class MonthlyTodosEntity {
+class MonthlyTodos {
   @Attribute(.unique) var id: String
-  var date: String
-  var monthlyTodos: [TodoEntity]
+  @Relationship var todos: [Todo]
 
-  init(
-    id: String,
-    date: String,
-    monthlyTodos: [TodoEntity]
-  ) {
+  init(id: String, todos: [Todo]) {
     self.id = id
-    self.date = date
-    self.monthlyTodos = monthlyTodos
+    self.todos = todos
   }
 }
 

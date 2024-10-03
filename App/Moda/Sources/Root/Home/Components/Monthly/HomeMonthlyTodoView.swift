@@ -17,7 +17,7 @@ struct HomeMonthlyTodoView: View {
 
   var body: some View {
     content
-      .animation(.spring, value: isFolded)
+      .animation(.spring(duration: 0.4), value: isFolded)
   }
 }
 
@@ -102,8 +102,8 @@ private extension HomeMonthlyTodoView {
 #Preview("투두가 3개 이하인 경우", traits: .sizeThatFitsLayout) {
   @Previewable @State var isFolded = false
   @Previewable @State var todos: [Todo] = [
-    .init(id: "1", content: "Todo1", isDone: true, type: .monthly),
-    .init(id: "2", content: "Todo2", isDone: true, type: .monthly)
+    .init(id: "1", content: "Todo1", isDone: true, category: .monthly),
+    .init(id: "2", content: "Todo2", isDone: true, category: .monthly)
   ]
 
   HomeMonthlyTodoView(
@@ -117,11 +117,11 @@ private extension HomeMonthlyTodoView {
 #Preview("투두가 3개 이상인 경우", traits: .sizeThatFitsLayout) {
   @Previewable @State var isFolded: Bool = true
   @Previewable @State var todos: [Todo] = [
-    .init(id: "1", content: "Todo1", isDone: true, type: .monthly),
-    .init(id: "2", content: "Todo2", isDone: true, type: .monthly),
-    .init(id: "3", content: "Todo3", isDone: false, type: .monthly),
-    .init(id: "4", content: "Todo4", isDone: false, type: .monthly),
-    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, type: .monthly)
+    .init(id: "1", content: "Todo1", isDone: true, category: .monthly),
+    .init(id: "2", content: "Todo2", isDone: true, category: .monthly),
+    .init(id: "3", content: "Todo3", isDone: false, category: .monthly),
+    .init(id: "4", content: "Todo4", isDone: false, category: .monthly),
+    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .monthly)
   ]
 
   HomeMonthlyTodoView(

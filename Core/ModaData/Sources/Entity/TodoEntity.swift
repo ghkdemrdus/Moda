@@ -1,22 +1,20 @@
 //
-//  TodoEntity.swift
-//  moda
+//  Model.swift
+//  ModaData
 //
-//  Created by 황득연 on 2022/11/14.
+//  Created by 황득연 on 10/3/24.
 //
 
-import RealmSwift
+import SwiftData
 
-public class TodoEntity: Object {
-  @Persisted(primaryKey: true) var id: ObjectId
-  @Persisted var todoId: String
-  @Persisted var content: String
-  @Persisted var isDone: Bool
-  
-  convenience init(todoId: String, content: String, isDone: Bool) {
-    self.init()
-    
-    self.todoId = todoId
+@Model
+public class TodoEntity {
+  @Attribute(.unique) var id: String
+  var content: String
+  var isDone: Bool
+
+  public init(id: String, content: String, isDone: Bool) {
+    self.id = id
     self.content = content
     self.isDone = isDone
   }
@@ -24,21 +22,20 @@ public class TodoEntity: Object {
 
 public extension TodoEntity {
   func asDomainToMonthly() -> Todo {
-    return Todo(
-      id: todoId,
+    Todo(
+      id: id,
       content: content,
       isDone: isDone,
       type: .monthly
     )
   }
-  
+
   func asDomainToDaily() -> Todo {
-    return Todo(
-      id: todoId,
+    Todo(
+      id: id,
       content: content,
       isDone: isDone,
       type: .daily
     )
   }
 }
-

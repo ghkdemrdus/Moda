@@ -10,7 +10,7 @@ import ComposableArchitecture
 
 struct RootView: View {
   let store = Store(initialState: Root.State.splash(.init())) {
-    Root.body._printChanges()
+    Root.body
   }
 
   var body: some View {

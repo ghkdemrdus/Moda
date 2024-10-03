@@ -25,7 +25,11 @@ struct HomeMonthlyTodoEditView: View {
 
   var body: some View {
     content
-      .animation(.spring, value: height)
+      .onChange(of: todos) {
+        if $1.count == 0 {
+          onTapDone()
+        }
+      }
   }
 }
 
@@ -55,7 +59,7 @@ private extension HomeMonthlyTodoEditView {
         .padding(.horizontal, 16)
 
         ScrollView {
-          LazyVStack(spacing: 0) {
+          VStack(spacing: 0) {
             ForEach(Array(todos.enumerated()), id: \.element.id) { idx, todo in
               HomeMonthlyTodoEditItemView(
                 idx: idx,
@@ -71,7 +75,7 @@ private extension HomeMonthlyTodoEditView {
             }
           }
           .onChangeSize {
-            height = min($0.height, 500)
+            height = min($0.height, UIScreen.heightExceptSafeArea - 240)
           }
           .onChangePosition {
             offsetY = $0
@@ -93,7 +97,7 @@ private extension HomeMonthlyTodoEditView {
               updateDragging: { _ in },
               endDragging: {}
             )
-            .offset(y: min(limitedDragOffset() + offsetY, 500))
+            .offset(y: min(limitedDragOffset() + offsetY, UIScreen.heightExceptSafeArea - 240))
             .zIndex(1)
           }
         }
@@ -152,11 +156,11 @@ private extension HomeMonthlyTodoEditView {
 
 #Preview(traits: .sizeThatFitsLayout) {
   @Previewable @State var todos: [Todo] = [
-    .init(id: "1", content: "Todo1", isDone: true, type: .monthly),
-    .init(id: "2", content: "Todo2", isDone: true, type: .monthly),
-    .init(id: "3", content: "Todo3", isDone: false, type: .monthly),
-    .init(id: "4", content: "Todo4", isDone: false, type: .monthly),
-    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, type: .monthly)
+    .init(id: "1", content: "Todo1", isDone: true, category: .monthly),
+    .init(id: "2", content: "Todo2", isDone: true, category: .monthly),
+    .init(id: "3", content: "Todo3", isDone: false, category: .monthly),
+    .init(id: "4", content: "Todo4", isDone: false, category: .monthly),
+    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .monthly)
   ]
 
   HomeMonthlyTodoEditView(

@@ -14,21 +14,22 @@ struct HomeDelayTodoBottomSheet: View {
     case tomorrow
     case specificDate
 
-    var title: String {
+    func title(category: Todo.Category?) -> String {
       switch self {
-      case .tomorrow: "내일로"
+      case .tomorrow: category == .daily ? "내일로" : "다음 달로"
       case .specificDate: "날짜 지정"
       }
     }
   }
 
+  @State private var selectedDate = Date()
   @State var selectedOption: Option = .tomorrow
   @State var isDatePickerShown: Bool = false
   @Binding var isPresented: Bool
 
   let todo: Todo?
 
-  let onTapDelete: (Todo) -> Void
+  let onTapConfirm: (Todo, Date) -> Void
 
   var body: some View {
     ZStack(alignment: .bottom) {
@@ -55,7 +56,7 @@ struct HomeDelayTodoBottomSheet: View {
                 ? Image.icCheckActive
                 : Image.icCheckInactive
 
-                Text(option.title)
+                Text(option.title(category: todo?.category))
                   .font(.spoqaHans(size: 17))
                   .foregroundStyle(Color.textPrimary)
 
@@ -85,9 +86,7 @@ struct HomeDelayTodoBottomSheet: View {
 
           PlainButton(
             action: {
-              guard let todo else { return }
-              onTapDelete(todo)
-              isPresented = false
+              tapConfirm()
             },
             label: {
               Text("좋아요!")
@@ -115,15 +114,21 @@ struct HomeDelayTodoBottomSheet: View {
       }
     }
     .zIndex(2)
-    .animation(.spring, value: isPresented)
-    .animation(.spring, value: isDatePickerShown)
+    .animation(.spring(duration: 0.4), value: isPresented)
+    .animation(.spring(duration: 0.4), value: isDatePickerShown)
   }
 
-  @State private var selectedDate = Date()
-
-  func formattedDate(date: Date) -> String {
-          let formatter = DateFormatter()
-          formatter.dateFormat = "yyyy년 MM월 dd일"
-          return formatter.string(from: date)
-      }
+  private func tapConfirm() {
+    guard let todo else { return }
+    let nextDate: Date
+    if todo.category == .daily, selectedOption == .tomorrow {
+      nextDate = Date().addDays(1)
+    } else if todo.category == .monthly, selectedOption == .tomorrow {
+      nextDate = Date().addMonth(1)
+    } else {
+      nextDate = selectedDate
+    }
+    onTapConfirm(todo, nextDate)
+    isPresented = false
+  }
 }

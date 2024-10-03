@@ -47,14 +47,14 @@ private extension HomeMonthlyTodoItemView {
 // MARK: - Previews
 
 #Preview("1줄인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodo", isDone: true, type: .monthly)
+  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodo", isDone: true, category: .monthly)
 
   HomeMonthlyTodoItemView(todo: $todo)
     .loadCustomFonts()
 }
 
 #Preview("2줄 이상인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodo", isDone: true, type: .monthly)
+  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodo", isDone: true, category: .monthly)
 
   HomeMonthlyTodoItemView(todo: $todo)
     .loadCustomFonts()

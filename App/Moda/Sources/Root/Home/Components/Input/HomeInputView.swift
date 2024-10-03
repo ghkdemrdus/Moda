@@ -11,9 +11,9 @@ import SwiftUI
 struct HomeInputView: View {
 
   @State var todo: String = ""
-  @State var type: Todo.`Type` = .monthly
+  @State var type: Todo.Category = .monthly
 
-  let onTapAdd: (Todo.`Type`, String) -> Void
+  let onTapAdd: (Todo.Category, String) -> Void
 
   var body: some View {
     content
@@ -79,6 +79,7 @@ private extension HomeInputView {
             }
           )
         }
+        .submitLabel(.done)
         .onSubmit {
           guard !todo.isEmpty else { return }
           onTapAdd(type, todo)
@@ -96,7 +97,7 @@ private extension HomeInputView {
 // MARK: - Previews
 
 #Preview(traits: .sizeThatFitsLayout) {
-  @Previewable @State var type: Todo.`Type` = .monthly
+  @Previewable @State var type: Todo.Category = .monthly
   @Previewable @State var todo: String = "Todo"
 
   HomeInputView(todo: todo, type: type, onTapAdd: { _, _ in })

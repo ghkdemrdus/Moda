@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0820AF0736C9748502C72433 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE51117C853673434F8597D /* UIApplication.swift */; };
 		0FB9E6A913E3A06E4C170D32 /* OnFisrtAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230F6F93A457BB35ADDDAB7 /* OnFisrtAppearModifier.swift */; };
+		1FA6B5D9A29F50D9342B83CB /* VersionNoticeAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5FC5458A45C0C7862D63C /* VersionNoticeAlertView.swift */; };
+		3AA9147966631FAFF942CEEE /* VersionNoticeAlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B718E3C42D972BD22AF02DB /* VersionNoticeAlertModifier.swift */; };
 		66EEC25AF18508EE8F43EAEB /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE129E8A7A86CE9FD96FD2 /* DateFormat.swift */; };
 		6AF3BC1903F9EF0BE640380E /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9326A91178BA806D86D972A6 /* View+Extension.swift */; };
+		81CC6C07933B91E6C7CECA8C /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331183890B71187FEDCBDD30 /* Manager.swift */; };
 		9BFACBC959CB44D5CCA27B77 /* ContentHeightPre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 863115F4C47EE6250287004F /* ContentHeightPre.swift */; };
 		BC32601D9A815AD8F98BF404 /* HideKeyboardModifiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC06563F2A37055015D301D /* HideKeyboardModifiler.swift */; };
+		CD68322724AE30EFA32DBEE8 /* UIScreen+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5EF1C76FA1ED95E3CD1E10 /* UIScreen+Extension.swift */; };
 		CE4A20653CFFEB7E5265C31E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEA21C725D0EC987DB7A789 /* Date+Extension.swift */; };
 		D24C78E754E17635A91F93D6 /* PositionOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59C610BA0B69682A457C0CE /* PositionOffsetPreferenceKey.swift */; };
+		F2D0E06731C283730AFA6423 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBB4A4FE6E2DE6D35C8620C /* UIApplication+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,9 +38,13 @@
 		0DAE129E8A7A86CE9FD96FD2 /* DateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormat.swift; sourceTree = "<group>"; };
 		2BC06563F2A37055015D301D /* HideKeyboardModifiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardModifiler.swift; sourceTree = "<group>"; };
 		2BEA21C725D0EC987DB7A789 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		3BE51117C853673434F8597D /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		331183890B71187FEDCBDD30 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		3B718E3C42D972BD22AF02DB /* VersionNoticeAlertModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNoticeAlertModifier.swift; sourceTree = "<group>"; };
+		4AB5FC5458A45C0C7862D63C /* VersionNoticeAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionNoticeAlertView.swift; sourceTree = "<group>"; };
 		6DFFE93768EA74944DF4CC2C /* ModaCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModaCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		863115F4C47EE6250287004F /* ContentHeightPre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentHeightPre.swift; sourceTree = "<group>"; };
+		8D5EF1C76FA1ED95E3CD1E10 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
+		8FBB4A4FE6E2DE6D35C8620C /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		9326A91178BA806D86D972A6 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		A59C610BA0B69682A457C0CE /* PositionOffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionOffsetPreferenceKey.swift; sourceTree = "<group>"; };
 		E230F6F93A457BB35ADDDAB7 /* OnFisrtAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnFisrtAppearModifier.swift; sourceTree = "<group>"; };
@@ -89,7 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				2BEA21C725D0EC987DB7A789 /* Date+Extension.swift */,
-				3BE51117C853673434F8597D /* UIApplication.swift */,
+				8FBB4A4FE6E2DE6D35C8620C /* UIApplication+Extension.swift */,
+				8D5EF1C76FA1ED95E3CD1E10 /* UIScreen+Extension.swift */,
 				9326A91178BA806D86D972A6 /* View+Extension.swift */,
 			);
 			path = Extension;
@@ -99,7 +108,10 @@
 			isa = PBXGroup;
 			children = (
 				2BC06563F2A37055015D301D /* HideKeyboardModifiler.swift */,
+				331183890B71187FEDCBDD30 /* Manager.swift */,
 				E230F6F93A457BB35ADDDAB7 /* OnFisrtAppearModifier.swift */,
+				3B718E3C42D972BD22AF02DB /* VersionNoticeAlertModifier.swift */,
+				4AB5FC5458A45C0C7862D63C /* VersionNoticeAlertView.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -196,13 +208,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4A20653CFFEB7E5265C31E /* Date+Extension.swift in Sources */,
-				0820AF0736C9748502C72433 /* UIApplication.swift in Sources */,
+				F2D0E06731C283730AFA6423 /* UIApplication+Extension.swift in Sources */,
+				CD68322724AE30EFA32DBEE8 /* UIScreen+Extension.swift in Sources */,
 				6AF3BC1903F9EF0BE640380E /* View+Extension.swift in Sources */,
 				9BFACBC959CB44D5CCA27B77 /* ContentHeightPre.swift in Sources */,
 				D24C78E754E17635A91F93D6 /* PositionOffsetPreferenceKey.swift in Sources */,
 				66EEC25AF18508EE8F43EAEB /* DateFormat.swift in Sources */,
 				BC32601D9A815AD8F98BF404 /* HideKeyboardModifiler.swift in Sources */,
+				81CC6C07933B91E6C7CECA8C /* Manager.swift in Sources */,
 				0FB9E6A913E3A06E4C170D32 /* OnFisrtAppearModifier.swift in Sources */,
+				3AA9147966631FAFF942CEEE /* VersionNoticeAlertModifier.swift in Sources */,
+				1FA6B5D9A29F50D9342B83CB /* VersionNoticeAlertView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

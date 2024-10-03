@@ -1,5 +1,5 @@
 //
-//  UIApplication.swift
+//  UIApplication+Extension.swift
 //  ModaCore
 //
 //  Created by 황득연 on 9/29/24.

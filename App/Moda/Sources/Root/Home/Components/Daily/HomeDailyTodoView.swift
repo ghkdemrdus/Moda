@@ -80,11 +80,11 @@ private extension HomeDailyTodoView {
 
 #Preview("투두가 있는 경우", traits: .sizeThatFitsLayout) {
   @Previewable @State var todos: [Todo] = [
-    .init(id: "1", content: "Todo1", isDone: true, type: .daily),
-    .init(id: "2", content: "Todo2", isDone: true, type: .daily),
-    .init(id: "3", content: "Todo3", isDone: false, type: .daily),
-    .init(id: "4", content: "Todo4", isDone: false, type: .daily),
-    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, type: .daily)
+    .init(id: "1", content: "Todo1", isDone: true, category: .daily),
+    .init(id: "2", content: "Todo2", isDone: true, category: .daily),
+    .init(id: "3", content: "Todo3", isDone: false, category: .daily),
+    .init(id: "4", content: "Todo4", isDone: false, category: .daily),
+    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .daily)
   ]
 
   HomeDailyTodoView(

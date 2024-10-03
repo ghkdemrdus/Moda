@@ -39,6 +39,7 @@ private extension HomeDailyTodoEditItemView {
         .foregroundStyle(Color.textSecondary)
         .frame(maxWidth: .infinity, alignment: .leading)
         .underline()
+        .submitLabel(.done)
 
       PlainButton(
         action: {

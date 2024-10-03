@@ -77,6 +77,6 @@ struct HomeDeleteTodoBottomSheet: View {
       }
     }
     .zIndex(2)
-    .animation(.spring, value: isPresented)
+    .animation(.spring(duration: 0.4), value: isPresented)
   }
 }
