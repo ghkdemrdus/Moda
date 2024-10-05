@@ -35,4 +35,17 @@ public extension Image {
   static let imgCheckMonthlyInactive = Image(.imgCheckMonthlyInactive)
   static let imgDailyEmpty = Image(.imgDailyEmpty)
   static let imgSplash = Image(.imgSplash)
+
+  // Widget
+  static let imgWidgetDone = Image(.imgWidgetDone)
+  static let imgWidgetEmpty = Image(.imgWidgetEmpty)
+  static let imgWidgetMonthlyDone = Image(.imgWidgetMonthlyDone)
+  static let imgWidgetMonthlyEmpty = Image(.imgWidgetMonthlyEmpty)
+  static let imgWidgetMonthlyTodo = Image(.imgWidgetMonthlyTodo)
+  static let imgWidgetDailyEmpty = Image(.imgWidgetDailyEmpty)
+  static let imgWidgetDailyTodo = Image(.imgWidgetDailyTodo)
+
+  // Notice
+  static let imgNotice1 = Image(.imgNotice1)
+  static let imgNotice2 = Image(.imgNotice2)
 }

@@ -17,7 +17,7 @@ struct Home: Reducer {
 
   @ObservableState
   struct State: Equatable {
-    var currentDate: HomeDate = .init(date: .today, timeline: .current, hasTodo: false)
+    var currentDate: HomeDate = HomeDate.today
     var dates: [HomeDate] = DateManager.shared.homeDatas(from: .today)
 
     var monthlyTodos: [Todo] = []
@@ -25,12 +25,17 @@ struct Home: Reducer {
     var editingTodo: Todo?
 
     var isMonthlyFolded: Bool = true
+    var isInitialMonthlyLoaded: Bool = false
 
     var isMonthlyEditing: Bool = false
     var isDailyEditing: Bool = false
 
-    var isDeleteTodoBottomSheetPresented = false
-    var isDelayTodoBottomSheetPresented = false
+    var todoCategory: Todo.Category = .monthly
+
+    var isDeleteTodoBottomSheetPresented: Bool = false
+    var isDelayTodoBottomSheetPresented: Bool = false
+
+    var showNotice: Bool = false
 
     var isEditing: Bool {
       isMonthlyEditing || isDailyEditing
@@ -38,13 +43,21 @@ struct Home: Reducer {
   }
 
   enum Action: ViewAction {
+    case showNotice
+    case updateTodoCategory(Todo.Category)
     case view(View)
 
     enum View: BindableAction {
       case binding(BindingAction<State>)
+      case onTask
+
       case monthChanged(Int)
+      case monthTapped
+
+      case dateTapped(HomeDate)
 
       case todoAdded(Todo.Category, String)
+      case todoCategoryTapped(Todo.Category)
       case todoDeleted(Todo)
       case todoDelayed(Todo, Date)
 
@@ -56,27 +69,80 @@ struct Home: Reducer {
     }
   }
 
+  @Dependency(\.userData) var userData: UserData
+
   var body: some Reducer<State, Action> {
     BindingReducer(action: \.view)
     Reduce<State, Action> { state, action in
       switch action {
+      case .showNotice:
+        state.showNotice = true
+        return .none
+
+      case let .updateTodoCategory(category):
+        state.todoCategory = category
+        return .none
+
       case let .view(viewAction):
         switch viewAction {
+        case .onTask:
+          return .run { send in
+            let showNotice = await userData.showNotice.value
+            let category = await userData.todoCategory.value
+
+            if showNotice {
+              await send(.showNotice)
+            }
+            await send(.updateTodoCategory(category))
+          }
+
         case let .monthChanged(cnt):
           let dates = DateManager.shared.homeDatas(from: state.currentDate.date.addMonth(cnt))
           state.dates = dates
           state.currentDate = dates.first!
           return .none
 
+        case .monthTapped:
+          let dates = DateManager.shared.homeDatas(from: .today)
+          state.dates = dates
+          state.currentDate = HomeDate.today
+          return .none
+
+        case let .dateTapped(date):
+          state.currentDate = date
+          return .none
+
         case let .todoAdded(category, todo):
           switch category {
           case .monthly:
-            state.monthlyTodos += [.init(id: todo, content: todo, isDone: false, category: category)]
+            var updatedTodos = state.monthlyTodos
+            let updatingIdx = updatedTodos.firstIndex(where: { $0.isDone })
+            let todo = Todo(content: todo, category: category)
+            if let updatingIdx {
+              updatedTodos.insert(todo, at: updatingIdx)
+            } else {
+              updatedTodos.append(todo)
+            }
+            state.monthlyTodos = updatedTodos
             return .none
 
           case .daily:
-            state.dailyTodos += [.init(id: todo, content: todo, isDone: false, category: category)]
+            var updatedTodos = state.dailyTodos
+            let updatingIdx = updatedTodos.firstIndex(where: { $0.isDone })
+            let todo = Todo(content: todo, category: category)
+            if let updatingIdx {
+              updatedTodos.insert(todo, at: updatingIdx)
+            } else {
+              updatedTodos.append(todo)
+            }
+            state.monthlyTodos = updatedTodos
             return .none
+          }
+
+        case let .todoCategoryTapped(category):
+          state.todoCategory = category
+          return .run { send in
+            await userData.todoCategory.update(category)
           }
 
         case let .todoDeleted(todo), let .todoDelayed(todo, _):
@@ -91,6 +157,7 @@ struct Home: Reducer {
 
         case let .monthlyTodosUpdated(todos):
           state.monthlyTodos = todos
+          state.isInitialMonthlyLoaded = true
           return .none
 
         case let .dailyTodosUpdated(todos):

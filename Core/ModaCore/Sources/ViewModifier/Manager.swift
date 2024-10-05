@@ -8,34 +8,24 @@
 
 import SwiftUI
 
-// MARK: - Configuration
-
-public struct BottomMenuConfiguration {
-  let confirmTitle: String
-  var cancelTitle: String = "취소"
-  let confirmAction: () async -> Void
-}
-
-// MARK: - BottomMenuManager
-
 @MainActor
-public final class BottomMenuManager: ObservableObject {
-  public static let shared = BottomMenuManager()
+public final class NoticeManager: ObservableObject {
+  public static let shared = NoticeManager()
   private init() {}
 
-  @Published private(set) var isPresented: Bool = false
+  @Published public private(set) var isPresented: Bool = false
   public var content: AnyView?
   private var continuation: CheckedContinuation<Void, Never>?
 
-  func show(@ViewBuilder content: () -> AnyView) async {
-    self.isPresented = true
+  public func show(@ViewBuilder content: () -> AnyView) async {
     self.content = content()
+    self.isPresented = true
     return await withCheckedContinuation { continuation in
       self.continuation = continuation
     }
   }
 
-  func dismiss() {
+  public func dismiss() {
     isPresented = false
     continuation?.resume()
     continuation = nil

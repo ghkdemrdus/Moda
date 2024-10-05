@@ -11,6 +11,7 @@ import ProjectDescription
 
 public extension Settings {
     static let defaultProject: Settings = .settings(
+        base: ["OTHER_LDFLAGS": .string("-ObjC")],
         configurations: [
             .debug(name: .debug, settings: debugProject),
             .release(name: .release, settings: releaseProject)
@@ -51,6 +52,14 @@ public extension Settings {
             configurations: [
                 .debug(name: .debug, settings: ConfigurationSetting.debug),
                 .release(name: .release, settings: ConfigurationSetting.release)
+            ]
+        )
+
+    static let widgetTarget: ProjectDescription.Settings =
+        .settings(
+            configurations: [
+                .debug(name: .debug, settings: ConfigurationSetting.debugWidget),
+                .release(name: .release, settings: ConfigurationSetting.releaseWidget)
             ]
         )
 

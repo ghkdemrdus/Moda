@@ -18,6 +18,12 @@ public enum Module {
             case widget = "ModaWidget"
 
             public var name: String { self.rawValue }
+            public var settings: ProjectDescription.Settings {
+                switch self {
+                case .widget:
+                    return .widgetTarget
+                }
+            }
         }
         
         case moda = "Moda"
@@ -70,8 +76,11 @@ public enum Module {
         public var name: String { self.rawValue }
         public var framework: Product {
             switch self {
-            case .kingfisher, .realm, .composableArchitecture:
+            case .kingfisher, .composableArchitecture:
                 return .framework
+
+            case .realm:
+                return .staticFramework
             }
         }
     }

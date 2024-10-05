@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HomeDateItemView: View {
 
-  @Binding var currentDate: HomeDate
+  let currentDate: HomeDate
   let date: HomeDate
 
   var body: some View {
@@ -56,7 +56,7 @@ private extension HomeDateItemView {
   var dayColor: Color {
     switch date.timeline {
     case .current: return .textPrimary
-    case .previous: return .brandTertiary
+    case .previous: return .brandSecondary
     case .following: return .textSecondary
     }
   }
@@ -73,30 +73,30 @@ private extension HomeDateItemView {
 // MARK: - Previews
 
 #Preview("오늘인 경우") {
-  @Previewable @State var date: HomeDate = .init(date: Date.now, timeline: .current, hasTodo: false)
+  let date: HomeDate = .init(date: Date.now, timeline: .current, hasTodo: false)
 
   HomeDateItemView(
-    currentDate: $date,
+    currentDate: date,
     date: date
   )
   .loadCustomFonts()
 }
 
 #Preview("과거인 경우") {
-  @Previewable @State var date: HomeDate = .init(date: Date.now, timeline: .previous, hasTodo: false)
+  let date: HomeDate = .init(date: Date.now, timeline: .previous, hasTodo: false)
 
   HomeDateItemView(
-    currentDate: $date,
+    currentDate: date,
     date: date
   )
   .loadCustomFonts()
 }
 
-#Preview("과거인 경우") {
-  @Previewable @State var date: HomeDate = .init(date: Date.now, timeline: .following, hasTodo: false)
+#Preview("미래인 경우") {
+  let date: HomeDate = .init(date: Date.now, timeline: .following, hasTodo: false)
 
   HomeDateItemView(
-    currentDate: $date,
+    currentDate: date,
     date: date
   )
   .loadCustomFonts()

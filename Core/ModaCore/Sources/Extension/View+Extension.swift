@@ -8,6 +8,20 @@
 import SwiftUI
 
 public extension View {
+  func onBackground(_ closure: @escaping () -> Void) -> some View {
+      self.onReceive(
+          NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification),
+          perform: { _ in closure() }
+      )
+  }
+
+  func onForeground(_ closure: @escaping () -> Void) -> some View {
+      self.onReceive(
+          NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification),
+          perform: { _ in closure() }
+      )
+  }
+  
   func frame(size: CGFloat? = nil, alignment: Alignment = .center) -> some View {
     frame(width: size, height: size, alignment: alignment)
   }

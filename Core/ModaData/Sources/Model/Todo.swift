@@ -1,43 +1,30 @@
 //
 //  Todo.swift
-//  moda
+//  Moda
 //
-//  Created by 황득연 on 2022/10/04.
+//  Created by 황득연 on 9/15/24.
+//  Copyright © 2024 Moda. All rights reserved.
 //
 
-import Foundation
+import SwiftData
 
-public struct Todo: Identifiable, Equatable {
+@Model
+public class Todo: Identifiable, Equatable, Hashable {
 
-  public enum TodoType {
+  public enum Category: String, Codable {
     case monthly
     case daily
   }
 
-  public let id: String
+  @Attribute(.unique) public var id: String
   public var content: String
   public var isDone: Bool
-  public let type: TodoType
+  public var category: Category
 
-  public init(id: String, content: String, isDone: Bool, type: TodoType) {
+  public init(id: String, content: String, isDone: Bool, category: Category) {
     self.id = id
     self.content = content
     self.isDone = isDone
-    self.type = type
+    self.category = category
   }
-}
-
-public extension Todo {
-  func toEntity() -> TodoEntity {
-    TodoEntity(id: id, content: content, isDone: isDone)
-  }
-}
-
-public extension Todo {
-  static let inactiveDummy = Todo(id: "id", content: "다이어리 작성하기", isDone: false, type: .monthly)
-  static let activeDummy = Todo(id: "id", content: "다이어리 작성하기", isDone: true, type: .monthly)
-  static let dummy: [Todo] = [
-    Todo(id: "id1", content: "다이어리 작성하기", isDone: false, type: .monthly),
-    Todo(id: "id2", content: "운동하기", isDone: true, type: .monthly),
-  ]
 }

@@ -43,7 +43,7 @@ public extension Target {
         resources: ProjectDescription.ResourceFileElements? = [],
         entitlements: ProjectDescription.Entitlements?,
         dependencies: [ProjectDescription.TargetDependency],
-        settings: ProjectDescription.Settings? = nil
+        settings: ProjectDescription.Settings
     ) -> Target {
         .target(
             name: name,
@@ -91,7 +91,7 @@ public extension Target {
             name: app.name,
             infoPlist: .file(path: .relativeToApp("\(app.name)/Info.plist")),
             sources: ["Sources/**"],
-            resources: ["Resources/**"],
+            resources: ["Resources/**", "../../Core/ModaResource/Resources/Font/**"],
             entitlements: .file(path: .relativeToApp("\(app.name)/\(app.name).entitlements")),
             scripts: scripts,
             dependencies: dependencies,
@@ -119,16 +119,16 @@ public extension Target {
 
     static func appExtension(
         implementation appExtension: Module.App.Extension,
-        dependencies: [ProjectDescription.TargetDependency] = [],
-        resources: ProjectDescription.ResourceFileElements? = []
+        dependencies: [ProjectDescription.TargetDependency] = []
     ) -> Target {
         .makeAppExtension(
             name: "\(appExtension.name)Extension",
             infoPlist: .file(path: .relativeToApp("\(appExtension.name)/Info.plist")),
-            sources: ["\(appExtension.name)/Sources/**"],
-            resources: resources,
+            sources: ["../\(appExtension.name)/Sources/**"],
+            resources: ["../../Core/ModaResource/Resources/Font/**"],
             entitlements: .file(path: .relativeToApp("\(appExtension.name)/\(appExtension.name).entitlements")),
-            dependencies: dependencies
+            dependencies: dependencies,
+            settings: appExtension.settings
         )
     }
 

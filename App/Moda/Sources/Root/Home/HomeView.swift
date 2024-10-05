@@ -21,10 +21,24 @@ struct HomeView: View {
   @Namespace private var monthlyAnimationNamespace
   @Namespace private var dailyAnimationNamespace
 
+  let manager = NoticeManager.shared
+
   var body: some View {
     content
-      .animation(.spring(duration: 0.4), value: store.isMonthlyEditing)
-      .animation(.spring(duration: 0.4), value: store.isDailyEditing)
+      .task {
+        send(.onTask)
+      }
+      .onTapGesture {
+        hideKeyboard()
+      }
+      .onChange(of: store.showNotice) {
+        guard $1 else { return }
+        Task { @MainActor in
+          await manager.show {
+            AnyView(noticeView)
+          }
+        }
+      }
       .onChange(of: store.monthlyTodos) {
         updateLocalData(monthlyTodos: $1)
       }
@@ -32,8 +46,10 @@ struct HomeView: View {
         updateLocalData(dailyTodos: $1)
       }
       .onChange(of: store.currentDate, initial: true) {
-        changeTodos(with: $1)
+        changeTodos(oldDate: $0, newDate: $1)
       }
+      .animation(.spring(duration: 0.4), value: store.isMonthlyEditing)
+      .animation(.spring(duration: 0.4), value: store.isDailyEditing)
   }
 }
 
@@ -46,12 +62,18 @@ private extension HomeView {
         currentDate: store.currentDate.date,
         onChangeMonth: {
           send(.monthChanged($0))
+        },
+        onTapMonth: {
+          send(.monthTapped)
         }
       )
 
       HomeDateSelectorView(
         dates: store.dates,
-        currentDate: $store.currentDate
+        currentDate: store.currentDate,
+        onTapDate: {
+          send(.dateTapped($0))
+        }
       )
       .padding(.top, 12)
 
@@ -81,11 +103,15 @@ private extension HomeView {
         .animation(.spring(duration: 0.4), value: store.isMonthlyFolded)
       }
 
-      if store.editingTodo == nil {
-        HomeInputView(onTapAdd: {
+      HomeInputView(
+        category: store.todoCategory,
+        onTapAdd: {
           send(.todoAdded($0, $1))
-        })
-      }
+        },
+        onTapCategory: {
+          send(.todoCategoryTapped($0))
+        }
+      )
     }
     .background(Color.backgroundPrimary)
     .blur(radius: store.isEditing ? 1.2 : 0)
@@ -163,12 +189,26 @@ private extension HomeView {
       HomeDelayTodoBottomSheet(
         isPresented: $store.isDelayTodoBottomSheetPresented,
         todo: store.editingTodo,
+        currentDate: store.currentDate.date,
         onTapConfirm: {
           delayTodo(todo: $0, date: $1)
           send(.todoDelayed($0, $1))
         }
       )
       .ignoresSafeArea()
+    }
+    .versionNoticeAlert()
+  }
+
+  @ViewBuilder var noticeView: some View {
+    VStack(spacing: 16) {
+      Image.imgNotice1
+        .resizable()
+        .scaledToFit()
+
+      Image.imgNotice2
+        .resizable()
+        .scaledToFit()
     }
   }
 }
@@ -179,8 +219,12 @@ private extension HomeView {
   func updateLocalData(monthlyTodos: [Todo]) {
     let id = store.currentDate.date.format(.monthlyId)
     if let todoIdx = monthlyTodosList.firstIndex(where: { $0.id == id }) {
-      monthlyTodosList[todoIdx].todos = monthlyTodos
-    } else {
+      if monthlyTodos.isEmpty {
+        modelContext.delete(monthlyTodosList[todoIdx])
+      } else {
+        monthlyTodosList[todoIdx].todos = monthlyTodos
+      }
+    } else if !monthlyTodos.isEmpty {
       modelContext.insert(MonthlyTodos(id: id, todos: monthlyTodos))
     }
   }
@@ -188,8 +232,12 @@ private extension HomeView {
   func updateLocalData(dailyTodos: [Todo]) {
     let id = store.currentDate.date.format(.dailyId)
     if let todoIdx = dailyTodosList.firstIndex(where: { $0.id == id }) {
-      dailyTodosList[todoIdx].todos = dailyTodos
-    } else {
+      if dailyTodos.isEmpty {
+        modelContext.delete(dailyTodosList[todoIdx])
+      } else {
+        dailyTodosList[todoIdx].todos = dailyTodos
+      }
+    } else if !dailyTodos.isEmpty {
       modelContext.insert(DailyTodos(id: id, todos: dailyTodos))
     }
   }
@@ -214,12 +262,17 @@ private extension HomeView {
     }
   }
 
-  func changeTodos(with currentDate: HomeDate) {
-    let monthlyId = currentDate.date.format(.monthlyId)
-    let dailyId = currentDate.date.format(.dailyId)
-    let monthlyTodo = monthlyTodosList.first { $0.id == monthlyId }
+  func changeTodos(oldDate: HomeDate, newDate: HomeDate) {
+    let oldMonthlyId = oldDate.date.format(.monthlyId)
+    let monthlyId = newDate.date.format(.monthlyId)
+    let dailyId = newDate.date.format(.dailyId)
+
+    if monthlyId != oldMonthlyId || !store.isInitialMonthlyLoaded {
+      let monthlyTodo = monthlyTodosList.first { $0.id == monthlyId }
+      send(.monthlyTodosUpdated(monthlyTodo?.todos ?? []))
+    }
+
     let dailyTodo = dailyTodosList.first { $0.id == dailyId }
-    send(.monthlyTodosUpdated(monthlyTodo?.todos ?? []))
     send(.dailyTodosUpdated(dailyTodo?.todos ?? []))
   }
 }

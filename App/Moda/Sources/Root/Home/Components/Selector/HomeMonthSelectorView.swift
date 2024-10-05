@@ -11,7 +11,9 @@ import SwiftUI
 struct HomeMonthSelectorView: View {
 
   let currentDate: Date
+
   let onChangeMonth: (Int) -> Void
+  let onTapMonth: () -> Void
 
   var body: some View {
     content
@@ -24,11 +26,14 @@ private extension HomeMonthSelectorView {
       HStack {
         Text("\(currentDate.format(.month))")
           .font(.spoqaHans(size: 28, weight: .bold))
-          .foregroundStyle(Color.textPrimary)
 
         Text("\(currentDate.format(.monthText))")
           .font(.spoqaHans(size: 18, weight: .bold))
-          .foregroundStyle(Color.textPrimary)
+      }
+      .foregroundStyle(Color.textPrimary)
+      .contentTouchable()
+      .onTapGesture {
+        onTapMonth()
       }
 
       Spacer()
@@ -70,6 +75,10 @@ private extension HomeMonthSelectorView {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-  HomeMonthSelectorView(currentDate: .today, onChangeMonth: { _ in })
-    .loadCustomFonts()
+  HomeMonthSelectorView(
+    currentDate: .today,
+    onChangeMonth: { _ in },
+    onTapMonth: {}
+  )
+  .loadCustomFonts()
 }

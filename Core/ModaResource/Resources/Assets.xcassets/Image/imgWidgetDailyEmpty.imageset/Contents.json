@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "state=empty, type=daily.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

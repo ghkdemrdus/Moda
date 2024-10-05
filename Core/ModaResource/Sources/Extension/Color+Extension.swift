@@ -36,4 +36,12 @@ public extension Color {
 
   // Border
   static let borderPrimary = ModaResourceAsset.borderPrimary.swiftUIColor
+
+  // Orange
+  static let fogOrange = ModaResourceAsset.fogOrange.swiftUIColor
+  static let orange200 = ModaResourceAsset.orange200.swiftUIColor
+
+  // Slate
+  static let slate800 = ModaResourceAsset.slate800.swiftUIColor
+  static let slate900 = ModaResourceAsset.slate900.swiftUIColor
 }

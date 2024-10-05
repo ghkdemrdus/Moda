@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "state=inactive, type=monthly.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

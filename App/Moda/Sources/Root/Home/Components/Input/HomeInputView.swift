@@ -11,9 +11,11 @@ import SwiftUI
 struct HomeInputView: View {
 
   @State var todo: String = ""
-  @State var type: Todo.Category = .monthly
+
+  let category: Todo.Category
 
   let onTapAdd: (Todo.Category, String) -> Void
+  let onTapCategory: (Todo.Category) -> Void
 
   var body: some View {
     content
@@ -27,7 +29,7 @@ private extension HomeInputView {
     HStack(spacing: 0) {
       PlainButton(
         action: {
-          type = .monthly
+          onTapCategory(.monthly)
         },
         label: {
           Text("M")
@@ -35,14 +37,14 @@ private extension HomeInputView {
             .frame(size: 32)
             .background(
               RoundedRectangle(cornerRadius: 4)
-                .fill(type == .monthly ? Color.brandTertiary : .clear)
+                .fill(category == .monthly ? Color.brandTertiary : .clear)
             )
         }
       )
 
       PlainButton(
         action: {
-          type = .daily
+          onTapCategory(.daily)
         },
         label: {
           Text("D")
@@ -50,7 +52,7 @@ private extension HomeInputView {
             .frame(size: 32)
             .background(
               RoundedRectangle(cornerRadius: 4)
-                .fill(type == .daily ? Color.brandTertiary : .clear)
+                .fill(category == .daily ? Color.brandTertiary : .clear)
             )
         }
       )
@@ -69,7 +71,7 @@ private extension HomeInputView {
         .overlay(if: !todo.isEmpty, alignment: .trailing) {
           PlainButton(
             action: {
-              onTapAdd(type, todo)
+              onTapAdd(category, todo)
               todo = ""
               hideKeyboard()
             },
@@ -82,7 +84,7 @@ private extension HomeInputView {
         .submitLabel(.done)
         .onSubmit {
           guard !todo.isEmpty else { return }
-          onTapAdd(type, todo)
+          onTapAdd(category, todo)
           todo = ""
         }
     }
@@ -100,6 +102,11 @@ private extension HomeInputView {
   @Previewable @State var type: Todo.Category = .monthly
   @Previewable @State var todo: String = "Todo"
 
-  HomeInputView(todo: todo, type: type, onTapAdd: { _, _ in })
-    .loadCustomFonts()
+  HomeInputView(
+    todo: todo,
+    category: type,
+    onTapAdd: { _, _ in todo = "" },
+    onTapCategory: { type = $0 }
+  )
+  .loadCustomFonts()
 }

@@ -24,4 +24,6 @@ public struct HomeDate: Hashable {
     self.timeline = timeline
     self.hasTodo = hasTodo
   }
+
+  public static let today: HomeDate = .init(date: .today, timeline: .current, hasTodo: false)
 }

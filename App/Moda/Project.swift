@@ -12,10 +12,19 @@ let project = Project(
         .app(
             implementation: .moda,
             dependencies: [
+                .appExtension(implementation: .widget),
                 .core(implementation: .core),
+                .core(implementation: .data),
                 .core(implementation: .resource),
-//                .thirdParty(.kingfisher),
-                .thirdParty(.composableArchitecture)
+                .thirdParty(.composableArchitecture),
+            ]
+        ),
+        .appExtension(
+            implementation: .widget,
+            dependencies: [
+                .core(implementation: .core),
+                .core(implementation: .data),
+                .core(implementation: .resource),
             ]
         )
     ],

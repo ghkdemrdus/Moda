@@ -7,6 +7,7 @@
 //
 
 import SwiftData
+import Foundation
 
 @Model
 public class Todo: Identifiable, Equatable, Hashable {
@@ -27,8 +28,10 @@ public class Todo: Identifiable, Equatable, Hashable {
     self.isDone = isDone
     self.category = category
   }
-//
-//  public static func == (lhs: Self, rhs: Self) -> Bool {
-//    lhs.id == rhs.id
-//  }
+
+  public convenience init(content: String, category: Category) {
+    self.init(id: Self.uniqueId, content: content, isDone: false, category: category)
+  }
+
+  static var uniqueId: String { String(Int(Date().timeIntervalSince1970)) }
 }

@@ -28,6 +28,7 @@ struct HomeDelayTodoBottomSheet: View {
   @Binding var isPresented: Bool
 
   let todo: Todo?
+  let currentDate: Date
 
   let onTapConfirm: (Todo, Date) -> Void
 
@@ -106,7 +107,7 @@ struct HomeDelayTodoBottomSheet: View {
         .padding(.vertical, 16)
         .padding(.bottom, UIApplication.shared.safeAreaBottomHeight)
         .background(
-          Color.backgroundSecondary
+          Color.backgroundPrimary
             .clipShape(.rect(topLeadingRadius: 16, topTrailingRadius: 16))
         )
         .zIndex(1)
@@ -122,9 +123,9 @@ struct HomeDelayTodoBottomSheet: View {
     guard let todo else { return }
     let nextDate: Date
     if todo.category == .daily, selectedOption == .tomorrow {
-      nextDate = Date().addDays(1)
+      nextDate = currentDate.addDays(1)
     } else if todo.category == .monthly, selectedOption == .tomorrow {
-      nextDate = Date().addMonth(1)
+      nextDate = currentDate.addMonth(1)
     } else {
       nextDate = selectedDate
     }

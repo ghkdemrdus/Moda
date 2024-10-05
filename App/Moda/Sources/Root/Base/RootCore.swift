@@ -17,7 +17,7 @@ enum Root {
   static var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
-      case .splash(.timeout):
+      case .splash(.view(.timeout)):
         state = .home(.init())
         return .none
 

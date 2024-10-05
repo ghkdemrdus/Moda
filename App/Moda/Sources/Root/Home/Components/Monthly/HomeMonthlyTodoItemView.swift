@@ -36,6 +36,7 @@ private extension HomeMonthlyTodoItemView {
       Text(todo.content)
         .font(.spoqaHans(size: 15))
         .foregroundStyle(Color.textSecondary)
+        .lineLimit(nil)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 3)
     }

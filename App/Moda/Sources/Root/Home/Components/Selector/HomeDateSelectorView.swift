@@ -11,7 +11,9 @@ import SwiftUI
 struct HomeDateSelectorView: View {
 
   let dates: [HomeDate]
-  @Binding var currentDate: HomeDate
+  let currentDate: HomeDate
+
+  let onTapDate: (HomeDate) -> Void
 
   var body: some View {
     content
@@ -24,15 +26,15 @@ private extension HomeDateSelectorView {
   var content: some View {
     ScrollViewReader { proxy in
       ScrollView(.horizontal) {
-        LazyHStack(spacing: dateSpacing) {
+        LazyHStack(spacing: 4) {
           ForEach(dates, id: \.date) { date in
             PlainButton(
               action: {
-                currentDate = date
+                onTapDate(date)
               },
               label: {
                 HomeDateItemView(
-                  currentDate: $currentDate,
+                  currentDate: currentDate,
                   date: date
                 )
               }
@@ -48,6 +50,7 @@ private extension HomeDateSelectorView {
         }
       }
       .frame(height: 64)
+      .gradient([.leading, .trailing], color: .backgroundPrimary, length: gradientWidth)
       .onChange(of: currentDate) {
         Task { @MainActor in
           withAnimation {
@@ -64,9 +67,9 @@ private extension HomeDateSelectorView {
 // MARK: - Properties
 
 private extension HomeDateSelectorView {
-  var dateSpacing: CGFloat {
-    let totalPadding = UIScreen.main.bounds.width - (7 * 40 + 2 * 16)
-    return totalPadding / 6
+  var gradientWidth: CGFloat {
+    let totalWidth = UIScreen.main.bounds.width - (7 * 40 + 6 * 4)
+    return totalWidth / 2
   }
 }
 
@@ -77,7 +80,8 @@ private extension HomeDateSelectorView {
 
   HomeDateSelectorView(
     dates: DateManager.shared.homeDatas(from: currentDate.date),
-    currentDate: $currentDate
+    currentDate: currentDate,
+    onTapDate: { currentDate = $0 }
   )
   .loadCustomFonts()
 }

@@ -29,7 +29,7 @@ struct VersionNoticeAlertView: View {
   }
 
   var body: some View {
-    VStack {
+    VStack(spacing: 0) {
       HStack {
         if let title {
           Text(title)
@@ -72,12 +72,14 @@ struct VersionNoticeAlertView: View {
 
       PlainButton(
         action: {
-//          onTapConfirm()
+          onClose()
         },
         label: {
           Text("좋아요!")
+            .font(.spoqaHans(size: 16, weight: .bold))
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
+            .padding(.vertical, 14)
             .background(
               RoundedRectangle(cornerRadius: 12)
                 .fill(Color.brandStrong)

@@ -7,4 +7,5 @@
 //
 
 @_exported import ModaCore
+@_exported import ModaData
 @_exported import ModaResource

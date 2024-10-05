@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 import SwiftData
+import WidgetKit
 
 @main
 struct ModaApp: App {
@@ -17,7 +18,7 @@ struct ModaApp: App {
 
   var modelContainer: ModelContainer = {
     let schema = Schema([MonthlyTodos.self, DailyTodos.self, Todo.self])
-    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false, cloudKitDatabase: .none)
+    let modelConfiguration = ModelConfiguration(schema: schema)
 
     do {
       return try ModelContainer(for: schema, configurations: [modelConfiguration])
@@ -30,8 +31,12 @@ struct ModaApp: App {
     WindowGroup {
       RootView()
         .modelContainer(modelContainer)
-        .onAppear {
-          FontUtil.registerCustomFonts()
+        .onFirstAppear {
+          WidgetCenter.shared.reloadAllTimelines()
+        }
+        .onBackground {
+          WidgetCenter.shared.reloadAllTimelines()
+          try? modelContainer.mainContext.save()
         }
     }
   }

@@ -15,13 +15,31 @@ struct Splash: Reducer {
   @ObservableState
   struct State: Equatable {}
 
-  enum Action {
-    case timeout
+  enum Action: ViewAction {
+    case view(View)
+
+    enum View: BindableAction {
+      case binding(BindingAction<State>)
+      case timeout
+    }
   }
+
+  @Dependency(\.userData) var userData: UserData
 
   var body: some Reducer<State, Action> {
     Reduce<State, Action> { state, action in
-      return .none
+      switch action {
+      case .view(let action):
+        switch action {
+        case .timeout:
+          return .run { send in
+            await userData.lastVersion.update(Bundle.main.version)
+          }
+
+        default:
+          return .none
+        }
+      }
     }
   }
 }

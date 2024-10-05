@@ -69,7 +69,7 @@ struct HomeDeleteTodoBottomSheet: View {
         .padding(.vertical, 16)
         .padding(.bottom, UIApplication.shared.safeAreaBottomHeight)
         .background(
-          Color.backgroundSecondary
+          Color.backgroundPrimary
             .clipShape(.rect(topLeadingRadius: 16, topTrailingRadius: 16))
         )
         .zIndex(1)

@@ -19,6 +19,8 @@ struct HomeDailyTodoEditView: View {
   @State private var dragOffset: CGFloat = 0
   @State private var isDragging: Bool = false
 
+  private let feedback = UIImpactFeedbackGenerator(style: .light)
+
   let onTapDone: () -> Void
   let onTapDelete: (Todo) -> Void
   let onTapDelay: (Todo) -> Void
@@ -126,6 +128,7 @@ private extension HomeDailyTodoEditView {
     if newIndex != draggingIdx {
       todos.move(fromOffsets: IndexSet(integer: draggingIdx), toOffset: newIndex > draggingIdx ? newIndex + 1 : newIndex)
       self.draggingIdx = newIndex
+      feedback.impactOccurred()
     }
   }
 

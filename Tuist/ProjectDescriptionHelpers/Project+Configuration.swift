@@ -32,4 +32,21 @@ public enum ConfigurationSetting {
         "PRODUCT_BUNDLE_IDENTIFIER": "com.pinto.moda",
         "BUNDLE_DISPLAY_NAME": "Moda"
     ])
+
+    // MARK: - Widget
+
+    public static let debugWidget = base.merge([
+        "CODE_SIGN_IDENTITY": "iPhone Developer",
+        "CODE_SIGN_STYLE": "Automatic",
+        "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.pinto.moda.debug.ModaWidget",
+    ])
+
+    public static let releaseWidget = base.merge([
+        "CODE_SIGN_IDENTITY": "iPhone Distribution",
+        "CODE_SIGN_STYLE": "Manual",
+        "SWIFT_OPTIMIZATION_LEVEL": "-O",
+        "VALIDATE_PRODUCT": "YES",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.pinto.moda.ModaWidget",
+    ])
 }
