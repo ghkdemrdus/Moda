@@ -31,7 +31,7 @@ private extension HomeDateItemView {
         .font(.spoqaHans(size: 13, weight: .bold))
         .foregroundStyle(dayColor)
         .background(if: date.timeline == .current) {
-          RoundedRectangle(cornerRadius: 6)
+          RoundedRectangle(cornerRadius: 8)
             .fill(dayBgColor)
             .frame(width: 32, height: 32)
         }

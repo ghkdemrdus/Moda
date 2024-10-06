@@ -10,7 +10,9 @@ import SwiftUI
 
 struct HomeDailyTodoItemView: View {
 
-  @Binding var todo: Todo
+  let todo: HomeTodo
+
+  let onTapDone: (HomeTodo) -> Void
 
   var body: some View {
       content
@@ -24,7 +26,7 @@ private extension HomeDailyTodoItemView {
     HStack(alignment: .top, spacing: 8) {
       PlainButton(
         action: {
-          todo.isDone.toggle()
+          onTapDone(todo)
         },
         label: {
           todo.isDone
@@ -51,15 +53,25 @@ private extension HomeDailyTodoItemView {
 // MARK: - Previews
 
 #Preview("1줄인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodo", isDone: true, category: .daily)
+  @Previewable @State var todo: HomeTodo = .init(content: "TodoTodo", category: .daily)
 
-  HomeDailyTodoItemView(todo: $todo)
-    .loadCustomFonts()
+  HomeDailyTodoItemView(
+    todo: todo,
+    onTapDone: {
+      $0.isDone.toggle()
+    }
+  )
+  .loadCustomFonts()
 }
 
 #Preview("2줄 이상인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: Todo = .init(id: "1", content: "TodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodo", isDone: true, category: .daily)
+  @Previewable @State var todo: HomeTodo = .init(content: "TodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodo", category: .daily)
 
-  HomeDailyTodoItemView(todo: $todo)
-    .loadCustomFonts()
+  HomeDailyTodoItemView(
+    todo: todo,
+    onTapDone: {
+      $0.isDone.toggle()
+    }
+  )
+  .loadCustomFonts()
 }

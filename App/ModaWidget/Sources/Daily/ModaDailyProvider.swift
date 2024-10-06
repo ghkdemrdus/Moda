@@ -11,19 +11,16 @@ import SwiftData
 
 struct ModaDailyProvider: TimelineProvider {
   func placeholder(in context: Context) -> ModaDailyEntry {
-    return entry
+    return ModaDailyEntry(date: Date())
   }
 
   func getSnapshot(in context: Context, completion: @escaping (ModaDailyEntry) -> ()) {
-    completion(entry)
+    completion(ModaDailyEntry(date: Date()))
   }
 
   func getTimeline(in context: Context, completion: @escaping (Timeline<ModaDailyEntry>) -> ()) {
+    let entry = ModaDailyEntry(date: Date.today.addDays(1))
     let timeline = Timeline(entries: [entry], policy: .atEnd)
     completion(timeline)
-  }
-
-  private var entry: ModaDailyEntry {
-    ModaDailyEntry(date: Date())
   }
 }

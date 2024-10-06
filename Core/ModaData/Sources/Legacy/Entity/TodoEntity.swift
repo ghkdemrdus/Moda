@@ -23,20 +23,16 @@ public class TodoEntity: Object {
 }
 
 public extension TodoEntity {
-  func asDomainToMonthly() -> Todo {
-    Todo(
-      id: todoId,
+  func asDomainToMonthly() -> HomeTodo {
+    HomeTodo(
       content: content,
-      isDone: isDone,
       category: .monthly
     )
   }
 
-  func asDomainToDaily() -> Todo {
-    Todo(
-      id: todoId,
+  func asDomainToDaily() -> HomeTodo {
+    HomeTodo(
       content: content,
-      isDone: isDone,
       category: .daily
     )
   }

@@ -14,13 +14,13 @@ struct HomeDailyTodoEditItemView: View {
 
   let idx: Int
 
-  @Binding var todo: Todo
+  @Bindable var todo: HomeTodo
   @Binding var isDragging: Bool
 
-  let onTapDelete: (Todo) -> Void
-  let onTapDelay: (Todo) -> Void
+  let onTapDelete: (HomeTodo) -> Void
+  let onTapDelay: (HomeTodo) -> Void
 
-  let startDragging: (Int, Todo) -> Void
+  let startDragging: (Int, HomeTodo) -> Void
   let updateDragging: (DragGesture.Value) -> Void
   let endDragging: () -> Void
 
@@ -43,6 +43,7 @@ private extension HomeDailyTodoEditItemView {
 
       PlainButton(
         action: {
+          hideKeyboard()
           onTapDelete(todo)
         },
         label: {
@@ -52,6 +53,7 @@ private extension HomeDailyTodoEditItemView {
 
       PlainButton(
         action: {
+          hideKeyboard()
           onTapDelay(todo)
         },
         label: {
@@ -60,10 +62,11 @@ private extension HomeDailyTodoEditItemView {
       )
 
       Image.icDailyReorder
-        .gesture(
-          DragGesture()
+        .highPriorityGesture(
+          DragGesture(minimumDistance: 0)
             .onChanged { value in
               if !isDragging {
+                hideKeyboard()
                 startDragging(idx, todo)
               }
               updateDragging(value)

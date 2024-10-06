@@ -12,9 +12,9 @@ struct HomeDeleteTodoBottomSheet: View {
 
   @Binding var isPresented: Bool
 
-  let todo: Todo?
+  let todo: HomeTodo?
 
-  let onTapDelete: (Todo) -> Void
+  let onTapDelete: (HomeTodo) -> Void
 
   var body: some View {
     ZStack(alignment: .bottom) {

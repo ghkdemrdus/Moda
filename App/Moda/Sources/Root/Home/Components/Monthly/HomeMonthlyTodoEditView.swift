@@ -10,11 +10,13 @@ import SwiftUI
 
 struct HomeMonthlyTodoEditView: View {
 
-  @Binding var todos: [Todo]
+  let prevTodos: [HomeTodo]
 
   @State private var height: CGFloat = 0
   @State private var offsetY: CGFloat = 0
-  @State private var draggingTodo: Todo?
+
+  @State private var todos: [HomeTodo] = []
+  @State private var draggingTodo: HomeTodo?
   @State private var draggingIdx: Int?
   @State private var dragOffset: CGFloat = 0
   @State private var isDragging: Bool = false
@@ -22,12 +24,14 @@ struct HomeMonthlyTodoEditView: View {
   private let feedback = UIImpactFeedbackGenerator(style: .light)
 
   let onTapDone: () -> Void
-  let onTapDelete: (Todo) -> Void
-  let onTapDelay: (Todo) -> Void
+  let onTapDelete: (HomeTodo) -> Void
+  let onTapDelay: (HomeTodo) -> Void
+  let onReorder: ([HomeTodo]) -> Void
 
   var body: some View {
     content
-      .onChange(of: todos) {
+      .onChange(of: prevTodos, initial: true) {
+        todos = $1
         if $1.count == 0 {
           onTapDone()
         }
@@ -65,7 +69,7 @@ private extension HomeMonthlyTodoEditView {
             ForEach(Array(todos.enumerated()), id: \.element.id) { idx, todo in
               HomeMonthlyTodoEditItemView(
                 idx: idx,
-                todo: $todos[idx],
+                todo: todo,
                 isDragging: $isDragging,
                 onTapDelete: onTapDelete,
                 onTapDelay: onTapDelay,
@@ -85,13 +89,13 @@ private extension HomeMonthlyTodoEditView {
         }
         .frame(maxHeight: height)
         .coordinateSpace(name: "ScrollView")
-        .scrollDisabled(draggingTodo != nil)
+        .scrollDisabled(isDragging)
         .scrollBounceBehavior(.basedOnSize)
         .overlay(alignment: .top) {
           if let draggingItem = draggingTodo {
             HomeMonthlyTodoEditItemView(
               idx: -1,
-              todo: .constant(draggingItem),
+              todo: draggingItem,
               isDragging: .constant(false),
               onTapDelete: { _ in },
               onTapDelay: { _ in },
@@ -107,7 +111,7 @@ private extension HomeMonthlyTodoEditView {
       .padding(.top, 12)
       .padding(.bottom, 6)
       .background(
-        RoundedRectangle(cornerRadius: 7)
+        RoundedRectangle(cornerRadius: 16)
           .fill(Color.backgroundBrand)
       )
       .padding(.horizontal, 16)
@@ -116,7 +120,7 @@ private extension HomeMonthlyTodoEditView {
 }
 
 private extension HomeMonthlyTodoEditView {
-  func startDragging(idx: Int, todo: Todo) {
+  func startDragging(idx: Int, todo: HomeTodo) {
     draggingTodo = todo
     draggingIdx = idx
     dragOffset = CGFloat(idx) * HomeMonthlyTodoEditItemView.height
@@ -147,6 +151,7 @@ private extension HomeMonthlyTodoEditView {
     draggingIdx = nil
     dragOffset = 0
     isDragging = false
+    onReorder(todos)
   }
 
   // 드래그 오프셋을 제한하는 함수
@@ -158,19 +163,20 @@ private extension HomeMonthlyTodoEditView {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-  @Previewable @State var todos: [Todo] = [
-    .init(id: "1", content: "Todo1", isDone: true, category: .monthly),
-    .init(id: "2", content: "Todo2", isDone: true, category: .monthly),
-    .init(id: "3", content: "Todo3", isDone: false, category: .monthly),
-    .init(id: "4", content: "Todo4", isDone: false, category: .monthly),
-    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .monthly)
+  @Previewable @State var todos: [HomeTodo] = [
+    .init(id: "1", order: 1, content: "Todo1", isDone: true, category: .monthly),
+    .init(id: "2", order: 2, content: "Todo2", isDone: true, category: .monthly),
+    .init(id: "3", order: 3, content: "Todo3", isDone: false, category: .monthly),
+    .init(id: "4", order: 4, content: "Todo4", isDone: false, category: .monthly),
+    .init(id: "5", order: 5, content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .monthly)
   ]
 
   HomeMonthlyTodoEditView(
-    todos: $todos,
+    prevTodos: todos,
     onTapDone: {},
     onTapDelete: { _ in },
-    onTapDelay: { _ in }
+    onTapDelay: { _ in },
+    onReorder: { _ in }
   )
   .loadCustomFonts()
 }

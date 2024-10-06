@@ -3,19 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		009394DEDB3DDFF44F069426 /* MonthlyTodos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E442B0FEDBED5A9E47D22 /* MonthlyTodos.swift */; };
 		35935A9EBD16F5AFABBF29A5 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41216ED2373185E849C52CD6 /* RealmSwift.framework */; };
+		41EECAB3FE3A5868F041D205 /* HomeTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D5F7311D219EFA68CE758E /* HomeTodo.swift */; };
+		4A32DE8F2CB23C5B002347ED /* HomeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A32DE8E2CB23C5B002347ED /* HomeDate.swift */; };
 		53F444EFBC9E52E0363F5BC4 /* TodoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B470AC78CCDD1F7056DC237 /* TodoEntity.swift */; };
 		58BE02FE2C7F2952BCF0BE7A /* TodoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F85AC9B68B9F12CD164460 /* TodoStorage.swift */; };
 		63A79F3C4579CE4E72F40BDD /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53433322E396F139DA58616 /* Realm.framework */; };
+		804781522B65214C59059AA8 /* ModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3861881BA765933835E5687E /* ModelContainer.swift */; };
 		816FB91756DD1BA4DD98A805 /* Realm_RealmSwift.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = DE29DE5E777F3127301B5972 /* Realm_RealmSwift.bundle */; };
+		8FB75E74816764A236054BF1 /* DailyTodoInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FA4937285821EB85DA58E4 /* DailyTodoInfoEntity.swift */; };
 		9C33536646421F385AF0B6DF /* DailyTodos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F763AA43A902D1177B707 /* DailyTodos.swift */; };
-		AF2421F08FC106FB0A819276 /* DailyTodosEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD2FAC004956D2B225D874 /* DailyTodosEntity.swift */; };
-		CB8840B4E6EF98A659CE002A /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC450BADDC4551A7405559CD /* Todo.swift */; };
 		DA9A5259D436D908E0EDA6A6 /* Realm_RealmSwift.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE29DE5E777F3127301B5972 /* Realm_RealmSwift.bundle */; };
 		DC0A0BF70612E58062E937E1 /* MonthlyTodosEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47E822772B2385E7CFFA62 /* MonthlyTodosEntity.swift */; };
 /* End PBXBuildFile section */
@@ -45,16 +47,18 @@
 
 /* Begin PBXFileReference section */
 		06F85AC9B68B9F12CD164460 /* TodoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStorage.swift; sourceTree = "<group>"; };
+		3861881BA765933835E5687E /* ModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainer.swift; sourceTree = "<group>"; };
 		41216ED2373185E849C52CD6 /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		46CD2FAC004956D2B225D874 /* DailyTodosEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodosEntity.swift; sourceTree = "<group>"; };
+		4A32DE8E2CB23C5B002347ED /* HomeDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDate.swift; sourceTree = "<group>"; };
+		58D5F7311D219EFA68CE758E /* HomeTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTodo.swift; sourceTree = "<group>"; };
 		5B470AC78CCDD1F7056DC237 /* TodoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntity.swift; sourceTree = "<group>"; };
 		645F763AA43A902D1177B707 /* DailyTodos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodos.swift; sourceTree = "<group>"; };
 		AA47E822772B2385E7CFFA62 /* MonthlyTodosEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodosEntity.swift; sourceTree = "<group>"; };
 		B636A092CF861A41A79AB706 /* ModaData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModaData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9FA4937285821EB85DA58E4 /* DailyTodoInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodoInfoEntity.swift; sourceTree = "<group>"; };
 		C53433322E396F139DA58616 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE29DE5E777F3127301B5972 /* Realm_RealmSwift.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Realm_RealmSwift.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		E46E442B0FEDBED5A9E47D22 /* MonthlyTodos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodos.swift; sourceTree = "<group>"; };
-		EC450BADDC4551A7405559CD /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		F98630EFB6C7B1A5FB968A64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +80,7 @@
 			children = (
 				A451170322805B788C11D3E1 /* Legacy */,
 				65A5D817B6795A06DF14D1A4 /* Model */,
+				3861881BA765933835E5687E /* ModelContainer.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -83,9 +88,10 @@
 		65A5D817B6795A06DF14D1A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4A32DE8E2CB23C5B002347ED /* HomeDate.swift */,
 				645F763AA43A902D1177B707 /* DailyTodos.swift */,
+				58D5F7311D219EFA68CE758E /* HomeTodo.swift */,
 				E46E442B0FEDBED5A9E47D22 /* MonthlyTodos.swift */,
-				EC450BADDC4551A7405559CD /* Todo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -93,7 +99,7 @@
 		6F22D14F8BCA2B9931AEB3EC /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				46CD2FAC004956D2B225D874 /* DailyTodosEntity.swift */,
+				B9FA4937285821EB85DA58E4 /* DailyTodoInfoEntity.swift */,
 				AA47E822772B2385E7CFFA62 /* MonthlyTodosEntity.swift */,
 				5B470AC78CCDD1F7056DC237 /* TodoEntity.swift */,
 			);
@@ -170,8 +176,6 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 7718FB2FFC72D408C15A98FB /* Build configuration list for PBXProject "ModaData" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -207,13 +211,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF2421F08FC106FB0A819276 /* DailyTodosEntity.swift in Sources */,
+				8FB75E74816764A236054BF1 /* DailyTodoInfoEntity.swift in Sources */,
 				DC0A0BF70612E58062E937E1 /* MonthlyTodosEntity.swift in Sources */,
 				53F444EFBC9E52E0363F5BC4 /* TodoEntity.swift in Sources */,
 				58BE02FE2C7F2952BCF0BE7A /* TodoStorage.swift in Sources */,
 				9C33536646421F385AF0B6DF /* DailyTodos.swift in Sources */,
+				4A32DE8F2CB23C5B002347ED /* HomeDate.swift in Sources */,
+				41EECAB3FE3A5868F041D205 /* HomeTodo.swift in Sources */,
 				009394DEDB3DDFF44F069426 /* MonthlyTodos.swift in Sources */,
-				CB8840B4E6EF98A659CE002A /* Todo.swift in Sources */,
+				804781522B65214C59059AA8 /* ModelContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,7 +329,8 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited) DEBUG=1",
+					"$(inherited)",
+					"DEBUG=1",
 					"DEBUG=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -375,17 +382,7 @@
 					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/Bid/Bid.modulemap",
 					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/s2geometry/s2geometry.modulemap",
 				);
-				OTHER_SWIFT_FLAGS = (
-					"$(inherited)",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/checkouts/realm-core/src/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/checkouts/realm-swift/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/Bid/Bid.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/s2geometry/s2geometry.modulemap",
-				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/../../Tuist/.build/checkouts/realm-core/src/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../Tuist/.build/checkouts/realm-swift/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/Bid/Bid.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/s2geometry/s2geometry.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pinto.moda.ModaData;
 				PRODUCT_NAME = ModaData;
 				SDKROOT = iphoneos;
@@ -436,17 +433,7 @@
 					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/Bid/Bid.modulemap",
 					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/s2geometry/s2geometry.modulemap",
 				);
-				OTHER_SWIFT_FLAGS = (
-					"$(inherited)",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/checkouts/realm-core/src/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/checkouts/realm-swift/include/module.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/Bid/Bid.modulemap",
-					"-Xcc",
-					"-fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/s2geometry/s2geometry.modulemap",
-				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=$(SRCROOT)/../../Tuist/.build/checkouts/realm-core/src/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../Tuist/.build/checkouts/realm-swift/include/module.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/Bid/Bid.modulemap -Xcc -fmodule-map-file=$(SRCROOT)/../../Tuist/.build/tuist-derived/s2geometry/s2geometry.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pinto.moda.ModaData;
 				PRODUCT_NAME = ModaData;
 				SDKROOT = iphoneos;
@@ -454,10 +441,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

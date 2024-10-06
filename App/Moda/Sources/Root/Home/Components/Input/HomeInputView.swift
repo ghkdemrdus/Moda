@@ -12,10 +12,10 @@ struct HomeInputView: View {
 
   @State var todo: String = ""
 
-  let category: Todo.Category
+  let category: HomeTodo.Category
 
-  let onTapAdd: (Todo.Category, String) -> Void
-  let onTapCategory: (Todo.Category) -> Void
+  let onTapAdd: (HomeTodo.Category, String) -> Void
+  let onTapCategory: (HomeTodo.Category) -> Void
 
   var body: some View {
     content
@@ -36,7 +36,7 @@ private extension HomeInputView {
             .font(.spoqaHans(size: 13, weight: .bold))
             .frame(size: 32)
             .background(
-              RoundedRectangle(cornerRadius: 4)
+              RoundedRectangle(cornerRadius: 8)
                 .fill(category == .monthly ? Color.brandTertiary : .clear)
             )
         }
@@ -51,7 +51,7 @@ private extension HomeInputView {
             .font(.spoqaHans(size: 13, weight: .bold))
             .frame(size: 32)
             .background(
-              RoundedRectangle(cornerRadius: 4)
+              RoundedRectangle(cornerRadius: 8)
                 .fill(category == .daily ? Color.brandTertiary : .clear)
             )
         }
@@ -76,7 +76,7 @@ private extension HomeInputView {
               hideKeyboard()
             },
             label: {
-              Image.imgCheckActive
+              Image.imgSend
                 .padding(.trailing, 6)
             }
           )
@@ -99,7 +99,7 @@ private extension HomeInputView {
 // MARK: - Previews
 
 #Preview(traits: .sizeThatFitsLayout) {
-  @Previewable @State var type: Todo.Category = .monthly
+  @Previewable @State var type: HomeTodo.Category = .monthly
   @Previewable @State var todo: String = "Todo"
 
   HomeInputView(

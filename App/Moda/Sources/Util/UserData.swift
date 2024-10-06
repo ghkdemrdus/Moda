@@ -18,9 +18,9 @@ enum UserDataKey: String, CaseIterable {
 }
 
 public final class UserData {
-  public let todoInputCategory = DataStorage<Todo.Category>(key: .todoInputCategory, defaultValue: .monthly)
+  public let todoInputCategory = DataStorage<HomeTodo.Category>(key: .todoInputCategory, defaultValue: .monthly)
   public let lastVersion = DataStorage<String>(key: .lastVersion, defaultValue: "1.0.0")
-  public let todoCategory = DataStorage<Todo.Category>(key: .todoCategory, defaultValue: .monthly)
+  public let todoCategory = DataStorage<HomeTodo.Category>(key: .todoCategory, defaultValue: .monthly)
   public let showNotice = DataStorage<Bool>(key: .showNotice, defaultValue: false)
 }
 

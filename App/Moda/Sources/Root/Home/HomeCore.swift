@@ -20,9 +20,9 @@ struct Home: Reducer {
     var currentDate: HomeDate = HomeDate.today
     var dates: [HomeDate] = DateManager.shared.homeDatas(from: .today)
 
-    var monthlyTodos: [Todo] = []
-    var dailyTodos: [Todo] = []
-    var editingTodo: Todo?
+    var monthlyTodos: [HomeTodo] = []
+    var dailyTodos: [HomeTodo] = []
+    var editingTodo: HomeTodo?
 
     var isMonthlyFolded: Bool = true
     var isInitialMonthlyLoaded: Bool = false
@@ -30,7 +30,7 @@ struct Home: Reducer {
     var isMonthlyEditing: Bool = false
     var isDailyEditing: Bool = false
 
-    var todoCategory: Todo.Category = .monthly
+    var todoCategory: HomeTodo.Category = .monthly
 
     var isDeleteTodoBottomSheetPresented: Bool = false
     var isDelayTodoBottomSheetPresented: Bool = false
@@ -44,7 +44,7 @@ struct Home: Reducer {
 
   enum Action: ViewAction {
     case showNotice
-    case updateTodoCategory(Todo.Category)
+    case updateTodoCategory(HomeTodo.Category)
     case view(View)
 
     enum View: BindableAction {
@@ -56,16 +56,20 @@ struct Home: Reducer {
 
       case dateTapped(HomeDate)
 
-      case todoAdded(Todo.Category, String)
-      case todoCategoryTapped(Todo.Category)
-      case todoDeleted(Todo)
-      case todoDelayed(Todo, Date)
+      case todoAdded(HomeTodo.Category, String)
+      case todoCategoryTapped(HomeTodo.Category)
+      case todoDeleted(HomeTodo)
+      case todoDelayed(HomeTodo, Date)
 
       case monthlyEditTapped
-      case monthlyTodosUpdated([Todo])
+      case monthlyTodoDoneTapped(HomeTodo)
+      case monthlyTodosUpdated([HomeTodo])
+      case monthlyTodosReordered([HomeTodo])
 
       case dailyEditTapped
-      case dailyTodosUpdated([Todo])
+      case dailyTodoDoneTapped(HomeTodo)
+      case dailyTodosUpdated([HomeTodo])
+      case dailyTodosReordered([HomeTodo])
     }
   }
 
@@ -112,30 +116,18 @@ struct Home: Reducer {
           state.currentDate = date
           return .none
 
-        case let .todoAdded(category, todo):
+        case let .todoAdded(category, content):
           switch category {
           case .monthly:
-            var updatedTodos = state.monthlyTodos
-            let updatingIdx = updatedTodos.firstIndex(where: { $0.isDone })
-            let todo = Todo(content: todo, category: category)
-            if let updatingIdx {
-              updatedTodos.insert(todo, at: updatingIdx)
-            } else {
-              updatedTodos.append(todo)
-            }
+            let todo = HomeTodo(content: content, category: .monthly)
+            let updatedTodos = state.monthlyTodos.updating(todo: todo)
             state.monthlyTodos = updatedTodos
             return .none
 
           case .daily:
-            var updatedTodos = state.dailyTodos
-            let updatingIdx = updatedTodos.firstIndex(where: { $0.isDone })
-            let todo = Todo(content: todo, category: category)
-            if let updatingIdx {
-              updatedTodos.insert(todo, at: updatingIdx)
-            } else {
-              updatedTodos.append(todo)
-            }
-            state.monthlyTodos = updatedTodos
+            let todo = HomeTodo(content: content, category: .daily)
+            let updatedTodos = state.dailyTodos.updating(todo: todo)
+            state.dailyTodos = updatedTodos
             return .none
           }
 
@@ -148,20 +140,45 @@ struct Home: Reducer {
         case let .todoDeleted(todo), let .todoDelayed(todo, _):
           switch todo.category {
           case .monthly:
-            state.monthlyTodos = state.monthlyTodos.filter { $0 != todo }
-
+            state.monthlyTodos = state.monthlyTodos.filter { $0.id != todo.id }
+            state.dailyTodos = state.dailyTodos.filter { $0.id != todo.id }
           case .daily:
-            state.dailyTodos = state.dailyTodos.filter { $0 != todo }
+            state.dailyTodos = state.dailyTodos.filter { $0.id != todo.id }
           }
           return .none
 
+        case let .monthlyTodoDoneTapped(todo):
+          todo.isDone.toggle()
+          let updatedTodos = state.monthlyTodos.updating(todo: todo)
+          withAnimation(.spring(duration: 0.4)) {
+            state.monthlyTodos = updatedTodos
+          }
+
+          return .none
+
         case let .monthlyTodosUpdated(todos):
-          state.monthlyTodos = todos
+          state.monthlyTodos = todos.sorted { $0.order < $1.order }
           state.isInitialMonthlyLoaded = true
           return .none
 
+        case let .monthlyTodosReordered(todos):
+          state.monthlyTodos = todos.updating()
+          return .none
+
+        case let .dailyTodoDoneTapped(todo):
+          todo.isDone.toggle()
+          let updatedTodos = state.dailyTodos.updating(todo: todo)
+          withAnimation(.spring(duration: 0.4)) {
+            state.dailyTodos = updatedTodos
+          }
+          return .none
+
         case let .dailyTodosUpdated(todos):
-          state.dailyTodos = todos
+          state.dailyTodos = todos.sorted { $0.order < $1.order }
+          return .none
+
+        case let .dailyTodosReordered(todos):
+          state.dailyTodos = todos.updating()
           return .none
 
         case .monthlyEditTapped:

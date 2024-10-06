@@ -43,6 +43,7 @@ private extension HomeDateSelectorView {
           }
           .frame(width: 40, height: 64)
         }
+        .padding(.horizontal, gradientWidth)
         .onFirstAppear {
           Task { @MainActor in
             proxy.scrollTo(currentDate, anchor: .center)

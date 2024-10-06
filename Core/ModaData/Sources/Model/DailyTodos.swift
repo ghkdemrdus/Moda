@@ -10,9 +10,9 @@ import SwiftData
 @Model
 public class DailyTodos {
   @Attribute(.unique) public var id: String
-  @Relationship public var todos: [Todo]
+  @Relationship public var todos: [HomeTodo]
 
-  public init(id: String, todos: [Todo]) {
+  public init(id: String, todos: [HomeTodo]) {
     self.id = id
     self.todos = todos
   }

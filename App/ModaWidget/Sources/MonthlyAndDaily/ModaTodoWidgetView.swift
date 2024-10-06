@@ -109,27 +109,29 @@ struct ModaTodoWidgetView : View {
 // MARK: - Properties
 
 private extension ModaTodoWidgetView {
-  var monthlyTodos: [Todo] {
-    monthlyTodosList.first { $0.id == Date.today.format(.monthlyId) }?.todos ?? []
+  var monthlyTodos: [HomeTodo] {
+    let todos = monthlyTodosList.first { $0.id == Date.today.format(.monthlyId) }?.todos
+    return todos?.sorted { $0.order < $1.order } ?? []
   }
 
-  var doneMonthlyTodos: [Todo] {
+  var doneMonthlyTodos: [HomeTodo] {
     monthlyTodos.filter { $0.isDone }
   }
 
-  var notDoneMonthlyTodos: [Todo] {
+  var notDoneMonthlyTodos: [HomeTodo] {
     monthlyTodos.filter { !$0.isDone }
   }
 
-  var dailyTodos: [Todo] {
-    dailyTodosList.first { $0.id == Date.today.format(.dailyId) }?.todos ?? []
+  var dailyTodos: [HomeTodo] {
+    let todos = dailyTodosList.first { $0.id == Date.today.format(.dailyId) }?.todos
+    return todos?.sorted { $0.order < $1.order } ?? []
   }
 
-  var doneDailyTodos: [Todo] {
+  var doneDailyTodos: [HomeTodo] {
     dailyTodos.filter { $0.isDone }
   }
 
-  var notDoneDailyTodos: [Todo] {
+  var notDoneDailyTodos: [HomeTodo] {
     dailyTodos.filter { !$0.isDone }
   }
 

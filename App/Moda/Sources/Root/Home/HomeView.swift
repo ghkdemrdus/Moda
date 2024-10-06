@@ -81,19 +81,25 @@ private extension HomeView {
         LazyVStack(spacing: 24) {
           HomeMonthlyTodoView(
             isFolded: $store.isMonthlyFolded,
-            todos: $store.monthlyTodos,
+            todos: store.monthlyTodos,
             onTapEdit: {
               hideKeyboard()
               send(.monthlyEditTapped)
+            },
+            onTapDone: {
+              send(.monthlyTodoDoneTapped($0))
             }
           )
           .matchedGeometryEffect(id: "Monthly", in: monthlyAnimationNamespace, anchor: .top)
 
           HomeDailyTodoView(
-            todos: $store.dailyTodos,
+            todos: store.dailyTodos,
             onTapEdit: {
               hideKeyboard()
               send(.dailyEditTapped)
+            },
+            onTapDone: {
+              send(.dailyTodoDoneTapped($0))
             }
           )
           .matchedGeometryEffect(id: "Daily", in: dailyAnimationNamespace, anchor: .top)
@@ -120,7 +126,7 @@ private extension HomeView {
         Color.clear.frame(height: 132)
 
         HomeMonthlyTodoEditView(
-          todos: $store.monthlyTodos,
+          prevTodos: store.monthlyTodos,
           onTapDone: {
             store.isMonthlyEditing = false
           },
@@ -131,6 +137,9 @@ private extension HomeView {
           onTapDelay: {
             store.editingTodo = $0
             store.isDelayTodoBottomSheetPresented = true
+          },
+          onReorder: {
+            send(.monthlyTodosReordered($0))
           }
         )
         .matchedGeometryEffect(id: "Monthly", in: monthlyAnimationNamespace, anchor: .top)
@@ -150,7 +159,7 @@ private extension HomeView {
         Color.clear.frame(height: 132)
 
         HomeDailyTodoEditView(
-          todos: $store.dailyTodos,
+          prevTodos: store.dailyTodos,
           onTapDone: {
             store.isDailyEditing = false
           },
@@ -161,6 +170,9 @@ private extension HomeView {
           onTapDelay: {
             store.editingTodo = $0
             store.isDelayTodoBottomSheetPresented = true
+          },
+          onReorder: {
+            send(.dailyTodosReordered($0))
           }
         )
         .matchedGeometryEffect(id: "Daily", in: dailyAnimationNamespace, anchor: .top)
@@ -216,7 +228,7 @@ private extension HomeView {
 // MARK: - Properties & Methods
 
 private extension HomeView {
-  func updateLocalData(monthlyTodos: [Todo]) {
+  func updateLocalData(monthlyTodos: [HomeTodo]) {
     let id = store.currentDate.date.format(.monthlyId)
     if let todoIdx = monthlyTodosList.firstIndex(where: { $0.id == id }) {
       if monthlyTodos.isEmpty {
@@ -229,7 +241,7 @@ private extension HomeView {
     }
   }
 
-  func updateLocalData(dailyTodos: [Todo]) {
+  func updateLocalData(dailyTodos: [HomeTodo]) {
     let id = store.currentDate.date.format(.dailyId)
     if let todoIdx = dailyTodosList.firstIndex(where: { $0.id == id }) {
       if dailyTodos.isEmpty {
@@ -242,22 +254,28 @@ private extension HomeView {
     }
   }
 
-  func delayTodo(todo: Todo, date: Date) {
+  func delayTodo(todo: HomeTodo, date: Date) {
+    send(.todoDeleted(todo))
+
     switch todo.category {
     case .monthly:
       let id = date.format(.monthlyId)
       if let todoIdx = monthlyTodosList.firstIndex(where: { $0.id == id }) {
-        monthlyTodosList[todoIdx].todos.append(todo)
+        let updatedTodos = monthlyTodosList[todoIdx].todos
+        monthlyTodosList[todoIdx].todos = updatedTodos.updating(todo: todo)
       } else {
-        modelContext.insert(MonthlyTodos(id: id, todos: [todo]))
+        let updatedTodo = HomeTodo(content: todo.content, isDone: todo.isDone, category: todo.category)
+        modelContext.insert(MonthlyTodos(id: id, todos: [updatedTodo]))
       }
 
     case .daily:
       let id = date.format(.dailyId)
       if let todoIdx = dailyTodosList.firstIndex(where: { $0.id == id }) {
-        dailyTodosList[todoIdx].todos.append(todo)
+        let updatedTodos = dailyTodosList[todoIdx].todos
+        dailyTodosList[todoIdx].todos = updatedTodos.updating(todo: todo)
       } else {
-        modelContext.insert(DailyTodos(id: id, todos: [todo]))
+        let updatedTodo = HomeTodo(content: todo.content, isDone: todo.isDone, category: todo.category)
+        modelContext.insert(DailyTodos(id: id, todos: [updatedTodo]))
       }
     }
   }

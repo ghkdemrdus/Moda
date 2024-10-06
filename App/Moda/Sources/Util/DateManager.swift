@@ -47,8 +47,4 @@ struct DateManager {
     }
     return dates
   }
-  
-  var getUniqueId: String {
-    return Date.today.format(.dailyId) + String(Int(Date().timeIntervalSince1970 * 10) % 100000 )
-  }
 }

@@ -14,7 +14,7 @@ struct HomeDelayTodoBottomSheet: View {
     case tomorrow
     case specificDate
 
-    func title(category: Todo.Category?) -> String {
+    func title(category: HomeTodo.Category?) -> String {
       switch self {
       case .tomorrow: category == .daily ? "내일로" : "다음 달로"
       case .specificDate: "날짜 지정"
@@ -27,10 +27,10 @@ struct HomeDelayTodoBottomSheet: View {
   @State var isDatePickerShown: Bool = false
   @Binding var isPresented: Bool
 
-  let todo: Todo?
+  let todo: HomeTodo?
   let currentDate: Date
 
-  let onTapConfirm: (Todo, Date) -> Void
+  let onTapConfirm: (HomeTodo, Date) -> Void
 
   var body: some View {
     ZStack(alignment: .bottom) {
@@ -129,7 +129,12 @@ struct HomeDelayTodoBottomSheet: View {
     } else {
       nextDate = selectedDate
     }
-    onTapConfirm(todo, nextDate)
-    isPresented = false
+
+    if todo.category == .monthly, nextDate.format(.monthlyId) == currentDate.format(.monthlyId) {
+      isPresented = false
+    } else {
+      onTapConfirm(todo, nextDate)
+      isPresented = false
+    }
   }
 }

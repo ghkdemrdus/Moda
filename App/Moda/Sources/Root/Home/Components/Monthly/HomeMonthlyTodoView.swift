@@ -11,9 +11,10 @@ import SwiftUI
 struct HomeMonthlyTodoView: View {
 
   @Binding var isFolded: Bool
-  @Binding var todos: [Todo]
+  let todos: [HomeTodo]
 
   let onTapEdit: () -> Void
+  let onTapDone: (HomeTodo) -> Void
 
   var body: some View {
     content
@@ -70,7 +71,12 @@ private extension HomeMonthlyTodoView {
       } else {
         VStack(spacing: 0) {
           ForEach(Array(todos.prefix(isFolded ? 3 : todos.count).enumerated()), id: \.element.id) { idx, todo in
-            HomeMonthlyTodoItemView(todo: $todos[idx])
+            HomeMonthlyTodoItemView(
+              todo: todos[idx],
+              onTapDone: {
+                onTapDone($0)
+              }
+            )
           }
         }
       }
@@ -78,7 +84,7 @@ private extension HomeMonthlyTodoView {
     .padding(.top, 12)
     .padding(.bottom, 6)
     .background(
-      RoundedRectangle(cornerRadius: 7)
+      RoundedRectangle(cornerRadius: 16)
         .fill(Color.backgroundBrand)
     )
     .padding(.horizontal, 16)
@@ -89,45 +95,48 @@ private extension HomeMonthlyTodoView {
 
 #Preview("투두가 없는 경우", traits: .sizeThatFitsLayout) {
   @Previewable @State var isFolded = false
-  @Previewable @State var todos = [Todo]()
+  @Previewable @State var todos = [HomeTodo]()
 
   HomeMonthlyTodoView(
     isFolded: $isFolded,
-    todos: $todos,
-    onTapEdit: {}
+    todos: todos,
+    onTapEdit: {},
+    onTapDone: { todo in todos.first(where: { $0.id == todo.id })?.isDone.toggle() }
   )
   .loadCustomFonts()
 }
 
 #Preview("투두가 3개 이하인 경우", traits: .sizeThatFitsLayout) {
   @Previewable @State var isFolded = false
-  @Previewable @State var todos: [Todo] = [
-    .init(id: "1", content: "Todo1", isDone: true, category: .monthly),
-    .init(id: "2", content: "Todo2", isDone: true, category: .monthly)
+  @Previewable @State var todos: [HomeTodo] = [
+    .init(id: "1", order: 1, content: "Todo1", isDone: true, category: .monthly),
+    .init(id: "2", order: 2, content: "Todo2", isDone: true, category: .monthly)
   ]
 
   HomeMonthlyTodoView(
     isFolded: $isFolded,
-    todos: $todos,
-    onTapEdit: {}
+    todos: todos,
+    onTapEdit: {},
+    onTapDone: { todo in todos.first(where: { $0.id == todo.id })?.isDone.toggle() }
   )
   .loadCustomFonts()
 }
 
 #Preview("투두가 3개 이상인 경우", traits: .sizeThatFitsLayout) {
   @Previewable @State var isFolded: Bool = true
-  @Previewable @State var todos: [Todo] = [
-    .init(id: "1", content: "Todo1", isDone: true, category: .monthly),
-    .init(id: "2", content: "Todo2", isDone: true, category: .monthly),
-    .init(id: "3", content: "Todo3", isDone: false, category: .monthly),
-    .init(id: "4", content: "Todo4", isDone: false, category: .monthly),
-    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .monthly)
+  @Previewable @State var todos: [HomeTodo] = [
+    .init(id: "1", order: 1, content: "Todo1", isDone: true, category: .monthly),
+    .init(id: "2", order: 2, content: "Todo2", isDone: true, category: .monthly),
+    .init(id: "3", order: 3, content: "Todo3", isDone: false, category: .monthly),
+    .init(id: "4", order: 4, content: "Todo4", isDone: false, category: .monthly),
+    .init(id: "5", order: 5, content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .monthly)
   ]
 
   HomeMonthlyTodoView(
     isFolded: $isFolded,
-    todos: $todos,
-    onTapEdit: {}
+    todos: todos,
+    onTapEdit: {},
+    onTapDone: { _ in }
   )
   .loadCustomFonts()
 }

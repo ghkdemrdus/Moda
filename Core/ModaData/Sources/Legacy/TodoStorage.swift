@@ -20,11 +20,17 @@ public final class TodoStorage {
     self.realm = try! Realm(configuration: config)
   }
 
-  public func fetchMonthlyTodos() -> [MonthlyTodosEntity] {
-    return Array(realm.objects(MonthlyTodosEntity.self))
+  public func fetchMonthlyTodos() -> [MonthlyTodoInfoEntity] {
+    return Array(realm.objects(MonthlyTodoInfoEntity.self))
   }
 
-  public func fetchDailyTodos() -> [DailyTodosEntity] {
-    return Array(realm.objects(DailyTodosEntity.self))
+  public func fetchDailyTodos() -> [DailyTodoInfoEntity] {
+    return Array(realm.objects(DailyTodoInfoEntity.self))
+  }
+
+  public func flush() {
+    try! realm.write {
+      realm.deleteAll()
+    }
   }
 }

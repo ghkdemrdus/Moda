@@ -18,35 +18,36 @@ public enum ConfigurationSetting {
 
     public static let debug = base.merge([
         "CODE_SIGN_IDENTITY": "iPhone Developer",
-        "CODE_SIGN_STYLE": "Automatic",
         "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
         "PRODUCT_BUNDLE_IDENTIFIER": "com.pinto.moda.debug",
-        "BUNDLE_DISPLAY_NAME": "ModaDebug"
+        "BUNDLE_DISPLAY_NAME": "ModaDebug",
+        "CODE_SIGN_STYLE": "Automatic",
     ])
 
     public static let release = base.merge([
         "CODE_SIGN_IDENTITY": "iPhone Distribution",
-        "CODE_SIGN_STYLE": "Manual",
         "SWIFT_OPTIMIZATION_LEVEL": "-O",
         "VALIDATE_PRODUCT": "YES",
         "PRODUCT_BUNDLE_IDENTIFIER": "com.pinto.moda",
-        "BUNDLE_DISPLAY_NAME": "Moda"
+        "BUNDLE_DISPLAY_NAME": "Moda",
+        "CODE_SIGN_STYLE": "Manual",
+
     ])
 
     // MARK: - Widget
 
     public static let debugWidget = base.merge([
         "CODE_SIGN_IDENTITY": "iPhone Developer",
-        "CODE_SIGN_STYLE": "Automatic",
         "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
         "PRODUCT_BUNDLE_IDENTIFIER": "com.pinto.moda.debug.ModaWidget",
+        "CODE_SIGN_STYLE": "Automatic",
     ])
 
     public static let releaseWidget = base.merge([
         "CODE_SIGN_IDENTITY": "iPhone Distribution",
-        "CODE_SIGN_STYLE": "Manual",
         "SWIFT_OPTIMIZATION_LEVEL": "-O",
         "VALIDATE_PRODUCT": "YES",
         "PRODUCT_BUNDLE_IDENTIFIER": "com.pinto.moda.ModaWidget",
+        "CODE_SIGN_STYLE": "Manual",
     ])
 }

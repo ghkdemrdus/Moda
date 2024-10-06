@@ -3,6 +3,16 @@
     {
       "filename" : "mode=day, type=02.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "mode=night, type=02, Property 1=Frame 1321316876.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {

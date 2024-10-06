@@ -16,27 +16,17 @@ struct ModaApp: App {
 //  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 //  private var store: StoreOf<RootCore> { delegate.store }
 
-  var modelContainer: ModelContainer = {
-    let schema = Schema([MonthlyTodos.self, DailyTodos.self, Todo.self])
-    let modelConfiguration = ModelConfiguration(schema: schema)
-
-    do {
-      return try ModelContainer(for: schema, configurations: [modelConfiguration])
-    } catch {
-      fatalError("Could not create ModelContainer: \(error)")
-    }
-  }()
-
   var body: some Scene {
     WindowGroup {
       RootView()
-        .modelContainer(modelContainer)
+        .modelContainer(defaultModelContainer)
         .onFirstAppear {
+          UITextField.appearance().tintColor = UIColor(.brandStrong)
           WidgetCenter.shared.reloadAllTimelines()
         }
         .onBackground {
           WidgetCenter.shared.reloadAllTimelines()
-          try? modelContainer.mainContext.save()
+          try? defaultModelContainer.mainContext.save()
         }
     }
   }

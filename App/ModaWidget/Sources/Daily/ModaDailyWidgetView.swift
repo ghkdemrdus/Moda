@@ -73,15 +73,16 @@ struct ModaDailyWidgetView : View {
 // MARK: - Properties
 
 private extension ModaDailyWidgetView {
-  var todos: [Todo] {
-    dailyTodosList.first { $0.id == Date.today.format(.dailyId) }?.todos ?? []
+  var todos: [HomeTodo] {
+    let todos = dailyTodosList.first { $0.id == Date.today.format(.dailyId) }?.todos
+    return todos?.sorted { $0.order < $1.order } ?? []
   }
 
-  var notDoneTodos: [Todo] {
+  var notDoneTodos: [HomeTodo] {
     Array(todos.filter { !$0.isDone }.prefix(4))
   }
 
-  var doneTodos: [Todo] {
+  var doneTodos: [HomeTodo] {
     todos.filter { $0.isDone }
   }
 

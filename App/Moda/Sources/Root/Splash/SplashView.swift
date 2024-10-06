@@ -18,98 +18,85 @@ struct SplashView: View {
   @Query var monthlyTodosList: [MonthlyTodos]
   @Query var dailyTodosList: [DailyTodos]
 
-  @Dependency(\.userData) var userData
-  @Dependency(\.versionManager) var versionManager
-
   public init(store: StoreOf<Splash>) {
     self.store = store
   }
 
   var body: some View {
-    Image.imgSplash
-      .ignoresSafeArea()
+    content
       .task {
-        let version = Bundle.main.version
-
-        async let upgradeTask: () = onUpgrade(version: version)
-        async let sleepTask: () = Task.sleep(for: .seconds(1))
-
-        _ = try? await [upgradeTask, sleepTask]
-        _ = withAnimation(.easeInOut) {
-          send(.timeout)
+        send(.onTask)
+      }
+      .onChange(of: store.shouldMigrateTodos, initial: true) {
+        guard let shouldMigrate = $1 else { return }
+        if shouldMigrate {
+          migrateTodoData()
+        }
+        send(.migrationFinished)
+      }
+      .onChange(of: [store.isTimeout, store.isMigrationFinished]) {
+        if $1.allSatisfy ({ $0 }) {
+          _ = withAnimation(.easeInOut) {
+            send(.splashFinished)
+          }
         }
       }
   }
+}
 
-  func onUpgrade(version: String) async {
-    await checkIsUpdated(version: version)
-    await migrateTodoDataIfNeeded(version: version)
+// MARK: - Content
+
+private extension SplashView {
+  var content: some View {
+    ZStack {
+      Image.imgSplash
+    }
+    .ignoresSafeArea()
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .background(Color.backgroundPrimary)
   }
+}
 
-  func checkIsUpdated(version: String) async {
-    await versionManager.checkIsUpdated(version: version)
-  }
+// MARK: - Methods
 
-  func migrateTodoDataIfNeeded(version: String) async {
-    let shouldMigrateTodoData = versionManager.shouldMigrateTodoData(version: version)
-    guard shouldMigrateTodoData else { return }
-
+private extension SplashView {
+  func migrateTodoData() {
     let monthlyTodoEntities = TodoStorage.shared.fetchMonthlyTodos()
     let dailyTodoEntities = TodoStorage.shared.fetchDailyTodos()
 
-    // 1. 월별 투두 변환 작업을 비동기적으로 처리
-    let monthlyResults = await withTaskGroup(of: MonthlyTodos.self) { taskGroup -> [MonthlyTodos] in
-        for entity in monthlyTodoEntities {
-            taskGroup.addTask {
-                let todos = entity.monthlyTodos.map {
-                    Todo(id: $0.todoId, content: $0.content, isDone: $0.isDone, category: .monthly)
-                }
-                return MonthlyTodos(id: entity.date, todos: Array(todos))
-            }
-        }
-
-        var results = [MonthlyTodos]()
-        for await result in taskGroup {
-            results.append(result)
-        }
-        return results
+    // 1. 먼쓸리 투두 변환 작업
+    let monthlyTodosList = monthlyTodoEntities.map { entity in
+      let todos = entity.monthlyTodos.enumerated().map { idx, todo in
+        HomeTodo(id: todo.todoId, order: idx, content: todo.content, isDone: todo.isDone, category: .monthly)
+      }
+      return MonthlyTodos(id: entity.date, todos: todos)
     }
 
-    // 2. 일별 투두 변환 작업을 비동기적으로 처리
-    let dailyResults = await withTaskGroup(of: DailyTodos.self) { taskGroup -> [DailyTodos] in
-        for entity in dailyTodoEntities {
-            taskGroup.addTask {
-                let todos = entity.dailyTodos.map {
-                    Todo(id: $0.todoId, content: $0.content, isDone: $0.isDone, category: .daily)
-                }
-                return DailyTodos(id: entity.date, todos: Array(todos))
-            }
-        }
-
-        var results = [DailyTodos]()
-        for await result in taskGroup {
-            results.append(result)
-        }
-        return results
+    // 2. 데일리 투두 변환 작업
+    let dailyTodosList = dailyTodoEntities.map { entity in
+      let todos = entity.dailyTodos.enumerated().map { idx, todo in
+        HomeTodo(id: todo.todoId, order: idx, content: todo.content, isDone: todo.isDone, category: .daily)
+      }
+      return DailyTodos(id: entity.date, todos: todos)
     }
 
-    // 3. 변환된 데이터를 MainActor에서 modelContext에 삽입
-    await MainActor.run {
-      for monthlyTodo in monthlyResults {
-        modelContext.insert(monthlyTodo)
-      }
-      for dailyTodo in dailyResults {
-        modelContext.insert(dailyTodo)
-      }
+    // 3. 변환된 데이터를 modelContext에 삽입
+    for monthlyTodos in monthlyTodosList {
+      modelContext.insert(monthlyTodos)
+    }
+    for dailyTodos in dailyTodosList {
+      modelContext.insert(dailyTodos)
+    }
 
-      do {
-        try modelContext.save()
-      } catch {
-        print("마이그레이션 실패: \(error)")
-      }
+    do {
+      try modelContext.save()
+    } catch {
+      fatalError("Failed to save: \(error)")
     }
   }
 }
+
+// MARK: - Preview
 
 #Preview(traits: .sizeThatFitsLayout) {
   SplashView(

@@ -11,7 +11,7 @@ import SwiftData
 
 struct ModaMonthlyWidgetView : View {
   var entry: ModaMonthlyProvider.Entry
-  @Query var monthlyTodoLists: [MonthlyTodos]
+  @Query var monthlyTodosList: [MonthlyTodos]
 
   var body: some View {
     HStack(alignment: .top, spacing: 12) {
@@ -73,15 +73,16 @@ struct ModaMonthlyWidgetView : View {
 // MARK: - Properties
 
 private extension ModaMonthlyWidgetView {
-  var todos: [Todo] {
-    monthlyTodoLists.first { $0.id == Date.today.format(.monthlyId) }?.todos ?? []
+  var todos: [HomeTodo] {
+    let todos = monthlyTodosList.first { $0.id == Date.today.format(.monthlyId) }?.todos
+    return todos?.sorted { $0.order < $1.order } ?? []
   }
 
-  var notDoneTodos: [Todo] {
+  var notDoneTodos: [HomeTodo] {
     Array(todos.filter { !$0.isDone }.prefix(4))
   }
 
-  var doneTodos: [Todo] {
+  var doneTodos: [HomeTodo] {
     todos.filter { $0.isDone }
   }
 

@@ -17,11 +17,11 @@ enum Root {
   static var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
-      case .splash(.view(.timeout)):
+      case .splash(.view(.splashFinished)):
         state = .home(.init())
         return .none
 
-      default: 
+      default:
         return .none
       }
     }
@@ -32,30 +32,4 @@ enum Root {
       Home()
     }
   }
-//  @ObservableState
-//  enum State: Equatable {
-//    case splash(Splash.State = .init())
-//    case home(Home.State = .init())
-//
-//    init() { self = .splash() }
-//  }
-//
-//  enum Action {
-//    case splash(Splash.Action)
-//    case home(Home.Action)
-//  }
-//
-//  var body: some Reducer<State, Action> {
-//    Reduce<State, Action> { state, action in
-//      switch action {
-//      default: return .none
-//      }
-//    }
-//    .ifCaseLet(\.splash, action: \.splash) {
-//      Splash()
-//    }
-//    .ifCaseLet(\.home, action: \.home) {
-//      Home()
-//    }
-//  }
 }

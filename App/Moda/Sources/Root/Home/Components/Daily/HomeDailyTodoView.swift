@@ -10,9 +10,10 @@ import SwiftUI
 
 struct HomeDailyTodoView: View {
 
-  @Binding var todos: [Todo]
+  let todos: [HomeTodo]
 
   let onTapEdit: () -> Void
+  let onTapDone: (HomeTodo) -> Void
 
   var body: some View {
     content
@@ -50,13 +51,17 @@ private extension HomeDailyTodoView {
           Text("오늘의 할 일을 가벼운 마음으로\n적어볼까요?")
             .font(.spoqaHans(size: 15))
             .foregroundStyle(Color.textInactive)
+            .lineLimit(2)
             .multilineTextAlignment(.center)
         }
         .padding(.vertical, 66)
       } else {
         VStack(spacing: 0) {
-          ForEach(Array(todos.enumerated()), id: \.element.id) { idx, todo in
-            HomeDailyTodoItemView(todo: $todos[idx])
+          ForEach(todos, id: \.id) { todo in
+            HomeDailyTodoItemView(
+              todo: todo,
+              onTapDone: onTapDone
+            )
           }
         }
         .padding(.top, 4)
@@ -69,27 +74,29 @@ private extension HomeDailyTodoView {
 // MARK: - Previews
 
 #Preview("투두가 없는 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todos: [Todo] = []
+  @Previewable @State var todos: [HomeTodo] = []
 
   HomeDailyTodoView(
-    todos: $todos,
-    onTapEdit: {}
+    todos: todos,
+    onTapEdit: {},
+    onTapDone: { _ in }
   )
   .loadCustomFonts()
 }
 
 #Preview("투두가 있는 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todos: [Todo] = [
-    .init(id: "1", content: "Todo1", isDone: true, category: .daily),
-    .init(id: "2", content: "Todo2", isDone: true, category: .daily),
-    .init(id: "3", content: "Todo3", isDone: false, category: .daily),
-    .init(id: "4", content: "Todo4", isDone: false, category: .daily),
-    .init(id: "5", content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .daily)
+  @Previewable @State var todos: [HomeTodo] = [
+    .init(id: "1", order: 1, content: "Todo1", isDone: true, category: .daily),
+    .init(id: "2", order: 2, content: "Todo2", isDone: true, category: .daily),
+    .init(id: "3", order: 3, content: "Todo3", isDone: false, category: .daily),
+    .init(id: "4", order: 4, content: "Todo4", isDone: false, category: .daily),
+    .init(id: "5", order: 5, content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .daily)
   ]
 
   HomeDailyTodoView(
-    todos: $todos,
-    onTapEdit: {}
+    todos: todos,
+    onTapEdit: {},
+    onTapDone: { _ in }
   )
   .loadCustomFonts()
 }
