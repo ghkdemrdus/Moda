@@ -68,7 +68,6 @@ public enum Module {
 
     public enum ThirdParty: String, CaseIterable {
         case composableArchitecture = "ComposableArchitecture"
-        case kingfisher = "Kingfisher"
         case realm = "RealmSwift"
 
         // MARK: - Properties
@@ -76,7 +75,7 @@ public enum Module {
         public var name: String { self.rawValue }
         public var framework: Product {
             switch self {
-            case .kingfisher, .composableArchitecture:
+            case .composableArchitecture:
                 return .framework
 
             case .realm:

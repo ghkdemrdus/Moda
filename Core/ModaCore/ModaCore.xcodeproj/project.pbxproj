@@ -3,13 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0FB9E6A913E3A06E4C170D32 /* OnFisrtAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E230F6F93A457BB35ADDDAB7 /* OnFisrtAppearModifier.swift */; };
 		39D23AE9C28050A2965E0721 /* NoticeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A77D327B4FCA5081A30E2C /* NoticeManager.swift */; };
-		4A32DE952CB24E24002347ED /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A32DE942CB24E24002347ED /* Bundle+Extension.swift */; };
 		66EEC25AF18508EE8F43EAEB /* DateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAE129E8A7A86CE9FD96FD2 /* DateFormat.swift */; };
 		6AF3BC1903F9EF0BE640380E /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9326A91178BA806D86D972A6 /* View+Extension.swift */; };
 		BC32601D9A815AD8F98BF404 /* HideKeyboardModifiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC06563F2A37055015D301D /* HideKeyboardModifiler.swift */; };
@@ -18,6 +17,7 @@
 		CE4A20653CFFEB7E5265C31E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEA21C725D0EC987DB7A789 /* Date+Extension.swift */; };
 		D24C78E754E17635A91F93D6 /* PositionOffsetPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59C610BA0B69682A457C0CE /* PositionOffsetPreferenceKey.swift */; };
 		F2D0E06731C283730AFA6423 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBB4A4FE6E2DE6D35C8620C /* UIApplication+Extension.swift */; };
+		FE112EDA8D7C72A4550412AB /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD6A4C6962EF47E985B2C97 /* Bundle+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,12 +38,12 @@
 		28AA8288A78EFC49B16D268F /* ContentSizePreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizePreferenceKey.swift; sourceTree = "<group>"; };
 		2BC06563F2A37055015D301D /* HideKeyboardModifiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboardModifiler.swift; sourceTree = "<group>"; };
 		2BEA21C725D0EC987DB7A789 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		4A32DE942CB24E24002347ED /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		6DFFE93768EA74944DF4CC2C /* ModaCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModaCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76A77D327B4FCA5081A30E2C /* NoticeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeManager.swift; sourceTree = "<group>"; };
 		8D5EF1C76FA1ED95E3CD1E10 /* UIScreen+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+Extension.swift"; sourceTree = "<group>"; };
 		8FBB4A4FE6E2DE6D35C8620C /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		9326A91178BA806D86D972A6 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		9CD6A4C6962EF47E985B2C97 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		A59C610BA0B69682A457C0CE /* PositionOffsetPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionOffsetPreferenceKey.swift; sourceTree = "<group>"; };
 		E230F6F93A457BB35ADDDAB7 /* OnFisrtAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnFisrtAppearModifier.swift; sourceTree = "<group>"; };
 		EABDB73FB03C1EE5E9C64562 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -94,8 +94,8 @@
 		92801AD8C3F4F1DA05980EFB /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9CD6A4C6962EF47E985B2C97 /* Bundle+Extension.swift */,
 				2BEA21C725D0EC987DB7A789 /* Date+Extension.swift */,
-				4A32DE942CB24E24002347ED /* Bundle+Extension.swift */,
 				8FBB4A4FE6E2DE6D35C8620C /* UIApplication+Extension.swift */,
 				8D5EF1C76FA1ED95E3CD1E10 /* UIScreen+Extension.swift */,
 				9326A91178BA806D86D972A6 /* View+Extension.swift */,
@@ -168,6 +168,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Moda;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 5014759DF7FE0C1490480618 /* Build configuration list for PBXProject "ModaCore" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -202,10 +204,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE112EDA8D7C72A4550412AB /* Bundle+Extension.swift in Sources */,
 				CE4A20653CFFEB7E5265C31E /* Date+Extension.swift in Sources */,
 				F2D0E06731C283730AFA6423 /* UIApplication+Extension.swift in Sources */,
 				CD68322724AE30EFA32DBEE8 /* UIScreen+Extension.swift in Sources */,
-				4A32DE952CB24E24002347ED /* Bundle+Extension.swift in Sources */,
 				6AF3BC1903F9EF0BE640380E /* View+Extension.swift in Sources */,
 				C56E645929403CC9E4BF4B56 /* ContentSizePreferenceKey.swift in Sources */,
 				D24C78E754E17635A91F93D6 /* PositionOffsetPreferenceKey.swift in Sources */,
@@ -243,7 +245,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -389,8 +394,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"DEBUG=1",
+					"$(inherited) DEBUG=1",
 					"DEBUG=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
