@@ -39,6 +39,7 @@ private extension HomeDailyTodoItemView {
         .font(.spoqaHans(size: 15))
         .foregroundStyle(Color.textSecondary)
         .lineLimit(nil)
+        .strikethrough(todo.isDone)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 3)
     }
