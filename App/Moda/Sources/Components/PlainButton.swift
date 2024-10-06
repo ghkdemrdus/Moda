@@ -23,6 +23,8 @@ struct PlainButton<Content: View>: View {
   }
 }
 
+// MARK: - Preview
+
 #Preview {
-  PlainButton(action: {}, label: { EmptyView() })
+  PlainButton(action: {}, label: { Color.blue.frame(size: 200) })
 }

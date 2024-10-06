@@ -81,22 +81,14 @@ private extension HomeDailyTodoView {
     onTapEdit: {},
     onTapDone: { _ in }
   )
-  .loadCustomFonts()
 }
 
 #Preview("투두가 있는 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todos: [HomeTodo] = [
-    .init(id: "1", order: 1, content: "Todo1", isDone: true, category: .daily),
-    .init(id: "2", order: 2, content: "Todo2", isDone: true, category: .daily),
-    .init(id: "3", order: 3, content: "Todo3", isDone: false, category: .daily),
-    .init(id: "4", order: 4, content: "Todo4", isDone: false, category: .daily),
-    .init(id: "5", order: 5, content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .daily)
-  ]
+  @Previewable @State var todos: [HomeTodo] = .mock
 
   HomeDailyTodoView(
     todos: todos,
     onTapEdit: {},
     onTapDone: { _ in }
   )
-  .loadCustomFonts()
 }

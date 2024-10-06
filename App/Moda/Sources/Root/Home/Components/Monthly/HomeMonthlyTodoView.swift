@@ -101,42 +101,34 @@ private extension HomeMonthlyTodoView {
     isFolded: $isFolded,
     todos: todos,
     onTapEdit: {},
-    onTapDone: { todo in todos.first(where: { $0.id == todo.id })?.isDone.toggle() }
+    onTapDone: { _ in }
   )
-  .loadCustomFonts()
 }
 
 #Preview("투두가 3개 이하인 경우", traits: .sizeThatFitsLayout) {
   @Previewable @State var isFolded = false
-  @Previewable @State var todos: [HomeTodo] = [
-    .init(id: "1", order: 1, content: "Todo1", isDone: true, category: .monthly),
-    .init(id: "2", order: 2, content: "Todo2", isDone: true, category: .monthly)
-  ]
+  @Previewable @State var todos: [HomeTodo] = [.shortMock]
 
   HomeMonthlyTodoView(
     isFolded: $isFolded,
     todos: todos,
     onTapEdit: {},
-    onTapDone: { todo in todos.first(where: { $0.id == todo.id })?.isDone.toggle() }
+    onTapDone: { todo in
+      todos.first(where: { $0.id == todo.id })?.isDone.toggle()
+    }
   )
-  .loadCustomFonts()
 }
 
 #Preview("투두가 3개 이상인 경우", traits: .sizeThatFitsLayout) {
   @Previewable @State var isFolded: Bool = true
-  @Previewable @State var todos: [HomeTodo] = [
-    .init(id: "1", order: 1, content: "Todo1", isDone: true, category: .monthly),
-    .init(id: "2", order: 2, content: "Todo2", isDone: true, category: .monthly),
-    .init(id: "3", order: 3, content: "Todo3", isDone: false, category: .monthly),
-    .init(id: "4", order: 4, content: "Todo4", isDone: false, category: .monthly),
-    .init(id: "5", order: 5, content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .monthly)
-  ]
+  @Previewable @State var todos: [HomeTodo] = .mock
 
   HomeMonthlyTodoView(
     isFolded: $isFolded,
     todos: todos,
     onTapEdit: {},
-    onTapDone: { _ in }
+    onTapDone: { todo in
+      todos.first(where: { $0.id == todo.id })?.isDone.toggle()
+    }
   )
-  .loadCustomFonts()
 }

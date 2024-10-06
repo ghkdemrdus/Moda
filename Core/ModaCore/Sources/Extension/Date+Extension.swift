@@ -20,11 +20,6 @@ public extension Date {
     Calendar.current.component(.day, from: self)
   }
 
-  static var today: Date {
-    let components = Calendar.current.dateComponents([.year, .month, .day], from: .now)
-    return Calendar.current.date(from: components)!
-  }
-
   var firstDayOfMonth: Date {
     let components = Calendar.current.dateComponents([.year, .month], from: self)
     return Calendar.current.date(from: components)!
@@ -36,6 +31,11 @@ public extension Date {
 
   func addMonth(_ count: Int) -> Date {
     Calendar.current.date(byAdding: .month, value: count, to: self)!
+  }
+
+  static var today: Date {
+    let components = Calendar.current.dateComponents([.year, .month, .day], from: .now)
+    return Calendar.current.date(from: components)!
   }
 }
 

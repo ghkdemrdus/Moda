@@ -19,11 +19,10 @@ public final class VersionManager {
   func onUpgrate() async {
     let version = Bundle.main.version
     let lastVersion = await userData.lastVersion.value
-    guard lastVersion < version else { return }
 
     migrateTodos.send(lastVersion < "1.0.4")
+    await userData.showNotice.update(lastVersion < version)
 
-    await userData.showNotice.update(true)
     await userData.lastVersion.update(version)
   }
 }

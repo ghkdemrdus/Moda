@@ -301,5 +301,4 @@ private extension HomeView {
       Home()
     }
   )
-  .loadCustomFonts()
 }

@@ -19,14 +19,13 @@ struct ModaApp: App {
   var body: some Scene {
     WindowGroup {
       RootView()
-        .modelContainer(defaultModelContainer)
+        .modelContainer(todoModelContainer)
         .onFirstAppear {
           UITextField.appearance().tintColor = UIColor(.brandStrong)
-          WidgetCenter.shared.reloadAllTimelines()
         }
         .onBackground {
           WidgetCenter.shared.reloadAllTimelines()
-          try? defaultModelContainer.mainContext.save()
+          try? todoModelContainer.mainContext.save()
         }
     }
   }

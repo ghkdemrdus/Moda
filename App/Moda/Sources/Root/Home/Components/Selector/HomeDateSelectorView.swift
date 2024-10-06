@@ -84,5 +84,4 @@ private extension HomeDateSelectorView {
     currentDate: currentDate,
     onTapDate: { currentDate = $0 }
   )
-  .loadCustomFonts()
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,7 +17,6 @@
 		8E7E39BDC94EF2371258A9D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2CA104B46F6B8A02F42817B /* Assets.xcassets */; };
 		94B77F61C8AAC2220C04AF9B /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2993576272794CAC2383651D /* Color+Extension.swift */; };
 		A8FC6371B95415DD07BBD796 /* SpoqaHanSansNeo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D8C4F6D8A199CF950D799F6F /* SpoqaHanSansNeo-Bold.otf */; };
-		B1E320B195A40195A1DA24B0 /* FontUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025A7BE1F78480B7FBEB3067 /* FontUtil.swift */; };
 		B215E070EC10A7B2EE619222 /* SpoqaHanSansNeo-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 09258D816FE75CC1633D99D9 /* SpoqaHanSansNeo-Light.otf */; };
 		D3C84B5E418B40F6101FB1D1 /* TuistAssets+ModaResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC6295E5965FB367B02847C /* TuistAssets+ModaResource.swift */; };
 /* End PBXBuildFile section */
@@ -36,7 +35,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		025A7BE1F78480B7FBEB3067 /* FontUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtil.swift; sourceTree = "<group>"; };
 		09258D816FE75CC1633D99D9 /* SpoqaHanSansNeo-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Light.otf"; sourceTree = "<group>"; };
 		0F0E4D1A97B38EA5A4460D11 /* SpoqaHanSansNeo-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SpoqaHanSansNeo-Thin.otf"; sourceTree = "<group>"; };
 		1EDE152A66A36B6000B294B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				FCB1CD11EE801EA2FA479735 /* Extension */,
-				E815ADE279F8C1D8F964C661 /* Util */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -141,14 +138,6 @@
 				3DE8F513837DB223C485E758 /* TuistFonts+ModaResource.swift */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		E815ADE279F8C1D8F964C661 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				025A7BE1F78480B7FBEB3067 /* FontUtil.swift */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 		FCB1CD11EE801EA2FA479735 /* Extension */ = {
@@ -190,8 +179,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Moda;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = A0A0A70445CF7C095D20266F /* Build configuration list for PBXProject "ModaResource" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -238,7 +225,6 @@
 				94B77F61C8AAC2220C04AF9B /* Color+Extension.swift in Sources */,
 				1BF307DB5E0BC13D93790DE5 /* Font+Extension.swift in Sources */,
 				62E6E124C7473AC5563849D8 /* Image+Extension.swift in Sources */,
-				B1E320B195A40195A1DA24B0 /* FontUtil.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,10 +345,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -418,7 +401,8 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited) DEBUG=1",
+					"$(inherited)",
+					"DEBUG=1",
 					"DEBUG=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

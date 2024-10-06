@@ -85,3 +85,18 @@ private extension HomeDailyTodoEditItemView {
     .padding(.horizontal, 20.5)
   }
 }
+
+// MARK: - Preview
+
+#Preview(traits: .sizeThatFitsLayout) {
+  HomeDailyTodoEditItemView(
+    idx: 0,
+    todo: .shortMock,
+    isDragging: .constant(false),
+    onTapDelete: { _ in },
+    onTapDelay: { _ in },
+    startDragging: { _, _ in },
+    updateDragging: { _ in },
+    endDragging: {}
+  )
+}

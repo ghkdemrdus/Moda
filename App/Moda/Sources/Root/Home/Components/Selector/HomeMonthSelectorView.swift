@@ -74,11 +74,13 @@ private extension HomeMonthSelectorView {
   }
 }
 
+// MARK: - Preview
+
 #Preview(traits: .sizeThatFitsLayout) {
+  @Previewable @State var currentDate: Date = .today
   HomeMonthSelectorView(
-    currentDate: .today,
-    onChangeMonth: { _ in },
-    onTapMonth: {}
+    currentDate: currentDate,
+    onChangeMonth: { currentDate = currentDate.addMonth($0) },
+    onTapMonth: { currentDate = .today }
   )
-  .loadCustomFonts()
 }

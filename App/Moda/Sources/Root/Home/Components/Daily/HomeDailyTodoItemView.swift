@@ -53,7 +53,7 @@ private extension HomeDailyTodoItemView {
 // MARK: - Previews
 
 #Preview("1줄인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: HomeTodo = .init(content: "TodoTodo", category: .daily)
+  @Previewable @State var todo: HomeTodo = .shortMock
 
   HomeDailyTodoItemView(
     todo: todo,
@@ -61,11 +61,10 @@ private extension HomeDailyTodoItemView {
       $0.isDone.toggle()
     }
   )
-  .loadCustomFonts()
 }
 
 #Preview("2줄 이상인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: HomeTodo = .init(content: "TodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodo", category: .daily)
+  @Previewable @State var todo: HomeTodo = .longMock
 
   HomeDailyTodoItemView(
     todo: todo,
@@ -73,5 +72,4 @@ private extension HomeDailyTodoItemView {
       $0.isDone.toggle()
     }
   )
-  .loadCustomFonts()
 }

@@ -162,14 +162,10 @@ private extension HomeMonthlyTodoEditView {
   }
 }
 
+// MARK: - Preview
+
 #Preview(traits: .sizeThatFitsLayout) {
-  @Previewable @State var todos: [HomeTodo] = [
-    .init(id: "1", order: 1, content: "Todo1", isDone: true, category: .monthly),
-    .init(id: "2", order: 2, content: "Todo2", isDone: true, category: .monthly),
-    .init(id: "3", order: 3, content: "Todo3", isDone: false, category: .monthly),
-    .init(id: "4", order: 4, content: "Todo4", isDone: false, category: .monthly),
-    .init(id: "5", order: 5, content: "Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5Todo5", isDone: false, category: .monthly)
-  ]
+  @Previewable @State var todos: [HomeTodo] = .mock
 
   HomeMonthlyTodoEditView(
     prevTodos: todos,
@@ -178,6 +174,4 @@ private extension HomeMonthlyTodoEditView {
     onTapDelay: { _ in },
     onReorder: { _ in }
   )
-  .loadCustomFonts()
 }
-

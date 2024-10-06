@@ -80,3 +80,41 @@ struct HomeDeleteTodoBottomSheet: View {
     .animation(.spring(duration: 0.4), value: isPresented)
   }
 }
+
+// MARK: - Preview
+
+#Preview("내용이 짧을 때") {
+  @Previewable @State var isPresented: Bool = false
+
+  ZStack {}
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .overlay(
+      HomeDeleteTodoBottomSheet(
+        isPresented: $isPresented,
+        todo: .init(content: "가나다라마바사아", isDone: false, category: .daily),
+        onTapDelete: { _ in }
+      )
+      .ignoresSafeArea()
+    )
+    .onAppear {
+      isPresented = true
+    }
+}
+
+#Preview("내용이 길 때") {
+  @Previewable @State var isPresented: Bool = false
+
+  ZStack {}
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .overlay(
+      HomeDeleteTodoBottomSheet(
+        isPresented: $isPresented,
+        todo: .init(content: "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하", isDone: false, category: .daily),
+        onTapDelete: { _ in }
+      )
+      .ignoresSafeArea()
+    )
+    .onAppear {
+      isPresented = true
+    }
+}

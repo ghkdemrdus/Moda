@@ -10,14 +10,16 @@
 		009394DEDB3DDFF44F069426 /* MonthlyTodos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46E442B0FEDBED5A9E47D22 /* MonthlyTodos.swift */; };
 		35935A9EBD16F5AFABBF29A5 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41216ED2373185E849C52CD6 /* RealmSwift.framework */; };
 		41EECAB3FE3A5868F041D205 /* HomeTodo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D5F7311D219EFA68CE758E /* HomeTodo.swift */; };
-		4A32DE8F2CB23C5B002347ED /* HomeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A32DE8E2CB23C5B002347ED /* HomeDate.swift */; };
 		53F444EFBC9E52E0363F5BC4 /* TodoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B470AC78CCDD1F7056DC237 /* TodoEntity.swift */; };
 		58BE02FE2C7F2952BCF0BE7A /* TodoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F85AC9B68B9F12CD164460 /* TodoStorage.swift */; };
 		63A79F3C4579CE4E72F40BDD /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C53433322E396F139DA58616 /* Realm.framework */; };
+		6A353027EC074B39A2488E64 /* ModuleExports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23989DAB5E81C6FF0C45E048 /* ModuleExports.swift */; };
+		7520331CB1924C9C9FC7F536 /* HomeDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A23694DE6112227A6721D /* HomeDate.swift */; };
 		804781522B65214C59059AA8 /* ModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3861881BA765933835E5687E /* ModelContainer.swift */; };
 		816FB91756DD1BA4DD98A805 /* Realm_RealmSwift.bundle in Dependencies */ = {isa = PBXBuildFile; fileRef = DE29DE5E777F3127301B5972 /* Realm_RealmSwift.bundle */; };
 		8FB75E74816764A236054BF1 /* DailyTodoInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FA4937285821EB85DA58E4 /* DailyTodoInfoEntity.swift */; };
 		9C33536646421F385AF0B6DF /* DailyTodos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645F763AA43A902D1177B707 /* DailyTodos.swift */; };
+		BA92D766B6C4D5C2F9265A8D /* ModaCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF9A3C4958ABA1A5B4EBDAE0 /* ModaCore.framework */; };
 		DA9A5259D436D908E0EDA6A6 /* Realm_RealmSwift.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE29DE5E777F3127301B5972 /* Realm_RealmSwift.bundle */; };
 		DC0A0BF70612E58062E937E1 /* MonthlyTodosEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA47E822772B2385E7CFFA62 /* MonthlyTodosEntity.swift */; };
 /* End PBXBuildFile section */
@@ -47,13 +49,15 @@
 
 /* Begin PBXFileReference section */
 		06F85AC9B68B9F12CD164460 /* TodoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStorage.swift; sourceTree = "<group>"; };
+		23989DAB5E81C6FF0C45E048 /* ModuleExports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleExports.swift; sourceTree = "<group>"; };
 		3861881BA765933835E5687E /* ModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainer.swift; sourceTree = "<group>"; };
 		41216ED2373185E849C52CD6 /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4A32DE8E2CB23C5B002347ED /* HomeDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDate.swift; sourceTree = "<group>"; };
 		58D5F7311D219EFA68CE758E /* HomeTodo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTodo.swift; sourceTree = "<group>"; };
 		5B470AC78CCDD1F7056DC237 /* TodoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntity.swift; sourceTree = "<group>"; };
 		645F763AA43A902D1177B707 /* DailyTodos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodos.swift; sourceTree = "<group>"; };
+		8E7A23694DE6112227A6721D /* HomeDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDate.swift; sourceTree = "<group>"; };
 		AA47E822772B2385E7CFFA62 /* MonthlyTodosEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTodosEntity.swift; sourceTree = "<group>"; };
+		AF9A3C4958ABA1A5B4EBDAE0 /* ModaCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModaCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B636A092CF861A41A79AB706 /* ModaData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ModaData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9FA4937285821EB85DA58E4 /* DailyTodoInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTodoInfoEntity.swift; sourceTree = "<group>"; };
 		C53433322E396F139DA58616 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA92D766B6C4D5C2F9265A8D /* ModaCore.framework in Frameworks */,
 				63A79F3C4579CE4E72F40BDD /* Realm.framework in Frameworks */,
 				35935A9EBD16F5AFABBF29A5 /* RealmSwift.framework in Frameworks */,
 			);
@@ -80,7 +85,7 @@
 			children = (
 				A451170322805B788C11D3E1 /* Legacy */,
 				65A5D817B6795A06DF14D1A4 /* Model */,
-				3861881BA765933835E5687E /* ModelContainer.swift */,
+				23989DAB5E81C6FF0C45E048 /* ModuleExports.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -88,8 +93,9 @@
 		65A5D817B6795A06DF14D1A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4A32DE8E2CB23C5B002347ED /* HomeDate.swift */,
 				645F763AA43A902D1177B707 /* DailyTodos.swift */,
+				8E7A23694DE6112227A6721D /* HomeDate.swift */,
+				3861881BA765933835E5687E /* ModelContainer.swift */,
 				58D5F7311D219EFA68CE758E /* HomeTodo.swift */,
 				E46E442B0FEDBED5A9E47D22 /* MonthlyTodos.swift */,
 			);
@@ -139,6 +145,7 @@
 		F164FFDD2124859B109A57D2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				AF9A3C4958ABA1A5B4EBDAE0 /* ModaCore.framework */,
 				B636A092CF861A41A79AB706 /* ModaData.framework */,
 				DE29DE5E777F3127301B5972 /* Realm_RealmSwift.bundle */,
 				C53433322E396F139DA58616 /* Realm.framework */,
@@ -216,10 +223,11 @@
 				53F444EFBC9E52E0363F5BC4 /* TodoEntity.swift in Sources */,
 				58BE02FE2C7F2952BCF0BE7A /* TodoStorage.swift in Sources */,
 				9C33536646421F385AF0B6DF /* DailyTodos.swift in Sources */,
-				4A32DE8F2CB23C5B002347ED /* HomeDate.swift in Sources */,
+				7520331CB1924C9C9FC7F536 /* HomeDate.swift in Sources */,
 				41EECAB3FE3A5868F041D205 /* HomeTodo.swift in Sources */,
 				009394DEDB3DDFF44F069426 /* MonthlyTodos.swift in Sources */,
 				804781522B65214C59059AA8 /* ModelContainer.swift in Sources */,
+				6A353027EC074B39A2488E64 /* ModuleExports.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

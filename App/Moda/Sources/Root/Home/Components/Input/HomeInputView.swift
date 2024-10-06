@@ -99,14 +99,13 @@ private extension HomeInputView {
 // MARK: - Previews
 
 #Preview(traits: .sizeThatFitsLayout) {
-  @Previewable @State var type: HomeTodo.Category = .monthly
-  @Previewable @State var todo: String = "Todo"
+  @Previewable @State var category: HomeTodo.Category = .monthly
+  @Previewable @State var todo: String = "가나다라마바사아"
 
   HomeInputView(
     todo: todo,
-    category: type,
+    category: category,
     onTapAdd: { _, _ in todo = "" },
-    onTapCategory: { type = $0 }
+    onTapCategory: { category = $0 }
   )
-  .loadCustomFonts()
 }

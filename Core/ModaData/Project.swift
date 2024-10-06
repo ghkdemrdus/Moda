@@ -12,6 +12,7 @@ let project = Project(
     .core(
         implementation: .data,
         dependencies: [
+            .core(implementation: .core),
             .thirdParty(.realm),
         ]
     )

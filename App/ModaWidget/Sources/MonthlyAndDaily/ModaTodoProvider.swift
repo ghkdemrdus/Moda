@@ -18,7 +18,7 @@ struct ModaTodoProvider: TimelineProvider {
   }
 
   func getTimeline(in context: Context, completion: @escaping (Timeline<ModaTodoEntry>) -> ()) {
-    let entry = ModaTodoEntry(date: Date())
+    let entry = ModaTodoEntry(date: Date.today.addDays(1))
     let timeline = Timeline(entries: [entry], policy: .atEnd)
     completion(timeline)
   }

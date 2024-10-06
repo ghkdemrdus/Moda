@@ -40,6 +40,11 @@ public class HomeTodo: Identifiable, Equatable, Hashable {
   public static var uniqueId: String { String(Int(Date().timeIntervalSince1970)) }
 }
 
+public extension HomeTodo {
+  static let shortMock: HomeTodo = HomeTodo(content: "가나다라마바사", category: .monthly)
+  static let longMock: HomeTodo = HomeTodo(content: "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하", category: .monthly)
+}
+
 public extension [HomeTodo] {
   func updating(todo: HomeTodo) -> [HomeTodo] {
     var updatedTodos = self
@@ -64,7 +69,7 @@ public extension [HomeTodo] {
   }
 
   func updating() -> [HomeTodo] {
-    var updatedTodos = self
+    let updatedTodos = self
 
     for (idx, updateTodo) in updatedTodos.enumerated() {
       updateTodo.order = idx
@@ -72,4 +77,12 @@ public extension [HomeTodo] {
 
     return updatedTodos
   }
+
+  static let mock: [HomeTodo] = [
+    HomeTodo(id: "0", order: 0, content: "가나다라마바사아", isDone: false, category: .monthly),
+    HomeTodo(id: "1", order: 1, content: "아자차카타파하", isDone: false, category: .monthly),
+    HomeTodo(id: "2", order: 2, content: "ABCDEFG", isDone: false, category: .monthly),
+    HomeTodo(id: "3", order: 3, content: "HIJKLMNOP", isDone: true, category: .monthly),
+    HomeTodo(id: "4", order: 4, content: "QRSTUVWXYZ", isDone: true, category: .monthly)
+  ]
 }

@@ -88,6 +88,7 @@ struct HomeDelayTodoBottomSheet: View {
           PlainButton(
             action: {
               tapConfirm()
+              isPresented = false
             },
             label: {
               Text("좋아요!")
@@ -131,10 +132,29 @@ struct HomeDelayTodoBottomSheet: View {
     }
 
     if todo.category == .monthly, nextDate.format(.monthlyId) == currentDate.format(.monthlyId) {
-      isPresented = false
-    } else {
-      onTapConfirm(todo, nextDate)
-      isPresented = false
+      return
     }
+    onTapConfirm(todo, nextDate)
   }
+}
+
+// MARK: - Preview
+
+#Preview {
+  @Previewable @State var isPresented: Bool = false
+
+  ZStack {}
+    .frame(maxWidth: .infinity, maxHeight: .infinity)
+    .overlay(
+      HomeDelayTodoBottomSheet(
+        isPresented: $isPresented,
+        todo: nil,
+        currentDate: Date(),
+        onTapConfirm: { _, _ in }
+      )
+      .ignoresSafeArea()
+    )
+    .onAppear {
+      isPresented = true
+    }
 }

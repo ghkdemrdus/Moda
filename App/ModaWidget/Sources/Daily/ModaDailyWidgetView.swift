@@ -91,4 +91,3 @@ private extension ModaDailyWidgetView {
     return todos.allSatisfy { $0.isDone }
   }
 }
-

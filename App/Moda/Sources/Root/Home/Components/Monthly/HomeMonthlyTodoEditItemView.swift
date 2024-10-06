@@ -84,3 +84,16 @@ private extension HomeMonthlyTodoEditItemView {
 }
 
 // MARK: - Previews
+
+#Preview(traits: .sizeThatFitsLayout) {
+  HomeMonthlyTodoEditItemView(
+    idx: 0,
+    todo: .shortMock,
+    isDragging: .constant(false),
+    onTapDelete: { _ in },
+    onTapDelay: { _ in },
+    startDragging: { _, _ in },
+    updateDragging: { _ in },
+    endDragging: {}
+  )
+}

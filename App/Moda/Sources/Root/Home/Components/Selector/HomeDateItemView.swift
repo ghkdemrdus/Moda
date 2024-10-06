@@ -79,7 +79,6 @@ private extension HomeDateItemView {
     currentDate: date,
     date: date
   )
-  .loadCustomFonts()
 }
 
 #Preview("과거인 경우") {
@@ -89,7 +88,6 @@ private extension HomeDateItemView {
     currentDate: date,
     date: date
   )
-  .loadCustomFonts()
 }
 
 #Preview("미래인 경우") {
@@ -99,5 +97,4 @@ private extension HomeDateItemView {
     currentDate: date,
     date: date
   )
-  .loadCustomFonts()
 }

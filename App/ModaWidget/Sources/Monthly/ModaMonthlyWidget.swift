@@ -15,10 +15,18 @@ struct ModaMonthlyWidget: Widget {
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: ModaMonthlyWidget.kind, provider: ModaMonthlyProvider()) { entry in
       ModaMonthlyWidgetView(entry: entry)
-        .modelContainer(defaultModelContainer)
+        .modelContainer(todoModelContainer)
     }
     .configurationDisplayName("먼쓸리 위젯")
-    .description("먼쓸리 투두를 확인해보세요")
+    .description("먼쓸리 투두를 확인해보세요!")
     .supportedFamilies([.systemMedium])
   }
+}
+
+// MARK: - Preview
+
+#Preview(as: .systemMedium) {
+  ModaMonthlyWidget()
+} timeline: {
+  ModaMonthlyEntry(date: Date())
 }

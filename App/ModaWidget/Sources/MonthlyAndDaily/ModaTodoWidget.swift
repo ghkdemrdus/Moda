@@ -15,10 +15,16 @@ struct ModaTodoWidget: Widget {
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: ModaTodoWidget.kind, provider: ModaTodoProvider()) { entry in
       ModaTodoWidgetView(entry: entry)
-        .modelContainer(defaultModelContainer)
+        .modelContainer(todoModelContainer)
     }
     .configurationDisplayName("먼쓸리 & 데일리 위젯")
-    .description("먼쓸리 & 데일리 투두를 확인해보세요")
+    .description("먼쓸리 & 데일리 투두를 확인해보세요!")
     .supportedFamilies([.systemLarge])
   }
+}
+
+#Preview(as: .systemMedium) {
+  ModaTodoWidget()
+} timeline: {
+  ModaTodoEntry(date: Date())
 }

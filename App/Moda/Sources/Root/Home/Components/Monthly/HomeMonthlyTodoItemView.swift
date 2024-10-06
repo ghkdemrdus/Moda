@@ -50,15 +50,23 @@ private extension HomeMonthlyTodoItemView {
 // MARK: - Previews
 
 #Preview("1줄인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: HomeTodo = .init(content: "TodoTodo", category: .monthly)
+  @Previewable @State var todo: HomeTodo = .shortMock
 
-  HomeMonthlyTodoItemView(todo: todo, onTapDone: { $0.isDone.toggle() })
-    .loadCustomFonts()
+  HomeMonthlyTodoItemView(
+    todo: todo,
+    onTapDone: {
+      $0.isDone.toggle()
+    }
+  )
 }
 
 #Preview("2줄 이상인 경우", traits: .sizeThatFitsLayout) {
-  @Previewable @State var todo: HomeTodo = .init(content: "TodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodoTodo", category: .monthly)
+  @Previewable @State var todo: HomeTodo = .longMock
 
-  HomeMonthlyTodoItemView(todo: todo, onTapDone: { $0.isDone.toggle() })
-    .loadCustomFonts()
+  HomeMonthlyTodoItemView(
+    todo: todo,
+    onTapDone: {
+      $0.isDone.toggle()
+    }
+  )
 }

@@ -15,10 +15,18 @@ struct ModaDailyWidget: Widget {
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: ModaDailyWidget.kind, provider: ModaDailyProvider()) { entry in
       ModaDailyWidgetView(entry: entry)
-        .modelContainer(defaultModelContainer)
+        .modelContainer(todoModelContainer)
     }
     .configurationDisplayName("데일리 위젯")
-    .description("데일리 투두를 확인해보세요")
+    .description("데일리 투두를 확인해보세요!")
     .supportedFamilies([.systemMedium])
   }
+}
+
+// MARK: - Preview
+
+#Preview(as: .systemMedium) {
+  ModaDailyWidget()
+} timeline: {
+  ModaDailyEntry(date: Date())
 }

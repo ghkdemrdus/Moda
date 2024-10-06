@@ -98,7 +98,7 @@ private extension SplashView {
 
 // MARK: - Preview
 
-#Preview(traits: .sizeThatFitsLayout) {
+#Preview {
   SplashView(
     store: Store(initialState: Splash.State()) {
       Splash()

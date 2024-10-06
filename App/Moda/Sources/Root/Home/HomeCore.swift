@@ -117,6 +117,9 @@ struct Home: Reducer {
           return .none
 
         case let .todoAdded(category, content):
+          let content = content.trimmingCharacters(in: .whitespacesAndNewlines)
+          if content.isEmpty { return .none }
+
           switch category {
           case .monthly:
             let todo = HomeTodo(content: content, category: .monthly)
