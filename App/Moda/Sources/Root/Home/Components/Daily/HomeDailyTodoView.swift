@@ -54,7 +54,8 @@ private extension HomeDailyTodoView {
             .lineLimit(2)
             .multilineTextAlignment(.center)
         }
-        .padding(.vertical, 66)
+        .padding(.top, 56)
+        .padding(.bottom, 30)
       } else {
         VStack(spacing: 0) {
           ForEach(todos, id: \.id) { todo in

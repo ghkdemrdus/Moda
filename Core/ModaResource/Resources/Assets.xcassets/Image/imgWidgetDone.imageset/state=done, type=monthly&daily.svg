@@ -21,7 +21,7 @@
 <path d="M167.388 55.7242L172.256 56.6181C172.611 56.6832 172.84 57.0365 172.699 57.3683C172.269 58.3822 171.281 59.6107 169.18 59.2249C167.217 58.8644 166.728 57.3308 166.722 56.2319C166.721 55.8874 167.049 55.662 167.388 55.7242Z" fill="#FF5934"/>
 </g>
 <g filter="url(#filter1_b_935_12495)">
-<path d="M203 63H45.5L62.1628 103.925C64.003 108.445 68.397 111.4 73.2769 111.4H174.554C179.373 111.4 183.725 108.517 185.604 104.079L203 63Z" fill="#FBEC9C" fill-opacity="0.55"/>
+<path d="M203.311 63H45.3711L62.9607 99.2401C64.9676 103.375 69.16 106 73.7563 106H173.872C178.368 106 182.487 103.487 184.544 99.4888L203.311 63Z" fill="#FBEC9C" fill-opacity="0.75"/>
 </g>
 <defs>
 <filter id="filter0_b_935_12495" x="39.6055" y="34" width="169.547" height="76" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -30,7 +30,7 @@
 <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_935_12495"/>
 <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_935_12495" result="shape"/>
 </filter>
-<filter id="filter1_b_935_12495" x="21.5" y="39" width="205.5" height="96.4004" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter1_b_935_12495" x="21.3711" y="39" width="205.94" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feGaussianBlur in="BackgroundImageFix" stdDeviation="12"/>
 <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_935_12495"/>

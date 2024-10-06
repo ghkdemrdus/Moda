@@ -14,7 +14,7 @@ struct ModaDailyWidgetView : View {
   @Query var dailyTodosList: [DailyTodos]
 
   var body: some View {
-    HStack(alignment: .top, spacing: 24) {
+    HStack(alignment: .top, spacing: 0) {
       VStack(alignment: .leading) {
         Text("데일리\n투두")
           .font(.spoqaHans(size: 19, weight: .bold))
@@ -45,7 +45,9 @@ struct ModaDailyWidgetView : View {
 
           Spacer()
         }
+        .padding(.leading, 12)
       } else {
+        Spacer()
         VStack(spacing: 8) {
           if isAllDone {
             Image.imgWidgetMonthlyDone
@@ -60,6 +62,7 @@ struct ModaDailyWidgetView : View {
             .multilineTextAlignment(.center)
             .padding(.bottom, 4)
         }
+        Spacer()
       }
 
       Spacer()
