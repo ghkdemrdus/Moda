@@ -74,6 +74,7 @@ struct Home: Reducer {
   }
 
   @Dependency(\.userData) var userData: UserData
+//  @Dependency(\.toastManager) var toastManager: ModaToastManager
 
   var body: some Reducer<State, Action> {
     BindingReducer(action: \.view)
@@ -140,7 +141,7 @@ struct Home: Reducer {
             await userData.todoCategory.update(category)
           }
 
-        case let .todoDeleted(todo), let .todoDelayed(todo, _):
+        case let .todoDeleted(todo):
           switch todo.category {
           case .monthly:
             state.monthlyTodos = state.monthlyTodos.filter { $0.id != todo.id }
@@ -148,7 +149,21 @@ struct Home: Reducer {
           case .daily:
             state.dailyTodos = state.dailyTodos.filter { $0.id != todo.id }
           }
-          return .none
+          return .run { send in
+            await ModaToastManager.shared.show(.deleteTodo)
+          }
+
+        case let .todoDelayed(todo, _):
+          switch todo.category {
+          case .monthly:
+            state.monthlyTodos = state.monthlyTodos.filter { $0.id != todo.id }
+            state.dailyTodos = state.dailyTodos.filter { $0.id != todo.id }
+          case .daily:
+            state.dailyTodos = state.dailyTodos.filter { $0.id != todo.id }
+          }
+          return .run { send in
+            await ModaToastManager.shared.show(.delayTodo)
+          }
 
         case let .monthlyTodoDoneTapped(todo):
           todo.isDone.toggle()
@@ -157,7 +172,11 @@ struct Home: Reducer {
             state.monthlyTodos = updatedTodos
           }
 
-          return .none
+          return .run { [todo] send in
+            if todo.isDone {
+              await ModaToastManager.shared.show(.doneTodo)
+            }
+          }
 
         case let .monthlyTodosUpdated(todos):
           state.monthlyTodos = todos.sorted { $0.order < $1.order }
@@ -174,7 +193,12 @@ struct Home: Reducer {
           withAnimation(.spring(duration: 0.4)) {
             state.dailyTodos = updatedTodos
           }
-          return .none
+
+          return .run { [todo] send in
+            if todo.isDone {
+              await ModaToastManager.shared.show(.doneTodo)
+            }
+          }
 
         case let .dailyTodosUpdated(todos):
           state.dailyTodos = todos.sorted { $0.order < $1.order }

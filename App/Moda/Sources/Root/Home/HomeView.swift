@@ -25,6 +25,7 @@ struct HomeView: View {
 
   var body: some View {
     content
+      .versionNoticeAlert()
       .task {
         send(.onTask)
       }
@@ -209,7 +210,6 @@ private extension HomeView {
       )
       .ignoresSafeArea()
     }
-    .versionNoticeAlert()
   }
 
   @ViewBuilder var noticeView: some View {
@@ -255,8 +255,6 @@ private extension HomeView {
   }
 
   func delayTodo(todo: HomeTodo, date: Date) {
-    send(.todoDeleted(todo))
-
     switch todo.category {
     case .monthly:
       let id = date.format(.monthlyId)

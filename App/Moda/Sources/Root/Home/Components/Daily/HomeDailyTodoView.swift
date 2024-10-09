@@ -90,6 +90,8 @@ private extension HomeDailyTodoView {
   HomeDailyTodoView(
     todos: todos,
     onTapEdit: {},
-    onTapDone: { _ in }
+    onTapDone: { todo in
+      todos.first{ $0.id == todo.id }?.isDone.toggle()
+    }
   )
 }

@@ -19,6 +19,7 @@ struct ModaApp: App {
   var body: some Scene {
     WindowGroup {
       RootView()
+        .toast()
         .modelContainer(todoModelContainer)
         .onFirstAppear {
           UITextField.appearance().tintColor = UIColor(.brandStrong)
