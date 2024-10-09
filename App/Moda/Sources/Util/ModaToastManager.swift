@@ -74,9 +74,7 @@ public final class ModaToastManager: ObservableObject {
         self.isPresented = false
         self.hideTask = nil
         self.processNextToast()
-      } catch {
-
-      }
+      } catch {}
     }
   }
 
@@ -87,6 +85,22 @@ public final class ModaToastManager: ObservableObject {
       isPresented = true
       startHideTask()
     }
+  }
+
+  public func dismissImmediately() {
+    hideTask?.cancel()
+    isPresented = false
+    hideTask = nil
+    processNextToast()
+  }
+
+  public func cancelCountdown() {
+    hideTask?.cancel()
+  }
+
+  public func restartCountdown() {
+    hideTask?.cancel()
+    startHideTask()
   }
 }
 
