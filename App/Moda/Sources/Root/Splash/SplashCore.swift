@@ -33,6 +33,7 @@ struct Splash: Reducer {
     }
   }
 
+  @Dependency(\.userData) var userData: UserData
   @Dependency(\.versionManager) var versionManager: VersionManager
 
   var body: some Reducer<State, Action> {
@@ -42,17 +43,20 @@ struct Splash: Reducer {
         switch action {
         case .onTask:
           return .merge(
-            .run(operation: { send in
-              await versionManager.onUpgrate()
-            }),
-            .run(operation: { send in
-              try? await Task.sleep(for: .seconds(1))
+            .run { send in
+              // 업데이트 상황 체크
+              async let upgradeTask: () = versionManager.onUpgrate()
+
+              // 최소 1초 이상 스플래시 보장
+              async let sleepTask: ()? = try? await Task.sleep(for: .seconds(1))
+
+              let _ = await (upgradeTask, sleepTask)
               await send(.timeout)
-            }),
-            .publisher({
+            },
+            .publisher {
               versionManager.migrateTodos
                 .map(Action.migrateTodos)
-            })
+            }
           )
 
         case .migrationFinished:

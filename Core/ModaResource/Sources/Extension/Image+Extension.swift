@@ -30,6 +30,8 @@ public extension Image {
   static let icDailyReorder = Image(.icDailyReorder)
   static let icRepair = Image(.icRepair)
 
+  static let icAppReviewDelete = Image(.icAppReviewDelete)
+
   // MARK: Image
   
   static let imgCheckActive = Image(.imgCheckActive)

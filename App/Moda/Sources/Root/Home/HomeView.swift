@@ -51,6 +51,7 @@ struct HomeView: View {
       }
       .animation(.spring(duration: 0.4), value: store.isMonthlyEditing)
       .animation(.spring(duration: 0.4), value: store.isDailyEditing)
+      .animation(.spring(duration: 0.4), value: store.showAppReviewBanner)
   }
 }
 
@@ -79,7 +80,19 @@ private extension HomeView {
       .padding(.top, 12)
 
       ScrollView {
-        LazyVStack(spacing: 24) {
+        LazyVStack(spacing: 0) {
+          if store.showAppReviewBanner {
+            HomeAppReviewBannerView(
+              onTapClose: {
+                send(.hideAppReviewBanner)
+              },
+              onTapConfirm: {
+                send(.reviewConfirmTapped)
+              }
+            )
+            .padding(.bottom, 15)
+          }
+
           HomeMonthlyTodoView(
             isFolded: $store.isMonthlyFolded,
             todos: store.monthlyTodos,
@@ -92,6 +105,7 @@ private extension HomeView {
             }
           )
           .matchedGeometryEffect(id: "Monthly", in: monthlyAnimationNamespace, anchor: .top)
+          .padding(.bottom, 24)
 
           HomeDailyTodoView(
             todos: store.dailyTodos,
