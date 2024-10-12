@@ -74,7 +74,6 @@ struct Home: Reducer {
   }
 
   @Dependency(\.userData) var userData: UserData
-//  @Dependency(\.toastManager) var toastManager: ModaToastManager
 
   var body: some Reducer<State, Action> {
     BindingReducer(action: \.view)

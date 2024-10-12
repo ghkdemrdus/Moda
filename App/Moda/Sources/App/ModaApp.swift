@@ -13,7 +13,7 @@ import WidgetKit
 @main
 struct ModaApp: App {
 
-//  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+  @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 //  private var store: StoreOf<RootCore> { delegate.store }
 
   var body: some Scene {

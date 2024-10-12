@@ -11,6 +11,10 @@ let project = Project(
     targets: [
         .app(
             implementation: .moda,
+            scripts: [
+                .firebaseCrashlytics,
+                .googleService
+            ],
             dependencies: [
                 .appExtension(implementation: .widget),
                 .core(implementation: .core),
@@ -18,6 +22,7 @@ let project = Project(
                 .core(implementation: .resource),
                 .thirdParty(.composableArchitecture),
             ]
+            + Module.ThirdParty.firebase.map { .thirdParty($0) }
         ),
         .appExtension(
             implementation: .widget,

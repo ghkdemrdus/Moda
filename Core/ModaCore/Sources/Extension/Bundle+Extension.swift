@@ -13,6 +13,10 @@ public extension Bundle {
     return infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
   }
 
+  var googleServiceFileName: String? {
+    return infoDictionary?["GoogleServiceFileName"] as? String ?? ""
+  }
+
   var groupId: String {
 #if DEBUG
     "group.pinto.moda.debug"

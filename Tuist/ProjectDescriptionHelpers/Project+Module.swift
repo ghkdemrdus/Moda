@@ -68,6 +68,12 @@ public enum Module {
 
     public enum ThirdParty: String, CaseIterable {
         case composableArchitecture = "ComposableArchitecture"
+        case firebaseAnalytics = "FirebaseAnalytics"
+        case firebaseAuth = "FirebaseAuth"
+        case firebaseCrashlytics = "FirebaseCrashlytics"
+        case firebaseMessaging = "FirebaseMessaging"
+        case firebaseRemoteConfig = "FirebaseRemoteConfig"
+        case firebaseStorage = "FirebaseStorage"
         case realm = "RealmSwift"
 
         // MARK: - Properties
@@ -78,9 +84,18 @@ public enum Module {
             case .composableArchitecture:
                 return .framework
 
-            case .realm:
+            case
+                    .firebaseAnalytics,
+                    .firebaseAuth,
+                    .firebaseCrashlytics,
+                    .firebaseMessaging,
+                    .firebaseRemoteConfig,
+                    .firebaseStorage,
+                    .realm:
                 return .staticFramework
             }
         }
+
+        public static let firebase: [ThirdParty] = [.firebaseAnalytics, .firebaseAuth, .firebaseCrashlytics, .firebaseMessaging, .firebaseRemoteConfig, .firebaseStorage]
     }
 }

@@ -21,13 +21,13 @@ import PackageDescription
 
 enum ThirdPartyPackage: CaseIterable {
     case composableArchitecture
-    case kingfisher
+    case firebase
     case realm
 
     var remoteURL: String {
         switch self {
         case .composableArchitecture: "https://github.com/pointfreeco/swift-composable-architecture"
-        case .kingfisher: "https://github.com/onevcat/Kingfisher.git"
+        case .firebase: "https://github.com/firebase/firebase-ios-sdk.git"
         case .realm: "https://github.com/realm/realm-swift"
         }
     }
@@ -35,7 +35,7 @@ enum ThirdPartyPackage: CaseIterable {
     var version: Range<PackageDescription.Version> {
         switch self {
         case .composableArchitecture: .upToNextMajor(from: "1.15.0")
-        case .kingfisher: .upToNextMajor(from: "7.11.0")
+        case .firebase: .upToNextMajor(from: "11.3.0")
         case .realm: .upToNextMajor(from: "20.0.0")
         }
     }
