@@ -21,6 +21,7 @@ let project = Project(
                 .core(implementation: .data),
                 .core(implementation: .resource),
                 .thirdParty(.composableArchitecture),
+                .thirdParty(.lottie)
             ]
             + Module.ThirdParty.firebase.map { .thirdParty($0) }
         ),

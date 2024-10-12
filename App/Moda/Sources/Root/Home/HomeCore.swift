@@ -8,7 +8,6 @@
 
 import Foundation
 import ComposableArchitecture
-import _SwiftData_SwiftUI
 import SwiftUI
 import SwiftData
 
@@ -36,6 +35,7 @@ struct Home: Reducer {
     var isDelayTodoBottomSheetPresented: Bool = false
 
     var showNotice: Bool = false
+    var showAppReviewBanner: Bool = false
 
     var isEditing: Bool {
       isMonthlyEditing || isDailyEditing
@@ -44,6 +44,7 @@ struct Home: Reducer {
 
   enum Action: ViewAction {
     case showNotice
+    case showAppReviewBanner
     case updateTodoCategory(HomeTodo.Category)
     case view(View)
 
@@ -70,6 +71,9 @@ struct Home: Reducer {
       case dailyTodoDoneTapped(HomeTodo)
       case dailyTodosUpdated([HomeTodo])
       case dailyTodosReordered([HomeTodo])
+
+      case hideAppReviewBanner
+      case reviewConfirmTapped
     }
   }
 
@@ -83,6 +87,10 @@ struct Home: Reducer {
         state.showNotice = true
         return .none
 
+      case .showAppReviewBanner:
+        state.showAppReviewBanner = true
+        return .none
+
       case let .updateTodoCategory(category):
         state.todoCategory = category
         return .none
@@ -92,11 +100,17 @@ struct Home: Reducer {
         case .onTask:
           return .run { send in
             let showNotice = await userData.showNotice.value
+            let showAppReviewBanner = await userData.showAppReviewBanner.value
             let category = await userData.todoCategory.value
 
             if showNotice {
               await send(.showNotice)
             }
+            if showAppReviewBanner {
+              try? await Task.sleep(for: .seconds(0.5))
+              await send(.showAppReviewBanner)
+            }
+
             await send(.updateTodoCategory(category))
           }
 
@@ -215,10 +229,25 @@ struct Home: Reducer {
           state.isDailyEditing = true
           return .none
 
+        case .hideAppReviewBanner:
+          state.showAppReviewBanner = false
+          return .none
+
+        case .reviewConfirmTapped:
+          openAppReview()
+          return .send(.view(.hideAppReviewBanner))
+
         default:
           return .none
         }
       }
     }
+  }
+
+  private func openAppReview() {
+    let url = "https://apps.apple.com/app/id6444545964?action=write-review"
+    guard let writeReviewURL = URL(string: url) else { fatalError("Expected a valid URL") }
+
+    UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
   }
 }

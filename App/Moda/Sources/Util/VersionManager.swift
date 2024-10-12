@@ -19,10 +19,26 @@ public final class VersionManager {
   func onUpgrate() async {
     let version = Bundle.main.version
     let lastVersion = await userData.lastVersion.value
+    var launchDates = await userData.launchDates.value
+    let didAppReviewBannerShown = await userData.didAppReviewBannerShown.value
 
-    migrateTodos.send(lastVersion < "1.0.4")
+    launchDates.insert(Date.today.format(.monthlyId))
+    await userData.launchDates.update(launchDates)
+
+    if lastVersion < "1.0.4" {
+      migrateTodos.send(true)
+    }
+
+    if !didAppReviewBannerShown && (lastVersion < "1.1.0" || launchDates.count == 3) {
+      await userData.showAppReviewBanner.update(true)
+      await userData.didAppReviewBannerShown.update(true)
+    }
+
+    if launchDates.count == 10 {
+      await userData.showAppReviewBanner.update(true)
+    }
+
     await userData.showNotice.update(lastVersion < version)
-
     await userData.lastVersion.update(version)
   }
 }

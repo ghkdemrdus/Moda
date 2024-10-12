@@ -22,9 +22,6 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 
-
-*.pbxproj
-
 ## Obj-C/Swift specific
 *.hmap
 

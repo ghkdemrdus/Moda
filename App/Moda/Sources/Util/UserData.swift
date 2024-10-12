@@ -11,17 +11,23 @@ import ComposableArchitecture
 
 
 enum UserDataKey: String, CaseIterable {
+  case launchDates
   case todoInputCategory
   case lastVersion
   case todoCategory
   case showNotice
+  case showAppReviewBanner
+  case didAppReviewBannerShown
 }
 
 public final class UserData {
+  public let launchDates = DataStorage<Set<String>>(key: .launchDates, defaultValue: .init())
   public let todoInputCategory = DataStorage<HomeTodo.Category>(key: .todoInputCategory, defaultValue: .monthly)
   public let lastVersion = DataStorage<String>(key: .lastVersion, defaultValue: "1.0.0")
   public let todoCategory = DataStorage<HomeTodo.Category>(key: .todoCategory, defaultValue: .monthly)
   public let showNotice = DataStorage<Bool>(key: .showNotice, defaultValue: false)
+  public let showAppReviewBanner = DataStorage<Bool>(key: .showAppReviewBanner, defaultValue: false)
+  public let didAppReviewBannerShown = DataStorage<Bool>(key: .didAppReviewBannerShown, defaultValue: false)
 }
 
 public extension UserData {

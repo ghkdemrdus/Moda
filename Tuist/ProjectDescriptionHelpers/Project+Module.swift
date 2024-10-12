@@ -74,6 +74,7 @@ public enum Module {
         case firebaseMessaging = "FirebaseMessaging"
         case firebaseRemoteConfig = "FirebaseRemoteConfig"
         case firebaseStorage = "FirebaseStorage"
+        case lottie = "Lottie"
         case realm = "RealmSwift"
 
         // MARK: - Properties
@@ -81,7 +82,7 @@ public enum Module {
         public var name: String { self.rawValue }
         public var framework: Product {
             switch self {
-            case .composableArchitecture:
+            case .composableArchitecture, .lottie:
                 return .framework
 
             case

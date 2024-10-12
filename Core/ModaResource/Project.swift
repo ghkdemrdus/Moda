@@ -10,6 +10,9 @@ let project = Project(
     ),
     settings: .defaultProject,
     targets: [
-        .core(implementation: .resource)
+        .core(
+            implementation: .resource,
+            dependencies: [.thirdParty(.lottie)]
+        )
     ]
 )
