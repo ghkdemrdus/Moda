@@ -33,6 +33,7 @@ public extension Color {
   static let backgroundPrimary = ModaResourceAsset.backgroundPrimary.swiftUIColor
   static let backgroundSecondary = ModaResourceAsset.backgroundSecondary.swiftUIColor
   static let backgroundBrand = ModaResourceAsset.backgroundBrand.swiftUIColor
+  static let backgroundAppReview = ModaResourceAsset.backgroundAppReview.swiftUIColor
 
   // Border
   static let borderPrimary = ModaResourceAsset.borderPrimary.swiftUIColor

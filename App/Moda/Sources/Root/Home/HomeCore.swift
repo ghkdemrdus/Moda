@@ -85,11 +85,15 @@ struct Home: Reducer {
       switch action {
       case .showNotice:
         state.showNotice = true
-        return .none
+        return .run { _ in
+          await userData.showNotice.update(false)
+        }
 
       case .showAppReviewBanner:
         state.showAppReviewBanner = true
-        return .none
+        return .run { _ in
+          await userData.showAppReviewBanner.update(false)
+        }
 
       case let .updateTodoCategory(category):
         state.todoCategory = category
@@ -150,7 +154,7 @@ struct Home: Reducer {
 
         case let .todoCategoryTapped(category):
           state.todoCategory = category
-          return .run { send in
+          return .run { _ in
             await userData.todoCategory.update(category)
           }
 
@@ -162,7 +166,7 @@ struct Home: Reducer {
           case .daily:
             state.dailyTodos = state.dailyTodos.filter { $0.id != todo.id }
           }
-          return .run { send in
+          return .run { _ in
             await ModaToastManager.shared.show(.deleteTodo)
           }
 
@@ -174,7 +178,7 @@ struct Home: Reducer {
           case .daily:
             state.dailyTodos = state.dailyTodos.filter { $0.id != todo.id }
           }
-          return .run { send in
+          return .run { _ in
             await ModaToastManager.shared.show(.delayTodo)
           }
 
@@ -185,9 +189,9 @@ struct Home: Reducer {
             state.monthlyTodos = updatedTodos
           }
 
-          return .run { [todo] send in
+          return .run { [todo] _ in
             if todo.isDone {
-              await ModaToastManager.shared.show(.doneTodo)
+              await ModaToastManager.shared.show(.doneTodo(ToastType.doneText))
             }
           }
 
@@ -209,7 +213,7 @@ struct Home: Reducer {
 
           return .run { [todo] send in
             if todo.isDone {
-              await ModaToastManager.shared.show(.doneTodo)
+              await ModaToastManager.shared.show(.doneTodo(ToastType.doneText))
             }
           }
 

@@ -15,7 +15,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.0.0</string>
+	<string>1.1.0.2</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>
@@ -24,10 +24,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>SpoqaHanSansNeo-Bold.otf</string>
-		<string>SpoqaHanSansNeo-Light.otf</string>
 		<string>SpoqaHanSansNeo-Medium.otf</string>
 		<string>SpoqaHanSansNeo-Regular.otf</string>
-		<string>SpoqaHanSansNeo-Thin.otf</string>
 	</array>
 </dict>
 </plist>

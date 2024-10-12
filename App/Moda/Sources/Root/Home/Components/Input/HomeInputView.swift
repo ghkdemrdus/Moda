@@ -73,7 +73,6 @@ private extension HomeInputView {
             action: {
               onTapAdd(category, todo)
               todo = ""
-              hideKeyboard()
             },
             label: {
               Image.imgSend

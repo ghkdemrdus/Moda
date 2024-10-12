@@ -43,7 +43,7 @@ struct HomeAppReviewBannerView: View {
     .padding(.vertical, 17)
     .padding(.leading, 38)
     .padding(.trailing, 12)
-    .background(alignment: .trailing) {
+    .background(alignment: .bottomTrailing) {
       LottieView(animation: .homeAppReviewBanner)
         .playing(loopMode: .playOnce)
         .frame(width: 150)
@@ -51,7 +51,7 @@ struct HomeAppReviewBannerView: View {
     }
     .background(
       RoundedRectangle(cornerRadius: 16)
-        .fill(Color.green)
+        .fill(Color.backgroundAppReview)
     )
     .onTapGesture {
       onTapConfirm()

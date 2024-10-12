@@ -33,7 +33,7 @@ struct HomeMonthlyTodoEditItemView: View {
 
 private extension HomeMonthlyTodoEditItemView {
   var content: some View {
-    HStack(spacing: 4) {
+    HStack(spacing: 0) {
       TextField("", text: $todo.content)
         .font(.spoqaHans(size: 14))
         .foregroundStyle(Color.textSecondary)
@@ -48,6 +48,7 @@ private extension HomeMonthlyTodoEditItemView {
         },
         label: {
           Image.icMonthlyTrash
+            .frame(size: 28)
         }
       )
 
@@ -58,10 +59,12 @@ private extension HomeMonthlyTodoEditItemView {
         },
         label: {
           Image.icMonthlyDelay
+            .frame(size: 28)
         }
       )
 
       Image.icMonthlyReorder
+        .frame(size: 28)
         .highPriorityGesture(
           DragGesture(minimumDistance: 0)
             .onChanged { value in
@@ -79,7 +82,8 @@ private extension HomeMonthlyTodoEditItemView {
         )
     }
     .frame(height: Self.height)
-    .padding(.horizontal, 16)
+    .padding(.leading, 16)
+    .padding(.trailing, 14)
   }
 }
 

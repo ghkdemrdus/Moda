@@ -19,6 +19,7 @@ struct VersionNoticeAlertModifier: ViewModifier {
         Color.black
           .ignoresSafeArea()
           .opacity(manager.isPresented ? 0.5 : 0)
+          .onTapGesture {}
 
         if manager.isPresented {
           VersionNoticeAlertView(

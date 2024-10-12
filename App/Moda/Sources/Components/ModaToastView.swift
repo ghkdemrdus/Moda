@@ -10,9 +10,9 @@ import SwiftUI
 
 struct ModaToastView: View {
 
-  let type: ModaToastManager.BottomType
+  let type: ModaToastManager.`Type`
 
-  init(_ type: ModaToastManager.BottomType) {
+  init(_ type: ModaToastManager.`Type`) {
     self.type = type
   }
 
@@ -26,8 +26,8 @@ struct ModaToastView: View {
         .foregroundStyle(Color.textPrimary)
         .frame(maxWidth: .infinity, alignment: .leading)
     }
-    .padding(.horizontal, 16)
-    .padding(.vertical, 12)
+    .padding(.leading, 24)
+    .padding(.vertical, 16)
     .background(
       Capsule()
         .fill(Color.backgroundSecondary)

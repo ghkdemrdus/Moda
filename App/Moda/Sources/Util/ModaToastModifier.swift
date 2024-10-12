@@ -21,7 +21,7 @@ struct ModaToastModifier: ViewModifier {
           if manager.isPresented {
             ModaToastView(manager.type)
               .transition(.move(edge: .bottom))
-              .padding(.bottom, 50)
+              .padding(.bottom, manager.type.isDone ? 100 : 50)
               .offset(offset)
               .gesture(dragGesture)
           }
@@ -87,7 +87,7 @@ public extension View {
 
     Button("Show Done Toast") {
       Task {
-        await ModaToastManager.shared.show(.doneTodo)
+        await ModaToastManager.shared.show(.doneTodo("참 잘했어요"))
       }
     }
 

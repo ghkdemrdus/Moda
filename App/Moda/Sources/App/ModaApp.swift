@@ -14,14 +14,13 @@ import WidgetKit
 struct ModaApp: App {
 
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-//  private var store: StoreOf<RootCore> { delegate.store }
 
   var body: some Scene {
     WindowGroup {
       RootView()
         .toast()
         .modelContainer(todoModelContainer)
-        .onFirstAppear {
+        .onAppear {
           UITextField.appearance().tintColor = UIColor(.brandStrong)
         }
         .onBackground {

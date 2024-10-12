@@ -23,7 +23,7 @@ enum UserDataKey: String, CaseIterable {
 public final class UserData {
   public let launchDates = DataStorage<Set<String>>(key: .launchDates, defaultValue: .init())
   public let todoInputCategory = DataStorage<HomeTodo.Category>(key: .todoInputCategory, defaultValue: .monthly)
-  public let lastVersion = DataStorage<String>(key: .lastVersion, defaultValue: "1.0.0")
+  public let lastVersion = DataStorage<String?>(key: .lastVersion, defaultValue: nil)
   public let todoCategory = DataStorage<HomeTodo.Category>(key: .todoCategory, defaultValue: .monthly)
   public let showNotice = DataStorage<Bool>(key: .showNotice, defaultValue: false)
   public let showAppReviewBanner = DataStorage<Bool>(key: .showAppReviewBanner, defaultValue: false)

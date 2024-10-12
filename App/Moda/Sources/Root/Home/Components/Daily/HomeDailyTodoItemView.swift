@@ -23,7 +23,7 @@ struct HomeDailyTodoItemView: View {
 
 private extension HomeDailyTodoItemView {
   var content: some View {
-    HStack(alignment: .top, spacing: 8) {
+    HStack(alignment: .top, spacing: 2) {
       PlainButton(
         action: {
           onTapDone(todo)
@@ -31,9 +31,12 @@ private extension HomeDailyTodoItemView {
         label: {
           todo.isDone
           ? Image.imgCheckActive
+            .frame(size: 36)
           : Image.imgCheckDailyInactive
+            .frame(size: 36)
         }
       )
+      .padding(.top, 6)
 
       Text(todo.content)
         .font(.spoqaHans(size: 15))
@@ -41,9 +44,8 @@ private extension HomeDailyTodoItemView {
         .lineLimit(nil)
         .strikethrough(todo.isDone)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.top, 3)
+        .padding(.vertical, 14.5)
     }
-    .padding(.vertical, 10)
     .background(alignment: .bottom) {
       Color.borderPrimary.frame(height: 1)
     }

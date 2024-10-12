@@ -33,7 +33,7 @@ struct HomeDailyTodoEditItemView: View {
 
 private extension HomeDailyTodoEditItemView {
   var content: some View {
-    HStack(spacing: 4) {
+    HStack(spacing: 0) {
       TextField("", text: $todo.content)
         .font(.spoqaHans(size: 14))
         .foregroundStyle(Color.textSecondary)
@@ -48,6 +48,7 @@ private extension HomeDailyTodoEditItemView {
         },
         label: {
           Image.icDailyTrash
+            .frame(size: 28)
         }
       )
 
@@ -58,10 +59,12 @@ private extension HomeDailyTodoEditItemView {
         },
         label: {
           Image.icDailyDelay
+            .frame(size: 28)
         }
       )
 
       Image.icDailyReorder
+        .frame(size: 28)
         .highPriorityGesture(
           DragGesture(minimumDistance: 0)
             .onChanged { value in
@@ -82,7 +85,8 @@ private extension HomeDailyTodoEditItemView {
     .background(alignment: .bottom) {
       Color.borderPrimary.frame(height: 1)
     }
-    .padding(.horizontal, 20.5)
+    .padding(.leading, 20.5)
+    .padding(.trailing, 18.5)
   }
 }
 
