@@ -9,8 +9,8 @@ import SwiftUI
 import ComposableArchitecture
 
 struct RootView: View {
-  let store = Store(initialState: Root.State.splash(.init())) {
-    Root.body
+  let store = Store(initialState: RootCore.State.splash(.init())) {
+    RootCore.body
   }
 
   var body: some View {

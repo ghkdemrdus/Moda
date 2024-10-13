@@ -28,17 +28,16 @@ public final class ModaToastManager: ObservableObject {
   @Published public private(set) var isPresented: Bool = false
   @Published public private(set) var type: `Type` = .custom("Toast")
 
-  private var toastQueue: [`Type`] = []
   private var hideTask: Task<Void, Never>?
 
   public func show(_ type: `Type`) {
     if isPresented {
       if self.type == type {
         // 같은 타입의 토스트: 숨김 타이머 재설정
-        restartCountdown()
+        startHideTask()
       } else {
         self.type = type
-        restartCountdown()
+        startHideTask()
       }
     } else {
       // 토스트가 표시되지 않은 경우: 즉시 표시
@@ -48,7 +47,7 @@ public final class ModaToastManager: ObservableObject {
     }
   }
 
-  private func startHideTask() {
+  public func startHideTask() {
     hideTask?.cancel()
     hideTask = Task { [weak self] in
       do {
@@ -56,34 +55,18 @@ public final class ModaToastManager: ObservableObject {
         guard let self = self else { return }
         self.isPresented = false
         self.hideTask = nil
-        self.processNextToast()
       } catch {}
     }
   }
 
-  private func processNextToast() {
-    if !toastQueue.isEmpty {
-      let nextType = toastQueue.removeFirst()
-      self.type = nextType
-      isPresented = true
-      startHideTask()
-    }
-  }
-
-  public func dismissImmediately() {
+  public func dismiss() {
     hideTask?.cancel()
     isPresented = false
     hideTask = nil
-    processNextToast()
   }
 
   public func cancelCountdown() {
     hideTask?.cancel()
-  }
-
-  public func restartCountdown() {
-    hideTask?.cancel()
-    startHideTask()
   }
 }
 
@@ -92,7 +75,7 @@ public final class ModaToastManager: ObservableObject {
 extension ModaToastManager.`Type` {
   var icon: Image? {
     switch self {
-    case .delayTodo: return .icCheck
+    case .delayTodo: return .icCheckGreen
     case .deleteTodo: return .icDelete
     case .doneTodo: return .icClear
     case .custom: return nil

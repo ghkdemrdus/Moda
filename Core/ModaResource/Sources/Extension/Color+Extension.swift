@@ -22,6 +22,8 @@ public extension Color {
   static let textTertiary = ModaResourceAsset.textTertiary.swiftUIColor
   static let textInactive = ModaResourceAsset.textInactive.swiftUIColor
   static let textInactiveOrange = ModaResourceAsset.textInactiveOrange.swiftUIColor
+  static let textCaption = ModaResourceAsset.textCaption.swiftUIColor
+  static let textAlternative = ModaResourceAsset.textAlternative.swiftUIColor
 
   // Icon
   static let iconPrimary = ModaResourceAsset.iconPrimary.swiftUIColor
@@ -33,6 +35,7 @@ public extension Color {
   static let backgroundPrimary = ModaResourceAsset.backgroundPrimary.swiftUIColor
   static let backgroundSecondary = ModaResourceAsset.backgroundSecondary.swiftUIColor
   static let backgroundBrand = ModaResourceAsset.backgroundBrand.swiftUIColor
+  static let backgroundTertiary = ModaResourceAsset.backgroundTertiary.swiftUIColor
   static let backgroundAppReview = ModaResourceAsset.backgroundAppReview.swiftUIColor
 
   // Border
@@ -41,6 +44,7 @@ public extension Color {
   // Orange
   static let fogOrange = ModaResourceAsset.fogOrange.swiftUIColor
   static let orange200 = ModaResourceAsset.orange200.swiftUIColor
+  static let orange300 = ModaResourceAsset.orange300.swiftUIColor
 
   // Slate
   static let slate800 = ModaResourceAsset.slate800.swiftUIColor

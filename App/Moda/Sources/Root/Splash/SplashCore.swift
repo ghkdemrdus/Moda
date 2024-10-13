@@ -10,7 +10,7 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct Splash: Reducer {
+struct SplashCore: Reducer {
 
   @ObservableState
   struct State: Equatable {

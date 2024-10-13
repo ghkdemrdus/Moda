@@ -26,7 +26,7 @@ enum Root {
       }
     }
     .ifCaseLet(\.splash, action: \.splash) {
-      Splash()
+      SplashCore()
     }
     .ifCaseLet(\.mainTab, action: \.mainTab) {
       MainTabCore()

@@ -91,7 +91,7 @@ public extension Target {
             name: app.name,
             infoPlist: .file(path: .relativeToApp("\(app.name)/Info.plist")),
             sources: ["Sources/**"],
-            resources: ["Resources/**", "../../Core/ModaResource/Resources/Font/**"],
+            resources: ["Resources/**"],
             entitlements: .file(path: .relativeToApp("\(app.name)/\(app.name).entitlements")),
             scripts: scripts,
             dependencies: dependencies,
@@ -125,7 +125,7 @@ public extension Target {
             name: "\(appExtension.name)Extension",
             infoPlist: .file(path: .relativeToApp("\(appExtension.name)/Info.plist")),
             sources: ["../\(appExtension.name)/Sources/**"],
-            resources: ["../../Core/ModaResource/Resources/Font/**"],
+            resources: ["../\(appExtension.name)/Resources/**"],
             entitlements: .file(path: .relativeToApp("\(appExtension.name)/\(appExtension.name).entitlements")),
             dependencies: dependencies,
             settings: appExtension.settings

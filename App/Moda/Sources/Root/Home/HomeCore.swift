@@ -12,7 +12,7 @@ import SwiftUI
 import SwiftData
 
 @Reducer
-struct Home: Reducer {
+struct HomeCore: Reducer {
 
   @ObservableState
   struct State: Equatable {

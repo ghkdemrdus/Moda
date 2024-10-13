@@ -9,10 +9,10 @@ import SwiftUI
 import ComposableArchitecture
 import SwiftData
 
-@ViewAction(for: Home.self)
+@ViewAction(for: HomeCore.self)
 struct HomeView: View {
 
-  @Bindable var store: StoreOf<Home>
+  @Bindable var store: StoreOf<HomeCore>
 
   @Environment(\.modelContext) var modelContext
   @Query var monthlyTodosList: [MonthlyTodos]
@@ -309,8 +309,8 @@ private extension HomeView {
 
 #Preview {
   HomeView(
-    store: .init(initialState: Home.State()) {
-      Home()
+    store: .init(initialState: HomeCore.State()) {
+      HomeCore()
     }
   )
 }

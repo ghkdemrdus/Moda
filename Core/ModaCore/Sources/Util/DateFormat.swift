@@ -35,10 +35,15 @@ public final class DateFormatUtil {
     case monthText = "MMMM"
 
     /// Monthly ID
+    case bookmarkId = "yyyy"
+
+    /// Monthly ID
     case monthlyId = "yyMM"
 
     /// Daily ID
     case dailyId = "yyMMdd"
+
+    case bookmarkDate = "MM. dd"
 
     var isEnglish: Bool {
       switch self {

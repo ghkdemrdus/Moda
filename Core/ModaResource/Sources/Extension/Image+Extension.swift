@@ -16,19 +16,30 @@ public extension Image {
   static let icClose = Image(.icClose)
   static let icDelete = Image(.icDelete)
   static let icCheck = Image(.icCheck)
+  static let icCheckGreen = Image(.icCheckGreen)
   static let icCheckActive = Image(.icCheckActive)
   static let icCheckInactive = Image(.icCheckInactive)
   static let icClear = Image(.icClear)
+
   static let icMonthlyArrow = Image(.icMonthlyArrow)
+  static let icMonthlyAdd = Image(.icMonthlyAdd)
   static let icMonthlyEdit = Image(.icMonthlyEdit)
   static let icMonthlyDelay = Image(.icMonthlyDelay)
   static let icMonthlyTrash = Image(.icMonthlyTrash)
   static let icMonthlyReorder = Image(.icMonthlyReorder)
+
+  static let icDailyAdd = Image(.icDailyAdd)
   static let icDailyEdit = Image(.icDailyEdit)
   static let icDailyDelay = Image(.icDailyDelay)
   static let icDailyTrash = Image(.icDailyTrash)
   static let icDailyReorder = Image(.icDailyReorder)
+
   static let icRepair = Image(.icRepair)
+
+  static let icBookmarkAdd = Image(.icBookmarkAdd)
+  static let icBookmarkEdit = Image(.icBookmarkEdit)
+  static let icFolderEdit = Image(.icFolderEdit)
+  static let icLink = Image(.icLink)
 
   static let icAppReviewDelete = Image(.icAppReviewDelete)
 

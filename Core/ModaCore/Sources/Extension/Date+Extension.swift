@@ -33,6 +33,10 @@ public extension Date {
     Calendar.current.date(byAdding: .month, value: count, to: self)!
   }
 
+  func addYear(_ count: Int) -> Date {
+    Calendar.current.date(byAdding: .year, value: count, to: self)!
+  }
+
   static var today: Date {
     let components = Calendar.current.dateComponents([.year, .month, .day], from: .now)
     return Calendar.current.date(from: components)!

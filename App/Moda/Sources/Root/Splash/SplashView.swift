@@ -9,16 +9,16 @@ import SwiftUI
 import ComposableArchitecture
 import SwiftData
 
-@ViewAction(for: Splash.self)
+@ViewAction(for: SplashCore.self)
 struct SplashView: View {
 
-  @Bindable var store: StoreOf<Splash>
+  @Bindable var store: StoreOf<SplashCore>
 
   @Environment(\.modelContext) var modelContext
   @Query var monthlyTodosList: [MonthlyTodos]
   @Query var dailyTodosList: [DailyTodos]
 
-  public init(store: StoreOf<Splash>) {
+  public init(store: StoreOf<SplashCore>) {
     self.store = store
   }
 
@@ -100,8 +100,8 @@ private extension SplashView {
 
 #Preview {
   SplashView(
-    store: Store(initialState: Splash.State()) {
-      Splash()
+    store: Store(initialState: SplashCore.State()) {
+      SplashCore()
     }
   )
 }

@@ -1,0 +1,47 @@
+//
+//  Bookmark.swift
+//  ModaData
+//
+//  Created by 황득연 on 10/13/24.
+//  Copyright © 2024 Moda. All rights reserved.
+//
+
+import SwiftData
+import Foundation
+
+@Model
+public class Bookmark: Identifiable, Equatable, Hashable {
+
+  @Attribute(.unique) public var id: String
+
+  // SwiftData가 Array의 순서를 보장해주지 않기 때문에 추가함.
+  public var order: Int
+  public var title: String
+  public var isFolded: Bool
+  public var todos: [BookmarkTodo]
+
+  public init(id: String, order: Int, title: String, isFolded: Bool, todos: [BookmarkTodo]) {
+    self.id = id
+    self.order = order
+    self.title = title
+    self.isFolded = isFolded
+    self.todos = todos
+  }
+
+  public init(title: String, isFolded: Bool = false, todos: [BookmarkTodo] = []) {
+    self.id = Self.uniqueId
+    self.order = -1
+    self.title = title
+    self.isFolded = isFolded
+    self.todos = todos
+  }
+
+  public static var uniqueId: String { String(Int(Date().timeIntervalSince1970)) }
+}
+
+// MARK: - Mock
+
+public extension Bookmark {
+  static let travelMock: Bookmark = .init(id: "0", order: 0, title: "✈️ 도쿄 여행 계획 짜기", isFolded: false, todos: .mock)
+  static let gameMock: Bookmark = .init(id: "1", order: 1, title: "🎮 게임 리스트", isFolded: false, todos: .mock)
+}

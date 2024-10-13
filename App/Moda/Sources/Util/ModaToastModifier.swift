@@ -51,10 +51,10 @@ struct ModaToastModifier: ViewModifier {
       }
       .onEnded { value in
         if value.velocity.height > 100 {
-          manager.dismissImmediately()
+          manager.dismiss()
           offset = .zero
         } else {
-          manager.restartCountdown()
+          manager.startHideTask()
           withAnimation(.spring(duration: 0.4)) {
             offset = .zero
           }
