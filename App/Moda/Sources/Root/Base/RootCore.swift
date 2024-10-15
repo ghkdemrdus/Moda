@@ -12,13 +12,13 @@ import ComposableArchitecture
 @Reducer
 enum Root {
   case splash(Splash)
-  case home(Home)
+  case mainTab(MainTabCore)
 
   static var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
       case .splash(.view(.splashFinished)):
-        state = .home(.init())
+        state = .mainTab(.init())
         return .none
 
       default:
@@ -28,8 +28,8 @@ enum Root {
     .ifCaseLet(\.splash, action: \.splash) {
       Splash()
     }
-    .ifCaseLet(\.home, action: \.home) {
-      Home()
+    .ifCaseLet(\.mainTab, action: \.mainTab) {
+      MainTabCore()
     }
   }
 }
