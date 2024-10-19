@@ -17,6 +17,7 @@ public enum ConfigurationSetting {
     ]
 
     public static let debug = base.merge([
+        "ASSETCATALOG_COMPILER_APPICON_NAME": "DebugAppIcon",
         "CODE_SIGN_IDENTITY": "iPhone Developer",
         "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
         "PRODUCT_BUNDLE_IDENTIFIER": "com.pinto.moda.debug",
