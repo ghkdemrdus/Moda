@@ -49,20 +49,23 @@ private extension BookmarkView {
       BookmarkHeaderView(
         bookmarkCount: store.bookmarks.count,
         onTapEdit: {
-          send(.binding(.set(\.isEditPresented, true)))
+          send(.editTapped)
         }
       )
-      .opacity(store.isEditPresented ? 0 : 1)
+      .opacity(store.isEditing ? 0 : 1)
 
       if store.bookmarks.isEmpty {
         BookmarkEmptyView()
-          .opacity(store.isEditPresented ? 0 : 1)
+          .opacity(store.isEditing ? 0 : 1)
       } else {
         BookmarkListView(
           bookmarks: store.bookmarks,
           addedBookmark: $store.addedBookmark,
           addedTodo: $store.addedTodo,
           focusedOnAddItem: $focusedOnAddItem,
+          onTapEdit: {
+            send(.todoEditTapped($0))
+          },
           onTapTodoDone: {
             send(.todoTapped($0, $1))
           },
@@ -73,7 +76,7 @@ private extension BookmarkView {
             send(.todoAdded($0, $1))
           }
         )
-        .opacity(store.isEditPresented ? 0 : 1)
+        .opacity(store.isEditing ? 0 : 1)
       }
 
       if let todo = store.addedTodo {
@@ -89,13 +92,16 @@ private extension BookmarkView {
           }
         )
         .padding(.bottom, inputBottomPadding)
-        .opacity(store.isEditPresented ? 0 : 1)
+        .opacity(store.isEditing ? 0 : 1)
       }
     }
     .background(Color.backgroundPrimary)
-    .blur(radius: store.isEditPresented ? 1.2 : 0)
+    .blur(radius: store.isEditing ? 1.2 : 0)
     .overlay(if: store.isEditPresented) {
       BookmarkEditView(store: store.scope(state: \.edit, action: \.edit))
+    }
+    .overlay(if: store.isTodoEditPresented) {
+      BookmarkTodoEditView(store: store.scope(state: \.todoEdit, action: \.todoEdit))
     }
   }
 }

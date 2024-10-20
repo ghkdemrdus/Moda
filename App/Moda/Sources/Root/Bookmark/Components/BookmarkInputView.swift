@@ -28,6 +28,20 @@ struct BookmarkInputView: View {
   let onAddTodo: (BookmarkTodo) -> Void
   let onLoseFocus: () -> Void
 
+  init(
+    todo: BookmarkTodo,
+    onAddTodo: @escaping (BookmarkTodo) -> Void,
+    onLoseFocus: @escaping () -> Void
+  ) {
+    self.todo = todo
+    self.isExternalLinkActive = !todo.externalLink.isEmpty
+    self.isMemoActive = !todo.memo.isEmpty
+    self.externalLink = todo.externalLink
+    self.memo = todo.memo
+    self.onAddTodo = onAddTodo
+    self.onLoseFocus = onLoseFocus
+  }
+
   var body: some View {
     content
       .onChange(of: isExternalLinkActive) {

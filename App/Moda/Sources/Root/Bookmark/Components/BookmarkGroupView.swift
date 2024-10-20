@@ -16,6 +16,7 @@ struct BookmarkGroupView: View {
   @Binding var focusedOnAddItem: Bool
   let scrollProxy: ScrollViewProxy
 
+  let onTapEdit: (Bookmark) -> Void
   let onTapTodoDone: (Bookmark, BookmarkTodo) -> Void
   let onTapAddTodo: (Bookmark) -> Void
   let onAddTodo: (Bookmark, BookmarkTodo) -> Void
@@ -110,6 +111,7 @@ private extension BookmarkGroupView {
             HStack(spacing: 2) {
               if !bookmark.todos.isEmpty {
                 PlainButton {
+                  onTapEdit(bookmark)
                 } label: {
                   Image.icBookmarkEdit
                     .frame(size: 28)

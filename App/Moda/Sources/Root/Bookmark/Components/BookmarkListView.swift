@@ -16,6 +16,7 @@ struct BookmarkListView: View {
   @Binding var addedTodo: BookmarkTodo?
   @Binding var focusedOnAddItem: Bool
 
+  let onTapEdit: (Bookmark) -> Void
   let onTapTodoDone: (Bookmark, BookmarkTodo) -> Void
   let onTapAddTodo: (Bookmark) -> Void
   let onAddTodo: (Bookmark, BookmarkTodo) -> Void
@@ -31,6 +32,7 @@ struct BookmarkListView: View {
               addedTodo: $addedTodo,
               focusedOnAddItem: $focusedOnAddItem,
               scrollProxy: proxy,
+              onTapEdit: onTapEdit,
               onTapTodoDone: onTapTodoDone,
               onTapAddTodo: onTapAddTodo,
               onAddTodo: onAddTodo

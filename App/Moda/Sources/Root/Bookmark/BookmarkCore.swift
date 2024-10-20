@@ -24,18 +24,24 @@ struct BookmarkCore: Reducer {
     var addedTodo: BookmarkTodo?
 
     var isEditPresented: Bool = false
+    var isTodoEditPresented: Bool = false
+    var isEditing: Bool { isEditPresented || isTodoEditPresented }
 
-    var edit: BookmarkEditCore.State = .init(bookmarks: [.gameMock, .travelMock])
+    var edit: BookmarkEditCore.State = .init(bookmarks: [])
+    var todoEdit: BookmarkTodoEditCore.State = .init(bookmark: .gameMock)
   }
 
   enum Action: ViewAction {
     case view(View)
     case edit(BookmarkEditCore.Action)
+    case todoEdit(BookmarkTodoEditCore.Action)
 
     enum View: BindableAction {
       case binding(BindingAction<State>)
       case onTask
       case updateBookmarks([Bookmark])
+
+      case todoEditTapped(Bookmark)
       case todoTapped(Bookmark, BookmarkTodo)
       case todoAddTapped(Bookmark)
       case todoAdded(Bookmark, BookmarkTodo)
@@ -49,6 +55,9 @@ struct BookmarkCore: Reducer {
     Scope(state: \.edit, action: \.edit) {
       BookmarkEditCore()
     }
+    Scope(state: \.todoEdit, action: \.todoEdit) {
+      BookmarkTodoEditCore()
+    }
     BindingReducer(action: \.view)
     Reduce<State, Action> { state, action in
       switch action {
@@ -60,6 +69,16 @@ struct BookmarkCore: Reducer {
         case let .updateBookmarks(bookmarks):
           state.bookmarks = bookmarks
           state.edit = .init(bookmarks: bookmarks)
+          return .none
+
+        case .editTapped:
+          state.edit = .init(bookmarks: state.bookmarks)
+          state.isEditPresented = true
+          return .none
+
+        case let .todoEditTapped(bookmark):
+          state.todoEdit = .init(bookmark: bookmark)
+          state.isTodoEditPresented = true
           return .none
 
         case let .todoTapped(bookmark, todo):
@@ -97,6 +116,16 @@ struct BookmarkCore: Reducer {
           let updating = bookmarks.updating()
           state.edit = .init(bookmarks: updating)
           state.bookmarks = updating
+          return .none
+
+        default:
+          return .none
+        }
+
+      case let .todoEdit(childAction):
+        switch childAction {
+        case .view(.doneTapped):
+          state.isTodoEditPresented = false
           return .none
 
         default:

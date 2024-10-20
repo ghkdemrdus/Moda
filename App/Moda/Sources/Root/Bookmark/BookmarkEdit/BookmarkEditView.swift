@@ -26,7 +26,7 @@ struct BookmarkEditView: View {
         send(.binding(.set(\.updatedBookmarks, $1)))
       }
       .onChange(of: store.updatedBookmarks) {
-        defer { isInitial = false}
+        defer { isInitial = false }
         if $1.count == 0 {
           let bookmark = Bookmark(title: "")
           send(.binding(.set(\.updatedBookmarks, [bookmark])))

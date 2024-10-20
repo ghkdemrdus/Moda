@@ -46,7 +46,7 @@ public extension BookmarkTodo {
 }
 
 public extension [BookmarkTodo] {
-  func updating(todo: BookmarkTodo) -> [BookmarkTodo] {
+  func updating(todo: BookmarkTodo) -> Self {
     var copy = self
 
     let removingIdx = copy.firstIndex(where: { $0.id == todo.id })
@@ -63,6 +63,15 @@ public extension [BookmarkTodo] {
       copy.append(todo)
     }
 
+    for (idx, updateTodo) in copy.enumerated() {
+      updateTodo.order = idx
+    }
+
+    return copy
+  }
+
+  func reordering() -> Self {
+    var copy = self
     for (idx, updateTodo) in copy.enumerated() {
       updateTodo.order = idx
     }

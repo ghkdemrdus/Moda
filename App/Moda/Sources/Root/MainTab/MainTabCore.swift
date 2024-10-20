@@ -53,14 +53,6 @@ struct MainTabCore: Reducer {
         // Bookmark
       case let .bookmark(action):
         switch action {
-        case .view(.binding(.set(\.isEditPresented, true))):
-          state.isBlured = true
-          return .none
-
-        case .edit(.view(.doneTapped)):
-          state.isBlured = false
-          return .none
-
         default:
           return .none
         }

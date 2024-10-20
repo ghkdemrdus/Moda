@@ -20,6 +20,7 @@ public extension Image {
   static let icCheckActive = Image(.icCheckActive)
   static let icCheckInactive = Image(.icCheckInactive)
   static let icClear = Image(.icClear)
+  static let icPencil = Image(.icPencil)
 
   static let icMonthlyArrow = Image(.icMonthlyArrow)
   static let icMonthlyAdd = Image(.icMonthlyAdd)

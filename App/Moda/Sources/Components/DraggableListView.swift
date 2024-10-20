@@ -22,7 +22,6 @@ struct DraggableListView<Item: Identifiable, ItemView: View>: View {
   @State private var dragOffset: CGFloat = 0
   @State private var isDragging: Bool = false
 
-
   private let feedback = UIImpactFeedbackGenerator(style: .light)
 
   var body: some View {

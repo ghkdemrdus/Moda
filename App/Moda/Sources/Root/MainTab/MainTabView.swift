@@ -17,10 +17,9 @@ struct MainTabView: View {
 
   var body: some View {
     content
-      .onChange(of: store.bookmark.isEditPresented) {
+      .onChange(of: store.bookmark.isEditing) {
         blurRadius = $1 ? 1.2 : 0
       }
-      .ignoresSafeArea(.keyboard)
   }
 }
 
@@ -64,6 +63,18 @@ private extension MainTabView {
       .overlay(alignment: .top) {
         Color.borderPrimary.frame(height: 1)
       }
+      .overlay(if: store.bookmark.isEditing) {
+        Color.backgroundPrimary.opacity(0.5)
+      }
+    }
+    .ignoresSafeArea(.keyboard)
+    .overlay(if: store.bookmark.todoEdit.editingTodo != nil) {
+      BookmarkTodoInputBottomSheet(
+        todo: store.bookmark.todoEdit.editingTodo!,
+        onTapConfirm: {
+          store.bookmark.todoEdit.editingTodo = nil
+        }
+      )
     }
   }
 }
