@@ -10,8 +10,8 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-enum Root {
-  case splash(Splash)
+enum RootCore {
+  case splash(SplashCore)
   case mainTab(MainTabCore)
 
   static var body: some ReducerOf<Self> {

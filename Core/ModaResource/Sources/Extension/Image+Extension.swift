@@ -34,11 +34,16 @@ public extension Image {
   static let icDailyTrash = Image(.icDailyTrash)
   static let icDailyReorder = Image(.icDailyReorder)
 
-  static let icRepair = Image(.icRepair)
-
   static let icBookmarkAdd = Image(.icBookmarkAdd)
   static let icBookmarkEdit = Image(.icBookmarkEdit)
+  static let icBookmarkLinkActive = Image(.icBookmarkLinkActive)
+  static let icBookmarkLinkInactive = Image(.icBookmarkLinkInactive)
+  static let icBookmarkMemoActive = Image(.icBookmarkMemoActive)
+  static let icBookmarkMemoInactive = Image(.icBookmarkMemoInactive)
   static let icFolderEdit = Image(.icFolderEdit)
+
+  static let icRepair = Image(.icRepair)
+
   static let icLink = Image(.icLink)
 
   static let icAppReviewDelete = Image(.icAppReviewDelete)
@@ -51,6 +56,8 @@ public extension Image {
   static let imgDailyEmpty = Image(.imgDailyEmpty)
   static let imgSplash = Image(.imgSplash)
   static let imgSend = Image(.imgSend)
+
+  static let imgBookmarkEmpty = Image(.imgBookmarkEmpty)
 
   // Widget
   static let imgWidgetDone = Image(.imgWidgetDone)

@@ -13,15 +13,21 @@ import SwiftUI
 struct MainTabView: View {
   @Bindable var store: StoreOf<MainTabCore>
 
+  @State var blurRadius: CGFloat = 0
+
   var body: some View {
     content
+      .onChange(of: store.bookmark.isEditPresented) {
+        blurRadius = $1 ? 1.2 : 0
+      }
+      .ignoresSafeArea(.keyboard)
   }
 }
 
 // MARK: - Content
 
 private extension MainTabView {
-  @ViewBuilder var content: some View {
+  var content: some View {
     VStack(spacing: 0) {
       TabView(selection: $store.selectedTab) {
           switch store.selectedTab {
@@ -30,14 +36,15 @@ private extension MainTabView {
                 .tag(MainTab.bookmark)
 
           case .home:
-              HomeView(store: store.scope(state: \.home, action: \.home))
-                  .tag(MainTab.home)
-            
+            HomeView(store: store.scope(state: \.home, action: \.home))
+              .tag(MainTab.home)
+
           case .setting:
             SettingView(store: store.scope(state: \.setting, action: \.setting))
                 .tag(MainTab.setting)
           }
       }
+      .tabViewStyle(.page(indexDisplayMode: .never))
 
       HStack {
         ForEach(MainTab.allCases, id: \.self) { tab in
@@ -53,6 +60,7 @@ private extension MainTabView {
       }
       .padding(.horizontal, 32)
       .frame(height: 50)
+      .blur(radius: blurRadius)
       .overlay(alignment: .top) {
         Color.borderPrimary.frame(height: 1)
       }

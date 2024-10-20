@@ -10,14 +10,35 @@ import SwiftUI
 
 struct BookmarkGroupView: View {
 
-  let bookmark: Bookmark
+  @Bindable var bookmark: Bookmark
+  @Binding var addedBookmark: Bookmark?
+  @Binding var addedTodo: BookmarkTodo?
+  @Binding var focusedOnAddItem: Bool
+  let scrollProxy: ScrollViewProxy
 
-  var isAllDone: Bool { bookmark.todos.allSatisfy(\.isDone) }
+  let onTapTodoDone: (Bookmark, BookmarkTodo) -> Void
+  let onTapAddTodo: (Bookmark) -> Void
+  let onAddTodo: (Bookmark, BookmarkTodo) -> Void
+
+  var isAllDone: Bool { !bookmark.todos.isEmpty && bookmark.todos.allSatisfy(\.isDone) }
   var totalCount: Int { bookmark.todos.count }
   var doneCount: Int { bookmark.todos.filter(\.isDone).count }
 
+  @FocusState var focused: Bool
+
   var body: some View {
     content
+      .onChange(of: focusedOnAddItem) {
+        focused = $1
+      }
+      .onChange(of: focused) {
+        focusedOnAddItem = $1
+        if $1 {
+          withAnimation(.spring(duration: 0.4)) {
+            scrollProxy.scrollTo(addedTodo)
+          }
+        }
+      }
   }
 }
 
@@ -47,7 +68,7 @@ private extension BookmarkGroupView {
           .padding(.horizontal, 8)
           .background(
             Capsule()
-              .fill(Color.orange300)
+              .fill(Color.brandPrimary)
           )
         } else if totalCount > 0 {
           Text("\(doneCount)/\(totalCount)")
@@ -87,13 +108,16 @@ private extension BookmarkGroupView {
             Spacer()
 
             HStack(spacing: 2) {
-              PlainButton {
-              } label: {
-                Image.icBookmarkEdit
-                  .frame(size: 28)
+              if !bookmark.todos.isEmpty {
+                PlainButton {
+                } label: {
+                  Image.icBookmarkEdit
+                    .frame(size: 28)
+                }
               }
 
               PlainButton {
+                onTapAddTodo(bookmark)
               } label: {
                 Image.icBookmarkAdd
                   .frame(size: 28)
@@ -104,8 +128,26 @@ private extension BookmarkGroupView {
           .padding(.trailing, 16)
 
           VStack(spacing: 6) {
-            ForEach(bookmark.todos) { todo in
-              BookmarkItemView(todo: todo)
+            LazyVStack(spacing: 6) {
+              ForEach(bookmark.todos) { todo in
+                BookmarkItemView(
+                  todo: todo,
+                  onTapDone: {
+                    onTapTodoDone(bookmark, $0)
+                  }
+                )
+              }
+            }
+
+            if addedBookmark == bookmark, let addedTodo {
+              BookmarkAddItemView(
+                todo: addedTodo,
+                onAddTodo: {
+                  onAddTodo(bookmark, $0)
+                }
+              )
+              .focused($focused)
+              .id(self.addedTodo)
             }
           }
         }
@@ -117,11 +159,12 @@ private extension BookmarkGroupView {
 
 // MARK: - Preview
 
-#Preview {
-  BookmarkGroupView(
-    bookmark: .init(
-      title: "✈️ 도쿄 여행 계획 짜기",
-      todos: .mock
-    )
-  )
-}
+//#Preview {
+//  BookmarkGroupView(
+//    bookmark: .travelMock,
+//    addedTodo: .constant(nil),
+//    onTapTodoDone: { _, _ in },
+//    onTapAddTodo: { _ in },
+//    onAddTodo: { _, _ in }
+//  )
+//}

@@ -21,14 +21,15 @@ struct MainTabCore: Reducer {
   @ObservableState
   struct State: Equatable {
     var selectedTab: MainTab = .home
+    var isBlured: Bool = false
 
-    var home: Home.State = .init()
+    var home: HomeCore.State = .init()
     var bookmark: BookmarkCore.State = .init()
     var setting: SettingCore.State = .init()
   }
 
   enum Action: ViewAction {
-    case home(Home.Action)
+    case home(HomeCore.Action)
     case bookmark(BookmarkCore.Action)
     case setting(SettingCore.Action)
 
@@ -42,14 +43,27 @@ struct MainTabCore: Reducer {
 
   var body: some Reducer<State, Action> {
     BindingReducer(action: \.view)
-    Scope(state: \.home, action: \.home) { Home() }
+    Scope(state: \.home, action: \.home) { HomeCore() }
     Scope(state: \.bookmark, action: \.bookmark) { BookmarkCore() }
     Scope(state: \.setting, action: \.setting) { SettingCore() }
 
     Reduce<State, Action> { state, action in
       switch action {
-      case let .view(viewAction):
-        return .none
+
+        // Bookmark
+      case let .bookmark(action):
+        switch action {
+        case .view(.binding(.set(\.isEditPresented, true))):
+          state.isBlured = true
+          return .none
+
+        case .edit(.view(.doneTapped)):
+          state.isBlured = false
+          return .none
+
+        default:
+          return .none
+        }
 
       default:
         return .none
@@ -62,9 +76,9 @@ extension MainTab {
   // FIXME: 임의로 넣어놓은거라 나중에 제거할 것
   var image: Image {
     switch self {
-    case .bookmark: return .icCheck
+    case .bookmark: return .icDelete
     case .home: return .icClear
-    case .setting: return .icDailyEdit
+    case .setting: return .icCheckGreen
     }
   }
 }

@@ -39,9 +39,28 @@ public class Bookmark: Identifiable, Equatable, Hashable {
   public static var uniqueId: String { String(Int(Date().timeIntervalSince1970)) }
 }
 
+// MARK: - Updating
+
+public extension [Bookmark] {
+  /// 북마크 수정 완료 시에 타이틀이 있거나 내용물이 있는 경우가 아닌 경우는 제거한다.
+  func updating() -> Self {
+    var copy = self
+    copy = copy.filter { !$0.title.isEmpty || !$0.todos.isEmpty }
+    return copy.reordering()
+  }
+
+  func reordering() -> Self {
+    let copy = self
+    for (idx, bookmark) in copy.enumerated() {
+      bookmark.order = idx
+    }
+    return copy
+  }
+}
+
 // MARK: - Mock
 
 public extension Bookmark {
-  static let travelMock: Bookmark = .init(id: "0", order: 0, title: "✈️ 도쿄 여행 계획 짜기", isFolded: false, todos: .mock)
-  static let gameMock: Bookmark = .init(id: "1", order: 1, title: "🎮 게임 리스트", isFolded: false, todos: .mock)
+  static let travelMock: Bookmark = .init(id: "0", order: 0, title: "✈️ 도쿄 여행 계획 짜기", isFolded: false, todos: .travelMock)
+  static let gameMock: Bookmark = .init(id: "1", order: 1, title: "🎮 게임 리스트", isFolded: false, todos: .gameMock)
 }

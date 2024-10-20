@@ -40,6 +40,7 @@ struct HomeDeleteTodoBottomSheet: View {
               Text("투두를 삭제할까요?")
             }
             .font(.spoqaHans(size: 17))
+            .foregroundStyle(Color.textPrimary)
             .frame(maxWidth: .infinity, alignment: .leading)
             .lineLimit(1)
           }

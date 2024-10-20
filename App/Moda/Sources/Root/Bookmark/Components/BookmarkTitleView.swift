@@ -51,6 +51,7 @@ private extension BookmarkTitleView {
         }
       }
     }
+    .frame(height: 40)
     .padding(.horizontal, 20)
   }
 }

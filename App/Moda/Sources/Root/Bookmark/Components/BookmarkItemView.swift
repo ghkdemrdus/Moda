@@ -10,7 +10,9 @@ import SwiftUI
 
 struct BookmarkItemView: View {
 
-  @Bindable var todo: BookmarkTodo
+  let todo: BookmarkTodo
+
+  let onTapDone: (BookmarkTodo) -> Void
 
   var body: some View {
     content
@@ -22,12 +24,9 @@ struct BookmarkItemView: View {
 private extension BookmarkItemView {
   @ViewBuilder var content: some View {
     VStack(spacing: 0) {
-      HStack(alignment: .top, spacing: 2) {
+      HStack(alignment: .top, spacing: 8) {
         PlainButton {
-          todo.isDone.toggle()
-          if todo.isDone {
-            todo.doneDate = .today
-          }
+          onTapDone(todo)
         } label: {
           todo.isDone
           ? Image.imgCheckActive
@@ -54,9 +53,9 @@ private extension BookmarkItemView {
               .foregroundStyle(Color.textCaption)
           }
 
-          if !todo.externalLink.isEmpty {
+          if !todo.externalLink.isEmpty, let url = URL(string: todo.externalLink) {
             PlainButton {
-              
+              UIApplication.shared.open(url)
             } label: {
               Image.icLink
                 .frame(size: 36)
@@ -94,13 +93,19 @@ private extension BookmarkItemView {
 // MARK: - Preview
 
 #Preview("일반 투두") {
-  BookmarkItemView(todo: .normalMock)
+  @Previewable @State var todo: BookmarkTodo = .normalMock1
+
+  BookmarkItemView(todo: todo, onTapDone: { $0.isDone.toggle() })
 }
 
 #Preview("메모가 있는 투두") {
-  BookmarkItemView(todo: .memoMock)
+  @Previewable @State var todo: BookmarkTodo = .memoMock1
+
+  BookmarkItemView(todo: todo, onTapDone: { $0.isDone.toggle() })
 }
 
 #Preview("외부 링크가 있는 투두") {
-  BookmarkItemView(todo: .linkMock)
+  @Previewable @State var todo: BookmarkTodo = .linkMock1
+
+  BookmarkItemView(todo: todo, onTapDone: { $0.isDone.toggle() })
 }

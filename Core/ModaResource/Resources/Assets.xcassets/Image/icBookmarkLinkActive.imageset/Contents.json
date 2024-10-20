@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Property 1=folder.svg",
+      "filename" : "state=active, mode=day.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Property 1=Variant2.svg",
+      "filename" : "state=active, mode=dark.svg",
       "idiom" : "universal"
     }
   ],

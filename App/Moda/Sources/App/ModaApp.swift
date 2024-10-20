@@ -18,10 +18,14 @@ struct ModaApp: App {
   var body: some Scene {
     WindowGroup {
       RootView()
-        .toast()
+        .globalToast()
+        .globalBottomSheet()
         .modelContainer(todoModelContainer)
         .onAppear {
           UITextField.appearance().tintColor = UIColor(.brandStrong)
+          UITextView.appearance().tintColor = UIColor(.brandStrong)
+          UITextView.appearance().backgroundColor = .clear
+          UITextView.appearance().textContainerInset = .zero
         }
         .onBackground {
           WidgetCenter.shared.reloadAllTimelines()

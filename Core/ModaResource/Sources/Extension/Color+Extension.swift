@@ -11,42 +11,43 @@ import SwiftUI
 public extension Color {
 
   // Brand
-  static let brandPrimary = ModaResourceAsset.brandPrimary.swiftUIColor
-  static let brandSecondary = ModaResourceAsset.brandSecondary.swiftUIColor
-  static let brandTertiary = ModaResourceAsset.brandTertiary.swiftUIColor
-  static let brandStrong = ModaResourceAsset.brandStrong.swiftUIColor
+  static let brandPrimary = Color(.brandPrimary)
+  static let brandSecondary = Color(.brandSecondary)
+  static let brandTertiary = Color(.brandTertiary)
+  static let brandStrong = Color(.brandStrong)
 
   // Text
-  static let textPrimary = ModaResourceAsset.textPrimary.swiftUIColor
-  static let textSecondary = ModaResourceAsset.textSecondary.swiftUIColor
-  static let textTertiary = ModaResourceAsset.textTertiary.swiftUIColor
-  static let textInactive = ModaResourceAsset.textInactive.swiftUIColor
-  static let textInactiveOrange = ModaResourceAsset.textInactiveOrange.swiftUIColor
-  static let textCaption = ModaResourceAsset.textCaption.swiftUIColor
-  static let textAlternative = ModaResourceAsset.textAlternative.swiftUIColor
+  static let textPrimary = Color(.textPrimary)
+  static let textSecondary = Color(.textSecondary)
+  static let textTertiary = Color(.textTertiary)
+  static let textInactive = Color(.textInactive)
+  static let textInactiveOrange = Color(.textInactiveOrange)
+  static let textCaption = Color(.textCaption)
+  static let textAlternative = Color(.textAlternative)
 
   // Icon
-  static let iconPrimary = ModaResourceAsset.iconPrimary.swiftUIColor
-  static let iconSecondary = ModaResourceAsset.iconSecondary.swiftUIColor
-  static let iconTertiary = ModaResourceAsset.iconTertiary.swiftUIColor
-  static let iconDefault = ModaResourceAsset.iconDefault.swiftUIColor
+  static let iconPrimary = Color(.iconPrimary)
+  static let iconSecondary = Color(.iconSecondary)
+  static let iconTertiary = Color(.iconTertiary)
+  static let iconDefault = Color(.iconDefault)
 
   // Background
-  static let backgroundPrimary = ModaResourceAsset.backgroundPrimary.swiftUIColor
-  static let backgroundSecondary = ModaResourceAsset.backgroundSecondary.swiftUIColor
-  static let backgroundBrand = ModaResourceAsset.backgroundBrand.swiftUIColor
-  static let backgroundTertiary = ModaResourceAsset.backgroundTertiary.swiftUIColor
-  static let backgroundAppReview = ModaResourceAsset.backgroundAppReview.swiftUIColor
+  static let backgroundPrimary = Color(.backgroundPrimary)
+  static let backgroundSecondary = Color(.backgroundSecondary)
+  static let backgroundBrand = Color(.backgroundBrand)
+  static let backgroundTertiary = Color(.backgroundTertiary)
+  static let backgroundInactive = Color(.backgroundInactive)
+  static let backgroundAppReview = Color(.backgroundAppReview)
 
   // Border
-  static let borderPrimary = ModaResourceAsset.borderPrimary.swiftUIColor
+  static let borderPrimary = Color(.borderPrimary)
 
   // Orange
-  static let fogOrange = ModaResourceAsset.fogOrange.swiftUIColor
-  static let orange200 = ModaResourceAsset.orange200.swiftUIColor
-  static let orange300 = ModaResourceAsset.orange300.swiftUIColor
+  static let fogOrange = Color(.fogOrange)
+  static let orange200 = Color(.orange200)
+  static let orange300 = Color(.orange300)
 
   // Slate
-  static let slate800 = ModaResourceAsset.slate800.swiftUIColor
-  static let slate900 = ModaResourceAsset.slate900.swiftUIColor
+  static let slate800 = Color(.slate800)
+  static let slate900 = Color(.slate900)
 }

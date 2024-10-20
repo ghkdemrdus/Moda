@@ -64,7 +64,7 @@ struct ModaToastModifier: ViewModifier {
 }
 
 public extension View {
-  func toast() -> some View {
+  func globalToast() -> some View {
     modifier(ModaToastModifier())
   }
 }
@@ -98,5 +98,5 @@ public extension View {
     }
   }
   .frame(maxWidth: .infinity, maxHeight: .infinity)
-  .toast()
+  .globalToast()
 }

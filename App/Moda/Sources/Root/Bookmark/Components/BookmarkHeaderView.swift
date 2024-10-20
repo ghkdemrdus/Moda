@@ -11,6 +11,7 @@ import SwiftUI
 struct BookmarkHeaderView: View {
 
   let bookmarkCount: Int
+  let onTapEdit: () -> Void
 
   var body: some View {
     content
@@ -22,7 +23,7 @@ struct BookmarkHeaderView: View {
 private extension BookmarkHeaderView {
   @ViewBuilder var content: some View {
     HStack {
-      HStack {
+      HStack(spacing: 6) {
         Text("북마크")
           .font(.spoqaHans(size: 16, weight: .bold))
           .foregroundStyle(Color.textPrimary)
@@ -31,9 +32,8 @@ private extension BookmarkHeaderView {
           Text("\(bookmarkCount)")
             .font(.spoqaHans(size: 10, weight: .bold))
             .foregroundStyle(.white)
-            .padding(.top, 3)
-            .padding(.bottom, 2)
-            .padding(.horizontal, 6)
+            .frame(size: 16)
+            .padding(.top, 0.5)
             .background(
               Circle()
                 .fill(Color.brandStrong)
@@ -43,24 +43,14 @@ private extension BookmarkHeaderView {
 
       Spacer()
 
-      HStack(spacing: 0) {
-        if bookmarkCount > 0 {
-          PlainButton {
-
-          } label: {
-            Image.icFolderEdit
-              .frame(size: 32)
-          }
-        }
-
-        PlainButton {
-
-        } label: {
-          Image.icDailyAdd
-            .frame(size: 32)
-        }
+      PlainButton {
+        onTapEdit()
+      } label: {
+        Image.icFolderEdit
+          .frame(size: 32)
       }
     }
+    .frame(height: 40)
     .padding(.leading, 20)
     .padding(.trailing, 16)
   }
@@ -69,5 +59,5 @@ private extension BookmarkHeaderView {
 // MARK: - Preview
 
 #Preview {
-  BookmarkHeaderView(bookmarkCount: 3)
+  BookmarkHeaderView(bookmarkCount: 3, onTapEdit: {})
 }

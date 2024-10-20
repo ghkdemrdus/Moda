@@ -23,8 +23,6 @@ public actor DataStorage<T: Codable> {
       if let data = userDefaultsManager.get(key: key, type: T.self) {
         return data
       } else {
-        print(key)
-        print(defaultValue)
         return defaultValue
       }
     }

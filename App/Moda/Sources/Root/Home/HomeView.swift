@@ -104,7 +104,7 @@ private extension HomeView {
               send(.monthlyTodoDoneTapped($0))
             }
           )
-          .matchedGeometryEffect(id: "Monthly", in: monthlyAnimationNamespace, anchor: .top)
+//          .matchedGeometryEffect(id: "Monthly", in: monthlyAnimationNamespace, anchor: .top)
           .padding(.bottom, 24)
 
           HomeDailyTodoView(
@@ -117,7 +117,7 @@ private extension HomeView {
               send(.dailyTodoDoneTapped($0))
             }
           )
-          .matchedGeometryEffect(id: "Daily", in: dailyAnimationNamespace, anchor: .top)
+//          .matchedGeometryEffect(id: "Daily", in: dailyAnimationNamespace, anchor: .top)
         }
         .opacity(store.isEditing ? 0 : 1)
         .padding(.vertical, 16)
